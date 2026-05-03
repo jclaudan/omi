@@ -1,0 +1,210 @@
+version: '3.9'
+
+# Omi Self-Hosted Stack
+# Replaces: Google Cloud Storage → MinIO, Pinecone → Qdrant, Deepgram → Faster-Whisper
+# Run: docker compose up -d
+# Docs: docker/README.md
+
+services:
+
+  # ==================== STORAGE (replaces Google Cloud Storage) ====================
+
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # Web console (admin UI)
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    volumes:
+      - minio-data:/data
+    command: minio server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    restart: on-failure
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set minio http://minio:9000 $${MINIO_ROOT_USER:-minioadmin} $${MINIO_ROOT_PASSWORD:-minioadmin} &&
+      mc mb --ignore-existing minio/omi-speech-profiles &&
+      mc mb --ignore-existing minio/omi-memories-recordings &&
+      mc mb --ignore-existing minio/omi-private-cloud-sync &&
+      mc mb --ignore-existing minio/omi-chat-files &&
+      mc mb --ignore-existing minio/omi-app-logos &&
+      mc mb --ignore-existing minio/omi-app-thumbnails &&
+      mc mb --ignore-existing minio/omi-desktop-updates &&
+      mc mb --ignore-existing minio/omi-postprocessing &&
+      mc anonymous set public minio/omi-app-logos &&
+      mc anonymous set public minio/omi-app-thumbnails &&
+      echo 'MinIO buckets ready.'
+      "
+
+  # ==================== VECTOR DB (replaces Pinecone) ====================
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.1
+    restart: unless-stopped
+    ports:
+      - "6333:6333"   # REST API
+      - "6334:6334"   # gRPC
+    volumes:
+      - qdrant-data:/qdrant/storage
+    environment:
+      QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY:-}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==================== CACHE ====================
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: >
+      sh -c "redis-server --appendonly yes $${REDIS_PASSWORD:+--requirepass $${REDIS_PASSWORD}}"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==================== SPEECH-TO-TEXT (replaces Deepgram) ====================
+
+  faster-whisper:
+    build:
+      context: .
+      dockerfile: docker/services/faster-whisper/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    volumes:
+      - whisper-models:/models
+    environment:
+      MODEL_SIZE: ${WHISPER_MODEL_SIZE:-base}
+      DEVICE: ${WHISPER_DEVICE:-cpu}
+      COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+  # ==================== SPEAKER DIARIZATION ====================
+
+  diarizer:
+    build:
+      context: .
+      dockerfile: backend/diarizer/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8004:8080"
+    volumes:
+      - diarizer-models:/root/.cache/huggingface
+    environment:
+      HUGGINGFACE_TOKEN: ${HUGGINGFACE_TOKEN:-}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+
+  # ==================== MAIN BACKEND ====================
+
+  omi-backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    env_file:
+      - .env.selfhosted
+    environment:
+      # Override cloud endpoints with self-hosted services
+      REDIS_DB_HOST: redis
+      REDIS_DB_PORT: "6379"
+      QDRANT_URL: http://qdrant:6333
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      FASTER_WHISPER_URL: http://faster-whisper:8001
+      DIARIZER_URL: http://diarizer:8080
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  # ==================== PUSHER (real-time hub) ====================
+
+  omi-pusher:
+    build:
+      context: .
+      dockerfile: backend/pusher/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    env_file:
+      - .env.selfhosted
+    environment:
+      REDIS_DB_HOST: redis
+      REDIS_DB_PORT: "6379"
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      FASTER_WHISPER_URL: http://faster-whisper:8001
+      DIARIZER_URL: http://diarizer:8080
+      HOSTED_PUSHER_API_URL: http://omi-backend:8080
+
+# ==================== VOLUMES ====================
+
+volumes:
+  minio-data:
+    driver: local
+  qdrant-data:
+    driver: local
+  redis-data:
+    driver: local
+  whisper-models:
+    driver: local
+  diarizer-models:
+    driver: local
+
+networks:
+  default:
+    name: omi-network
