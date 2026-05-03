@@ -12,10 +12,6 @@ from concurrent.futures import as_completed, wait, FIRST_COMPLETED
 from utils.executors import postprocess_executor, storage_executor
 
 import opuslib
-from google.cloud import storage
-from google.oauth2 import service_account
-from google.cloud.exceptions import NotFound as BlobNotFound
-from google.cloud.exceptions import NotFound
 
 from database.redis_db import cache_signed_url, get_cached_signed_url
 from utils import encryption
@@ -44,12 +40,222 @@ OPUS_FRAME_SIZE = OPUS_SAMPLE_RATE * OPUS_FRAME_DURATION_MS // 1000  # 320 sampl
 # Valid private cloud sync extensions (longest first for correct matching)
 PRIVATE_CLOUD_EXTENSIONS = ['.batch.enc', '.batch.bin', '.opus.enc', '.opus', '.enc', '.bin']
 
-if os.environ.get('SERVICE_ACCOUNT_JSON'):
-    service_account_info = json.loads(os.environ["SERVICE_ACCOUNT_JSON"])
-    credentials = service_account.Credentials.from_service_account_info(service_account_info)
-    storage_client = storage.Client(credentials=credentials)
+# ---------------------------------------------------------------------------
+# Storage backend selection
+#
+# Priority: MinIO/S3 (self-hosted) > Google Cloud Storage (cloud)
+# Set MINIO_ENDPOINT to use the open-source backend.
+# ---------------------------------------------------------------------------
+
+_MINIO_ENDPOINT = os.getenv('MINIO_ENDPOINT')
+
+
+# ---------------------------------------------------------------------------
+# MinIO / S3-compatible backend (GCS-compatible adapter)
+# ---------------------------------------------------------------------------
+
+if _MINIO_ENDPOINT:
+    import boto3
+    from botocore.exceptions import ClientError
+
+    _s3 = boto3.client(
+        's3',
+        endpoint_url=_MINIO_ENDPOINT,
+        aws_access_key_id=os.getenv('MINIO_ACCESS_KEY', os.getenv('MINIO_ROOT_USER', 'minioadmin')),
+        aws_secret_access_key=os.getenv('MINIO_SECRET_KEY', os.getenv('MINIO_ROOT_PASSWORD', 'minioadmin')),
+        region_name=os.getenv('MINIO_REGION', 'us-east-1'),
+        use_ssl=os.getenv('MINIO_SSL', 'false').lower() == 'true',
+    )
+
+    class _S3BlobWriter:
+        """Write-mode context manager: buffers in memory, then uploads on __exit__."""
+
+        def __init__(self, s3_client, bucket_name, key, content_type):
+            self._s3 = s3_client
+            self._bucket = bucket_name
+            self._key = key
+            self._content_type = content_type
+            self._buf = bytearray()
+
+        def __enter__(self):
+            return self
+
+        def write(self, data):
+            self._buf.extend(data)
+
+        def __exit__(self, exc_type, exc_val, exc_tb):
+            if exc_type is None:
+                self._s3.put_object(
+                    Bucket=self._bucket,
+                    Key=self._key,
+                    Body=bytes(self._buf),
+                    ContentType=self._content_type,
+                )
+            del self._buf
+            return False
+
+    class _S3Blob:
+        """GCS-compatible blob object backed by S3/MinIO."""
+
+        # cache_control is write-only in GCS (passed to put_object)
+        cache_control = None
+
+        def __init__(self, s3_client, bucket_name: str, key: str):
+            self._s3 = s3_client
+            self._bucket = bucket_name
+            self._key = key
+            self.name = key
+            self.size = None
+            self.time_created = None
+            self.metadata = None  # populated by reload()
+            self._pending_metadata = {}
+
+        # --- attribute interception for metadata dict assignment ---
+        def __setattr__(self, name, value):
+            if name == 'metadata' and isinstance(value, dict):
+                # Store as pending so upload_from_string can use it
+                object.__setattr__(self, '_pending_metadata', value)
+            object.__setattr__(self, name, value)
+
+        def exists(self) -> bool:
+            try:
+                self._s3.head_object(Bucket=self._bucket, Key=self._key)
+                return True
+            except ClientError as e:
+                if e.response['Error']['Code'] in ('404', 'NoSuchKey'):
+                    return False
+                raise
+
+        def reload(self):
+            try:
+                resp = self._s3.head_object(Bucket=self._bucket, Key=self._key)
+                self.size = resp.get('ContentLength', 0)
+                self.time_created = resp.get('LastModified')
+                raw_meta = resp.get('Metadata', {})
+                # S3 lowercases metadata keys
+                self.metadata = {k: v for k, v in raw_meta.items()}
+            except ClientError:
+                self.metadata = {}
+
+        def upload_from_filename(self, file_path: str, content_type: str = 'application/octet-stream'):
+            extra = {}
+            if self.cache_control:
+                extra['CacheControl'] = self.cache_control
+            if self._pending_metadata:
+                extra['Metadata'] = {k: str(v) for k, v in self._pending_metadata.items()}
+            with open(file_path, 'rb') as f:
+                self._s3.put_object(
+                    Bucket=self._bucket,
+                    Key=self._key,
+                    Body=f,
+                    ContentType=content_type,
+                    **extra,
+                )
+
+        def upload_from_string(self, data: bytes, content_type: str = 'application/octet-stream'):
+            extra = {}
+            if self.cache_control:
+                extra['CacheControl'] = self.cache_control
+            if self._pending_metadata:
+                extra['Metadata'] = {k: str(v) for k, v in self._pending_metadata.items()}
+            self._s3.put_object(
+                Bucket=self._bucket,
+                Key=self._key,
+                Body=data if isinstance(data, (bytes, bytearray)) else data.encode(),
+                ContentType=content_type,
+                **extra,
+            )
+
+        def download_as_bytes(self) -> bytes:
+            resp = self._s3.get_object(Bucket=self._bucket, Key=self._key)
+            return resp['Body'].read()
+
+        def download_to_filename(self, dest_path: str):
+            resp = self._s3.get_object(Bucket=self._bucket, Key=self._key)
+            with open(dest_path, 'wb') as f:
+                f.write(resp['Body'].read())
+
+        def delete(self):
+            self._s3.delete_object(Bucket=self._bucket, Key=self._key)
+
+        def make_public(self):
+            # Bucket-level public policy is set at init by minio-init service
+            pass
+
+        def generate_signed_url(self, version=None, expiration=None, method='GET') -> str:
+            if isinstance(expiration, datetime.timedelta):
+                expires_in = int(expiration.total_seconds())
+            else:
+                expires_in = int(expiration) if expiration else 3600
+            op = 'get_object' if method == 'GET' else 'put_object'
+            return self._s3.generate_presigned_url(
+                op,
+                Params={'Bucket': self._bucket, 'Key': self._key},
+                ExpiresIn=expires_in,
+            )
+
+        def open(self, mode: str = 'rb', content_type: str = 'application/octet-stream'):
+            if mode == 'wb':
+                return _S3BlobWriter(self._s3, self._bucket, self._key, content_type)
+            raise ValueError(f'Unsupported S3 blob open mode: {mode}')
+
+    class _S3Bucket:
+        """GCS-compatible bucket object backed by S3/MinIO."""
+
+        def __init__(self, s3_client, bucket_name: str):
+            self._s3 = s3_client
+            self._name = bucket_name
+
+        def blob(self, key: str) -> '_S3Blob':
+            return _S3Blob(self._s3, self._name, key)
+
+        def list_blobs(self, prefix: str = ''):
+            blobs = []
+            paginator = self._s3.get_paginator('list_objects_v2')
+            for page in paginator.paginate(Bucket=self._name, Prefix=prefix):
+                for obj in page.get('Contents', []):
+                    b = _S3Blob(self._s3, self._name, obj['Key'])
+                    b.size = obj['Size']
+                    b.time_created = obj.get('LastModified')
+                    blobs.append(b)
+            return blobs
+
+    class _S3StorageClient:
+        """GCS-compatible storage client backed by S3/MinIO."""
+
+        def __init__(self, s3_client):
+            self._s3 = s3_client
+
+        def bucket(self, bucket_name: str) -> '_S3Bucket':
+            return _S3Bucket(self._s3, bucket_name)
+
+    # Sentinel for "blob not found" — matches NotFound usages in this file
+    class _S3NotFound(Exception):
+        pass
+
+    BlobNotFound = _S3NotFound
+    NotFound = _S3NotFound
+
+    storage_client = _S3StorageClient(_s3)
+    logger.info(f'storage: using MinIO at {_MINIO_ENDPOINT}')
+
+# ---------------------------------------------------------------------------
+# Google Cloud Storage backend (original)
+# ---------------------------------------------------------------------------
+
 else:
-    storage_client = storage.Client()
+    from google.cloud import storage
+    from google.oauth2 import service_account
+    from google.cloud.exceptions import NotFound as BlobNotFound
+    from google.cloud.exceptions import NotFound
+
+    if os.environ.get('SERVICE_ACCOUNT_JSON'):
+        service_account_info = json.loads(os.environ["SERVICE_ACCOUNT_JSON"])
+        credentials = service_account.Credentials.from_service_account_info(service_account_info)
+        storage_client = storage.Client(credentials=credentials)
+    else:
+        storage_client = storage.Client()
+    logger.info('storage: using Google Cloud Storage')
 
 speech_profiles_bucket = os.getenv('BUCKET_SPEECH_PROFILES')
 postprocessing_audio_bucket = os.getenv('BUCKET_POSTPROCESSING')
@@ -61,6 +267,27 @@ app_thumbnails_bucket = os.getenv('BUCKET_APP_THUMBNAILS')
 chat_files_bucket = os.getenv('BUCKET_CHAT_FILES')
 desktop_updates_bucket = os.getenv('BUCKET_DESKTOP_UPDATES')
 
+# Public base URL for self-hosted MinIO (or GCS fallback)
+_MINIO_PUBLIC_URL = os.getenv('MINIO_PUBLIC_URL', _MINIO_ENDPOINT or '')
+
+
+def _public_url(bucket: str, key: str) -> str:
+    """Return the public URL for a blob, adapting to the active storage backend."""
+    if _MINIO_ENDPOINT:
+        base = _MINIO_PUBLIC_URL.rstrip('/')
+        return f'{base}/{bucket}/{key}'
+    return f'https://storage.googleapis.com/{bucket}/{key}'
+
+
+def _parse_key_from_url(img_url: str, bucket: str) -> str:
+    """Extract the object key from a storage URL (GCS or MinIO)."""
+    if _MINIO_ENDPOINT:
+        base = _MINIO_PUBLIC_URL.rstrip('/')
+        prefix = f'{base}/{bucket}/'
+    else:
+        prefix = f'https://storage.googleapis.com/{bucket}/'
+    return img_url.split(prefix)[1]
+
 
 # *******************************************
 # ************* SPEECH PROFILE **************
@@ -70,7 +297,7 @@ def upload_profile_audio(file_path: str, uid: str):
     path = f'{uid}/speech_profile.wav'
     blob = bucket.blob(path)
     blob.upload_from_filename(file_path)
-    return f'https://storage.googleapis.com/{speech_profiles_bucket}/{path}'
+    return _public_url(speech_profiles_bucket, path)
 
 
 def get_user_has_speech_profile(uid: str, max_age_days: int = None) -> bool:
@@ -218,7 +445,7 @@ def upload_postprocessing_audio(file_path: str):
     bucket = storage_client.bucket(postprocessing_audio_bucket)
     blob = bucket.blob(file_path)
     blob.upload_from_filename(file_path)
-    return f'https://storage.googleapis.com/{postprocessing_audio_bucket}/{file_path}'
+    return _public_url(postprocessing_audio_bucket, file_path)
 
 
 def delete_postprocessing_audio(file_path: str):
@@ -236,7 +463,7 @@ def upload_sdcard_audio(file_path: str):
     bucket = storage_client.bucket(postprocessing_audio_bucket)
     blob = bucket.blob(file_path)
     blob.upload_from_filename(file_path)
-    return f'https://storage.googleapis.com/{postprocessing_audio_bucket}/sdcard/{file_path}'
+    return _public_url(postprocessing_audio_bucket, f'sdcard/{file_path}')
 
 
 def download_postprocessing_audio(file_path: str, destination_file_path: str):
@@ -255,7 +482,7 @@ def upload_conversation_recording(file_path: str, uid: str, conversation_id: str
     path = f'{uid}/{conversation_id}.wav'
     blob = bucket.blob(path)
     blob.upload_from_filename(file_path)
-    return f'https://storage.googleapis.com/{memories_recordings_bucket}/{path}'
+    return _public_url(memories_recordings_bucket, path)
 
 
 def get_conversation_recording_if_exists(uid: str, memory_id: str) -> str:
@@ -286,7 +513,7 @@ def get_syncing_file_temporal_url(file_path: str):
     bucket = storage_client.bucket(syncing_local_bucket)
     blob = bucket.blob(file_path)
     blob.upload_from_filename(file_path)
-    return f'https://storage.googleapis.com/{syncing_local_bucket}/{file_path}'
+    return _public_url(syncing_local_bucket, file_path)
 
 
 def get_syncing_file_temporal_signed_url(file_path: str):
@@ -1160,12 +1387,12 @@ def upload_app_logo(file_path: str, app_id: str):
     blob = bucket.blob(path)
     blob.cache_control = 'public, no-cache'
     blob.upload_from_filename(file_path)
-    return f'https://storage.googleapis.com/{omi_apps_bucket}/{path}'
+    return _public_url(omi_apps_bucket, path)
 
 
 def delete_app_logo(img_url: str):
     bucket = storage_client.bucket(omi_apps_bucket)
-    path = img_url.split(f'https://storage.googleapis.com/{omi_apps_bucket}/')[1]
+    path = _parse_key_from_url(img_url, omi_apps_bucket)
     logger.info(f'delete_app_logo {path}')
     blob = bucket.blob(path)
     blob.delete()
@@ -1177,13 +1404,12 @@ def upload_app_thumbnail(file_path: str, thumbnail_id: str) -> str:
     blob = bucket.blob(path)
     blob.cache_control = 'public, no-cache'
     blob.upload_from_filename(file_path)
-    public_url = f'https://storage.googleapis.com/{app_thumbnails_bucket}/{path}'
-    return public_url
+    return _public_url(app_thumbnails_bucket, path)
 
 
 def get_app_thumbnail_url(thumbnail_id: str) -> str:
     path = f'{thumbnail_id}.jpg'
-    return f'https://storage.googleapis.com/{app_thumbnails_bucket}/{path}'
+    return _public_url(app_thumbnails_bucket, path)
 
 
 # **********************************
@@ -1211,7 +1437,7 @@ def upload_multi_chat_files(files_name: List[str], uid: str) -> dict:
                 blob.make_public()
             except Exception as e:
                 logger.warning(f"Could not make blob public (may need bucket-level IAM): {e}")
-            dictFiles[name] = f'https://storage.googleapis.com/{chat_files_bucket}/{uid}/{name}'
+            dictFiles[name] = _public_url(chat_files_bucket, f'{uid}/{name}')
         except Exception as e:
             logger.error("Failed to upload {} due to exception: {}".format(name, e))
     return dictFiles
