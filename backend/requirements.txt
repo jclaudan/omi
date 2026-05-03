@@ -1,3 +1,6 @@
+# Self-hosted open-source backends
+boto3==1.35.99
+qdrant-client==1.12.1
 aenum==3.1.15
 aiofiles==24.1.0
 aiohappyeyeballs==2.5.0
