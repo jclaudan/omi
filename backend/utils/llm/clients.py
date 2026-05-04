@@ -431,6 +431,34 @@ def _get_or_create_openai_llm(model_name: str, streaming: bool = False) -> ChatO
     return _llm_cache[key]
 
 
+# ---------------------------------------------------------------------------
+# Ollama (local LLM — OpenAI-compatible endpoint)
+# Set OLLAMA_BASE_URL=http://ollama:11434 and OLLAMA_MODEL=llama3.2 to use.
+# When OLLAMA_BASE_URL is set and OPENAI_API_KEY is absent, Ollama is used
+# as the default provider for all OpenAI-model features.
+# ---------------------------------------------------------------------------
+
+_OLLAMA_BASE_URL = os.getenv('OLLAMA_BASE_URL')
+_OLLAMA_MODEL = os.getenv('OLLAMA_MODEL', 'llama3.2')
+
+
+def _get_or_create_ollama_llm(streaming: bool = False) -> ChatOpenAI:
+    """ChatOpenAI pointed at Ollama's OpenAI-compatible API."""
+    key = ('ollama', _OLLAMA_MODEL, streaming)
+    if key not in _llm_cache:
+        kwargs: Dict[str, Any] = {
+            'base_url': f'{_OLLAMA_BASE_URL.rstrip("/")}/v1',
+            'api_key': 'ollama',  # required arg, ignored by Ollama
+            'callbacks': [_usage_callback],
+        }
+        if streaming:
+            kwargs['streaming'] = True
+            kwargs['stream_options'] = {'include_usage': True}
+        _llm_cache[key] = ChatOpenAI(model=_OLLAMA_MODEL, **kwargs)
+        logger.info(f'Ollama LLM configured: model={_OLLAMA_MODEL} url={_OLLAMA_BASE_URL}')
+    return _llm_cache[key]
+
+
 def _get_or_create_openrouter_llm(
     model_name: str, streaming: bool = False, temperature: Optional[float] = None
 ) -> ChatOpenAI:
@@ -500,6 +528,9 @@ def _get_or_create_gemini_llm(model_name: str, streaming: bool = False) -> BaseC
 
 def _get_default_client(model: str, provider: str, streaming: bool, feature: str) -> BaseChatModel:
     """Get the cached default client for a model/provider combo."""
+    # Route OpenAI-model features to Ollama when configured and no OpenAI key is present
+    if _OLLAMA_BASE_URL and not os.getenv('OPENAI_API_KEY') and provider == 'openai':
+        return _get_or_create_ollama_llm(streaming)
     if provider == 'openrouter':
         temp = _OPENROUTER_TEMPERATURES.get(feature)
         return _get_or_create_openrouter_llm(model, streaming, temp)
