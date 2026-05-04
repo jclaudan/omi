@@ -1,7 +1,8 @@
 version: '3.9'
 
 # Omi Self-Hosted Stack
-# Replaces: Google Cloud Storage → MinIO, Pinecone → Qdrant, Deepgram → Faster-Whisper
+# Replaces: GCS → MinIO, Pinecone → Qdrant, Deepgram → Faster-Whisper,
+#           Typesense cloud → Typesense self-hosted, OpenAI/Anthropic → Ollama (optional)
 # Run: docker compose up -d
 # Docs: docker/README.md
 
@@ -84,8 +85,47 @@ services:
       timeout: 5s
       retries: 5
 
+  # ==================== FULL-TEXT SEARCH (replaces Typesense cloud) ====================
+
+  typesense:
+    image: typesense/typesense:27.1
+    restart: unless-stopped
+    ports:
+      - "8108:8108"
+    volumes:
+      - typesense-data:/data
+    command: >
+      --data-dir /data
+      --api-key ${TYPESENSE_API_KEY:-typesense_api_key}
+      --enable-cors
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8108/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==================== LOCAL LLM (optional — replaces OpenAI/Anthropic) ====================
+  # Set OLLAMA_MODEL in .env.selfhosted to use. Leave commented if you prefer cloud LLMs.
+  #
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama-models:/root/.ollama
+  #   # GPU support: uncomment deploy block below
+  #   # deploy:
+  #   #   resources:
+  #   #     reservations:
+  #   #       devices:
+  #   #         - driver: nvidia
+  #   #           count: 1
+  #   #           capabilities: [gpu]
+
   # ==================== SPEECH-TO-TEXT (replaces Deepgram) ====================
 
+  # Batch STT — used for pre-recorded audio (conversations, profiles)
   faster-whisper:
     build:
       context: .
@@ -101,6 +141,29 @@ services:
       COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+
+  # Streaming STT — used for live audio (replaces Deepgram WebSocket API)
+  faster-whisper-ws:
+    build:
+      context: .
+      dockerfile: docker/services/faster-whisper-ws/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8002:8002"
+    volumes:
+      - whisper-models:/models
+    environment:
+      MODEL_SIZE: ${WHISPER_MODEL_SIZE:-base}
+      DEVICE: ${WHISPER_DEVICE:-cpu}
+      COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
+      FLUSH_SECS: "1.5"
+      SILENCE_SECS: "0.3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -144,6 +207,10 @@ services:
         condition: service_healthy
       minio-init:
         condition: service_completed_successfully
+      typesense:
+        condition: service_healthy
+      faster-whisper-ws:
+        condition: service_healthy
     env_file:
       - .env.selfhosted
     environment:
@@ -155,7 +222,11 @@ services:
       MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
       FASTER_WHISPER_URL: http://faster-whisper:8001
+      FASTER_WHISPER_WS_URL: ws://faster-whisper-ws:8002
       DIARIZER_URL: http://diarizer:8080
+      TYPESENSE_HOST: typesense
+      TYPESENSE_HOST_PORT: "8108"
+      TYPESENSE_PROTOCOL: http
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
@@ -188,6 +259,7 @@ services:
       MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
       FASTER_WHISPER_URL: http://faster-whisper:8001
+      FASTER_WHISPER_WS_URL: ws://faster-whisper-ws:8002
       DIARIZER_URL: http://diarizer:8080
       HOSTED_PUSHER_API_URL: http://omi-backend:8080
 
@@ -204,6 +276,10 @@ volumes:
     driver: local
   diarizer-models:
     driver: local
+  typesense-data:
+    driver: local
+  # ollama-models:
+  #   driver: local
 
 networks:
   default:
