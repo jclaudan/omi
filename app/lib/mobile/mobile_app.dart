@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/preferences.dart';
+import 'package:omi/backend/schema/app_mode.dart';
 import 'package:omi/pages/home/page.dart';
 import 'package:omi/pages/onboarding/device_selection.dart';
+import 'package:omi/pages/onboarding/mode_selector.dart';
+import 'package:omi/pages/onboarding/oss_plus/wrapper.dart';
 import 'package:omi/pages/onboarding/permissions/permissions_checker.dart';
 import 'package:omi/pages/onboarding/wrapper.dart';
 import 'package:omi/providers/auth_provider.dart';
@@ -17,6 +20,15 @@ class MobileApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthenticationProvider>(
       builder: (context, authProvider, child) {
+        if (!SharedPreferencesUtil().modeSelected) {
+          return const ModeSelectorPage();
+        }
+        if (SharedPreferencesUtil().appMode == AppMode.opensourcePlus) {
+          if (!SharedPreferencesUtil().onboardingCompleted) {
+            return const OssPlusOnboardingWrapper();
+          }
+          return const HomePageWrapper();
+        }
         if (authProvider.isSignedIn()) {
           // Returning users who haven't yet given consent under the new
           // model must see the consent screen before any AI processing

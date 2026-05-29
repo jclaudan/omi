@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:omi/backend/schema/app.dart';
+import 'package:omi/backend/schema/app_mode.dart';
 import 'package:omi/backend/schema/bt_device/bt_device.dart';
 import 'package:omi/backend/schema/conversation.dart';
 import 'package:omi/backend/schema/memory.dart';
@@ -624,6 +625,45 @@ class SharedPreferencesUtil {
       saveString('lastAnnouncementCheckTime', value.toUtc().toIso8601String());
     }
   }
+
+  //--------------------------- OSS+ Mode ------------------------------------//
+
+  AppMode get appMode => AppMode.fromString(getString('ossAppMode', defaultValue: ''));
+  set appMode(AppMode value) => saveString('ossAppMode', value.name);
+  bool get modeSelected => getString('ossAppMode', defaultValue: '').isNotEmpty;
+
+  String get ossSupabaseUrl => getString('ossSupabaseUrl', defaultValue: '');
+  set ossSupabaseUrl(String v) => saveString('ossSupabaseUrl', v);
+
+  String get ossSupabaseAnonKey => getString('ossSupabaseAnonKey', defaultValue: '');
+  set ossSupabaseAnonKey(String v) => saveString('ossSupabaseAnonKey', v);
+
+  String get ossSupabaseServiceKey => getString('ossSupabaseServiceKey', defaultValue: '');
+  set ossSupabaseServiceKey(String v) => saveString('ossSupabaseServiceKey', v);
+
+  String get ossFasterWhisperBatchUrl => getString('ossFasterWhisperBatchUrl', defaultValue: '');
+  set ossFasterWhisperBatchUrl(String v) => saveString('ossFasterWhisperBatchUrl', v);
+
+  String get ossFasterWhisperStreamUrl => getString('ossFasterWhisperStreamUrl', defaultValue: '');
+  set ossFasterWhisperStreamUrl(String v) => saveString('ossFasterWhisperStreamUrl', v);
+
+  String get ossQdrantUrl => getString('ossQdrantUrl', defaultValue: '');
+  set ossQdrantUrl(String v) => saveString('ossQdrantUrl', v);
+
+  String get ossQdrantApiKey => getString('ossQdrantApiKey', defaultValue: '');
+  set ossQdrantApiKey(String v) => saveString('ossQdrantApiKey', v);
+
+  String get ossMinioEndpoint => getString('ossMinioEndpoint', defaultValue: '');
+  set ossMinioEndpoint(String v) => saveString('ossMinioEndpoint', v);
+
+  String get ossMinioAccessKey => getString('ossMinioAccessKey', defaultValue: '');
+  set ossMinioAccessKey(String v) => saveString('ossMinioAccessKey', v);
+
+  String get ossMinioSecretKey => getString('ossMinioSecretKey', defaultValue: '');
+  set ossMinioSecretKey(String v) => saveString('ossMinioSecretKey', v);
+
+  String get ossOllamaUrl => getString('ossOllamaUrl', defaultValue: '');
+  set ossOllamaUrl(String v) => saveString('ossOllamaUrl', v);
 
   //--------------------------- Setters & Getters -----------------------------//
 

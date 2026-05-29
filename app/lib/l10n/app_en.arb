@@ -10986,5 +10986,77 @@
     "unableToDetermineFirmwareVersion": "Unable to determine current firmware version",
     "@unableToDetermineFirmwareVersion": {
         "description": "Shown when the device firmware revision cannot be read over BLE, so an OTA update offer would be unreliable."
+    },
+    "modeSelectorTitle": "Choose Your Mode",
+    "@modeSelectorTitle": {
+        "description": "Mode selection screen title"
+    },
+    "officialModeTitle": "Official",
+    "@officialModeTitle": {
+        "description": "Official (cloud) mode card title"
+    },
+    "officialModeDescription": "Omi Cloud — no setup required.",
+    "@officialModeDescription": {
+        "description": "Official mode card description"
+    },
+    "opensourcePlusModeTitle": "Open Source+",
+    "@opensourcePlusModeTitle": {
+        "description": "Open Source+ mode card title"
+    },
+    "opensourcePlusModeDescription": "Self-hosted — full privacy, no paid API.",
+    "@opensourcePlusModeDescription": {
+        "description": "Open Source+ mode card description"
+    },
+    "ossSetupTitle": "Open Source+ Setup",
+    "@ossSetupTitle": {
+        "description": "OSS+ onboarding: top title"
+    },
+    "ossSetupWelcomeBody": "Configure your services. This takes about 5 minutes.",
+    "@ossSetupWelcomeBody": {
+        "description": "OSS+ onboarding: welcome body text"
+    },
+    "ossAuthSubtitle": "Authentication & database",
+    "@ossAuthSubtitle": {
+        "description": "OSS+ Supabase step subtitle"
+    },
+    "ossSpeechSubtitle": "Speech recognition",
+    "@ossSpeechSubtitle": {
+        "description": "OSS+ STT step subtitle"
+    },
+    "ossVectorSubtitle": "Vector database",
+    "@ossVectorSubtitle": {
+        "description": "OSS+ Qdrant step subtitle"
+    },
+    "ossStorageSubtitle": "Object storage",
+    "@ossStorageSubtitle": {
+        "description": "OSS+ MinIO step subtitle"
+    },
+    "ossLocalAiSubtitle": "Local AI model",
+    "@ossLocalAiSubtitle": {
+        "description": "OSS+ Ollama step subtitle"
+    },
+    "ossConnectionTestTitle": "Connection Test",
+    "@ossConnectionTestTitle": {
+        "description": "OSS+ connection test step title"
+    },
+    "ossConnectionTestSubtitle": "Testing your services…",
+    "@ossConnectionTestSubtitle": {
+        "description": "OSS+ connection test step subtitle (testing state)"
+    },
+    "ossConnected": "Connected",
+    "@ossConnected": {
+        "description": "OSS+ service status: connected"
+    },
+    "ossUnreachable": "Unreachable",
+    "@ossUnreachable": {
+        "description": "OSS+ service status: unreachable"
+    },
+    "ossFinish": "Start using Omi",
+    "@ossFinish": {
+        "description": "OSS+ finish button label"
+    },
+    "ossOptional": "optional",
+    "@ossOptional": {
+        "description": "OSS+ label for optional fields/services"
     }
 }

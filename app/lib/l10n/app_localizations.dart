@@ -109,7 +109,8 @@ import 'app_localizations_zh.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -117,7 +118,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -129,12 +131,13 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
@@ -186,7 +189,7 @@ abstract class AppLocalizations {
     Locale('uk'),
     Locale('ur'),
     Locale('vi'),
-    Locale('zh')
+    Locale('zh'),
   ];
 
   /// The app title displayed in various places
@@ -2880,7 +2883,7 @@ abstract class AppLocalizations {
   /// No description provided for @freeMinutesMonth.
   ///
   /// In en, this message translates to:
-  /// **'1,200 free minutes/month included. Unlimited with '**
+  /// **'600 free minutes/month included. Unlimited with '**
   String get freeMinutesMonth;
 
   /// No description provided for @omiUnlimited.
@@ -8917,7 +8920,10 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'{accessDescription} and is {triggerDescription}.'**
-  String accessesAndTriggeredBy(String accessDescription, String triggerDescription);
+  String accessesAndTriggeredBy(
+    String accessDescription,
+    String triggerDescription,
+  );
 
   /// Sentence starting with 'Is' for trigger description
   ///
@@ -8934,7 +8940,7 @@ abstract class AppLocalizations {
   /// Description of basic plan features in usage page
   ///
   /// In en, this message translates to:
-  /// **'1,200 premium mins + unlimited on-device'**
+  /// **'600 premium mins + unlimited on-device'**
   String get basicPlanDescription;
 
   /// Unit label for minutes
@@ -11352,7 +11358,7 @@ abstract class AppLocalizations {
   /// Info about premium minutes
   ///
   /// In en, this message translates to:
-  /// **'1,200 premium minutes/month. On-Device tab offers unlimited free transcription.'**
+  /// **'600 premium minutes/month. On-Device tab offers unlimited free transcription.'**
   String get premiumMinutesInfo;
 
   /// Link to view usage
@@ -11496,7 +11502,7 @@ abstract class AppLocalizations {
   /// Description of premium minutes quota
   ///
   /// In en, this message translates to:
-  /// **'1,200 premium minutes/month. On-Device tab offers unlimited free transcription. '**
+  /// **'600 premium minutes/month. On-Device tab offers unlimited free transcription. '**
   String get premiumMinutesMonth;
 
   /// Description of on-device processing
@@ -17288,9 +17294,118 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unable to determine current firmware version'**
   String get unableToDetermineFirmwareVersion;
+
+  /// Mode selection screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Your Mode'**
+  String get modeSelectorTitle;
+
+  /// Official (cloud) mode card title
+  ///
+  /// In en, this message translates to:
+  /// **'Official'**
+  String get officialModeTitle;
+
+  /// Official mode card description
+  ///
+  /// In en, this message translates to:
+  /// **'Omi Cloud — no setup required.'**
+  String get officialModeDescription;
+
+  /// Open Source+ mode card title
+  ///
+  /// In en, this message translates to:
+  /// **'Open Source+'**
+  String get opensourcePlusModeTitle;
+
+  /// Open Source+ mode card description
+  ///
+  /// In en, this message translates to:
+  /// **'Self-hosted — full privacy, no paid API.'**
+  String get opensourcePlusModeDescription;
+
+  /// OSS+ onboarding: top title
+  ///
+  /// In en, this message translates to:
+  /// **'Open Source+ Setup'**
+  String get ossSetupTitle;
+
+  /// OSS+ onboarding: welcome body text
+  ///
+  /// In en, this message translates to:
+  /// **'Configure your services. This takes about 5 minutes.'**
+  String get ossSetupWelcomeBody;
+
+  /// OSS+ Supabase step subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication & database'**
+  String get ossAuthSubtitle;
+
+  /// OSS+ STT step subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Speech recognition'**
+  String get ossSpeechSubtitle;
+
+  /// OSS+ Qdrant step subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Vector database'**
+  String get ossVectorSubtitle;
+
+  /// OSS+ MinIO step subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Object storage'**
+  String get ossStorageSubtitle;
+
+  /// OSS+ Ollama step subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Local AI model'**
+  String get ossLocalAiSubtitle;
+
+  /// OSS+ connection test step title
+  ///
+  /// In en, this message translates to:
+  /// **'Connection Test'**
+  String get ossConnectionTestTitle;
+
+  /// OSS+ connection test step subtitle (testing state)
+  ///
+  /// In en, this message translates to:
+  /// **'Testing your services…'**
+  String get ossConnectionTestSubtitle;
+
+  /// OSS+ service status: connected
+  ///
+  /// In en, this message translates to:
+  /// **'Connected'**
+  String get ossConnected;
+
+  /// OSS+ service status: unreachable
+  ///
+  /// In en, this message translates to:
+  /// **'Unreachable'**
+  String get ossUnreachable;
+
+  /// OSS+ finish button label
+  ///
+  /// In en, this message translates to:
+  /// **'Start using Omi'**
+  String get ossFinish;
+
+  /// OSS+ label for optional fields/services
+  ///
+  /// In en, this message translates to:
+  /// **'optional'**
+  String get ossOptional;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -17300,56 +17415,56 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 
   @override
   bool isSupported(Locale locale) => <String>[
-        'ar',
-        'be',
-        'bg',
-        'bn',
-        'bs',
-        'ca',
-        'cs',
-        'da',
-        'de',
-        'el',
-        'en',
-        'es',
-        'et',
-        'fa',
-        'fi',
-        'fr',
-        'he',
-        'hi',
-        'hr',
-        'hu',
-        'id',
-        'it',
-        'ja',
-        'kn',
-        'ko',
-        'lt',
-        'lv',
-        'mk',
-        'mr',
-        'ms',
-        'nl',
-        'no',
-        'pl',
-        'pt',
-        'ro',
-        'ru',
-        'sk',
-        'sl',
-        'sr',
-        'sv',
-        'ta',
-        'te',
-        'th',
-        'tl',
-        'tr',
-        'uk',
-        'ur',
-        'vi',
-        'zh'
-      ].contains(locale.languageCode);
+    'ar',
+    'be',
+    'bg',
+    'bn',
+    'bs',
+    'ca',
+    'cs',
+    'da',
+    'de',
+    'el',
+    'en',
+    'es',
+    'et',
+    'fa',
+    'fi',
+    'fr',
+    'he',
+    'hi',
+    'hr',
+    'hu',
+    'id',
+    'it',
+    'ja',
+    'kn',
+    'ko',
+    'lt',
+    'lv',
+    'mk',
+    'mr',
+    'ms',
+    'nl',
+    'no',
+    'pl',
+    'pt',
+    'ro',
+    'ru',
+    'sk',
+    'sl',
+    'sr',
+    'sv',
+    'ta',
+    'te',
+    'th',
+    'tl',
+    'tr',
+    'uk',
+    'ur',
+    'vi',
+    'zh',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -17458,8 +17573,10 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsZh();
   }
 
-  throw FlutterError('AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+  throw FlutterError(
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
 }

@@ -135,11 +135,11 @@ Transformer les fichiers déjà modifiés en pattern Strategy pour éviter les c
 
 Nouvel écran au premier lancement, avant l'onboarding existant.
 
-- [ ] `AppMode` enum : `official` | `opensourcePlus`
-- [ ] Stockage dans `SharedPreferencesUtil` (`appMode`)
-- [ ] Écran de sélection (nouveau fichier, non modification de l'existant)
-- [ ] Routing conditionnel : si `appMode == official` → onboarding Omi existant, sinon → onboarding OSS+
-- [ ] L'app injecte `AppMode` dans un provider global accessible partout
+- [x] `AppMode` enum : `official` | `opensourcePlus` → `app/lib/backend/schema/app_mode.dart`
+- [x] Stockage dans `SharedPreferencesUtil` (`ossAppMode`) + préférences OSS+ services
+- [x] Écran de sélection → `app/lib/pages/onboarding/mode_selector.dart`
+- [x] Routing conditionnel : si `appMode == official` → onboarding Omi existant, sinon → onboarding OSS+
+- [ ] L'app injecte `AppMode` dans un provider global accessible partout (différé à Étape 4)
 
 ---
 
@@ -148,14 +148,14 @@ Nouvel écran au premier lancement, avant l'onboarding existant.
 
 Flux de configuration guidé, affiché uniquement en mode OSS+.
 
-**Écrans :**
-1. **Écran accueil OSS+** — explication de ce que l'utilisateur va configurer
-2. **Supabase** — URL du projet + clé anonyme + clé service
-3. **Services STT** — URL Faster-Whisper batch + URL WebSocket streaming
-4. **Qdrant** — URL + clé API optionnelle
-5. **Stockage MinIO** — endpoint + access key + secret key
-6. **Ollama** — URL (optionnel, skip possible)
-7. **Récapitulatif + test de connexion** — ping de chaque service, indicateur vert/rouge
+**Écrans :** ✅ Tous implémentés dans `app/lib/pages/onboarding/oss_plus/`
+1. **Écran accueil OSS+** → `step_welcome.dart`
+2. **Supabase** → `step_supabase.dart`
+3. **Services STT** → `step_stt.dart`
+4. **Qdrant** → `step_qdrant.dart`
+5. **Stockage MinIO** → `step_minio.dart`
+6. **Ollama** → `step_ollama.dart`
+7. **Test de connexion** → `step_test.dart`
 
 **Test de connexion :**
 - Chaque service est pingué en temps réel pendant la saisie

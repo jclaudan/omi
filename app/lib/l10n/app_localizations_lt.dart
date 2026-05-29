@@ -82,13 +82,16 @@ class AppLocalizationsLt extends AppLocalizations {
   String get contentCopied => 'Turinys nukopijuotas į iškarpinę';
 
   @override
-  String get failedToUpdateStarred => 'Nepavyko atnaujinti žvaigždutės būsenos.';
+  String get failedToUpdateStarred =>
+      'Nepavyko atnaujinti žvaigždutės būsenos.';
 
   @override
-  String get conversationUrlNotShared => 'Pokalbio nuorodos nepavyko bendrinti.';
+  String get conversationUrlNotShared =>
+      'Pokalbio nuorodos nepavyko bendrinti.';
 
   @override
-  String get errorProcessingConversation => 'Klaida dorojant pokalbį. Bandykite dar kartą vėliau.';
+  String get errorProcessingConversation =>
+      'Klaida dorojant pokalbį. Bandykite dar kartą vėliau.';
 
   @override
   String get noInternetConnection => 'Nėra interneto ryšio';
@@ -97,7 +100,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get unableToDeleteConversation => 'Nepavyko ištrinti pokalbio';
 
   @override
-  String get somethingWentWrong => 'Kažkas nepavyko! Bandykite dar kartą vėliau.';
+  String get somethingWentWrong =>
+      'Kažkas nepavyko! Bandykite dar kartą vėliau.';
 
   @override
   String get copyErrorMessage => 'Kopijuoti klaidos pranešimą';
@@ -129,7 +133,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get editPerson => 'Redaguoti asmenį';
 
   @override
-  String get createPersonHint => 'Sukurkite naują asmenį ir apmokykite Omi atpažinti jų kalbą!';
+  String get createPersonHint =>
+      'Sukurkite naują asmenį ir apmokykite Omi atpažinti jų kalbą!';
 
   @override
   String get speechProfile => 'Kalbos Profilis';
@@ -152,16 +157,19 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deleting => 'Trinama...';
 
   @override
-  String get pleaseCompleteAuthentication => 'Užbaikite autentifikaciją naršyklėje. Baigę grįžkite į programą.';
+  String get pleaseCompleteAuthentication =>
+      'Užbaikite autentifikaciją naršyklėje. Baigę grįžkite į programą.';
 
   @override
   String get failedToStartAuthentication => 'Nepavyko pradėti autentifikacijos';
 
   @override
-  String get importStarted => 'Importavimas pradėtas! Gausite pranešimą, kai bus baigta.';
+  String get importStarted =>
+      'Importavimas pradėtas! Gausite pranešimą, kai bus baigta.';
 
   @override
-  String get failedToStartImport => 'Nepavyko pradėti importavimo. Bandykite dar kartą.';
+  String get failedToStartImport =>
+      'Nepavyko pradėti importavimo. Bandykite dar kartą.';
 
   @override
   String get couldNotAccessFile => 'Nepavyko pasiekti pasirinkto failo';
@@ -215,7 +223,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get tapSyncToStart => 'Paspauskite Sinchronizuoti, kad pradėtumėte';
 
   @override
-  String get pendantNotConnected => 'Pakabukas neprijungtas. Prijunkite, kad sinchronizuotumėte.';
+  String get pendantNotConnected =>
+      'Pakabukas neprijungtas. Prijunkite, kad sinchronizuotumėte.';
 
   @override
   String get everythingSynced => 'Viskas jau sinchronizuota.';
@@ -265,10 +274,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get askAnything => 'Klauskite bet ko';
 
   @override
-  String get noMessagesYet => 'Kol kas nėra žinučių!\nKodėl gi nepradėtumėte pokalbio?';
+  String get noMessagesYet =>
+      'Kol kas nėra žinučių!\nKodėl gi nepradėtumėte pokalbio?';
 
   @override
-  String get deletingMessages => 'Ištrinami jūsų pranešimai iš Omi atminties...';
+  String get deletingMessages =>
+      'Ištrinami jūsų pranešimai iš Omi atminties...';
 
   @override
   String get messageCopied => '✨ Pranešimas nukopijuotas į iškarpinę';
@@ -280,7 +291,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get reportMessage => 'Pranešti apie pranešimą';
 
   @override
-  String get reportMessageConfirm => 'Ar tikrai norite pranešti apie šią žinutę?';
+  String get reportMessageConfirm =>
+      'Ar tikrai norite pranešti apie šią žinutę?';
 
   @override
   String get messageReported => 'Apie žinutę pranešta sėkmingai.';
@@ -292,7 +304,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get clearChat => 'Išvalyti pokalbį';
 
   @override
-  String get clearChatConfirm => 'Ar tikrai norite išvalyti pokalbį? Šio veiksmo negalima atšaukti.';
+  String get clearChatConfirm =>
+      'Ar tikrai norite išvalyti pokalbį? Šio veiksmo negalima atšaukti.';
 
   @override
   String get maxFilesLimit => 'Galite įkelti tik 4 failus vienu metu';
@@ -356,10 +369,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get cannotBeUndone => 'Šio veiksmo negalima atšaukti.';
 
   @override
-  String get allDataErased => 'Visi jūsų prisiminimai ir pokalbiai bus negrįžtamai ištrinti.';
+  String get allDataErased =>
+      'Visi jūsų prisiminimai ir pokalbiai bus negrįžtamai ištrinti.';
 
   @override
-  String get appsDisconnected => 'Jūsų programėlės ir integracijos bus nedelsiant atjungtos.';
+  String get appsDisconnected =>
+      'Jūsų programėlės ir integracijos bus nedelsiant atjungtos.';
 
   @override
   String get exportBeforeDelete =>
@@ -453,7 +468,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get signOut => 'Atsijungti';
 
   @override
-  String get appAndDeviceCopied => 'Programėlės ir įrenginio informacija nukopijuota';
+  String get appAndDeviceCopied =>
+      'Programėlės ir įrenginio informacija nukopijuota';
 
   @override
   String get wrapped2025 => '2025 apžvalga';
@@ -483,7 +499,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Šios programėlės gali pasiekti jūsų duomenis. Paspauskite programėlę, kad valdytumėte jos leidimus.';
 
   @override
-  String get noAppsExternalAccess => 'Jokios įdiegtos programėlės neturi išorinės prieigos prie jūsų duomenų.';
+  String get noAppsExternalAccess =>
+      'Jokios įdiegtos programėlės neturi išorinės prieigos prie jūsų duomenų.';
 
   @override
   String get deviceName => 'Įrenginio pavadinimas';
@@ -551,7 +568,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deviceNotConnected => 'Įrenginys neprijungtas';
 
   @override
-  String get connectDeviceMessage => 'Prijunkite Omi įrenginį, kad pasiektumėte\nįrenginio nustatymus ir pritaikymą';
+  String get connectDeviceMessage =>
+      'Prijunkite Omi įrenginį, kad pasiektumėte\nįrenginio nustatymus ir pritaikymą';
 
   @override
   String get deviceInfoSection => 'Įrenginio informacija';
@@ -621,7 +639,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get micGainDescNeutral => 'Neutralus – subalansuotas įrašymas';
 
   @override
-  String get micGainDescSlightlyBoosted => 'Šiek tiek sustiprintas – įprastam naudojimui';
+  String get micGainDescSlightlyBoosted =>
+      'Šiek tiek sustiprintas – įprastam naudojimui';
 
   @override
   String get micGainDescBoosted => 'Sustiprintas – tyliai aplinkai';
@@ -654,7 +673,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get conversationTimeout => 'Pokalbio skirtasis laikas';
 
   @override
-  String get conversationTimeoutConfig => 'Nustatykite, kada automatiškai baigiami pokalbiai';
+  String get conversationTimeoutConfig =>
+      'Nustatykite, kada automatiškai baigiami pokalbiai';
 
   @override
   String get importData => 'Importuoti duomenis';
@@ -699,7 +719,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get noActivityYet => 'Kol kas nėra veiklos';
 
   @override
-  String get startConversationToSeeInsights => 'Pradėkite pokalbį su Omi,\nkad čia matytumėte naudojimo įžvalgas.';
+  String get startConversationToSeeInsights =>
+      'Pradėkite pokalbį su Omi,\nkad čia matytumėte naudojimo įžvalgas.';
 
   @override
   String get listening => 'Klausymasis';
@@ -717,7 +738,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get providing => 'Teikimas';
 
   @override
-  String get providingSubtitle => 'Automatiškai užfiksuotos užduotys ir pastabos.';
+  String get providingSubtitle =>
+      'Automatiškai užfiksuotos užduotys ir pastabos.';
 
   @override
   String get remembering => 'Prisiminimas';
@@ -761,7 +783,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get shareStatsMessage => 'Dalinu savo Omi statistika! (omi.me – jūsų visada veikiantis DI asistentas)';
+  String get shareStatsMessage =>
+      'Dalinu savo Omi statistika! (omi.me – jūsų visada veikiantis DI asistentas)';
 
   @override
   String get sharePeriodToday => 'Šiandien omi:';
@@ -823,7 +846,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get debugLogCleared => 'Derinimo žurnalas išvalytas';
 
   @override
-  String get exportStarted => 'Eksportavimas pradėtas. Tai gali užtrukti keletą sekundžių...';
+  String get exportStarted =>
+      'Eksportavimas pradėtas. Tai gali užtrukti keletą sekundžių...';
 
   @override
   String get exportAllData => 'Eksportuoti visus duomenis';
@@ -967,19 +991,22 @@ class AppLocalizationsLt extends AppLocalizations {
   String get visibility => 'Matomumas';
 
   @override
-  String get visibilitySubtitle => 'Kontroliuokite, kurie pokalbiai rodomi jūsų sąraše';
+  String get visibilitySubtitle =>
+      'Kontroliuokite, kurie pokalbiai rodomi jūsų sąraše';
 
   @override
   String get showShortConversations => 'Rodyti trumpus pokalbius';
 
   @override
-  String get showShortConversationsDesc => 'Rodyti pokalbius, trumpesnius už ribą';
+  String get showShortConversationsDesc =>
+      'Rodyti pokalbius, trumpesnius už ribą';
 
   @override
   String get showDiscardedConversations => 'Rodyti atmestus pokalbius';
 
   @override
-  String get showDiscardedConversationsDesc => 'Įtraukti pokalbius, pažymėtus kaip atmesti';
+  String get showDiscardedConversationsDesc =>
+      'Įtraukti pokalbius, pažymėtus kaip atmesti';
 
   @override
   String get shortConversationThreshold => 'Trumpo pokalbio riba';
@@ -992,7 +1019,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get durationThreshold => 'Trukmės riba';
 
   @override
-  String get durationThresholdDesc => 'Slėpti pokalbius, trumpesnius už šią ribą';
+  String get durationThresholdDesc =>
+      'Slėpti pokalbius, trumpesnius už šią ribą';
 
   @override
   String minLabel(int count) {
@@ -1018,10 +1046,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get comingSoon => 'Greitai';
 
   @override
-  String get integrationsFooter => 'Prijunkite savo programėles, kad matytumėte duomenis ir metrikas pokalbyje.';
+  String get integrationsFooter =>
+      'Prijunkite savo programėles, kad matytumėte duomenis ir metrikas pokalbyje.';
 
   @override
-  String get completeAuthInBrowser => 'Užbaikite autentifikaciją naršyklėje. Baigę grįžkite į programą.';
+  String get completeAuthInBrowser =>
+      'Užbaikite autentifikaciją naršyklėje. Baigę grįžkite į programą.';
 
   @override
   String failedToStartAuth(String appName) {
@@ -1081,10 +1111,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get needYourPermission => 'Mums reikia jūsų leidimo';
 
   @override
-  String get alreadyGavePermission => 'Jau davėte mums leidimą išsaugoti jūsų įrašus. Primename, kodėl mums to reikia:';
+  String get alreadyGavePermission =>
+      'Jau davėte mums leidimą išsaugoti jūsų įrašus. Primename, kodėl mums to reikia:';
 
   @override
-  String get wouldLikePermission => 'Norėtume jūsų leidimo išsaugoti jūsų balso įrašus. Štai kodėl:';
+  String get wouldLikePermission =>
+      'Norėtume jūsų leidimo išsaugoti jūsų balso įrašus. Štai kodėl:';
 
   @override
   String get improveSpeechProfile => 'Pagerinti jūsų kalbos profilį';
@@ -1097,7 +1129,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get trainFamilyProfiles => 'Mokyti draugų ir šeimos profilius';
 
   @override
-  String get trainFamilyProfilesDesc => 'Jūsų įrašai padeda atpažinti ir kurti profilius jūsų draugams ir šeimai.';
+  String get trainFamilyProfilesDesc =>
+      'Jūsų įrašai padeda atpažinti ir kurti profilius jūsų draugams ir šeimai.';
 
   @override
   String get enhanceTranscriptAccuracy => 'Pagerinti transkripcijos tikslumą';
@@ -1132,13 +1165,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get recordingsDeleted => 'Įrašai ištrinti.';
 
   @override
-  String get failedToRevoke => 'Nepavyko atšaukti leidimo. Bandykite dar kartą.';
+  String get failedToRevoke =>
+      'Nepavyko atšaukti leidimo. Bandykite dar kartą.';
 
   @override
   String get permissionRevokedTitle => 'Leidimas atšauktas';
 
   @override
-  String get permissionRevokedMessage => 'Ar norite, kad ištrintume visus jūsų esamus įrašus?';
+  String get permissionRevokedMessage =>
+      'Ar norite, kad ištrintume visus jūsų esamus įrašus?';
 
   @override
   String get yes => 'Taip';
@@ -1180,13 +1215,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get showMeetingsMenuBar => 'Rodyti būsimus susitikimus meniu juostoje';
 
   @override
-  String get showMeetingsMenuBarDesc => 'Rodyti kitą susitikimą ir laiką iki jo pradžios macOS meniu juostoje';
+  String get showMeetingsMenuBarDesc =>
+      'Rodyti kitą susitikimą ir laiką iki jo pradžios macOS meniu juostoje';
 
   @override
   String get showEventsNoParticipants => 'Rodyti renginius be dalyvių';
 
   @override
-  String get showEventsNoParticipantsDesc => 'Kai įjungta, „Coming Up\" rodo renginius be dalyvių ar vaizdo nuorodos.';
+  String get showEventsNoParticipantsDesc =>
+      'Kai įjungta, „Coming Up\" rodo renginius be dalyvių ar vaizdo nuorodos.';
 
   @override
   String get yourMeetings => 'Jūsų susitikimai';
@@ -1204,7 +1241,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get tomorrow => 'Rytoj';
 
   @override
-  String get googleCalendarComingSoon => 'Google kalendoriaus integracija greitai!';
+  String get googleCalendarComingSoon =>
+      'Google kalendoriaus integracija greitai!';
 
   @override
   String connectedAsUser(String userId) {
@@ -1215,19 +1253,22 @@ class AppLocalizationsLt extends AppLocalizations {
   String get defaultWorkspace => 'Numatytoji darbo sritis';
 
   @override
-  String get tasksCreatedInWorkspace => 'Užduotys bus sukurtos šioje darbo srityje';
+  String get tasksCreatedInWorkspace =>
+      'Užduotys bus sukurtos šioje darbo srityje';
 
   @override
   String get defaultProjectOptional => 'Numatytasis projektas (nebūtinas)';
 
   @override
-  String get leaveUnselectedTasks => 'Palikite nepasirinkus, kad sukurtumėte užduotis be projekto';
+  String get leaveUnselectedTasks =>
+      'Palikite nepasirinkus, kad sukurtumėte užduotis be projekto';
 
   @override
   String get noProjectsInWorkspace => 'Šioje darbo srityje nerasta projektų';
 
   @override
-  String get conversationTimeoutDesc => 'Pasirinkite, kiek laiko laukti tylos prieš automatiškai baigiant pokalbį:';
+  String get conversationTimeoutDesc =>
+      'Pasirinkite, kiek laiko laukti tylos prieš automatiškai baigiant pokalbį:';
 
   @override
   String get timeout2Minutes => '2 minutės';
@@ -1260,7 +1301,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get timeout4HoursDesc => 'Baigti pokalbį po 4 valandų tylos';
 
   @override
-  String get conversationEndAfterHours => 'Pokalbiai dabar bus baigiami po 4 valandų tylos';
+  String get conversationEndAfterHours =>
+      'Pokalbiai dabar bus baigiami po 4 valandų tylos';
 
   @override
   String conversationEndAfterMinutes(int minutes) {
@@ -1350,7 +1392,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get defaultRepoSaved => 'Numatytoji saugykla išsaugota';
 
   @override
-  String get failedToSaveDefaultRepo => 'Nepavyko išsaugoti numatytosios saugyklos';
+  String get failedToSaveDefaultRepo =>
+      'Nepavyko išsaugoti numatytosios saugyklos';
 
   @override
   String get defaultRepository => 'Numatytoji saugykla';
@@ -1395,7 +1438,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get issuesCreatedInRepo => 'Problemos bus sukurtos jūsų numatytojoje saugykloje';
+  String get issuesCreatedInRepo =>
+      'Problemos bus sukurtos jūsų numatytojoje saugykloje';
 
   @override
   String get taskIntegrations => 'Užduočių integracijos';
@@ -1404,7 +1448,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get configureSettings => 'Konfigūruoti nustatymus';
 
   @override
-  String get completeAuthBrowser => 'Užbaikite autentifikaciją naršyklėje. Baigę grįžkite į programą.';
+  String get completeAuthBrowser =>
+      'Užbaikite autentifikaciją naršyklėje. Baigę grįžkite į programą.';
 
   @override
   String failedToStartAppAuth(String appName) {
@@ -1438,7 +1483,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get gotIt => 'Supratau';
 
   @override
-  String get tasksExportedOneApp => 'Užduotys gali būti eksportuojamos į vieną programėlę vienu metu.';
+  String get tasksExportedOneApp =>
+      'Užduotys gali būti eksportuojamos į vieną programėlę vienu metu.';
 
   @override
   String get completeYourUpgrade => 'Užbaikite savo atnaujinimą';
@@ -1453,10 +1499,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get bringYourOwn => 'Naudokite savo';
 
   @override
-  String get payYourSttProvider => 'Laisvai naudokite omi. Mokate tik savo STT teikėjui tiesiogiai.';
+  String get payYourSttProvider =>
+      'Laisvai naudokite omi. Mokate tik savo STT teikėjui tiesiogiai.';
 
   @override
-  String get freeMinutesMonth => '1 200 nemokamų minučių per mėnesį įtraukta. Neribota su ';
+  String get freeMinutesMonth =>
+      '1 200 nemokamų minučių per mėnesį įtraukta. Neribota su ';
 
   @override
   String get omiUnlimited => 'Omi Unlimited';
@@ -1468,7 +1516,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get validPortRequired => 'Reikalingas tinkamas prievadas';
 
   @override
-  String get validWebsocketUrlRequired => 'Reikalingas tinkamas WebSocket URL (wss://)';
+  String get validWebsocketUrlRequired =>
+      'Reikalingas tinkamas WebSocket URL (wss://)';
 
   @override
   String get apiUrlRequired => 'Reikalingas API URL';
@@ -1491,7 +1540,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get pasteJsonConfig => 'Įklijuokite savo JSON konfigūraciją žemiau:';
 
   @override
-  String get addApiKeyAfterImport => 'Importavę turėsite pridėti savo API raktą';
+  String get addApiKeyAfterImport =>
+      'Importavę turėsite pridėti savo API raktą';
 
   @override
   String get paste => 'Įklijuoti';
@@ -1531,7 +1581,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get websocketUrl => 'WebSocket URL';
 
   @override
-  String get enterLiveSttWebsocket => 'Įveskite savo tiesioginį STT WebSocket galinį tašką';
+  String get enterLiveSttWebsocket =>
+      'Įveskite savo tiesioginį STT WebSocket galinį tašką';
 
   @override
   String get apiKey => 'API raktas';
@@ -1564,7 +1615,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get modified => 'Pakeista';
 
   @override
-  String get resetRequestConfig => 'Atkurti užklausos konfigūraciją į numatytąją';
+  String get resetRequestConfig =>
+      'Atkurti užklausos konfigūraciją į numatytąją';
 
   @override
   String get logs => 'Žurnalai';
@@ -1573,7 +1625,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get logsCopied => 'Žurnalai nukopijuoti';
 
   @override
-  String get noLogsYet => 'Kol kas nėra žurnalų. Pradėkite įrašinėti, kad matytumėte pasirinktinio STT veiklą.';
+  String get noLogsYet =>
+      'Kol kas nėra žurnalų. Pradėkite įrašinėti, kad matytumėte pasirinktinio STT veiklą.';
 
   @override
   String deviceUsesCodec(String device, String reason) {
@@ -1584,7 +1637,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get omiTranscription => 'Omi transkripcija';
 
   @override
-  String get bestInClassTranscription => 'Geriausia klasės transkripcija be jokio nustatymo';
+  String get bestInClassTranscription =>
+      'Geriausia klasės transkripcija be jokio nustatymo';
 
   @override
   String get instantSpeakerLabels => 'Akimirksniu kalbėtojų etiketės';
@@ -1671,7 +1725,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get tailoredConversationSummaries => 'Pritaikytos pokalbių santraukos';
 
   @override
-  String get customChatbotPersonality => 'Pasirinktinė pokalbių roboto asmenybė';
+  String get customChatbotPersonality =>
+      'Pasirinktinė pokalbių roboto asmenybė';
 
   @override
   String get makePublic => 'Padaryti viešą';
@@ -1748,19 +1803,22 @@ class AppLocalizationsLt extends AppLocalizations {
   String get backgroundActivity => 'Foninė veikla';
 
   @override
-  String get backgroundActivityDesc => 'Leiskite Omi veikti fone geresniam stabilumui';
+  String get backgroundActivityDesc =>
+      'Leiskite Omi veikti fone geresniam stabilumui';
 
   @override
   String get locationAccess => 'Vietos prieiga';
 
   @override
-  String get locationAccessDesc => 'Įjunkite foninę vietos nustatymą visapusiškesnei patirčiai';
+  String get locationAccessDesc =>
+      'Įjunkite foninę vietos nustatymą visapusiškesnei patirčiai';
 
   @override
   String get notifications => 'Pranešimai';
 
   @override
-  String get notificationsDesc => 'Įjunkite pranešimus, kad būtumėte informuoti';
+  String get notificationsDesc =>
+      'Įjunkite pranešimus, kad būtumėte informuoti';
 
   @override
   String get locationServiceDisabled => 'Vietos tarnyba išjungta';
@@ -1797,7 +1855,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get maybeLater => 'Gal vėliau';
 
   @override
-  String get speechProfileIntro => 'Omi turi išmokti jūsų tikslus ir balsą. Vėliau galėsite tai pakeisti.';
+  String get speechProfileIntro =>
+      'Omi turi išmokti jūsų tikslus ir balsą. Vėliau galėsite tai pakeisti.';
 
   @override
   String get getStarted => 'Pradėti';
@@ -1829,10 +1888,12 @@ class AppLocalizationsLt extends AppLocalizations {
       'Atrodo, kad įraše yra keli kalbėtojai. Įsitikinkite, kad esate tylioje vietoje, ir bandykite dar kartą.';
 
   @override
-  String get tooShortDesc => 'Neaptikta pakankamai kalbos. Kalbėkite daugiau ir bandykite dar kartą.';
+  String get tooShortDesc =>
+      'Neaptikta pakankamai kalbos. Kalbėkite daugiau ir bandykite dar kartą.';
 
   @override
-  String get invalidRecordingDesc => 'Įsitikinkite, kad kalbate bent 5 sekundes ir ne ilgiau nei 90.';
+  String get invalidRecordingDesc =>
+      'Įsitikinkite, kad kalbate bent 5 sekundes ir ne ilgiau nei 90.';
 
   @override
   String get areYouThere => 'Ar jūs čia?';
@@ -1845,7 +1906,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get connectionLost => 'Ryšys prarastas';
 
   @override
-  String get connectionLostDesc => 'Ryšys buvo nutrauktas. Patikrinkite interneto ryšį ir bandykite dar kartą.';
+  String get connectionLostDesc =>
+      'Ryšys buvo nutrauktas. Patikrinkite interneto ryšį ir bandykite dar kartą.';
 
   @override
   String get tryAgain => 'Bandyti dar kartą';
@@ -1873,7 +1935,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get whatsYourName => 'Koks tavo vardas?';
 
   @override
-  String get speakTranscribeSummarize => 'Kalbėti. Transkribuoti. Apibendrinti.';
+  String get speakTranscribeSummarize =>
+      'Kalbėti. Transkribuoti. Apibendrinti.';
 
   @override
   String get signInWithApple => 'Prisijungti su Apple';
@@ -1942,7 +2005,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get selectPrimaryLanguage => 'Pasirinkite savo pagrindinę kalbą';
 
   @override
-  String get languageBenefits => 'Nustatykite savo kalbą tikslesnėms transkripcijoms ir individualizuotai patirčiai';
+  String get languageBenefits =>
+      'Nustatykite savo kalbą tikslesnėms transkripcijoms ir individualizuotai patirčiai';
 
   @override
   String get whatsYourPrimaryLanguage => 'Kokia jūsų pagrindinė kalba?';
@@ -1951,7 +2015,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get selectYourLanguage => 'Pasirinkite savo kalbą';
 
   @override
-  String get personalGrowthJourney => 'Jūsų asmeninio augimo kelionė su AI, kuris klauso kiekvieno jūsų žodžio.';
+  String get personalGrowthJourney =>
+      'Jūsų asmeninio augimo kelionė su AI, kuris klauso kiekvieno jūsų žodžio.';
 
   @override
   String get actionItemsTitle => 'Užduotys';
@@ -1970,7 +2035,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get tabOld => 'Senos';
 
   @override
-  String get emptyTodoMessage => '🎉 Viskas atnaujinta!\nNėra laukiančių užduočių';
+  String get emptyTodoMessage =>
+      '🎉 Viskas atnaujinta!\nNėra laukiančių užduočių';
 
   @override
   String get emptyDoneMessage => 'Kol kas nėra baigtų elementų';
@@ -1991,7 +2057,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deleteActionItemTitle => 'Ištrinti veiksmo elementą';
 
   @override
-  String get deleteActionItemMessage => 'Ar tikrai norite ištrinti šį veiksmo elementą?';
+  String get deleteActionItemMessage =>
+      'Ar tikrai norite ištrinti šį veiksmo elementą?';
 
   @override
   String get deleteSelectedItemsTitle => 'Ištrinti pasirinktus elementus';
@@ -2031,7 +2098,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get autoExtractionFeature => 'Automatiškai išgauta iš pokalbių';
 
   @override
-  String get editSwipeFeature => 'Bakstelėkite, kad redaguotumėte, braukite, kad baigtumėte ar ištrintumėte';
+  String get editSwipeFeature =>
+      'Bakstelėkite, kad redaguotumėte, braukite, kad baigtumėte ar ištrintumėte';
 
   @override
   String itemsSelected(int count) {
@@ -2075,7 +2143,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get clearMemoryTitle => 'Išvalyti Omi atmintį';
 
   @override
-  String get clearMemoryMessage => 'Ar tikrai norite išvalyti Omi atmintį? Šio veiksmo negalima atšaukti.';
+  String get clearMemoryMessage =>
+      'Ar tikrai norite išvalyti Omi atmintį? Šio veiksmo negalima atšaukti.';
 
   @override
   String get clearMemoryButton => 'Išvalyti atmintį';
@@ -2152,7 +2221,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get actionItemDescriptionHint => 'Ką reikia padaryti?';
 
   @override
-  String get actionItemDescriptionEmpty => 'Užduoties aprašymas negali būti tuščias.';
+  String get actionItemDescriptionEmpty =>
+      'Užduoties aprašymas negali būti tuščias.';
 
   @override
   String get actionItemUpdated => 'Užduotis atnaujinta';
@@ -2209,7 +2279,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deleteActionItemConfirmTitle => 'Ištrinti užduotį';
 
   @override
-  String get deleteActionItemConfirmMessage => 'Ar tikrai norite ištrinti šią užduotį?';
+  String get deleteActionItemConfirmMessage =>
+      'Ar tikrai norite ištrinti šią užduotį?';
 
   @override
   String get appLanguage => 'Programėlės kalba';
@@ -2232,13 +2303,15 @@ class AppLocalizationsLt extends AppLocalizations {
       'Omi verčia pokalbius į jūsų pagrindinę kalbą. Atnaujinkite bet kada skiltyje Nustatymai → Profiliai.';
 
   @override
-  String get pleaseCheckInternetConnection => 'Patikrinkite interneto ryšį ir bandykite dar kartą';
+  String get pleaseCheckInternetConnection =>
+      'Patikrinkite interneto ryšį ir bandykite dar kartą';
 
   @override
   String get pleaseSelectReason => 'Pasirinkite priežastį';
 
   @override
-  String get tellUsMoreWhatWentWrong => 'Pasakykite mums daugiau apie tai, kas nutiko ne taip...';
+  String get tellUsMoreWhatWentWrong =>
+      'Pasakykite mums daugiau apie tai, kas nutiko ne taip...';
 
   @override
   String get selectText => 'Pasirinkti tekstą';
@@ -2249,7 +2322,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get conversationCannotBeMerged => 'Šis pokalbis negali būti sujungtas (užrakintas arba jau sujungiamas)';
+  String get conversationCannotBeMerged =>
+      'Šis pokalbis negali būti sujungtas (užrakintas arba jau sujungiamas)';
 
   @override
   String get pleaseEnterFolderName => 'Įveskite aplanko pavadinimą';
@@ -2276,13 +2350,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deleteFolder => 'Ištrinti aplanką';
 
   @override
-  String get transcriptCopiedToClipboard => 'Transkriptai nukopijuoti į iškarpinę';
+  String get transcriptCopiedToClipboard =>
+      'Transkriptai nukopijuoti į iškarpinę';
 
   @override
   String get summaryCopiedToClipboard => 'Santrauka nukopijuota į iškarpinę';
 
   @override
-  String get conversationUrlCouldNotBeShared => 'Pokalbio URL nepavyko bendrinti.';
+  String get conversationUrlCouldNotBeShared =>
+      'Pokalbio URL nepavyko bendrinti.';
 
   @override
   String get urlCopiedToClipboard => 'URL nukopijuotas į iškarpinę';
@@ -2297,7 +2373,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get exportButton => 'Eksportuoti';
 
   @override
-  String get actionItemsCopiedToClipboard => 'Veiksmų elementai nukopijuoti į iškarpinę';
+  String get actionItemsCopiedToClipboard =>
+      'Veiksmų elementai nukopijuoti į iškarpinę';
 
   @override
   String get summarize => 'Apibendrinti';
@@ -2306,7 +2383,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get generateSummary => 'Generuoti suvestinę';
 
   @override
-  String get conversationNotFoundOrDeleted => 'Pokalbis nerastas arba buvo ištrintas';
+  String get conversationNotFoundOrDeleted =>
+      'Pokalbis nerastas arba buvo ištrintas';
 
   @override
   String get deleteMemory => 'Ištrinti atminimą';
@@ -2329,19 +2407,22 @@ class AppLocalizationsLt extends AppLocalizations {
   String get firmwareDisconnectUsb => 'Atjunkite USB';
 
   @override
-  String get firmwareUsbWarning => 'USB ryšys atnaujinimo metu gali sugadinti jūsų įrenginį.';
+  String get firmwareUsbWarning =>
+      'USB ryšys atnaujinimo metu gali sugadinti jūsų įrenginį.';
 
   @override
   String get firmwareBatteryAbove15 => 'Baterija virš 15%';
 
   @override
-  String get firmwareEnsureBattery => 'Įsitikinkite, kad jūsų įrenginyje yra 15% baterijos.';
+  String get firmwareEnsureBattery =>
+      'Įsitikinkite, kad jūsų įrenginyje yra 15% baterijos.';
 
   @override
   String get firmwareStableConnection => 'Stabilus ryšys';
 
   @override
-  String get firmwareConnectWifi => 'Prisijunkite prie WiFi arba mobiliojo ryšio.';
+  String get firmwareConnectWifi =>
+      'Prisijunkite prie WiFi arba mobiliojo ryšio.';
 
   @override
   String failedToStartUpdate(String error) {
@@ -2420,7 +2501,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get noApiKeysYet => 'Dar nėra API raktų. Sukurkite vieną integracijai su savo programa.';
+  String get noApiKeysYet =>
+      'Dar nėra API raktų. Sukurkite vieną integracijai su savo programa.';
 
   @override
   String get createKeyToGetStarted => 'Sukurkite raktą, kad pradėtumėte';
@@ -2429,10 +2511,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get configureSttProvider => 'Konfigūruoti STT teikėją';
 
   @override
-  String get setWhenConversationsAutoEnd => 'Nustatykite, kada pokalbiai baigiasi automatiškai';
+  String get setWhenConversationsAutoEnd =>
+      'Nustatykite, kada pokalbiai baigiasi automatiškai';
 
   @override
-  String get importDataFromOtherSources => 'Importuoti duomenis iš kitų šaltinių';
+  String get importDataFromOtherSources =>
+      'Importuoti duomenis iš kitų šaltinių';
 
   @override
   String get debugAndDiagnostics => 'Derinimas ir diagnostika';
@@ -2444,13 +2528,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get helpsDiagnoseIssues => 'Padeda diagnozuoti problemas';
 
   @override
-  String get exportStartedMessage => 'Eksportavimas pradėtas. Tai gali užtrukti kelias sekundes...';
+  String get exportStartedMessage =>
+      'Eksportavimas pradėtas. Tai gali užtrukti kelias sekundes...';
 
   @override
   String get exportConversationsToJson => 'Eksportuoti pokalbius į JSON failą';
 
   @override
-  String get knowledgeGraphDeletedSuccess => 'Žinių grafikas sėkmingai ištrintas';
+  String get knowledgeGraphDeletedSuccess =>
+      'Žinių grafikas sėkmingai ištrintas';
 
   @override
   String failedToDeleteGraph(String error) {
@@ -2461,10 +2547,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get clearAllNodesAndConnections => 'Išvalyti visus mazgus ir ryšius';
 
   @override
-  String get addToClaudeDesktopConfig => 'Pridėti prie claude_desktop_config.json';
+  String get addToClaudeDesktopConfig =>
+      'Pridėti prie claude_desktop_config.json';
 
   @override
-  String get connectAiAssistantsToData => 'Prijunkite AI asistentus prie savo duomenų';
+  String get connectAiAssistantsToData =>
+      'Prijunkite AI asistentus prie savo duomenų';
 
   @override
   String get useYourMcpApiKey => 'Naudokite savo MCP API raktą';
@@ -2491,16 +2579,19 @@ class AppLocalizationsLt extends AppLocalizations {
   String get followUpQuestions => 'Tolimesnės užklausos';
 
   @override
-  String get suggestQuestionsAfterConversations => 'Siūlyti klausimus po pokalbių';
+  String get suggestQuestionsAfterConversations =>
+      'Siūlyti klausimus po pokalbių';
 
   @override
   String get goalTracker => 'Tikslų stebėjimas';
 
   @override
-  String get trackPersonalGoalsOnHomepage => 'Sekite savo asmeninius tikslus pagrindiniame puslapyje';
+  String get trackPersonalGoalsOnHomepage =>
+      'Sekite savo asmeninius tikslus pagrindiniame puslapyje';
 
   @override
-  String get actionItemDescriptionCannotBeEmpty => 'Veiksmo elemento aprašymas negali būti tuščias';
+  String get actionItemDescriptionCannotBeEmpty =>
+      'Veiksmo elemento aprašymas negali būti tuščias';
 
   @override
   String get saved => 'Išsaugota';
@@ -2558,10 +2649,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get checksForAudioFiles => 'Patikrina garso failus SD kortelėje';
 
   @override
-  String get omiSyncsAudioFiles => 'Omi tada sinchronizuoja garso failus su serveriu';
+  String get omiSyncsAudioFiles =>
+      'Omi tada sinchronizuoja garso failus su serveriu';
 
   @override
-  String get serverProcessesAudio => 'Serveris apdoroja garso failus ir sukuria atsiminimus';
+  String get serverProcessesAudio =>
+      'Serveris apdoroja garso failus ir sukuria atsiminimus';
 
   @override
   String get youreAllSet => 'Viskas paruošta!';
@@ -2644,19 +2737,24 @@ class AppLocalizationsLt extends AppLocalizations {
   String get yourConversations => 'Jūsų pokalbiai';
 
   @override
-  String get reviewAndManageConversations => 'Peržiūrėkite ir tvarkykite įrašytus pokalbius';
+  String get reviewAndManageConversations =>
+      'Peržiūrėkite ir tvarkykite įrašytus pokalbius';
 
   @override
-  String get startCapturingConversations => 'Pradėkite fiksuoti pokalbius su Omi įrenginiu, kad juos matytumėte čia.';
+  String get startCapturingConversations =>
+      'Pradėkite fiksuoti pokalbius su Omi įrenginiu, kad juos matytumėte čia.';
 
   @override
-  String get useMobileAppToCapture => 'Naudokite mobilią programą garso įrašymui';
+  String get useMobileAppToCapture =>
+      'Naudokite mobilią programą garso įrašymui';
 
   @override
-  String get conversationsProcessedAutomatically => 'Pokalbiai apdorojami automatiškai';
+  String get conversationsProcessedAutomatically =>
+      'Pokalbiai apdorojami automatiškai';
 
   @override
-  String get getInsightsInstantly => 'Gaukite įžvalgas ir santraukas akimirksniu';
+  String get getInsightsInstantly =>
+      'Gaukite įžvalgas ir santraukas akimirksniu';
 
   @override
   String get showAll => 'Rodyti viską →';
@@ -2669,7 +2767,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get dailyScore => 'DIENOS BALAS';
 
   @override
-  String get dailyScoreDescription => 'Balas, padedantis geriau\nsutelkti dėmesį į vykdymą.';
+  String get dailyScoreDescription =>
+      'Balas, padedantis geriau\nsutelkti dėmesį į vykdymą.';
 
   @override
   String get searchResults => 'Paieškos rezultatai';
@@ -2696,7 +2795,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get tasks => 'Užduotys';
 
   @override
-  String get swipeTasksToIndent => 'Braukite užduotis, kad įtrauktumėte, vilkite tarp kategorijų';
+  String get swipeTasksToIndent =>
+      'Braukite užduotis, kad įtrauktumėte, vilkite tarp kategorijų';
 
   @override
   String get create => 'Kurti';
@@ -2751,13 +2851,16 @@ class AppLocalizationsLt extends AppLocalizations {
   String get timeAM => 'AM';
 
   @override
-  String get actionItemUpdatedSuccessfully => 'Veiksmo elementas sėkmingai atnaujintas';
+  String get actionItemUpdatedSuccessfully =>
+      'Veiksmo elementas sėkmingai atnaujintas';
 
   @override
-  String get actionItemCreatedSuccessfully => 'Veiksmo elementas sėkmingai sukurtas';
+  String get actionItemCreatedSuccessfully =>
+      'Veiksmo elementas sėkmingai sukurtas';
 
   @override
-  String get actionItemDeletedSuccessfully => 'Veiksmo elementas sėkmingai ištrintas';
+  String get actionItemDeletedSuccessfully =>
+      'Veiksmo elementas sėkmingai ištrintas';
 
   @override
   String get deleteActionItem => 'Ištrinti veiksmo elementą';
@@ -2767,7 +2870,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Ar tikrai norite ištrinti šį veiksmo elementą? Šio veiksmo negalima atšaukti.';
 
   @override
-  String get enterActionItemDescription => 'Įveskite veiksmo elemento aprašymą...';
+  String get enterActionItemDescription =>
+      'Įveskite veiksmo elemento aprašymą...';
 
   @override
   String get markAsCompleted => 'Pažymėti kaip atliktą';
@@ -2782,7 +2886,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get loadingApps => 'Programų įkėlimas...';
 
   @override
-  String get browseInstallCreateApps => 'Naršykite, įdiekite ir kurkite programas';
+  String get browseInstallCreateApps =>
+      'Naršykite, įdiekite ir kurkite programas';
 
   @override
   String get all => 'Visi';
@@ -2800,19 +2905,22 @@ class AppLocalizationsLt extends AppLocalizations {
   String get unableToLoadApps => 'Nepavyko įkelti programų';
 
   @override
-  String get tryAdjustingSearchTermsOrFilters => 'Pabandykite pakoreguoti paieškos terminus arba filtrus';
+  String get tryAdjustingSearchTermsOrFilters =>
+      'Pabandykite pakoreguoti paieškos terminus arba filtrus';
 
   @override
   String get checkBackLaterForNewApps => 'Užsukite vėliau dėl naujų programų';
 
   @override
-  String get pleaseCheckInternetConnectionAndTryAgain => 'Patikrinkite interneto ryšį ir bandykite dar kartą';
+  String get pleaseCheckInternetConnectionAndTryAgain =>
+      'Patikrinkite interneto ryšį ir bandykite dar kartą';
 
   @override
   String get createNewApp => 'Sukurti naują programėlę';
 
   @override
-  String get buildSubmitCustomOmiApp => 'Sukurkite ir pateikite savo tinkintą Omi programėlę';
+  String get buildSubmitCustomOmiApp =>
+      'Sukurkite ir pateikite savo tinkintą Omi programėlę';
 
   @override
   String get submittingYourApp => 'Jūsų programėlė pateikiama...';
@@ -2869,7 +2977,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get needHelpGettingStarted => 'Reikia pagalbos pradedant?';
 
   @override
-  String get clickHereForAppBuildingGuides => 'Spustelėkite čia programėlių kūrimo vadovams ir dokumentacijai';
+  String get clickHereForAppBuildingGuides =>
+      'Spustelėkite čia programėlių kūrimo vadovams ir dokumentacijai';
 
   @override
   String get submitAppQuestion => 'Pateikti programėlę?';
@@ -2886,7 +2995,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get startEarning => 'Pradėkite uždirbti! 💰';
 
   @override
-  String get connectStripeOrPayPal => 'Prijunkite Stripe arba PayPal, kad gautumėte mokėjimus už savo programėlę.';
+  String get connectStripeOrPayPal =>
+      'Prijunkite Stripe arba PayPal, kad gautumėte mokėjimus už savo programėlę.';
 
   @override
   String get connectNow => 'Prijungti dabar';
@@ -2911,10 +3021,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get installApp => 'Įdiegti programą';
 
   @override
-  String get betaTesterNotice => 'Esate šios programos beta testuotojas. Ji dar nėra vieša. Ji taps vieša patvirtinus.';
+  String get betaTesterNotice =>
+      'Esate šios programos beta testuotojas. Ji dar nėra vieša. Ji taps vieša patvirtinus.';
 
   @override
-  String get appUnderReviewOwner => 'Jūsų programa peržiūrima ir matoma tik jums. Ji taps vieša patvirtinus.';
+  String get appUnderReviewOwner =>
+      'Jūsų programa peržiūrima ir matoma tik jums. Ji taps vieša patvirtinus.';
 
   @override
   String get appRejectedNotice =>
@@ -2953,7 +3065,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get errorActivatingApp => 'Klaida aktyvinant programą';
 
   @override
-  String get integrationSetupRequired => 'Jei tai integracijos programa, įsitikinkite, kad sąranka užbaigta.';
+  String get integrationSetupRequired =>
+      'Jei tai integracijos programa, įsitikinkite, kad sąranka užbaigta.';
 
   @override
   String get installed => 'Įdiegta';
@@ -3061,7 +3174,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get connectionNeeded => '🌐 Reikalingas ryšys';
 
   @override
-  String get startConversation => 'Pradėkite pokalbį ir leiskite magijai prasidėti';
+  String get startConversation =>
+      'Pradėkite pokalbį ir leiskite magijai prasidėti';
 
   @override
   String get checkInternetConnection => 'Patikrinkite interneto ryšį';
@@ -3103,7 +3217,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get messageReportedSuccessfully => '✅ Pranešimas sėkmingai praneštas';
 
   @override
-  String get confirmReportMessage => 'Ar tikrai norite pranešti apie šį pranešimą?';
+  String get confirmReportMessage =>
+      'Ar tikrai norite pranešti apie šį pranešimą?';
 
   @override
   String get selectChatAssistant => 'Pasirinkti pokalbio asistentą';
@@ -3118,7 +3233,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get clearChatTitle => 'Išvalyti pokalbį?';
 
   @override
-  String get confirmClearChat => 'Ar tikrai norite išvalyti pokalbį? Šio veiksmo negalima atšaukti.';
+  String get confirmClearChat =>
+      'Ar tikrai norite išvalyti pokalbį? Šio veiksmo negalima atšaukti.';
 
   @override
   String get copy => 'Kopijuoti';
@@ -3130,7 +3246,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get report => 'Pranešti';
 
   @override
-  String get microphonePermissionRequired => 'Norint įrašyti balsą, reikalingas mikrofono leidimas.';
+  String get microphonePermissionRequired =>
+      'Norint įrašyti balsą, reikalingas mikrofono leidimas.';
 
   @override
   String get microphonePermissionDenied =>
@@ -3189,13 +3306,16 @@ class AppLocalizationsLt extends AppLocalizations {
   String get noTranscriptMessage => 'Šis pokalbis neturi transkripcijos.';
 
   @override
-  String get conversationUrlCouldNotBeGenerated => 'Pokalbio URL negalima sugeneruoti.';
+  String get conversationUrlCouldNotBeGenerated =>
+      'Pokalbio URL negalima sugeneruoti.';
 
   @override
-  String get failedToGenerateConversationLink => 'Nepavyko sugeneruoti pokalbio nuorodos';
+  String get failedToGenerateConversationLink =>
+      'Nepavyko sugeneruoti pokalbio nuorodos';
 
   @override
-  String get failedToGenerateShareLink => 'Nepavyko sugeneruoti bendrinimo nuorodos';
+  String get failedToGenerateShareLink =>
+      'Nepavyko sugeneruoti bendrinimo nuorodos';
 
   @override
   String get reloadingConversations => 'Pokalbių perkrovimas...';
@@ -3213,10 +3333,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get noResultsFound => 'Rezultatų nerasta';
 
   @override
-  String get tryAdjustingSearchTerms => 'Pabandykite koreguoti paieškos terminus';
+  String get tryAdjustingSearchTerms =>
+      'Pabandykite koreguoti paieškos terminus';
 
   @override
-  String get starConversationsToFindQuickly => 'Pažymėkite pokalbius žvaigždute, kad greitai rastumėte juos čia';
+  String get starConversationsToFindQuickly =>
+      'Pažymėkite pokalbius žvaigždute, kad greitai rastumėte juos čia';
 
   @override
   String noConversationsOnDate(String date) {
@@ -3272,7 +3394,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get loadingYourMemories => 'Įkeliami jūsų prisiminimai...';
 
   @override
-  String get createYourFirstMemory => 'Sukurkite pirmąjį prisiminimą, kad pradėtumėte';
+  String get createYourFirstMemory =>
+      'Sukurkite pirmąjį prisiminimą, kad pradėtumėte';
 
   @override
   String get tryAdjustingFilter => 'Pabandykite koreguoti paiešką arba filtrą';
@@ -3287,19 +3410,22 @@ class AppLocalizationsLt extends AppLocalizations {
   String get public => 'Vieša';
 
   @override
-  String get failedToSaveCheckConnection => 'Nepavyko išsaugoti. Patikrinkite savo ryšį.';
+  String get failedToSaveCheckConnection =>
+      'Nepavyko išsaugoti. Patikrinkite savo ryšį.';
 
   @override
   String get createMemory => 'Sukurti atminimą';
 
   @override
-  String get deleteMemoryConfirmation => 'Ar tikrai norite ištrinti šį atminimą? Šio veiksmo negalima atšaukti.';
+  String get deleteMemoryConfirmation =>
+      'Ar tikrai norite ištrinti šį atminimą? Šio veiksmo negalima atšaukti.';
 
   @override
   String get makePrivate => 'Padaryti privačią';
 
   @override
-  String get organizeAndControlMemories => 'Organizuokite ir valdykite savo atmintis';
+  String get organizeAndControlMemories =>
+      'Organizuokite ir valdykite savo atmintis';
 
   @override
   String get total => 'Iš viso';
@@ -3308,7 +3434,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get makeAllMemoriesPrivate => 'Padaryti visus atminimus privačius';
 
   @override
-  String get setAllMemoriesToPrivate => 'Nustatyti visus atminimus kaip privačius';
+  String get setAllMemoriesToPrivate =>
+      'Nustatyti visus atminimus kaip privačius';
 
   @override
   String get makeAllMemoriesPublic => 'Padaryti visus atminimus viešus';
@@ -3317,7 +3444,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get setAllMemoriesToPublic => 'Nustatyti visus atminimus kaip viešus';
 
   @override
-  String get permanentlyRemoveAllMemories => 'Visam laikui pašalinti visus atminimus iš Omi';
+  String get permanentlyRemoveAllMemories =>
+      'Visam laikui pašalinti visus atminimus iš Omi';
 
   @override
   String get allMemoriesAreNowPrivate => 'Visi atminimai dabar privatūs';
@@ -3361,7 +3489,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get secureAuthViaAppleId => 'Saugus autentifikavimas per Apple ID';
 
   @override
-  String get secureAuthViaGoogleAccount => 'Saugus autentifikavimas per Google paskyrą';
+  String get secureAuthViaGoogleAccount =>
+      'Saugus autentifikavimas per Google paskyrą';
 
   @override
   String get whatWeCollect => 'Ką renkame';
@@ -3374,7 +3503,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get dataProtection => 'Duomenų apsauga';
 
   @override
-  String get yourDataIsProtected => 'Jūsų duomenys yra saugomi ir valdomi pagal mūsų ';
+  String get yourDataIsProtected =>
+      'Jūsų duomenys yra saugomi ir valdomi pagal mūsų ';
 
   @override
   String get pleaseSelectYourPrimaryLanguage => 'Pasirinkite pagrindinę kalbą';
@@ -3383,7 +3513,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get chooseYourLanguage => 'Pasirinkite kalbą';
 
   @override
-  String get selectPreferredLanguageForBestExperience => 'Pasirinkite pageidaujamą kalbą geriausiam Omi patirčiai';
+  String get selectPreferredLanguageForBestExperience =>
+      'Pasirinkite pageidaujamą kalbą geriausiam Omi patirčiai';
 
   @override
   String get searchLanguages => 'Ieškoti kalbų...';
@@ -3410,7 +3541,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get enableFeaturesForBestExperience => 'Įjunkite funkcijas geriausiai Omi patirčiai jūsų įrenginyje.';
+  String get enableFeaturesForBestExperience =>
+      'Įjunkite funkcijas geriausiai Omi patirčiai jūsų įrenginyje.';
 
   @override
   String get microphoneAccess => 'Mikrofono prieiga';
@@ -3426,7 +3558,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get screenRecording => 'Ekrano įrašymas';
 
   @override
-  String get captureSystemAudioFromMeetings => 'Užfiksuoti sistemos garsą iš susitikimų';
+  String get captureSystemAudioFromMeetings =>
+      'Užfiksuoti sistemos garsą iš susitikimų';
 
   @override
   String get screenRecordingDescription =>
@@ -3436,7 +3569,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get accessibility => 'Prieinamumas';
 
   @override
-  String get detectBrowserBasedMeetings => 'Aptikti naršyklėje vykstančius susitikimus';
+  String get detectBrowserBasedMeetings =>
+      'Aptikti naršyklėje vykstančius susitikimus';
 
   @override
   String get accessibilityDescription =>
@@ -3482,19 +3616,22 @@ class AppLocalizationsLt extends AppLocalizations {
   String get payment => 'Mokėjimas';
 
   @override
-  String get addOrChangeYourPaymentMethod => 'Pridėti arba pakeisti mokėjimo būdą';
+  String get addOrChangeYourPaymentMethod =>
+      'Pridėti arba pakeisti mokėjimo būdą';
 
   @override
   String get preferences => 'Nuostatos';
 
   @override
-  String get helpImproveOmiBySharing => 'Padėkite tobulinti Omi dalindamiesi anoniminiais analitikos duomenimis';
+  String get helpImproveOmiBySharing =>
+      'Padėkite tobulinti Omi dalindamiesi anoniminiais analitikos duomenimis';
 
   @override
   String get deleteAccount => 'Ištrinti Paskyrą';
 
   @override
-  String get deleteYourAccountAndAllData => 'Ištrinti paskyrą ir visus duomenis';
+  String get deleteYourAccountAndAllData =>
+      'Ištrinti paskyrą ir visus duomenis';
 
   @override
   String get clearLogs => 'Išvalyti žurnalus';
@@ -3506,7 +3643,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get exportConversations => 'Eksportuoti pokalbius';
 
   @override
-  String get exportAllConversationsToJson => 'Eksportuokite visus savo pokalbius į JSON failą.';
+  String get exportAllConversationsToJson =>
+      'Eksportuokite visus savo pokalbius į JSON failą.';
 
   @override
   String get conversationsExportStarted =>
@@ -3525,40 +3663,49 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get noApiKeysFound => 'Nerasta API raktų. Sukurkite vieną, kad pradėtumėte.';
+  String get noApiKeysFound =>
+      'Nerasta API raktų. Sukurkite vieną, kad pradėtumėte.';
 
   @override
   String get advancedSettings => 'Išplėstiniai nustatymai';
 
   @override
-  String get triggersWhenNewConversationCreated => 'Suaktyvinamas, kai sukuriamas naujas pokalbis.';
+  String get triggersWhenNewConversationCreated =>
+      'Suaktyvinamas, kai sukuriamas naujas pokalbis.';
 
   @override
-  String get triggersWhenNewTranscriptReceived => 'Suaktyvinamas, kai gaunama nauja transkripcija.';
+  String get triggersWhenNewTranscriptReceived =>
+      'Suaktyvinamas, kai gaunama nauja transkripcija.';
 
   @override
   String get realtimeAudioBytes => 'Realaus laiko garso baitai';
 
   @override
-  String get triggersWhenAudioBytesReceived => 'Suaktyvinamas, kai gaunami garso baitai.';
+  String get triggersWhenAudioBytesReceived =>
+      'Suaktyvinamas, kai gaunami garso baitai.';
 
   @override
   String get everyXSeconds => 'Kas x sekundžių';
 
   @override
-  String get triggersWhenDaySummaryGenerated => 'Suaktyvinamas, kai generuojama dienos santrauka.';
+  String get triggersWhenDaySummaryGenerated =>
+      'Suaktyvinamas, kai generuojama dienos santrauka.';
 
   @override
-  String get tryLatestExperimentalFeatures => 'Išbandykite naujausias eksperimentines Omi komandos funkcijas.';
+  String get tryLatestExperimentalFeatures =>
+      'Išbandykite naujausias eksperimentines Omi komandos funkcijas.';
 
   @override
-  String get transcriptionServiceDiagnosticStatus => 'Transkripcijos paslaugos diagnostikos būsena';
+  String get transcriptionServiceDiagnosticStatus =>
+      'Transkripcijos paslaugos diagnostikos būsena';
 
   @override
-  String get enableDetailedDiagnosticMessages => 'Įjungti išsamius diagnostikos pranešimus iš transkripcijos paslaugos';
+  String get enableDetailedDiagnosticMessages =>
+      'Įjungti išsamius diagnostikos pranešimus iš transkripcijos paslaugos';
 
   @override
-  String get autoCreateAndTagNewSpeakers => 'Automatiškai kurti ir žymėti naujus kalbėtojus';
+  String get autoCreateAndTagNewSpeakers =>
+      'Automatiškai kurti ir žymėti naujus kalbėtojus';
 
   @override
   String get automaticallyCreateNewPerson =>
@@ -3568,7 +3715,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get pilotFeatures => 'Bandomosios funkcijos';
 
   @override
-  String get pilotFeaturesDescription => 'Šios funkcijos yra testai ir nėra garantuojama parama.';
+  String get pilotFeaturesDescription =>
+      'Šios funkcijos yra testai ir nėra garantuojama parama.';
 
   @override
   String get suggestFollowUpQuestion => 'Pasiūlyti tolesnį klausimą';
@@ -3577,7 +3725,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get saveSettings => 'Išsaugoti Nustatymus';
 
   @override
-  String get syncingDeveloperSettings => 'Sinchronizuojami kūrėjo nustatymai...';
+  String get syncingDeveloperSettings =>
+      'Sinchronizuojami kūrėjo nustatymai...';
 
   @override
   String get summary => 'Santrauka';
@@ -3586,7 +3735,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get auto => 'Automatinis';
 
   @override
-  String get noSummaryForApp => 'Šiai programai santraukos nėra. Išbandykite kitą programą geresniems rezultatams.';
+  String get noSummaryForApp =>
+      'Šiai programai santraukos nėra. Išbandykite kitą programą geresniems rezultatams.';
 
   @override
   String get tryAnotherApp => 'Išbandykite kitą programėlę';
@@ -3620,10 +3770,12 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get letOmiChooseAutomatically => 'Leisti Omi automatiškai pasirinkti geriausią programėlę';
+  String get letOmiChooseAutomatically =>
+      'Leisti Omi automatiškai pasirinkti geriausią programėlę';
 
   @override
-  String get deleteConversationConfirmation => 'Ar tikrai norite ištrinti šį pokalbį? Šio veiksmo negalima atšaukti.';
+  String get deleteConversationConfirmation =>
+      'Ar tikrai norite ištrinti šį pokalbį? Šio veiksmo negalima atšaukti.';
 
   @override
   String get conversationDeleted => 'Pokalbis ištrintas';
@@ -3635,10 +3787,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get editConversation => 'Redaguoti pokalbį';
 
   @override
-  String get conversationLinkCopiedToClipboard => 'Pokalbio nuoroda nukopijuota į iškarpinę';
+  String get conversationLinkCopiedToClipboard =>
+      'Pokalbio nuoroda nukopijuota į iškarpinę';
 
   @override
-  String get conversationTranscriptCopiedToClipboard => 'Pokalbio transkripcijos tekstas nukopijuotas į iškarpinę';
+  String get conversationTranscriptCopiedToClipboard =>
+      'Pokalbio transkripcijos tekstas nukopijuotas į iškarpinę';
 
   @override
   String get editConversationDialogTitle => 'Redaguoti pokalbį';
@@ -3653,13 +3807,16 @@ class AppLocalizationsLt extends AppLocalizations {
   String get enterConversationTitle => 'Įveskite pokalbio pavadinimą...';
 
   @override
-  String get conversationTitleUpdatedSuccessfully => 'Pokalbio pavadinimas sėkmingai atnaujintas';
+  String get conversationTitleUpdatedSuccessfully =>
+      'Pokalbio pavadinimas sėkmingai atnaujintas';
 
   @override
-  String get failedToUpdateConversationTitle => 'Nepavyko atnaujinti pokalbio pavadinimo';
+  String get failedToUpdateConversationTitle =>
+      'Nepavyko atnaujinti pokalbio pavadinimo';
 
   @override
-  String get errorUpdatingConversationTitle => 'Klaida atnaujinant pokalbio pavadinimą';
+  String get errorUpdatingConversationTitle =>
+      'Klaida atnaujinant pokalbio pavadinimą';
 
   @override
   String get settingUp => 'Nustatoma...';
@@ -3720,7 +3877,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get startRecordingToSeeTranscript => 'Pradėkite įrašymą, kad matytumėte tiesioginį transkribavimą';
+  String get startRecordingToSeeTranscript =>
+      'Pradėkite įrašymą, kad matytumėte tiesioginį transkribavimą';
 
   @override
   String get paused => 'Pristabdyta';
@@ -3737,16 +3895,20 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get clickPlayToResumeOrStop => 'Spustelėkite atkurti, kad tęstumėte, arba stabdyti, kad baigtumėte';
+  String get clickPlayToResumeOrStop =>
+      'Spustelėkite atkurti, kad tęstumėte, arba stabdyti, kad baigtumėte';
 
   @override
-  String get settingUpSystemAudioCapture => 'Nustatomas sistemos garso įrašymas';
+  String get settingUpSystemAudioCapture =>
+      'Nustatomas sistemos garso įrašymas';
 
   @override
-  String get capturingAudioAndGeneratingTranscript => 'Įrašomas garsas ir generuojamas transkribavimas';
+  String get capturingAudioAndGeneratingTranscript =>
+      'Įrašomas garsas ir generuojamas transkribavimas';
 
   @override
-  String get clickToBeginRecordingSystemAudio => 'Spustelėkite, kad pradėtumėte sistemos garso įrašymą';
+  String get clickToBeginRecordingSystemAudio =>
+      'Spustelėkite, kad pradėtumėte sistemos garso įrašymą';
 
   @override
   String get you => 'Jūs';
@@ -3818,7 +3980,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get customVocabularyHeader => 'PASIRINKTINIS ŽODYNAS';
 
   @override
-  String get addWordsDescription => 'Pridėkite žodžius, kuriuos Omi turėtų atpažinti transkribavimo metu.';
+  String get addWordsDescription =>
+      'Pridėkite žodžius, kuriuos Omi turėtų atpažinti transkribavimo metu.';
 
   @override
   String get enterWordsHint => 'Įveskite žodžius (atskirti kableliais)';
@@ -3830,7 +3993,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get dailySummaryTitle => 'Dienos Santrauka';
 
   @override
-  String get dailySummaryDescription => 'Gaukite asmeniškai pritaikytą dienos pokalbių suvestinę kaip pranešimą.';
+  String get dailySummaryDescription =>
+      'Gaukite asmeniškai pritaikytą dienos pokalbių suvestinę kaip pranešimą.';
 
   @override
   String get deliveryTime => 'Pristatymo laikas';
@@ -3845,10 +4009,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get viewPlansAndUsage => 'Peržiūrėti Planus ir Naudojimą';
 
   @override
-  String get viewPlansDescription => 'Tvarkykite prenumeratą ir peržiūrėkite naudojimo statistiką';
+  String get viewPlansDescription =>
+      'Tvarkykite prenumeratą ir peržiūrėkite naudojimo statistiką';
 
   @override
-  String get addOrChangePaymentMethod => 'Pridėkite arba pakeiskite mokėjimo būdą';
+  String get addOrChangePaymentMethod =>
+      'Pridėkite arba pakeiskite mokėjimo būdą';
 
   @override
   String get displayOptions => 'Rodymo parinktys';
@@ -3857,13 +4023,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get showMeetingsInMenuBar => 'Rodyti susitikimus meniu juostoje';
 
   @override
-  String get displayUpcomingMeetingsDescription => 'Rodyti būsimus susitikimus meniu juostoje';
+  String get displayUpcomingMeetingsDescription =>
+      'Rodyti būsimus susitikimus meniu juostoje';
 
   @override
   String get showEventsWithoutParticipants => 'Rodyti įvykius be dalyvių';
 
   @override
-  String get includePersonalEventsDescription => 'Įtraukti asmeninius įvykius be dalyvių';
+  String get includePersonalEventsDescription =>
+      'Įtraukti asmeninius įvykius be dalyvių';
 
   @override
   String get upcomingMeetings => 'Artėjantys susitikimai';
@@ -3882,7 +4050,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get configureSTTProvider => 'Sukonfigūruoti STT teikėją';
 
   @override
-  String get setConversationEndDescription => 'Nustatykite, kada pokalbiai automatiškai baigiasi';
+  String get setConversationEndDescription =>
+      'Nustatykite, kada pokalbiai automatiškai baigiasi';
 
   @override
   String get importDataDescription => 'Importuoti duomenis iš kitų šaltinių';
@@ -3913,7 +4082,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get autoCreateWhenDetected => 'Automatiškai kurti aptikus vardą';
 
   @override
-  String get trackPersonalGoals => 'Stebėti asmeninius tikslus pagrindiniame puslapyje';
+  String get trackPersonalGoals =>
+      'Stebėti asmeninius tikslus pagrindiniame puslapyje';
 
   @override
   String get endpointURL => 'Galinio taško URL';
@@ -3943,7 +4113,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get termsAndPrivacyPolicy => 'Sąlygos ir Privatumo Politika';
 
   @override
-  String get helpsDiagnoseIssuesAutoDeletes => 'Padeda diagnozuoti problemas. Automatiškai ištrinamas po 3 dienų.';
+  String get helpsDiagnoseIssuesAutoDeletes =>
+      'Padeda diagnozuoti problemas. Automatiškai ištrinamas po 3 dienų.';
 
   @override
   String get manageYourApp => 'Tvarkykite savo programėlę';
@@ -3993,7 +4164,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Prenumerata sėkmingai atšaukta. Ji liks aktyvi iki dabartinio atsiskaitymo laikotarpio pabaigos.';
 
   @override
-  String get failedToCancelSubscription => 'Nepavyko atšaukti prenumeratos. Bandykite dar kartą.';
+  String get failedToCancelSubscription =>
+      'Nepavyko atšaukti prenumeratos. Bandykite dar kartą.';
 
   @override
   String get invalidPaymentUrl => 'Netinkamas mokėjimo URL';
@@ -4044,7 +4216,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Jūsų programėlė yra peržiūrima ir matoma tik jums. Ji taps vieša po patvirtinimo.';
 
   @override
-  String get appRejectedMessage => 'Jūsų programėlė buvo atmesta. Atnaujinkite informaciją ir pateikite iš naujo.';
+  String get appRejectedMessage =>
+      'Jūsų programėlė buvo atmesta. Atnaujinkite informaciją ir pateikite iš naujo.';
 
   @override
   String get invalidIntegrationUrl => 'Neteisingas integracijos URL';
@@ -4053,7 +4226,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get tapToComplete => 'Bakstelėkite, kad užbaigtumėte';
 
   @override
-  String get invalidSetupInstructionsUrl => 'Neteisingas sąrankos instrukcijų URL';
+  String get invalidSetupInstructionsUrl =>
+      'Neteisingas sąrankos instrukcijų URL';
 
   @override
   String get pushToTalk => 'Paspauskite kalbėti';
@@ -4068,10 +4242,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get reviewAddedSuccessfully => 'Atsiliepimas sėkmingai pridėtas 🚀';
 
   @override
-  String get reviewUpdatedSuccessfully => 'Atsiliepimas sėkmingai atnaujintas 🚀';
+  String get reviewUpdatedSuccessfully =>
+      'Atsiliepimas sėkmingai atnaujintas 🚀';
 
   @override
-  String get failedToSubmitReview => 'Nepavyko pateikti atsiliepimo. Bandykite dar kartą.';
+  String get failedToSubmitReview =>
+      'Nepavyko pateikti atsiliepimo. Bandykite dar kartą.';
 
   @override
   String get addYourReview => 'Pridėkite savo atsiliepimą';
@@ -4095,7 +4271,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get anonymousUser => 'Anoniminis naudotojas';
 
   @override
-  String get issueActivatingApp => 'Aktyvuojant šią programėlę įvyko klaida. Bandykite dar kartą.';
+  String get issueActivatingApp =>
+      'Aktyvuojant šią programėlę įvyko klaida. Bandykite dar kartą.';
 
   @override
   String get dataAccessNoticeDescription =>
@@ -4165,7 +4342,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get permissionDeniedForAppleReminders => 'Apple Reminders leidimas atmestas';
+  String get permissionDeniedForAppleReminders =>
+      'Apple Reminders leidimas atmestas';
 
   @override
   String failedToCreateApiKey(String error) {
@@ -4200,7 +4378,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get copyToClipboard => 'Kopijuoti į iškarpinę';
 
   @override
-  String get pleaseCopyKeyNow => 'Prašome nukopijuoti dabar ir užsirašyti saugioje vietoje. ';
+  String get pleaseCopyKeyNow =>
+      'Prašome nukopijuoti dabar ir užsirašyti saugioje vietoje. ';
 
   @override
   String get willNotSeeAgain => 'Negalėsite jo pamatyti dar kartą.';
@@ -4296,13 +4475,15 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get failedToCreateKeyTryAgain => 'Nepavyko sukurti rakto. Bandykite dar kartą.';
+  String get failedToCreateKeyTryAgain =>
+      'Nepavyko sukurti rakto. Bandykite dar kartą.';
 
   @override
   String get keyCreated => 'Raktas sukurtas';
 
   @override
-  String get keyCreatedMessage => 'Jūsų naujas raktas sukurtas. Prašome nukopijuoti jį dabar. Daugiau jo nematysite.';
+  String get keyCreatedMessage =>
+      'Jūsų naujas raktas sukurtas. Prašome nukopijuoti jį dabar. Daugiau jo nematysite.';
 
   @override
   String get keyWord => 'Raktas';
@@ -4315,7 +4496,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Šios įdiegtos programos turi išorines integracijas ir gali pasiekti jūsų duomenis, tokius kaip pokalbiai ir prisiminimai.';
 
   @override
-  String get noExternalAppsHaveAccess => 'Jokios išorinės programos neturi prieigos prie jūsų duomenų.';
+  String get noExternalAppsHaveAccess =>
+      'Jokios išorinės programos neturi prieigos prie jūsų duomenų.';
 
   @override
   String get maximumSecurityE2ee => 'Maksimalus saugumas (E2EE)';
@@ -4328,16 +4510,19 @@ class AppLocalizationsLt extends AppLocalizations {
   String get importantTradeoffs => 'Svarbūs kompromisai:';
 
   @override
-  String get e2eeTradeoff1 => '• Kai kurios funkcijos, pvz., išorinių programų integracijos, gali būti išjungtos.';
+  String get e2eeTradeoff1 =>
+      '• Kai kurios funkcijos, pvz., išorinių programų integracijos, gali būti išjungtos.';
 
   @override
-  String get e2eeTradeoff2 => '• Jei prarasite slaptažodį, jūsų duomenų negalima atkurti.';
+  String get e2eeTradeoff2 =>
+      '• Jei prarasite slaptažodį, jūsų duomenų negalima atkurti.';
 
   @override
   String get featureComingSoon => 'Ši funkcija netrukus bus prieinama!';
 
   @override
-  String get migrationInProgressMessage => 'Migracija vyksta. Negalite keisti apsaugos lygio, kol ji nebaigta.';
+  String get migrationInProgressMessage =>
+      'Migracija vyksta. Negalite keisti apsaugos lygio, kol ji nebaigta.';
 
   @override
   String get migrationFailed => 'Migracija nepavyko';
@@ -4386,7 +4571,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get apiKeyCreated => 'API raktas sukurtas!';
 
   @override
-  String get saveKeyWarning => 'Išsaugokite šį raktą dabar! Daugiau jo nematysite.';
+  String get saveKeyWarning =>
+      'Išsaugokite šį raktą dabar! Daugiau jo nematysite.';
 
   @override
   String get yourApiKey => 'JŪSŲ API RAKTAS';
@@ -4401,7 +4587,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get createApiKey => 'Sukurti API raktą';
 
   @override
-  String get accessDataProgrammatically => 'Pasiekite savo duomenis programiškai';
+  String get accessDataProgrammatically =>
+      'Pasiekite savo duomenis programiškai';
 
   @override
   String get keyNameLabel => 'RAKTO PAVADINIMAS';
@@ -4413,7 +4600,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get permissionsLabel => 'LEIDIMAI';
 
   @override
-  String get permissionsInfoNote => 'R = Skaityti, W = Rašyti. Numatytasis tik skaitymas, jei nieko nepasirinkta.';
+  String get permissionsInfoNote =>
+      'R = Skaityti, W = Rašyti. Numatytasis tik skaitymas, jei nieko nepasirinkta.';
 
   @override
   String get developerApi => 'Kūrėjo API';
@@ -4444,13 +4632,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get learnMoreAtOmiTraining => 'Sužinokite daugiau omi.me/training';
 
   @override
-  String get agreeToContributeData => 'Suprantu ir sutinku prisidėti savo duomenimis AI mokymui';
+  String get agreeToContributeData =>
+      'Suprantu ir sutinku prisidėti savo duomenimis AI mokymui';
 
   @override
   String get submitRequest => 'Pateikti užklausą';
 
   @override
-  String get thankYouRequestUnderReview => 'Ačiū! Jūsų užklausa peržiūrima. Pranešime, kai bus patvirtinta.';
+  String get thankYouRequestUnderReview =>
+      'Ačiū! Jūsų užklausa peržiūrima. Pranešime, kai bus patvirtinta.';
 
   @override
   String planRemainsActiveUntil(String date) {
@@ -4464,19 +4654,23 @@ class AppLocalizationsLt extends AppLocalizations {
   String get keepMyPlan => 'Palikti mano planą';
 
   @override
-  String get subscriptionSetToCancel => 'Jūsų prenumerata nustatyta atšaukti pasibaigus laikotarpiui.';
+  String get subscriptionSetToCancel =>
+      'Jūsų prenumerata nustatyta atšaukti pasibaigus laikotarpiui.';
 
   @override
   String get switchedToOnDevice => 'Perjungta į įrenginio transkripciją';
 
   @override
-  String get couldNotSwitchToFreePlan => 'Nepavyko perjungti į nemokamą planą. Bandykite dar kartą.';
+  String get couldNotSwitchToFreePlan =>
+      'Nepavyko perjungti į nemokamą planą. Bandykite dar kartą.';
 
   @override
-  String get couldNotLoadPlans => 'Nepavyko įkelti galimų planų. Bandykite dar kartą.';
+  String get couldNotLoadPlans =>
+      'Nepavyko įkelti galimų planų. Bandykite dar kartą.';
 
   @override
-  String get selectedPlanNotAvailable => 'Pasirinktas planas neprieinamas. Bandykite dar kartą.';
+  String get selectedPlanNotAvailable =>
+      'Pasirinktas planas neprieinamas. Bandykite dar kartą.';
 
   @override
   String get upgradeToAnnualPlan => 'Atnaujinti į metinį planą';
@@ -4485,17 +4679,20 @@ class AppLocalizationsLt extends AppLocalizations {
   String get importantBillingInfo => 'Svarbi atsiskaitymo informacija:';
 
   @override
-  String get monthlyPlanContinues => 'Jūsų dabartinis mėnesinis planas tęsis iki atsiskaitymo laikotarpio pabaigos';
+  String get monthlyPlanContinues =>
+      'Jūsų dabartinis mėnesinis planas tęsis iki atsiskaitymo laikotarpio pabaigos';
 
   @override
   String get paymentMethodCharged =>
       'Jūsų esamas mokėjimo būdas bus automatiškai apmokestintas, kai baigsis mėnesinis planas';
 
   @override
-  String get annualSubscriptionStarts => 'Jūsų 12 mėnesių metinė prenumerata automatiškai prasidės po apmokėjimo';
+  String get annualSubscriptionStarts =>
+      'Jūsų 12 mėnesių metinė prenumerata automatiškai prasidės po apmokėjimo';
 
   @override
-  String get thirteenMonthsCoverage => 'Gausite iš viso 13 mėnesių aprėptį (dabartinis mėnuo + 12 mėnesių per metus)';
+  String get thirteenMonthsCoverage =>
+      'Gausite iš viso 13 mėnesių aprėptį (dabartinis mėnuo + 12 mėnesių per metus)';
 
   @override
   String get confirmUpgrade => 'Patvirtinti atnaujinimą';
@@ -4513,13 +4710,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get changePlan => 'Keisti planą';
 
   @override
-  String get upgradeAlreadyScheduled => 'Jūsų atnaujinimas į metinį planą jau suplanuotas';
+  String get upgradeAlreadyScheduled =>
+      'Jūsų atnaujinimas į metinį planą jau suplanuotas';
 
   @override
   String get youAreOnUnlimitedPlan => 'Jūs esate Neribotame plane.';
 
   @override
-  String get yourOmiUnleashed => 'Jūsų Omi, paleistas. Tapkite neribotu dėl begalinių galimybių.';
+  String get yourOmiUnleashed =>
+      'Jūsų Omi, paleistas. Tapkite neribotu dėl begalinių galimybių.';
 
   @override
   String planEndedOn(String date) {
@@ -4553,13 +4752,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get youreOnAnnualPlan => 'Jūs esate metiniame plane';
 
   @override
-  String get alreadyBestValuePlan => 'Jau turite geriausios vertės planą. Pakeitimų nereikia.';
+  String get alreadyBestValuePlan =>
+      'Jau turite geriausios vertės planą. Pakeitimų nereikia.';
 
   @override
   String get unableToLoadPlans => 'Nepavyko įkelti planų';
 
   @override
-  String get checkConnectionTryAgain => 'Patikrinkite ryšį ir bandykite dar kartą';
+  String get checkConnectionTryAgain =>
+      'Patikrinkite ryšį ir bandykite dar kartą';
 
   @override
   String get useFreePlan => 'Naudoti nemokamą planą';
@@ -4571,7 +4772,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get resubscribe => 'Persiregistruoti';
 
   @override
-  String get couldNotOpenPaymentSettings => 'Nepavyko atidaryti mokėjimo nustatymų. Bandykite dar kartą.';
+  String get couldNotOpenPaymentSettings =>
+      'Nepavyko atidaryti mokėjimo nustatymų. Bandykite dar kartą.';
 
   @override
   String get managePaymentMethod => 'Tvarkyti mokėjimo būdą';
@@ -4663,17 +4865,20 @@ class AppLocalizationsLt extends AppLocalizations {
   String get autoDeletesAfterThreeDays => 'Automatiškai ištrinami po 3 dienų.';
 
   @override
-  String get knowledgeGraphDeletedSuccessfully => 'Žinių grafas sėkmingai ištrintas';
+  String get knowledgeGraphDeletedSuccessfully =>
+      'Žinių grafas sėkmingai ištrintas';
 
   @override
-  String get exportStartedMayTakeFewSeconds => 'Eksportas pradėtas. Tai gali užtrukti kelias sekundes...';
+  String get exportStartedMayTakeFewSeconds =>
+      'Eksportas pradėtas. Tai gali užtrukti kelias sekundes...';
 
   @override
   String get knowledgeGraphDeleteDescription =>
       'Tai ištrins visus išvestinius žinių grafo duomenis (mazgus ir ryšius). Jūsų originalūs prisiminimai išliks saugūs. Grafas bus atstatytas laikui bėgant arba kitą kartą pateikus užklausą.';
 
   @override
-  String get configureDailySummaryDigest => 'Sukonfigūruokite savo kasdienę užduočių suvestinę';
+  String get configureDailySummaryDigest =>
+      'Sukonfigūruokite savo kasdienę užduočių suvestinę';
 
   @override
   String accessesDataTypes(String dataTypes) {
@@ -4686,7 +4891,10 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String accessesAndTriggeredBy(String accessDescription, String triggerDescription) {
+  String accessesAndTriggeredBy(
+    String accessDescription,
+    String triggerDescription,
+  ) {
     return '$accessDescription ir yra $triggerDescription.';
   }
 
@@ -4696,10 +4904,12 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get noSpecificDataAccessConfigured => 'Nenustatyta konkreti prieiga prie duomenų.';
+  String get noSpecificDataAccessConfigured =>
+      'Nenustatyta konkreti prieiga prie duomenų.';
 
   @override
-  String get basicPlanDescription => '1 200 premium minučių + neribota įrenginyje';
+  String get basicPlanDescription =>
+      '1 200 premium minučių + neribota įrenginyje';
 
   @override
   String get minutes => 'minučių';
@@ -4714,7 +4924,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get setupOnDevice => 'Nustatyti įrenginyje';
 
   @override
-  String get forUnlimitedFreeTranscription => 'neribotam nemokamam transkribavimui.';
+  String get forUnlimitedFreeTranscription =>
+      'neribotam nemokamam transkribavimui.';
 
   @override
   String premiumMinsLeft(int count) {
@@ -4737,7 +4948,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get otherDevicesComingSoon => 'Kiti įrenginiai netrukus';
 
   @override
-  String get deleteAllLimitlessConversations => 'Ištrinti visus Limitless pokalbius?';
+  String get deleteAllLimitlessConversations =>
+      'Ištrinti visus Limitless pokalbius?';
 
   @override
   String get deleteAllLimitlessWarning =>
@@ -4775,7 +4987,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get pleaseEnterName => 'Įveskite vardą';
 
   @override
-  String get nameMustBeBetweenCharacters => 'Vardas turi būti nuo 2 iki 40 simbolių';
+  String get nameMustBeBetweenCharacters =>
+      'Vardas turi būti nuo 2 iki 40 simbolių';
 
   @override
   String get deleteSampleQuestion => 'Ištrinti pavyzdį?';
@@ -4906,7 +5119,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get checkingForUpdates => 'Tikrinami atnaujinimai';
 
   @override
-  String get checkingFirmwareVersion => 'Tikrinama programinės įrangos versija...';
+  String get checkingFirmwareVersion =>
+      'Tikrinama programinės įrangos versija...';
 
   @override
   String get firmwareUpdate => 'Programinės įrangos atnaujinimas';
@@ -4937,7 +5151,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get setActive => 'Nustatyti kaip aktyvų';
 
   @override
-  String get getPaidThroughStripe => 'Gaukite mokėjimus už programų pardavimus per Stripe';
+  String get getPaidThroughStripe =>
+      'Gaukite mokėjimus už programų pardavimus per Stripe';
 
   @override
   String get monthlyPayouts => 'Mėnesiniai mokėjimai';
@@ -4950,22 +5165,27 @@ class AppLocalizationsLt extends AppLocalizations {
   String get secureAndReliable => 'Saugus ir patikimas';
 
   @override
-  String get stripeSecureDescription => 'Stripe užtikrina saugius ir savalaikius jūsų programos pajamų pervedimus';
+  String get stripeSecureDescription =>
+      'Stripe užtikrina saugius ir savalaikius jūsų programos pajamų pervedimus';
 
   @override
   String get selectYourCountry => 'Pasirinkite savo šalį';
 
   @override
-  String get countrySelectionPermanent => 'Jūsų šalies pasirinkimas yra nuolatinis ir vėliau negali būti pakeistas.';
+  String get countrySelectionPermanent =>
+      'Jūsų šalies pasirinkimas yra nuolatinis ir vėliau negali būti pakeistas.';
 
   @override
-  String get byClickingConnectNow => 'Spustelėdami \"Prisijungti dabar\" sutinkate su';
+  String get byClickingConnectNow =>
+      'Spustelėdami \"Prisijungti dabar\" sutinkate su';
 
   @override
-  String get stripeConnectedAccountAgreement => 'Stripe susietos paskyros sutartis';
+  String get stripeConnectedAccountAgreement =>
+      'Stripe susietos paskyros sutartis';
 
   @override
-  String get errorConnectingToStripe => 'Klaida jungiantis prie Stripe! Bandykite dar kartą vėliau.';
+  String get errorConnectingToStripe =>
+      'Klaida jungiantis prie Stripe! Bandykite dar kartą vėliau.';
 
   @override
   String get connectingYourStripeAccount => 'Jūsų Stripe paskyros prijungimas';
@@ -4991,7 +5211,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get updateStripeDetails => 'Atnaujinti Stripe duomenis';
 
   @override
-  String get errorUpdatingStripeDetails => 'Klaida atnaujinant Stripe duomenis! Bandykite dar kartą vėliau.';
+  String get errorUpdatingStripeDetails =>
+      'Klaida atnaujinant Stripe duomenis! Bandykite dar kartą vėliau.';
 
   @override
   String get updatePayPal => 'Atnaujinti PayPal';
@@ -5000,7 +5221,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get setUpPayPal => 'Nustatyti PayPal';
 
   @override
-  String get updatePayPalAccountDetails => 'Atnaujinkite savo PayPal paskyros duomenis';
+  String get updatePayPalAccountDetails =>
+      'Atnaujinkite savo PayPal paskyros duomenis';
 
   @override
   String get connectPayPalToReceivePayments =>
@@ -5029,10 +5251,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get pleaseEnterPayPalMeLink => 'Įveskite savo PayPal.me nuorodą';
 
   @override
-  String get doNotIncludeHttpInLink => 'Neįtraukite http, https ar www į nuorodą';
+  String get doNotIncludeHttpInLink =>
+      'Neįtraukite http, https ar www į nuorodą';
 
   @override
-  String get pleaseEnterValidPayPalMeLink => 'Įveskite galiojančią PayPal.me nuorodą';
+  String get pleaseEnterValidPayPalMeLink =>
+      'Įveskite galiojančią PayPal.me nuorodą';
 
   @override
   String get pleaseEnterValidEmail => 'Įveskite galiojantį el. pašto adresą';
@@ -5063,7 +5287,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get additionalSpeechSampleRemoved => 'Papildomas balso pavyzdys pašalintas';
+  String get additionalSpeechSampleRemoved =>
+      'Papildomas balso pavyzdys pašalintas';
 
   @override
   String get consentDataMessage =>
@@ -5092,7 +5317,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get loadingYourRecording => 'Įkeliamas įrašas...';
 
   @override
-  String get photoDiscardedMessage => 'Ši nuotrauka buvo atmesta, nes nebuvo reikšminga.';
+  String get photoDiscardedMessage =>
+      'Ši nuotrauka buvo atmesta, nes nebuvo reikšminga.';
 
   @override
   String get analyzing => 'Analizuojama...';
@@ -5128,7 +5354,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Nepavyko atidaryti Apple Watch programos. Rankiniu būdu atidarykite Watch programą savo Apple Watch ir įdiekite Omi iš skyriaus \"Galimos programos\".';
 
   @override
-  String get appleWatchConnectedSuccessfully => 'Apple Watch sėkmingai prijungtas!';
+  String get appleWatchConnectedSuccessfully =>
+      'Apple Watch sėkmingai prijungtas!';
 
   @override
   String get appleWatchNotReachable =>
@@ -5149,7 +5376,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get finishedConversation => 'Pokalbis baigtas?';
 
   @override
-  String get stopRecordingConfirmation => 'Ar tikrai norite sustabdyti įrašymą ir apibendrinti pokalbį dabar?';
+  String get stopRecordingConfirmation =>
+      'Ar tikrai norite sustabdyti įrašymą ir apibendrinti pokalbį dabar?';
 
   @override
   String get conversationEndsManually => 'Pokalbis baigsis tik rankiniu būdu.';
@@ -5163,7 +5391,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get dontAskAgain => 'Daugiau neklausti';
 
   @override
-  String get waitingForTranscriptOrPhotos => 'Laukiama transkripcijos arba nuotraukų...';
+  String get waitingForTranscriptOrPhotos =>
+      'Laukiama transkripcijos arba nuotraukų...';
 
   @override
   String get noSummaryYet => 'Santraukos dar nėra';
@@ -5189,7 +5418,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get notHelpful => 'Nenaudinga';
 
   @override
-  String get exportTasksWithOneTap => 'Eksportuokite užduotis vienu bakstelėjimu!';
+  String get exportTasksWithOneTap =>
+      'Eksportuokite užduotis vienu bakstelėjimu!';
 
   @override
   String get inProgress => 'Vykdoma';
@@ -5219,10 +5449,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get welcomeBackSimple => 'Sveiki sugrįžę';
 
   @override
-  String get addVocabularyDescription => 'Pridėkite žodžius, kuriuos Omi turėtų atpažinti transkripcijos metu.';
+  String get addVocabularyDescription =>
+      'Pridėkite žodžius, kuriuos Omi turėtų atpažinti transkripcijos metu.';
 
   @override
-  String get enterWordsCommaSeparated => 'Įveskite žodžius (atskirti kableliais)';
+  String get enterWordsCommaSeparated =>
+      'Įveskite žodžius (atskirti kableliais)';
 
   @override
   String get whenToReceiveDailySummary => 'Kada gauti dienos santrauką';
@@ -5239,7 +5471,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get developerApiKeys => 'Kūrėjo API raktai';
 
   @override
-  String get noApiKeysCreateOne => 'Nėra API raktų. Sukurkite vieną, kad pradėtumėte.';
+  String get noApiKeysCreateOne =>
+      'Nėra API raktų. Sukurkite vieną, kad pradėtumėte.';
 
   @override
   String get commandRequired => '⌘ būtinas';
@@ -5392,7 +5625,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get wrappedFailedToShare => 'Nepavyko dalintis. Bandykite dar kartą.';
 
   @override
-  String get wrappedFailedToStartGeneration => 'Nepavyko pradėti generavimo. Bandykite dar kartą.';
+  String get wrappedFailedToStartGeneration =>
+      'Nepavyko pradėti generavimo. Bandykite dar kartą.';
 
   @override
   String get wrappedStarting => 'Pradedama...';
@@ -5458,7 +5692,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get wrappedThatAwkwardMoment => 'Ta keista akimirka';
 
   @override
-  String get wrappedYouHadFunnyMoments => 'Turėjai linksmų akimirkų šiais metais!';
+  String get wrappedYouHadFunnyMoments =>
+      'Turėjai linksmų akimirkų šiais metais!';
 
   @override
   String get wrappedWeveAllBeenThere => 'Visi esame tai patyrę!';
@@ -5567,13 +5802,16 @@ class AppLocalizationsLt extends AppLocalizations {
   String get invalidRecordingDetected => 'Aptiktas netinkamas įrašas';
 
   @override
-  String get notEnoughSpeechDescription => 'Neaptikta pakankamai kalbos. Prašome kalbėti daugiau ir bandyti dar kartą.';
+  String get notEnoughSpeechDescription =>
+      'Neaptikta pakankamai kalbos. Prašome kalbėti daugiau ir bandyti dar kartą.';
 
   @override
-  String get speechDurationDescription => 'Įsitikinkite, kad kalbate bent 5 sekundes ir ne daugiau kaip 90.';
+  String get speechDurationDescription =>
+      'Įsitikinkite, kad kalbate bent 5 sekundes ir ne daugiau kaip 90.';
 
   @override
-  String get connectionLostDescription => 'Ryšys nutrūko. Patikrinkite savo interneto ryšį ir bandykite dar kartą.';
+  String get connectionLostDescription =>
+      'Ryšys nutrūko. Patikrinkite savo interneto ryšį ir bandykite dar kartą.';
 
   @override
   String get howToTakeGoodSample => 'Kaip padaryti gerą pavyzdį?';
@@ -5583,7 +5821,8 @@ class AppLocalizationsLt extends AppLocalizations {
       '1. Įsitikinkite, kad esate ramioje vietoje.\n2. Kalbėkite aiškiai ir natūraliai.\n3. Įsitikinkite, kad jūsų įrenginys yra natūralioje padėtyje ant kaklo.\n\nSukūrus visada galite patobulinti arba padaryti iš naujo.';
 
   @override
-  String get noDeviceConnectedUseMic => 'Neprijungtas joks įrenginys. Bus naudojamas telefono mikrofonas.';
+  String get noDeviceConnectedUseMic =>
+      'Neprijungtas joks įrenginys. Bus naudojamas telefono mikrofonas.';
 
   @override
   String get doItAgain => 'Daryti iš naujo';
@@ -5598,7 +5837,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get keepGoingGreat => 'Tęskite, jums puikiai sekasi';
 
   @override
-  String get somethingWentWrongTryAgain => 'Kažkas nutiko! Bandykite dar kartą vėliau.';
+  String get somethingWentWrongTryAgain =>
+      'Kažkas nutiko! Bandykite dar kartą vėliau.';
 
   @override
   String get uploadingVoiceProfile => 'Įkeliamas jūsų balso profilis....';
@@ -5622,7 +5862,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get notificationFrequency => 'Pranešimų dažnumas';
 
   @override
-  String get controlNotificationFrequency => 'Valdykite, kaip dažnai Omi siunčia jums aktyvius pranešimus.';
+  String get controlNotificationFrequency =>
+      'Valdykite, kaip dažnai Omi siunčia jums aktyvius pranešimus.';
 
   @override
   String get yourScore => 'Jūsų balas';
@@ -5662,7 +5903,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get failedToGenerateSummary => 'Nepavyko sugeneruoti suvestinės. Įsitikinkite, kad tą dieną turite pokalbių.';
+  String get failedToGenerateSummary =>
+      'Nepavyko sugeneruoti suvestinės. Įsitikinkite, kad tą dieną turite pokalbių.';
 
   @override
   String get recap => 'Apžvalga';
@@ -5684,7 +5926,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get removeFromAllFolders => 'Pašalinti iš visų aplankų';
 
   @override
-  String get buildAndShareYourCustomApp => 'Sukurkite ir dalinkitės savo pritaikyta programėle';
+  String get buildAndShareYourCustomApp =>
+      'Sukurkite ir dalinkitės savo pritaikyta programėle';
 
   @override
   String get searchAppsPlaceholder => 'Ieškoti 1500+ programėlių';
@@ -5754,13 +5997,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get chooseFile => 'Pasirinkti failą';
 
   @override
-  String get connectAiAssistantsToYourData => 'Prijungti AI asistentus prie savo duomenų';
+  String get connectAiAssistantsToYourData =>
+      'Prijungti AI asistentus prie savo duomenų';
 
   @override
   String get oAuth => 'OAuth';
 
   @override
-  String get trackYourGoalsOnHomepage => 'Sekti savo asmeninius tikslus pagrindiniame puslapyje';
+  String get trackYourGoalsOnHomepage =>
+      'Sekti savo asmeninius tikslus pagrindiniame puslapyje';
 
   @override
   String get deleteRecording => 'Ištrinti įrašą';
@@ -5795,7 +6040,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get cancelSync => 'Atšaukti sinchronizavimą';
 
   @override
-  String get cancelSyncMessage => 'Jau atsisiųsti duomenys bus išsaugoti. Galėsite tęsti vėliau.';
+  String get cancelSyncMessage =>
+      'Jau atsisiųsti duomenys bus išsaugoti. Galėsite tęsti vėliau.';
 
   @override
   String get syncCancelled => 'Sinchronizavimas atšauktas';
@@ -5849,7 +6095,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get noRecordings => 'Nėra įrašų';
 
   @override
-  String get audioFromOmiWillAppearHere => 'Garsas iš jūsų Omi įrenginio bus rodomas čia';
+  String get audioFromOmiWillAppearHere =>
+      'Garsas iš jūsų Omi įrenginio bus rodomas čia';
 
   @override
   String get deleteProcessed => 'Ištrinti apdorotus';
@@ -5893,13 +6140,16 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get summarizingConversation => 'Sumuojamas pokalbis...\nTai gali užtrukti kelias sekundes';
+  String get summarizingConversation =>
+      'Sumuojamas pokalbis...\nTai gali užtrukti kelias sekundes';
 
   @override
-  String get resummarizingConversation => 'Iš naujo sumuojamas pokalbis...\nTai gali užtrukti kelias sekundes';
+  String get resummarizingConversation =>
+      'Iš naujo sumuojamas pokalbis...\nTai gali užtrukti kelias sekundes';
 
   @override
-  String get nothingInterestingRetry => 'Nieko įdomaus nerasta,\nar norite bandyti dar kartą?';
+  String get nothingInterestingRetry =>
+      'Nieko įdomaus nerasta,\nar norite bandyti dar kartą?';
 
   @override
   String get noSummaryForConversation => 'Šiam pokalbiui\nsantraukos nėra.';
@@ -5911,13 +6161,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get couldNotLoadMap => 'Nepavyko įkelti žemėlapio';
 
   @override
-  String get triggerConversationIntegration => 'Paleisti pokalbio kūrimo integraciją';
+  String get triggerConversationIntegration =>
+      'Paleisti pokalbio kūrimo integraciją';
 
   @override
   String get webhookUrlNotSet => 'Webhook URL nenustatytas';
 
   @override
-  String get setWebhookUrlInSettings => 'Norėdami naudoti šią funkciją, nustatykite webhook URL kūrėjo nustatymuose.';
+  String get setWebhookUrlInSettings =>
+      'Norėdami naudoti šią funkciją, nustatykite webhook URL kūrėjo nustatymuose.';
 
   @override
   String get sendWebUrl => 'Siųsti žiniatinklio URL';
@@ -5943,19 +6195,24 @@ class AppLocalizationsLt extends AppLocalizations {
   String get modelRequired => 'Reikalingas modelis';
 
   @override
-  String get downloadWhisperModel => 'Atsisiųskite whisper modelį, kad galėtumėte naudoti transkripcija įrenginyje';
+  String get downloadWhisperModel =>
+      'Atsisiųskite whisper modelį, kad galėtumėte naudoti transkripcija įrenginyje';
 
   @override
-  String get deviceNotCompatible => 'Jūsų įrenginys nesuderinamas su transkripcija įrenginyje';
+  String get deviceNotCompatible =>
+      'Jūsų įrenginys nesuderinamas su transkripcija įrenginyje';
 
   @override
-  String get deviceRequirements => 'Jūsų įrenginys neatitinka transkripcijos įrenginyje reikalavimų.';
+  String get deviceRequirements =>
+      'Jūsų įrenginys neatitinka transkripcijos įrenginyje reikalavimų.';
 
   @override
-  String get willLikelyCrash => 'Įjungus tai tikriausiai programa užstrigs arba sustings.';
+  String get willLikelyCrash =>
+      'Įjungus tai tikriausiai programa užstrigs arba sustings.';
 
   @override
-  String get transcriptionSlowerLessAccurate => 'Transkripcija bus žymiai lėtesnė ir mažiau tiksli.';
+  String get transcriptionSlowerLessAccurate =>
+      'Transkripcija bus žymiai lėtesnė ir mažiau tiksli.';
 
   @override
   String get proceedAnyway => 'Vis tiek tęsti';
@@ -5964,28 +6221,35 @@ class AppLocalizationsLt extends AppLocalizations {
   String get olderDeviceDetected => 'Aptiktas senesnis įrenginys';
 
   @override
-  String get onDeviceSlower => 'Transkripcija įrenginyje šiame įrenginyje gali būti lėtesnė.';
+  String get onDeviceSlower =>
+      'Transkripcija įrenginyje šiame įrenginyje gali būti lėtesnė.';
 
   @override
-  String get batteryUsageHigher => 'Baterijos naudojimas bus didesnis nei debesies transkripcijos.';
+  String get batteryUsageHigher =>
+      'Baterijos naudojimas bus didesnis nei debesies transkripcijos.';
 
   @override
-  String get considerOmiCloud => 'Apsvarstykite Omi Cloud naudojimą geresniam veikimui.';
+  String get considerOmiCloud =>
+      'Apsvarstykite Omi Cloud naudojimą geresniam veikimui.';
 
   @override
   String get highResourceUsage => 'Didelis išteklių naudojimas';
 
   @override
-  String get onDeviceIntensive => 'Transkripcija įrenginyje reikalauja daug skaičiavimo resursų.';
+  String get onDeviceIntensive =>
+      'Transkripcija įrenginyje reikalauja daug skaičiavimo resursų.';
 
   @override
-  String get batteryDrainIncrease => 'Akumuliatoriaus naudojimas žymiai padidės.';
+  String get batteryDrainIncrease =>
+      'Akumuliatoriaus naudojimas žymiai padidės.';
 
   @override
-  String get deviceMayWarmUp => 'Įrenginys gali įkaisti ilgesnio naudojimo metu.';
+  String get deviceMayWarmUp =>
+      'Įrenginys gali įkaisti ilgesnio naudojimo metu.';
 
   @override
-  String get speedAccuracyLower => 'Greitis ir tikslumas gali būti mažesni nei debesies modelių.';
+  String get speedAccuracyLower =>
+      'Greitis ir tikslumas gali būti mažesni nei debesies modelių.';
 
   @override
   String get cloudProvider => 'Debesies tiekėjas';
@@ -6012,7 +6276,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Šis modelis yra didelis ir gali sukelti programos gedimą arba labai lėtą veikimą mobiliuosiuose įrenginiuose.\n\nRekomenduojama \"small\" arba \"base\".';
 
   @override
-  String get usingNativeIosSpeech => 'Naudojamas vietinis iOS kalbos atpažinimas';
+  String get usingNativeIosSpeech =>
+      'Naudojamas vietinis iOS kalbos atpažinimas';
 
   @override
   String get noModelDownloadRequired =>
@@ -6061,20 +6326,24 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deviceNotCompatibleTitle => 'Įrenginys nesuderinamas';
 
   @override
-  String get deviceNotMeetRequirements => 'Jūsų įrenginys neatitinka transkripcijos įrenginyje reikalavimų.';
+  String get deviceNotMeetRequirements =>
+      'Jūsų įrenginys neatitinka transkripcijos įrenginyje reikalavimų.';
 
   @override
-  String get transcriptionSlowerOnDevice => 'Transkripcija įrenginyje gali būti lėtesnė šiame įrenginyje.';
+  String get transcriptionSlowerOnDevice =>
+      'Transkripcija įrenginyje gali būti lėtesnė šiame įrenginyje.';
 
   @override
-  String get computationallyIntensive => 'Transkripcija įrenginyje reikalauja daug skaičiavimo resursų.';
+  String get computationallyIntensive =>
+      'Transkripcija įrenginyje reikalauja daug skaičiavimo resursų.';
 
   @override
-  String get batteryDrainSignificantly => 'Baterijos išsikrovimas žymiai padidės.';
+  String get batteryDrainSignificantly =>
+      'Baterijos išsikrovimas žymiai padidės.';
 
   @override
   String get premiumMinutesMonth =>
-      '1200 premium minučių/mėn. Įrenginyje skirtukas siūlo neribotą nemokamą transkripciją. ';
+      '600 premium minučių/mėn. Įrenginyje skirtukas siūlo neribotą nemokamą transkripciją. ';
 
   @override
   String get audioProcessedLocally =>
@@ -6141,10 +6410,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get selectProviderTemplate => 'Pasirinkite tiekėjo šabloną...';
 
   @override
-  String get quicklyPopulateResponse => 'Greitai užpildyti žinomu tiekėjo atsakymo formatu';
+  String get quicklyPopulateResponse =>
+      'Greitai užpildyti žinomu tiekėjo atsakymo formatu';
 
   @override
-  String get quicklyPopulateRequest => 'Greitai užpildyti žinomu tiekėjo užklausos formatu';
+  String get quicklyPopulateRequest =>
+      'Greitai užpildyti žinomu tiekėjo užklausos formatu';
 
   @override
   String get invalidJsonError => 'Netinkamas JSON';
@@ -6190,19 +6461,24 @@ class AppLocalizationsLt extends AppLocalizations {
   String get permissionTypeTrigger => 'Aktyviklis';
 
   @override
-  String get permissionDescReadConversations => 'Ši programa gali pasiekti jūsų pokalbius.';
+  String get permissionDescReadConversations =>
+      'Ši programa gali pasiekti jūsų pokalbius.';
 
   @override
-  String get permissionDescReadMemories => 'Ši programa gali pasiekti jūsų prisiminimus.';
+  String get permissionDescReadMemories =>
+      'Ši programa gali pasiekti jūsų prisiminimus.';
 
   @override
-  String get permissionDescReadTasks => 'Ši programa gali pasiekti jūsų užduotis.';
+  String get permissionDescReadTasks =>
+      'Ši programa gali pasiekti jūsų užduotis.';
 
   @override
-  String get permissionDescCreateConversations => 'Ši programa gali kurti naujus pokalbius.';
+  String get permissionDescCreateConversations =>
+      'Ši programa gali kurti naujus pokalbius.';
 
   @override
-  String get permissionDescCreateMemories => 'Ši programa gali kurti naujus prisiminimus.';
+  String get permissionDescCreateMemories =>
+      'Ši programa gali kurti naujus prisiminimus.';
 
   @override
   String get realtimeListening => 'Klausymasis realiu laiku';
@@ -6217,7 +6493,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get writeReviewOptional => 'Parašykite atsiliepimą (neprivaloma)';
 
   @override
-  String get setupQuestionsIntro => 'Padėkite mums tobulinti Omi atsakydami į kelis klausimus. 👋';
+  String get setupQuestionsIntro =>
+      'Padėkite mums tobulinti Omi atsakydami į kelis klausimus. 👋';
 
   @override
   String get setupQuestionProfession => '1. Kuo užsiimate?';
@@ -6229,7 +6506,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get setupQuestionAge => '3. Koks jūsų amžiaus intervalas?';
 
   @override
-  String get setupAnswerAllQuestions => 'Jūs dar neatsakėte į visus klausimus\\! ✋';
+  String get setupAnswerAllQuestions =>
+      'Jūs dar neatsakėte į visus klausimus\\! ✋';
 
   @override
   String get setupSkipHelp => 'Praleisti, nenoriu padėti :C';
@@ -6346,7 +6624,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get noKnowledgeGraphYet => 'Dar nėra žinių grafo';
 
   @override
-  String get buildingKnowledgeGraphFromMemories => 'Kuriamas žinių grafas iš prisiminimų...';
+  String get buildingKnowledgeGraphFromMemories =>
+      'Kuriamas žinių grafas iš prisiminimų...';
 
   @override
   String get knowledgeGraphWillBuildAutomatically =>
@@ -6379,13 +6658,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get replyToReview => 'Atsakyti į atsiliepimą';
 
   @override
-  String get rateAndReviewThisApp => 'Įvertinkite ir peržiūrėkite šią programėlę';
+  String get rateAndReviewThisApp =>
+      'Įvertinkite ir peržiūrėkite šią programėlę';
 
   @override
   String get noChangesInReview => 'Nėra atsiliepimo pakeitimų atnaujinti.';
 
   @override
-  String get cantRateWithoutInternet => 'Negalima įvertinti programėlės be interneto ryšio.';
+  String get cantRateWithoutInternet =>
+      'Negalima įvertinti programėlės be interneto ryšio.';
 
   @override
   String get appAnalytics => 'Programėlės analitika';
@@ -6518,7 +6799,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get personNameAlreadyExists => 'Asmuo su tokiu vardu jau egzistuoja.';
 
   @override
-  String get selectYouFromList => 'Norėdami pažymėti save, pasirinkite \"Jūs\" iš sąrašo.';
+  String get selectYouFromList =>
+      'Norėdami pažymėti save, pasirinkite \"Jūs\" iš sąrašo.';
 
   @override
   String get enterPersonsName => 'Įveskite asmens vardą';
@@ -6541,7 +6823,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get shareViaSms => 'Bendrinti per SMS';
 
   @override
-  String get selectContactsToShareSummary => 'Pasirinkite kontaktus pokalbio santraukai bendrinti';
+  String get selectContactsToShareSummary =>
+      'Pasirinkite kontaktus pokalbio santraukai bendrinti';
 
   @override
   String get searchContactsHint => 'Ieškoti kontaktų...';
@@ -6571,25 +6854,31 @@ class AppLocalizationsLt extends AppLocalizations {
   String get contactsPermissionRequired => 'Reikalingas kontaktų leidimas';
 
   @override
-  String get contactsPermissionRequiredForSms => 'Norint bendrinti per SMS, reikalingas kontaktų leidimas';
+  String get contactsPermissionRequiredForSms =>
+      'Norint bendrinti per SMS, reikalingas kontaktų leidimas';
 
   @override
-  String get grantContactsPermissionForSms => 'Suteikite kontaktų leidimą, kad galėtumėte bendrinti per SMS';
+  String get grantContactsPermissionForSms =>
+      'Suteikite kontaktų leidimą, kad galėtumėte bendrinti per SMS';
 
   @override
-  String get noContactsWithPhoneNumbers => 'Nerasta kontaktų su telefono numeriais';
+  String get noContactsWithPhoneNumbers =>
+      'Nerasta kontaktų su telefono numeriais';
 
   @override
-  String get noContactsMatchSearch => 'Nėra kontaktų, atitinkančių jūsų paiešką';
+  String get noContactsMatchSearch =>
+      'Nėra kontaktų, atitinkančių jūsų paiešką';
 
   @override
   String get failedToLoadContacts => 'Nepavyko įkelti kontaktų';
 
   @override
-  String get failedToPrepareConversationForSharing => 'Nepavyko paruošti pokalbio bendrinimui. Bandykite dar kartą.';
+  String get failedToPrepareConversationForSharing =>
+      'Nepavyko paruošti pokalbio bendrinimui. Bandykite dar kartą.';
 
   @override
-  String get couldNotOpenSmsApp => 'Nepavyko atidaryti SMS programos. Bandykite dar kartą.';
+  String get couldNotOpenSmsApp =>
+      'Nepavyko atidaryti SMS programos. Bandykite dar kartą.';
 
   @override
   String heresWhatWeDiscussed(String link) {
@@ -6638,7 +6927,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get transferRequired => 'Reikalingas perkėlimas';
 
   @override
-  String get downloadingAudioFromSdCard => 'Atsisiunčiamas garsas iš jūsų įrenginio SD kortelės';
+  String get downloadingAudioFromSdCard =>
+      'Atsisiunčiamas garsas iš jūsų įrenginio SD kortelės';
 
   @override
   String get transferRequiredDescription =>
@@ -6700,7 +6990,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get statusUnprocessed => 'Neapdorota';
 
   @override
-  String get transferCompleteMessage => 'Perkėlimas baigtas\\! Dabar galite paleisti šį įrašą.';
+  String get transferCompleteMessage =>
+      'Perkėlimas baigtas\\! Dabar galite paleisti šį įrašą.';
 
   @override
   String transferFailedMessage(String error) {
@@ -6741,16 +7032,20 @@ class AppLocalizationsLt extends AppLocalizations {
   String get batteryFullyChargedTitle => 'Omi yra visiškai įkrautas';
 
   @override
-  String get batteryFullyChargedBody => 'Jūsų Omi įrenginys yra visiškai įkrautas. Galite jį atjungti!';
+  String get batteryFullyChargedBody =>
+      'Jūsų Omi įrenginys yra visiškai įkrautas. Galite jį atjungti!';
 
   @override
-  String get deviceDisconnectedNotificationTitle => 'Jūsų Omi įrenginys atsijungė';
+  String get deviceDisconnectedNotificationTitle =>
+      'Jūsų Omi įrenginys atsijungė';
 
   @override
-  String get deviceDisconnectedNotificationBody => 'Prašome prisijungti iš naujo, kad galėtumėte toliau naudoti Omi.';
+  String get deviceDisconnectedNotificationBody =>
+      'Prašome prisijungti iš naujo, kad galėtumėte toliau naudoti Omi.';
 
   @override
-  String get firmwareUpdateAvailable => 'Yra programinės aparatinės įrangos atnaujinimas';
+  String get firmwareUpdateAvailable =>
+      'Yra programinės aparatinės įrangos atnaujinimas';
 
   @override
   String firmwareUpdateAvailableDescription(String version) {
@@ -6764,7 +7059,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get appDeletedSuccessfully => 'Programa sėkmingai ištrinta';
 
   @override
-  String get appDeleteFailed => 'Nepavyko ištrinti programos. Bandykite vėliau.';
+  String get appDeleteFailed =>
+      'Nepavyko ištrinti programos. Bandykite vėliau.';
 
   @override
   String get appVisibilityChangedSuccessfully =>
@@ -6775,7 +7071,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Klaida aktyvuojant programą. Jei tai integracijos programa, įsitikinkite, kad sąranka užbaigta.';
 
   @override
-  String get errorUpdatingAppStatus => 'Atnaujinant programos būseną įvyko klaida.';
+  String get errorUpdatingAppStatus =>
+      'Atnaujinant programos būseną įvyko klaida.';
 
   @override
   String get calculatingETA => 'Skaičiuojama...';
@@ -6803,7 +7100,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get noDataToMigrateFinalizing => 'Nėra duomenų migracijai. Užbaigiama...';
+  String get noDataToMigrateFinalizing =>
+      'Nėra duomenų migracijai. Užbaigiama...';
 
   @override
   String migratingItemsProgress(String itemType, int percentage) {
@@ -6811,10 +7109,12 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get allObjectsMigratedFinalizing => 'Visi objektai perkelti. Užbaigiama...';
+  String get allObjectsMigratedFinalizing =>
+      'Visi objektai perkelti. Užbaigiama...';
 
   @override
-  String get migrationErrorOccurred => 'Migracijos metu įvyko klaida. Bandykite dar kartą.';
+  String get migrationErrorOccurred =>
+      'Migracijos metu įvyko klaida. Bandykite dar kartą.';
 
   @override
   String get migrationComplete => 'Migracija baigta\\!';
@@ -6850,7 +7150,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get templateNameHint => 'pvz., Susitikimo veiksmų ištrauktuvas';
 
   @override
-  String get nameMustBeAtLeast3Characters => 'Pavadinimas turi būti bent 3 simbolių';
+  String get nameMustBeAtLeast3Characters =>
+      'Pavadinimas turi būti bent 3 simbolių';
 
   @override
   String get conversationPromptHint =>
@@ -6860,7 +7161,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get pleaseEnterAppPrompt => 'Įveskite programėlės užuominą';
 
   @override
-  String get promptMustBeAtLeast10Characters => 'Užuomina turi būti bent 10 simbolių';
+  String get promptMustBeAtLeast10Characters =>
+      'Užuomina turi būti bent 10 simbolių';
 
   @override
   String get anyoneCanDiscoverTemplate => 'Bet kas gali atrasti jūsų šabloną';
@@ -6884,28 +7186,35 @@ class AppLocalizationsLt extends AppLocalizations {
   String get appCreatedSuccessfully => 'Programėlė sėkmingai sukurta!';
 
   @override
-  String get failedToCreateApp => 'Nepavyko sukurti programėlės. Bandykite dar kartą.';
+  String get failedToCreateApp =>
+      'Nepavyko sukurti programėlės. Bandykite dar kartą.';
 
   @override
-  String get addAppSelectCoreCapability => 'Pasirinkite dar vieną pagrindinę galimybę savo programėlei';
+  String get addAppSelectCoreCapability =>
+      'Pasirinkite dar vieną pagrindinę galimybę savo programėlei';
 
   @override
-  String get addAppSelectPaymentPlan => 'Pasirinkite mokėjimo planą ir įveskite savo programėlės kainą';
+  String get addAppSelectPaymentPlan =>
+      'Pasirinkite mokėjimo planą ir įveskite savo programėlės kainą';
 
   @override
-  String get addAppSelectCapability => 'Pasirinkite bent vieną galimybę savo programėlei';
+  String get addAppSelectCapability =>
+      'Pasirinkite bent vieną galimybę savo programėlei';
 
   @override
   String get addAppSelectLogo => 'Pasirinkite logotipą savo programėlei';
 
   @override
-  String get addAppEnterChatPrompt => 'Įveskite pokalbių užklausą savo programėlei';
+  String get addAppEnterChatPrompt =>
+      'Įveskite pokalbių užklausą savo programėlei';
 
   @override
-  String get addAppEnterConversationPrompt => 'Įveskite pokalbio užklausą savo programėlei';
+  String get addAppEnterConversationPrompt =>
+      'Įveskite pokalbio užklausą savo programėlei';
 
   @override
-  String get addAppSelectTriggerEvent => 'Pasirinkite paleidimo įvykį savo programėlei';
+  String get addAppSelectTriggerEvent =>
+      'Pasirinkite paleidimo įvykį savo programėlei';
 
   @override
   String get addAppEnterWebhookUrl => 'Įveskite webhook URL savo programėlei';
@@ -6914,7 +7223,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get addAppSelectCategory => 'Pasirinkite kategoriją savo programėlei';
 
   @override
-  String get addAppFillRequiredFields => 'Teisingai užpildykite visus privalomus laukus';
+  String get addAppFillRequiredFields =>
+      'Teisingai užpildykite visus privalomus laukus';
 
   @override
   String get addAppUpdatedSuccess => 'Programėlė sėkmingai atnaujinta 🚀';
@@ -6936,10 +7246,12 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get addAppPhotosPermissionDenied => 'Nuotraukų leidimas atmestas. Leiskite prieigą prie nuotraukų';
+  String get addAppPhotosPermissionDenied =>
+      'Nuotraukų leidimas atmestas. Leiskite prieigą prie nuotraukų';
 
   @override
-  String get addAppErrorSelectingImageRetry => 'Klaida pasirenkant vaizdą. Bandykite dar kartą.';
+  String get addAppErrorSelectingImageRetry =>
+      'Klaida pasirenkant vaizdą. Bandykite dar kartą.';
 
   @override
   String addAppErrorSelectingThumbnail(String error) {
@@ -6947,22 +7259,28 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get addAppErrorSelectingThumbnailRetry => 'Klaida pasirenkant miniatiūrą. Bandykite dar kartą.';
+  String get addAppErrorSelectingThumbnailRetry =>
+      'Klaida pasirenkant miniatiūrą. Bandykite dar kartą.';
 
   @override
-  String get addAppCapabilityConflictWithPersona => 'Kitų galimybių negalima pasirinkti su Persona';
+  String get addAppCapabilityConflictWithPersona =>
+      'Kitų galimybių negalima pasirinkti su Persona';
 
   @override
-  String get addAppPersonaConflictWithCapabilities => 'Persona negalima pasirinkti su kitomis galimybėmis';
+  String get addAppPersonaConflictWithCapabilities =>
+      'Persona negalima pasirinkti su kitomis galimybėmis';
 
   @override
-  String get paymentFailedToFetchCountries => 'Nepavyko gauti palaikomų šalių. Bandykite vėliau.';
+  String get paymentFailedToFetchCountries =>
+      'Nepavyko gauti palaikomų šalių. Bandykite vėliau.';
 
   @override
-  String get paymentFailedToSetDefault => 'Nepavyko nustatyti numatytojo mokėjimo būdo. Bandykite vėliau.';
+  String get paymentFailedToSetDefault =>
+      'Nepavyko nustatyti numatytojo mokėjimo būdo. Bandykite vėliau.';
 
   @override
-  String get paymentFailedToSavePaypal => 'Nepavyko išsaugoti PayPal duomenų. Bandykite vėliau.';
+  String get paymentFailedToSavePaypal =>
+      'Nepavyko išsaugoti PayPal duomenų. Bandykite vėliau.';
 
   @override
   String get paypalEmailHint => 'nik@example.com';
@@ -6992,7 +7310,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get paymentEnterValidAmount => 'Įveskite galiojančią sumą';
 
   @override
-  String get paymentEnterAmountGreaterThanZero => 'Įveskite sumą, didesnę nei 0';
+  String get paymentEnterAmountGreaterThanZero =>
+      'Įveskite sumą, didesnę nei 0';
 
   @override
   String get paymentPlan => 'Mokėjimo planas';
@@ -7021,13 +7340,16 @@ class AppLocalizationsLt extends AppLocalizations {
   String get aiGenErrorWhileCreatingApp => 'Kuriant programėlę įvyko klaida';
 
   @override
-  String get aiGenFailedToGenerateApp => 'Nepavyko sugeneruoti programėlės. Bandykite dar kartą.';
+  String get aiGenFailedToGenerateApp =>
+      'Nepavyko sugeneruoti programėlės. Bandykite dar kartą.';
 
   @override
-  String get aiGenFailedToRegenerateIcon => 'Nepavyko iš naujo sugeneruoti piktogramos';
+  String get aiGenFailedToRegenerateIcon =>
+      'Nepavyko iš naujo sugeneruoti piktogramos';
 
   @override
-  String get aiGenPleaseGenerateAppFirst => 'Pirmiausia sugeneruokite programėlę';
+  String get aiGenPleaseGenerateAppFirst =>
+      'Pirmiausia sugeneruokite programėlę';
 
   @override
   String get nextButton => 'Toliau';
@@ -7045,7 +7367,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Atnaujinimas suplanuotas\\! Jūsų mėnesinis planas tęsiasi iki atsiskaitymo laikotarpio pabaigos, tada automatiškai persijungia į metinį.';
 
   @override
-  String get couldNotSchedulePlanChange => 'Nepavyko suplanuoti plano pakeitimo. Bandykite dar kartą.';
+  String get couldNotSchedulePlanChange =>
+      'Nepavyko suplanuoti plano pakeitimo. Bandykite dar kartą.';
 
   @override
   String get subscriptionReactivatedDefault =>
@@ -7056,13 +7379,16 @@ class AppLocalizationsLt extends AppLocalizations {
       'Prenumerata sėkminga\\! Jums buvo nuskaičiuota už naują atsiskaitymo laikotarpį.';
 
   @override
-  String get couldNotProcessSubscription => 'Nepavyko apdoroti prenumeratos. Bandykite dar kartą.';
+  String get couldNotProcessSubscription =>
+      'Nepavyko apdoroti prenumeratos. Bandykite dar kartą.';
 
   @override
-  String get couldNotLaunchUpgradePage => 'Nepavyko atidaryti atnaujinimo puslapio. Bandykite dar kartą.';
+  String get couldNotLaunchUpgradePage =>
+      'Nepavyko atidaryti atnaujinimo puslapio. Bandykite dar kartą.';
 
   @override
-  String get transcriptionJsonPlaceholder => 'Įklijuokite savo JSON konfigūraciją čia...';
+  String get transcriptionJsonPlaceholder =>
+      'Įklijuokite savo JSON konfigūraciją čia...';
 
   @override
   String get transcriptionSourceOmi => 'Omi';
@@ -7132,13 +7458,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get onboardingYoureAllSet => 'Viskas paruošta';
 
   @override
-  String get searchTranscriptOrSummary => 'Ieškoti transkripcijoje ar santraukoje...';
+  String get searchTranscriptOrSummary =>
+      'Ieškoti transkripcijoje ar santraukoje...';
 
   @override
   String get myGoal => 'Mano tikslas';
 
   @override
-  String get appNotAvailable => 'Oi! Atrodo, kad ieškoma programėlė nepasiekiama.';
+  String get appNotAvailable =>
+      'Oi! Atrodo, kad ieškoma programėlė nepasiekiama.';
 
   @override
   String get failedToConnectTodoist => 'Nepavyko prisijungti prie Todoist';
@@ -7147,7 +7475,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get failedToConnectAsana => 'Nepavyko prisijungti prie Asana';
 
   @override
-  String get failedToConnectGoogleTasks => 'Nepavyko prisijungti prie Google Tasks';
+  String get failedToConnectGoogleTasks =>
+      'Nepavyko prisijungti prie Google Tasks';
 
   @override
   String get failedToConnectClickUp => 'Nepavyko prisijungti prie ClickUp';
@@ -7158,79 +7487,102 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get successfullyConnectedTodoist => 'Sėkmingai prisijungta prie Todoist!';
+  String get successfullyConnectedTodoist =>
+      'Sėkmingai prisijungta prie Todoist!';
 
   @override
-  String get failedToConnectTodoistRetry => 'Nepavyko prisijungti prie Todoist. Bandykite dar kartą.';
+  String get failedToConnectTodoistRetry =>
+      'Nepavyko prisijungti prie Todoist. Bandykite dar kartą.';
 
   @override
   String get successfullyConnectedAsana => 'Sėkmingai prisijungta prie Asana!';
 
   @override
-  String get failedToConnectAsanaRetry => 'Nepavyko prisijungti prie Asana. Bandykite dar kartą.';
+  String get failedToConnectAsanaRetry =>
+      'Nepavyko prisijungti prie Asana. Bandykite dar kartą.';
 
   @override
-  String get successfullyConnectedGoogleTasks => 'Sėkmingai prisijungta prie Google Tasks!';
+  String get successfullyConnectedGoogleTasks =>
+      'Sėkmingai prisijungta prie Google Tasks!';
 
   @override
-  String get failedToConnectGoogleTasksRetry => 'Nepavyko prisijungti prie Google Tasks. Bandykite dar kartą.';
+  String get failedToConnectGoogleTasksRetry =>
+      'Nepavyko prisijungti prie Google Tasks. Bandykite dar kartą.';
 
   @override
-  String get successfullyConnectedClickUp => 'Sėkmingai prisijungta prie ClickUp!';
+  String get successfullyConnectedClickUp =>
+      'Sėkmingai prisijungta prie ClickUp!';
 
   @override
-  String get failedToConnectClickUpRetry => 'Nepavyko prisijungti prie ClickUp. Bandykite dar kartą.';
+  String get failedToConnectClickUpRetry =>
+      'Nepavyko prisijungti prie ClickUp. Bandykite dar kartą.';
 
   @override
-  String get successfullyConnectedNotion => 'Sėkmingai prisijungta prie Notion!';
+  String get successfullyConnectedNotion =>
+      'Sėkmingai prisijungta prie Notion!';
 
   @override
-  String get failedToRefreshNotionStatus => 'Nepavyko atnaujinti Notion ryšio būsenos.';
+  String get failedToRefreshNotionStatus =>
+      'Nepavyko atnaujinti Notion ryšio būsenos.';
 
   @override
-  String get successfullyConnectedGoogle => 'Sėkmingai prisijungta prie Google!';
+  String get successfullyConnectedGoogle =>
+      'Sėkmingai prisijungta prie Google!';
 
   @override
-  String get failedToRefreshGoogleStatus => 'Nepavyko atnaujinti Google ryšio būsenos.';
+  String get failedToRefreshGoogleStatus =>
+      'Nepavyko atnaujinti Google ryšio būsenos.';
 
   @override
   String get successfullyConnectedWhoop => 'Sėkmingai prisijungta prie Whoop!';
 
   @override
-  String get failedToRefreshWhoopStatus => 'Nepavyko atnaujinti Whoop ryšio būsenos.';
+  String get failedToRefreshWhoopStatus =>
+      'Nepavyko atnaujinti Whoop ryšio būsenos.';
 
   @override
-  String get successfullyConnectedGitHub => 'Sėkmingai prisijungta prie GitHub!';
+  String get successfullyConnectedGitHub =>
+      'Sėkmingai prisijungta prie GitHub!';
 
   @override
-  String get failedToRefreshGitHubStatus => 'Nepavyko atnaujinti GitHub ryšio būsenos.';
+  String get failedToRefreshGitHubStatus =>
+      'Nepavyko atnaujinti GitHub ryšio būsenos.';
 
   @override
-  String get authFailedToSignInWithGoogle => 'Nepavyko prisijungti su Google, bandykite dar kartą.';
+  String get authFailedToSignInWithGoogle =>
+      'Nepavyko prisijungti su Google, bandykite dar kartą.';
 
   @override
-  String get authenticationFailed => 'Autentifikacija nepavyko. Bandykite dar kartą.';
+  String get authenticationFailed =>
+      'Autentifikacija nepavyko. Bandykite dar kartą.';
 
   @override
-  String get authFailedToSignInWithApple => 'Nepavyko prisijungti su Apple, bandykite dar kartą.';
+  String get authFailedToSignInWithApple =>
+      'Nepavyko prisijungti su Apple, bandykite dar kartą.';
 
   @override
-  String get authFailedToRetrieveToken => 'Nepavyko gauti Firebase žetono, bandykite dar kartą.';
+  String get authFailedToRetrieveToken =>
+      'Nepavyko gauti Firebase žetono, bandykite dar kartą.';
 
   @override
-  String get authUnexpectedErrorFirebase => 'Netikėta klaida prisijungiant, Firebase klaida, bandykite dar kartą.';
+  String get authUnexpectedErrorFirebase =>
+      'Netikėta klaida prisijungiant, Firebase klaida, bandykite dar kartą.';
 
   @override
-  String get authUnexpectedError => 'Netikėta klaida prisijungiant, bandykite dar kartą';
+  String get authUnexpectedError =>
+      'Netikėta klaida prisijungiant, bandykite dar kartą';
 
   @override
-  String get authFailedToLinkGoogle => 'Nepavyko susieti su Google, bandykite dar kartą.';
+  String get authFailedToLinkGoogle =>
+      'Nepavyko susieti su Google, bandykite dar kartą.';
 
   @override
-  String get authFailedToLinkApple => 'Nepavyko susieti su Apple, bandykite dar kartą.';
+  String get authFailedToLinkApple =>
+      'Nepavyko susieti su Apple, bandykite dar kartą.';
 
   @override
-  String get onboardingBluetoothRequired => 'Norint prisijungti prie įrenginio, reikalingas Bluetooth leidimas.';
+  String get onboardingBluetoothRequired =>
+      'Norint prisijungti prie įrenginio, reikalingas Bluetooth leidimas.';
 
   @override
   String get onboardingBluetoothDeniedSystemPrefs =>
@@ -7269,7 +7621,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Suteikite vietos leidimą Nustatymai > Privatumas ir sauga > Vietos paslaugos';
 
   @override
-  String get onboardingMicrophoneRequired => 'Įrašymui reikalingas mikrofono leidimas.';
+  String get onboardingMicrophoneRequired =>
+      'Įrašymui reikalingas mikrofono leidimas.';
 
   @override
   String get onboardingMicrophoneDenied =>
@@ -7286,7 +7639,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get onboardingScreenCaptureRequired => 'Sistemos garso įrašymui reikalingas ekrano fiksavimo leidimas.';
+  String get onboardingScreenCaptureRequired =>
+      'Sistemos garso įrašymui reikalingas ekrano fiksavimo leidimas.';
 
   @override
   String get onboardingScreenCaptureDenied =>
@@ -7303,7 +7657,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get onboardingAccessibilityRequired => 'Naršyklės susitikimų aptikimui reikalingas prieinamumo leidimas.';
+  String get onboardingAccessibilityRequired =>
+      'Naršyklės susitikimų aptikimui reikalingas prieinamumo leidimas.';
 
   @override
   String onboardingAccessibilityStatusCheckPrefs(String status) {
@@ -7316,10 +7671,12 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get msgCameraNotAvailable => 'Kameros fiksavimas šioje platformoje nepasiekiamas';
+  String get msgCameraNotAvailable =>
+      'Kameros fiksavimas šioje platformoje nepasiekiamas';
 
   @override
-  String get msgCameraPermissionDenied => 'Kameros leidimas atmestas. Leiskite prieigą prie kameros';
+  String get msgCameraPermissionDenied =>
+      'Kameros leidimas atmestas. Leiskite prieigą prie kameros';
 
   @override
   String msgCameraAccessError(String error) {
@@ -7347,7 +7704,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Nuotraukų leidimas atmestas. Leiskite prieigą prie nuotraukų, kad galėtumėte pasirinkti paveikslėlius';
 
   @override
-  String get msgSelectImagesGenericError => 'Klaida renkantis paveikslėlius. Bandykite dar kartą.';
+  String get msgSelectImagesGenericError =>
+      'Klaida renkantis paveikslėlius. Bandykite dar kartą.';
 
   @override
   String get msgMaxFilesLimit => 'Galite pasirinkti tik iki 4 failų';
@@ -7358,7 +7716,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get msgSelectFilesGenericError => 'Klaida renkantis failus. Bandykite dar kartą.';
+  String get msgSelectFilesGenericError =>
+      'Klaida renkantis failus. Bandykite dar kartą.';
 
   @override
   String get msgUploadFileFailed => 'Failo įkėlimas nepavyko, bandykite vėliau';
@@ -7383,28 +7742,36 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get captureMicrophonePermissionRequired => 'Reikalingas mikrofono leidimas';
+  String get captureMicrophonePermissionRequired =>
+      'Reikalingas mikrofono leidimas';
 
   @override
-  String get captureMicrophonePermissionInSystemPreferences => 'Suteikite mikrofono leidimą Sistemos nuostatose';
+  String get captureMicrophonePermissionInSystemPreferences =>
+      'Suteikite mikrofono leidimą Sistemos nuostatose';
 
   @override
-  String get captureScreenRecordingPermissionRequired => 'Reikalingas ekrano įrašymo leidimas';
+  String get captureScreenRecordingPermissionRequired =>
+      'Reikalingas ekrano įrašymo leidimas';
 
   @override
-  String get captureDisplayDetectionFailed => 'Ekrano aptikimas nepavyko. Įrašymas sustabdytas.';
+  String get captureDisplayDetectionFailed =>
+      'Ekrano aptikimas nepavyko. Įrašymas sustabdytas.';
 
   @override
-  String get devModeInvalidAudioBytesWebhookUrl => 'Neteisingas garso baitų webhook URL';
+  String get devModeInvalidAudioBytesWebhookUrl =>
+      'Neteisingas garso baitų webhook URL';
 
   @override
-  String get devModeInvalidRealtimeTranscriptWebhookUrl => 'Neteisingas realaus laiko transkripcijos webhook URL';
+  String get devModeInvalidRealtimeTranscriptWebhookUrl =>
+      'Neteisingas realaus laiko transkripcijos webhook URL';
 
   @override
-  String get devModeInvalidConversationCreatedWebhookUrl => 'Neteisingas sukurto pokalbio webhook URL';
+  String get devModeInvalidConversationCreatedWebhookUrl =>
+      'Neteisingas sukurto pokalbio webhook URL';
 
   @override
-  String get devModeInvalidDaySummaryWebhookUrl => 'Neteisingas dienos santraukos webhook URL';
+  String get devModeInvalidDaySummaryWebhookUrl =>
+      'Neteisingas dienos santraukos webhook URL';
 
   @override
   String get devModeSettingsSaved => 'Nustatymai išsaugoti!';
@@ -7554,7 +7921,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get noDailyRecapsYet => 'Dar nėra dienos santraukų';
 
   @override
-  String get dailyRecapsDescription => 'Jūsų dienos santraukos bus rodomos čia, kai bus sukurtos';
+  String get dailyRecapsDescription =>
+      'Jūsų dienos santraukos bus rodomos čia, kai bus sukurtos';
 
   @override
   String largeTimeGapDetected(String gap) {
@@ -7567,7 +7935,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get appleHealthNotAvailable => 'Apple Health nepasiekiama šiame įrenginyje';
+  String get appleHealthNotAvailable =>
+      'Apple Health nepasiekiama šiame įrenginyje';
 
   @override
   String get downloadAudio => 'Atsisiųsti garsą';
@@ -7833,7 +8202,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get audioPlaybackUnavailable => 'Garso failas nepasiekiamas atkūrimui';
 
   @override
-  String get audioPlaybackFailed => 'Nepavyksta atkurti garso. Failas gali būti pažeistas arba trūkstamas.';
+  String get audioPlaybackFailed =>
+      'Nepavyksta atkurti garso. Failas gali būti pažeistas arba trūkstamas.';
 
   @override
   String get connectionGuide => 'Prisijungimo vadovas';
@@ -7854,7 +8224,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get pairingTitleOmi => 'Įjunkite Omi';
 
   @override
-  String get pairingDescOmi => 'Paspauskite ir palaikykite įrenginį, kol jis suvibruos, kad įjungtumėte.';
+  String get pairingDescOmi =>
+      'Paspauskite ir palaikykite įrenginį, kol jis suvibruos, kad įjungtumėte.';
 
   @override
   String get pairingTitleOmiDevkit => 'Įjunkite Omi DevKit susiejimo režimą';
@@ -7867,7 +8238,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get pairingTitleOmiGlass => 'Įjunkite Omi Glass';
 
   @override
-  String get pairingDescOmiGlass => 'Paspauskite ir palaikykite šoninį mygtuką 3 sekundes, kad įjungtumėte.';
+  String get pairingDescOmiGlass =>
+      'Paspauskite ir palaikykite šoninį mygtuką 3 sekundes, kad įjungtumėte.';
 
   @override
   String get pairingTitlePlaudNote => 'Įjunkite Plaud Note susiejimo režimą';
@@ -7880,7 +8252,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get pairingTitleBee => 'Įjunkite Bee susiejimo režimą';
 
   @override
-  String get pairingDescBee => 'Paspauskite mygtuką 5 kartus iš eilės. Šviesa pradės mirksėti mėlynai ir žaliai.';
+  String get pairingDescBee =>
+      'Paspauskite mygtuką 5 kartus iš eilės. Šviesa pradės mirksėti mėlynai ir žaliai.';
 
   @override
   String get pairingTitleLimitless => 'Įjunkite Limitless susiejimo režimą';
@@ -7890,7 +8263,8 @@ class AppLocalizationsLt extends AppLocalizations {
       'Kai matoma bet kokia šviesa, paspauskite vieną kartą, tada paspauskite ir palaikykite, kol įrenginys parodys rožinę šviesą, tada atleiskite.';
 
   @override
-  String get pairingTitleFriendPendant => 'Įjunkite Friend Pendant susiejimo režimą';
+  String get pairingTitleFriendPendant =>
+      'Įjunkite Friend Pendant susiejimo režimą';
 
   @override
   String get pairingDescFriendPendant =>
@@ -7900,7 +8274,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get pairingTitleFieldy => 'Įjunkite Fieldy susiejimo režimą';
 
   @override
-  String get pairingDescFieldy => 'Paspauskite ir palaikykite įrenginį, kol pasirodys šviesa, kad jį įjungtumėte.';
+  String get pairingDescFieldy =>
+      'Paspauskite ir palaikykite įrenginį, kol pasirodys šviesa, kad jį įjungtumėte.';
 
   @override
   String get pairingTitleAppleWatch => 'Prijunkite Apple Watch';
@@ -8003,13 +8378,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get onboardingWhatIKnowAboutYouTitle => 'Štai ką žinau apie tave';
 
   @override
-  String get onboardingWhatIKnowAboutYouDescription => 'Šis žemėlapis atnaujinamas, kai Omi mokosi iš jūsų pokalbių.';
+  String get onboardingWhatIKnowAboutYouDescription =>
+      'Šis žemėlapis atnaujinamas, kai Omi mokosi iš jūsų pokalbių.';
 
   @override
   String get apiEnvironment => 'API aplinka';
 
   @override
-  String get apiEnvironmentDescription => 'Pasirinkite, prie kurio serverio prisijungti';
+  String get apiEnvironmentDescription =>
+      'Pasirinkite, prie kurio serverio prisijungti';
 
   @override
   String get production => 'Gamyba';
@@ -8018,7 +8395,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get staging => 'Testavimo aplinka';
 
   @override
-  String get switchRequiresRestart => 'Perjungimui reikia iš naujo paleisti programėlę';
+  String get switchRequiresRestart =>
+      'Perjungimui reikia iš naujo paleisti programėlę';
 
   @override
   String get switchApiConfirmTitle => 'Perjungti API aplinką';
@@ -8046,7 +8424,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get onlyYouCanSeeConversation => 'Tik jūs galite matyti šį pokalbį';
 
   @override
-  String get anyoneWithLinkCanView => 'Bet kas, turintis nuorodą, gali peržiūrėti';
+  String get anyoneWithLinkCanView =>
+      'Bet kas, turintis nuorodą, gali peržiūrėti';
 
   @override
   String get tasksCleanTodayTitle => 'Išvalyti šiandienos užduotis?';
@@ -8073,25 +8452,29 @@ class AppLocalizationsLt extends AppLocalizations {
   String get phoneSetupStep2Title => 'Iveskite patvirtinimo koda';
 
   @override
-  String get phoneSetupStep2Subtitle => 'Trumpas kodas, kuri ivesite skambuchio metu';
+  String get phoneSetupStep2Subtitle =>
+      'Trumpas kodas, kuri ivesite skambuchio metu';
 
   @override
   String get phoneSetupStep3Title => 'Pradekite skambinti savo kontaktams';
 
   @override
-  String get phoneSetupStep3Subtitle => 'Su integruota tiesioginee transkripcija';
+  String get phoneSetupStep3Subtitle =>
+      'Su integruota tiesioginee transkripcija';
 
   @override
   String get phoneGetStarted => 'Pradeti';
 
   @override
-  String get callRecordingConsentDisclaimer => 'Skambuciu irasymas gali reikalauti sutikimo jusu jurisdikcijoje';
+  String get callRecordingConsentDisclaimer =>
+      'Skambuciu irasymas gali reikalauti sutikimo jusu jurisdikcijoje';
 
   @override
   String get enterYourNumber => 'Iveskite savo numeri';
 
   @override
-  String get phoneNumberCallerIdHint => 'Po patvirtinimo tai taps jusu skambintojo ID';
+  String get phoneNumberCallerIdHint =>
+      'Po patvirtinimo tai taps jusu skambintojo ID';
 
   @override
   String get phoneNumberHint => 'Telefono numeris';
@@ -8193,13 +8576,15 @@ class AppLocalizationsLt extends AppLocalizations {
   String get showPhoneCallButtonTitle => 'Rodyti skambučio mygtuką';
 
   @override
-  String get showPhoneCallButtonDesc => 'Rodyti telefono skambučio mygtuką pradiniame ekrane';
+  String get showPhoneCallButtonDesc =>
+      'Rodyti telefono skambučio mygtuką pradiniame ekrane';
 
   @override
   String get yourVerifiedNumbers => 'Jusu patvirtinti numeriai';
 
   @override
-  String get verifiedNumbersDescription => 'Kai skambinate kam nors, jie matys si numeri';
+  String get verifiedNumbersDescription =>
+      'Kai skambinate kam nors, jie matys si numeri';
 
   @override
   String get noVerifiedNumbers => 'Nera patvirtintu numeriu';
@@ -8210,7 +8595,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get deletePhoneNumberWarning => 'Turesite patvirtinti is naujo, kad galetumete skambinti';
+  String get deletePhoneNumberWarning =>
+      'Turesite patvirtinti is naujo, kad galetumete skambinti';
 
   @override
   String get phoneDeleteButton => 'Istrinti';
@@ -8242,10 +8628,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get callAlreadyInProgress => 'Skambutis jau vyksta';
 
   @override
-  String get failedToGetCallToken => 'Nepavyko gauti zymeklio. Pirma patvirtinkite savo numeri.';
+  String get failedToGetCallToken =>
+      'Nepavyko gauti zymeklio. Pirma patvirtinkite savo numeri.';
 
   @override
-  String get failedToInitializeCallService => 'Nepavyko inicializuoti skambuciu paslaugos';
+  String get failedToInitializeCallService =>
+      'Nepavyko inicializuoti skambuciu paslaugos';
 
   @override
   String get speakerLabelYou => 'Jus';
@@ -8254,7 +8642,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get speakerLabelUnknown => 'Nezinomas';
 
   @override
-  String get showDailyScoreOnHomepage => 'Rodyti dienos balą pagrindiniame puslapyje';
+  String get showDailyScoreOnHomepage =>
+      'Rodyti dienos balą pagrindiniame puslapyje';
 
   @override
   String get showTasksOnHomepage => 'Rodyti užduotis pagrindiniame puslapyje';
@@ -8267,16 +8656,20 @@ class AppLocalizationsLt extends AppLocalizations {
       'Skambinkite per Omi ir gaukite transkripcijas realiu laiku, automatinius santraukas ir daugiau.';
 
   @override
-  String get phoneCallsUpsellFeature1 => 'Kiekvieno skambučio transkripcija realiu laiku';
+  String get phoneCallsUpsellFeature1 =>
+      'Kiekvieno skambučio transkripcija realiu laiku';
 
   @override
-  String get phoneCallsUpsellFeature2 => 'Automatinės skambučių santraukos ir veiksmai';
+  String get phoneCallsUpsellFeature2 =>
+      'Automatinės skambučių santraukos ir veiksmai';
 
   @override
-  String get phoneCallsUpsellFeature3 => 'Gavėjai mato jūsų tikrąjį numerį, ne atsitiktinį';
+  String get phoneCallsUpsellFeature3 =>
+      'Gavėjai mato jūsų tikrąjį numerį, ne atsitiktinį';
 
   @override
-  String get phoneCallsUpsellFeature4 => 'Jūsų skambučiai lieka privatūs ir saugūs';
+  String get phoneCallsUpsellFeature4 =>
+      'Jūsų skambučiai lieka privatūs ir saugūs';
 
   @override
   String get phoneCallsUpgradeButton => 'Atnaujinti iki Neriboto';
@@ -8291,7 +8684,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deleteSyncedFiles => 'Ištrinti sinchronizuotus įrašus';
 
   @override
-  String get deleteSyncedFilesMessage => 'Šie įrašai jau sinchronizuoti su jūsų telefonu. To atšaukti negalima.';
+  String get deleteSyncedFilesMessage =>
+      'Šie įrašai jau sinchronizuoti su jūsų telefonu. To atšaukti negalima.';
 
   @override
   String get syncedFilesDeleted => 'Sinchronizuoti įrašai ištrinti';
@@ -8349,7 +8743,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get fairUsePolicy => 'Sąžiningas naudojimas';
 
   @override
-  String get fairUseLoadError => 'Nepavyko įkelti sąžiningo naudojimo būsenos. Bandykite dar kartą.';
+  String get fairUseLoadError =>
+      'Nepavyko įkelti sąžiningo naudojimo būsenos. Bandykite dar kartą.';
 
   @override
   String get fairUseStatusNormal => 'Jūsų naudojimas yra normaliose ribose.';
@@ -8410,7 +8805,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get transcriptionPaused => 'Įrašoma, jungiamasi iš naujo';
 
   @override
-  String get transcriptionPausedReconnecting => 'Vis dar įrašoma — jungiamasi prie transkripcijos...';
+  String get transcriptionPausedReconnecting =>
+      'Vis dar įrašoma — jungiamasi prie transkripcijos...';
 
   @override
   String fairUseBannerStatus(String status) {
@@ -8448,10 +8844,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get noSyncedRecordings => 'Dar nėra sinchronizuotų įrašų';
 
   @override
-  String get recordingsSyncAutomatically => 'Įrašai sinchronizuojami automatiškai — jokių veiksmų nereikia.';
+  String get recordingsSyncAutomatically =>
+      'Įrašai sinchronizuojami automatiškai — jokių veiksmų nereikia.';
 
   @override
-  String get filesDownloadedUploadedNextTime => 'Jau atsisiųsti failai bus įkelti kitą kartą.';
+  String get filesDownloadedUploadedNextTime =>
+      'Jau atsisiųsti failai bus įkelti kitą kartą.';
 
   @override
   String nConversationsCreated(int count) {
@@ -8489,10 +8887,12 @@ class AppLocalizationsLt extends AppLocalizations {
       'Įkėlus, jūsų įrašai apdorojami ir transkribuojami. Pokalbiai bus prieinami per minutę.';
 
   @override
-  String get tipKeepPhoneNearby => 'Laikykite telefoną šalia greitesniam sinchronizavimui';
+  String get tipKeepPhoneNearby =>
+      'Laikykite telefoną šalia greitesniam sinchronizavimui';
 
   @override
-  String get tipStableInternet => 'Stabilus internetas pagreitina įkėlimą į debesį';
+  String get tipStableInternet =>
+      'Stabilus internetas pagreitina įkėlimą į debesį';
 
   @override
   String get tipAutoSync => 'Įrašai sinchronizuojami automatiškai';
@@ -8521,10 +8921,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get permissionsSetupTitle => 'Gaukite geriausią patirtį';
 
   @override
-  String get permissionsSetupDescription => 'Įjunkite kelis leidimus, kad Omi galėtų atlikti savo magiją.';
+  String get permissionsSetupDescription =>
+      'Įjunkite kelis leidimus, kad Omi galėtų atlikti savo magiją.';
 
   @override
-  String get permissionsChangeAnytime => 'Galite tai pakeisti bet kada nustatymuose > Leidimai';
+  String get permissionsChangeAnytime =>
+      'Galite tai pakeisti bet kada nustatymuose > Leidimai';
 
   @override
   String get location => 'Vieta';
@@ -8569,7 +8971,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get justAMoment => 'Vieną minutėlę';
 
   @override
-  String get cancelConsequencesSubtitle => 'Labai rekomenduojame išnagrinėti kitas galimybes vietoj atšaukimo.';
+  String get cancelConsequencesSubtitle =>
+      'Labai rekomenduojame išnagrinėti kitas galimybes vietoj atšaukimo.';
 
   @override
   String cancelBillingPeriodInfo(String date) {
@@ -8580,16 +8983,20 @@ class AppLocalizationsLt extends AppLocalizations {
   String get ifYouCancel => 'Jei atšauksite:';
 
   @override
-  String get cancelConsequenceNoAccess => 'Nebeturėsite neriboto prieigos atsiskaitymo laikotarpio pabaigoje.';
+  String get cancelConsequenceNoAccess =>
+      'Nebeturėsite neriboto prieigos atsiskaitymo laikotarpio pabaigoje.';
 
   @override
-  String get cancelConsequenceBattery => '7x didesnis baterijos naudojimas (apdorojimas įrenginyje)';
+  String get cancelConsequenceBattery =>
+      '7x didesnis baterijos naudojimas (apdorojimas įrenginyje)';
 
   @override
-  String get cancelConsequenceQuality => '30% mažesnė transkripcijos kokybė (modeliai įrenginyje)';
+  String get cancelConsequenceQuality =>
+      '30% mažesnė transkripcijos kokybė (modeliai įrenginyje)';
 
   @override
-  String get cancelConsequenceDelay => '5-7 sekundžių apdorojimo vėlavimas (modeliai įrenginyje)';
+  String get cancelConsequenceDelay =>
+      '5-7 sekundžių apdorojimo vėlavimas (modeliai įrenginyje)';
 
   @override
   String get cancelConsequenceSpeakers => 'Negali identifikuoti kalbėtojų.';
@@ -8598,7 +9005,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get confirmAndCancel => 'Patvirtinti ir atšaukti';
 
   @override
-  String get cancelConsequencePhoneCalls => 'Jokio realaus laiko telefono skambučių transkripcijos';
+  String get cancelConsequencePhoneCalls =>
+      'Jokio realaus laiko telefono skambučių transkripcijos';
 
   @override
   String get feedbackTitleTooExpensive => 'Kokia kaina jums tiktų?';
@@ -8610,7 +9018,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get feedbackTitleAudioQuality => 'Kokių problemų patyrėte?';
 
   @override
-  String get feedbackTitleBatteryDrain => 'Papasakokite apie baterijos problemas';
+  String get feedbackTitleBatteryDrain =>
+      'Papasakokite apie baterijos problemas';
 
   @override
   String get feedbackTitleFoundAlternative => 'Į ką pereinate?';
@@ -8619,22 +9028,27 @@ class AppLocalizationsLt extends AppLocalizations {
   String get feedbackTitleNotUsing => 'Kas paskatintų jus daugiau naudoti Omi?';
 
   @override
-  String get feedbackSubtitleTooExpensive => 'Jūsų atsiliepimai padeda rasti tinkamą balansą.';
+  String get feedbackSubtitleTooExpensive =>
+      'Jūsų atsiliepimai padeda rasti tinkamą balansą.';
 
   @override
-  String get feedbackSubtitleMissingFeatures => 'Visada kuriame — tai padeda mums nustatyti prioritetus.';
+  String get feedbackSubtitleMissingFeatures =>
+      'Visada kuriame — tai padeda mums nustatyti prioritetus.';
 
   @override
   String get feedbackSubtitleAudioQuality => 'Norėtume suprasti, kas nutiko.';
 
   @override
-  String get feedbackSubtitleBatteryDrain => 'Tai padeda mūsų aparatūros komandai tobulėti.';
+  String get feedbackSubtitleBatteryDrain =>
+      'Tai padeda mūsų aparatūros komandai tobulėti.';
 
   @override
-  String get feedbackSubtitleFoundAlternative => 'Norėtume sužinoti, kas patraukė jūsų dėmesį.';
+  String get feedbackSubtitleFoundAlternative =>
+      'Norėtume sužinoti, kas patraukė jūsų dėmesį.';
 
   @override
-  String get feedbackSubtitleNotUsing => 'Norime padaryti Omi naudingesnį jums.';
+  String get feedbackSubtitleNotUsing =>
+      'Norime padaryti Omi naudingesnį jums.';
 
   @override
   String get deviceDiagnostics => 'Įrenginio diagnostika';
@@ -8734,7 +9148,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get week => 'Savaitė';
 
   @override
-  String get rollbackToStableFirmware => 'Grįžti prie stabilios programinės įrangos';
+  String get rollbackToStableFirmware =>
+      'Grįžti prie stabilios programinės įrangos';
 
   @override
   String get rollbackConfirmTitle => 'Grąžinti programinę įrangą?';
@@ -8748,16 +9163,19 @@ class AppLocalizationsLt extends AppLocalizations {
   String get stableFirmware => 'Stabili programinė įranga';
 
   @override
-  String get fetchingStableFirmware => 'Gaunama naujausia stabili programinė įranga...';
+  String get fetchingStableFirmware =>
+      'Gaunama naujausia stabili programinė įranga...';
 
   @override
-  String get noStableFirmwareFound => 'Nepavyko rasti stabilios programinės įrangos versijos jūsų įrenginiui.';
+  String get noStableFirmwareFound =>
+      'Nepavyko rasti stabilios programinės įrangos versijos jūsų įrenginiui.';
 
   @override
   String get installStableFirmware => 'Įdiegti stabilią programinę įrangą';
 
   @override
-  String get alreadyOnStableFirmware => 'Jau naudojate naujausią stabilią versiją.';
+  String get alreadyOnStableFirmware =>
+      'Jau naudojate naujausią stabilią versiją.';
 
   @override
   String audioSavedLocally(String duration) {
@@ -8781,7 +9199,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get transcriptionConnecting => 'Jungiamasi prie transkripcijos...';
 
   @override
-  String get transcriptionReconnecting => 'Perjungiamasi prie transkripcijos...';
+  String get transcriptionReconnecting =>
+      'Perjungiamasi prie transkripcijos...';
 
   @override
   String get transcriptionUnavailable => 'Transkripcija nepasiekiama';
@@ -8830,19 +9249,22 @@ class AppLocalizationsLt extends AppLocalizations {
   String get appleHealthFeatureChatTitle => 'Kalbėkitės apie savo sveikatą';
 
   @override
-  String get appleHealthFeatureChatDesc => 'Klauskite Omi apie žingsnius, miegą, pulsą ir treniruotes.';
+  String get appleHealthFeatureChatDesc =>
+      'Klauskite Omi apie žingsnius, miegą, pulsą ir treniruotes.';
 
   @override
   String get appleHealthFeatureReadOnlyTitle => 'Prieiga tik skaitymui';
 
   @override
-  String get appleHealthFeatureReadOnlyDesc => 'Omi niekada nerašo į Apple Health ir nekeičia jūsų duomenų.';
+  String get appleHealthFeatureReadOnlyDesc =>
+      'Omi niekada nerašo į Apple Health ir nekeičia jūsų duomenų.';
 
   @override
   String get appleHealthFeatureSecureTitle => 'Saugus sinchronizavimas';
 
   @override
-  String get appleHealthFeatureSecureDesc => 'Jūsų Apple Health duomenys privačiai sinchronizuojami su Omi paskyra.';
+  String get appleHealthFeatureSecureDesc =>
+      'Jūsų Apple Health duomenys privačiai sinchronizuojami su Omi paskyra.';
 
   @override
   String get appleHealthDeniedTitle => 'Prieiga prie Apple Health atmesta';
@@ -8855,7 +9277,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deleteFlowReasonTitle => 'Kodėl išeini?';
 
   @override
-  String get deleteFlowReasonSubtitle => 'Tavo atsiliepimai padeda mums tobulinti Omi visiems.';
+  String get deleteFlowReasonSubtitle =>
+      'Tavo atsiliepimai padeda mums tobulinti Omi visiems.';
 
   @override
   String get deleteReasonPrivacy => 'Privatumo problemos';
@@ -8864,7 +9287,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deleteReasonNotUsing => 'Naudoju nepakankamai dažnai';
 
   @override
-  String get deleteReasonMissingFeatures => 'Trūksta funkcijų, kurių man reikia';
+  String get deleteReasonMissingFeatures =>
+      'Trūksta funkcijų, kurių man reikia';
 
   @override
   String get deleteReasonTechnicalIssues => 'Per daug techninių problemų';
@@ -8885,19 +9309,23 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deleteFlowFeedbackSubtitle => 'Kas būtų padarę Omi tinkamą tau?';
 
   @override
-  String get deleteFlowFeedbackHint => 'Neprivaloma — tavo mintys padeda mums sukurti geresnį produktą.';
+  String get deleteFlowFeedbackHint =>
+      'Neprivaloma — tavo mintys padeda mums sukurti geresnį produktą.';
 
   @override
   String get deleteFlowConfirmTitle => 'Tai negrįžtama';
 
   @override
-  String get deleteFlowConfirmSubtitle => 'Ištrynus paskyrą jos nebus galima atkurti.';
+  String get deleteFlowConfirmSubtitle =>
+      'Ištrynus paskyrą jos nebus galima atkurti.';
 
   @override
-  String get deleteConsequenceSubscription => 'Bet kokia aktyvi prenumerata bus atšaukta.';
+  String get deleteConsequenceSubscription =>
+      'Bet kokia aktyvi prenumerata bus atšaukta.';
 
   @override
-  String get deleteConsequenceNoRecovery => 'Tavo paskyros negalima atkurti — net ir palaikymo komandai.';
+  String get deleteConsequenceNoRecovery =>
+      'Tavo paskyros negalima atkurti — net ir palaikymo komandai.';
 
   @override
   String get deleteTypeToConfirm => 'Norėdami patvirtinti, įveskite DELETE';
@@ -8912,7 +9340,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get keepMyAccount => 'Palikti mano paskyrą';
 
   @override
-  String get deleteAccountFailed => 'Nepavyko ištrinti tavo paskyros. Bandyk dar kartą.';
+  String get deleteAccountFailed =>
+      'Nepavyko ištrinti tavo paskyros. Bandyk dar kartą.';
 
   @override
   String get planUpdate => 'Plano atnaujinimas';
@@ -8952,7 +9381,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get chatLimitReachedUpgrade => 'Pokalbio limitas pasiektas. Atnaujinkite daugiau žinučių.';
+  String get chatLimitReachedUpgrade =>
+      'Pokalbio limitas pasiektas. Atnaujinkite daugiau žinučių.';
 
   @override
   String get chatLimitReachedTitle => 'Pokalbio limitas pasiektas';
@@ -9004,7 +9434,8 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get architectSubtitle => 'Pažangus AI — tūkstančiai pokalbių + agentinė automatizacija';
+  String get architectSubtitle =>
+      'Pažangus AI — tūkstančiai pokalbių + agentinė automatizacija';
 
   @override
   String chatUsageCost(String used, String limit) {
@@ -9085,7 +9516,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get phoneCall => 'Telefono skambutis';
 
   @override
-  String get phoneCallSubtitle => 'Įrašykite skambutį su tiesiogine transkripcija';
+  String get phoneCallSubtitle =>
+      'Įrašykite skambutį su tiesiogine transkripcija';
 
   @override
   String get searchActionItems => 'Ieškoti veiksmų elementų';
@@ -9121,7 +9553,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get selectAllTasksMenu => 'Pasirinkti viską';
 
   @override
-  String get connectTaskAppToExport => 'Prijunkite užduočių programą Nustatymuose, kad galėtumėte eksportuoti';
+  String get connectTaskAppToExport =>
+      'Prijunkite užduočių programą Nustatymuose, kad galėtumėte eksportuoti';
 
   @override
   String get connectAction => 'Prijungti';
@@ -9130,10 +9563,12 @@ class AppLocalizationsLt extends AppLocalizations {
   String get deselectAllTasksMenu => 'Atžymėti viską';
 
   @override
-  String get bulkExportAlreadyExported => 'Visos pasirinktos užduotys jau eksportuotos';
+  String get bulkExportAlreadyExported =>
+      'Visos pasirinktos užduotys jau eksportuotos';
 
   @override
-  String get bulkDeleteFailed => 'Nepavyko ištrinti užduočių. Bandykite dar kartą.';
+  String get bulkDeleteFailed =>
+      'Nepavyko ištrinti užduočių. Bandykite dar kartą.';
 
   @override
   String get deleteRecap => 'Ištrinti suvestinę';
@@ -9152,7 +9587,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get recapDeletedSnackbar => 'Suvestinė ištrinta';
 
   @override
-  String get recapDeleteFailed => 'Nepavyko ištrinti suvestinės. Bandykite vėliau.';
+  String get recapDeleteFailed =>
+      'Nepavyko ištrinti suvestinės. Bandykite vėliau.';
 
   @override
   String get syncStatusBackedUp => 'Sukurta atsarginė kopija';
@@ -9267,7 +9703,8 @@ class AppLocalizationsLt extends AppLocalizations {
   String get syncStatusOnDevice => 'Jūsų įrenginyje';
 
   @override
-  String get syncStatusDownloadingFromDevice => 'Atsisiunčiama iš jūsų įrenginio';
+  String get syncStatusDownloadingFromDevice =>
+      'Atsisiunčiama iš jūsų įrenginio';
 
   @override
   String get newestFirst => 'Pirma naujausi';
@@ -9279,15 +9716,74 @@ class AppLocalizationsLt extends AppLocalizations {
   String get morePaymentMethodsComingSoon => 'Netrukus daugiau mokėjimo būdų';
 
   @override
-  String get syncProcessingBackgroundHint => 'Tai tęsiasi fone — galite išeiti iš šio ekrano.';
+  String get syncProcessingBackgroundHint =>
+      'Tai tęsiasi fone — galite išeiti iš šio ekrano.';
 
   @override
-  String get syncCardRateLimited => 'Pasiekta sąžiningo naudojimo riba — sinchronizavimas bus tęsiamas automatiškai';
+  String get syncCardRateLimited =>
+      'Pasiekta sąžiningo naudojimo riba — sinchronizavimas bus tęsiamas automatiškai';
 
   @override
-  String get syncCardBackendBusy => 'Omi serveriai užimti — jūsų įrašai bus sinchronizuoti, kai atsilaisvins pajėgumai';
+  String get syncCardBackendBusy =>
+      'Omi serveriai užimti — jūsų įrašai bus sinchronizuoti, kai atsilaisvins pajėgumai';
 
   @override
   String get unableToDetermineFirmwareVersion =>
       'Nepavyko nustatyti dabartinės programinės aparatinės įrangos versijos';
+
+  @override
+  String get modeSelectorTitle => 'Pasirinkite režimą';
+
+  @override
+  String get officialModeTitle => 'Oficialus';
+
+  @override
+  String get officialModeDescription => 'Omi Cloud — nereikia nustatymų.';
+
+  @override
+  String get opensourcePlusModeTitle => 'Atvirasis kodas+';
+
+  @override
+  String get opensourcePlusModeDescription =>
+      'Savastinis prieglobstis — visiškas privatumas, be mokamo API.';
+
+  @override
+  String get ossSetupTitle => 'Open Source+ sąranka';
+
+  @override
+  String get ossSetupWelcomeBody =>
+      'Sukonfigūruokite savo paslaugas. Tai užtrunka apie 5 minutes.';
+
+  @override
+  String get ossAuthSubtitle => 'Autentifikacija ir duomenų bazė';
+
+  @override
+  String get ossSpeechSubtitle => 'Kalbos atpažinimas';
+
+  @override
+  String get ossVectorSubtitle => 'Vektorinė duomenų bazė';
+
+  @override
+  String get ossStorageSubtitle => 'Objektų saugykla';
+
+  @override
+  String get ossLocalAiSubtitle => 'Vietinis AI modelis';
+
+  @override
+  String get ossConnectionTestTitle => 'Ryšio testas';
+
+  @override
+  String get ossConnectionTestSubtitle => 'Tikrinamos paslaugos…';
+
+  @override
+  String get ossConnected => 'Prisijungta';
+
+  @override
+  String get ossUnreachable => 'Nepasiekiama';
+
+  @override
+  String get ossFinish => 'Pradėti naudoti Omi';
+
+  @override
+  String get ossOptional => 'neprivaloma';
 }
