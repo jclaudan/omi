@@ -165,21 +165,24 @@ Flux de configuration guidé, affiché uniquement en mode OSS+.
 ---
 
 ### Étape 4 — Supabase Auth (backend + Flutter)
-**Complexité : Haute | Priorité : Haute**
+**Complexité : Haute | Priorité : Haute** ✅ **DONE**
 
 Remplacement de Firebase Auth en mode OSS+. En mode Officiel, Firebase Auth est inchangé.
 
 **Backend :**
-- [ ] `backend/dependencies.py` → factory : si `OMI_AUTH_BACKEND=supabase`, vérifier JWT Supabase ; sinon Firebase
-- [ ] `backend/utils/auth/firebase_auth.py` ← code existant déplacé ici
-- [ ] `backend/utils/auth/supabase_auth.py` ← nouveau, vérifie JWT avec la clé Supabase
-- [ ] `backend/utils/auth/factory.py` ← sélectionne l'implémentation selon env var
+- [x] `backend/utils/auth/firebase_auth.py` ← code existant déplacé ici
+- [x] `backend/utils/auth/supabase_auth.py` ← nouveau, vérifie JWT HS256 avec `SUPABASE_JWT_SECRET`
+- [x] `backend/utils/auth/factory.py` ← sélectionne selon `OMI_AUTH_BACKEND=firebase|supabase`
+- [x] `backend/dependencies.py` → `get_current_user_id()` délègue à la factory
 
 **Flutter app :**
-- [ ] Ajout du package `supabase_flutter` dans `pubspec.yaml`
-- [ ] `AuthService` étendu avec `signInWithSupabase()` / `signUpWithSupabase()`
-- [ ] En mode OSS+ : `AuthService` utilise Supabase ; en mode Officiel : Firebase inchangé
-- [ ] Supabase initialisé au démarrage uniquement si `appMode == opensourcePlus`
+- [x] `supabase_flutter: ^2.8.0` ajouté dans `pubspec.yaml`
+- [x] `app/lib/services/oss_supabase_service.dart` — singleton client Supabase
+- [x] `AuthService.signInWithSupabase()` / `signUpWithSupabase()` ajoutés
+- [x] `AuthService.isSignedIn()` / `getIdToken()` / `signOut()` routent selon `appMode`
+- [x] Supabase initialisé au démarrage uniquement si `appMode == opensourcePlus`
+- [x] `StepAuth` (étape 8) — écran email/password dans l'onboarding OSS+
+- [x] L10n : 8 nouvelles clés traduites en 49 langues
 
 ---
 
