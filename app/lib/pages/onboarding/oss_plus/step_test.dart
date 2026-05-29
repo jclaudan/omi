@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:omi/backend/preferences.dart';
-import 'package:omi/pages/home/page.dart';
 import 'package:omi/utils/l10n_extensions.dart';
 
 class StepTest extends StatefulWidget {
-  const StepTest({super.key, required this.onBack});
+  const StepTest({super.key, required this.onNext, required this.onBack});
 
+  final VoidCallback onNext;
   final VoidCallback onBack;
 
   @override
@@ -92,11 +91,7 @@ class _StepTestState extends State<StepTest> {
     }
   }
 
-  void _finish() {
-    SharedPreferencesUtil().onboardingCompleted = true;
-    SharedPreferencesUtil().permissionsCompleted = true;
-    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_) => const HomePageWrapper()), (_) => false);
-  }
+  void _finish() => widget.onNext();
 
   @override
   Widget build(BuildContext context) {
