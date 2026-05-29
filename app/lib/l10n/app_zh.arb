@@ -3076,4 +3076,13 @@
     "ossUnreachable": "无法连接",
     "ossFinish": "开始使用Omi",
     "ossOptional": "可选"
+,
+    "ossAccountTitle": "创建您的账户",
+    "ossSignInTitle": "登录",
+    "ossEmail": "电子邮件",
+    "ossPassword": "密码",
+    "ossCreateAccount": "创建账户",
+    "ossSignIn": "登录",
+    "ossHaveAccount": "已有账户？登录",
+    "ossNoAccount": "没有账户？创建一个"
 }

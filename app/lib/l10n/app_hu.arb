@@ -3150,4 +3150,13 @@
     "ossUnreachable": "Elérhetetlen",
     "ossFinish": "Kezdje el az Omi használatát",
     "ossOptional": "nem kötelező"
+,
+    "ossAccountTitle": "Hozza létre fiókját",
+    "ossSignInTitle": "Bejelentkezés",
+    "ossEmail": "E-mail",
+    "ossPassword": "Jelszó",
+    "ossCreateAccount": "Fiók létrehozása",
+    "ossSignIn": "Bejelentkezés",
+    "ossHaveAccount": "Már van fiókja? Jelentkezzen be",
+    "ossNoAccount": "Nincs fiókja? Hozzon létre egyet"
 }

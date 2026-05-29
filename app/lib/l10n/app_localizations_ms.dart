@@ -9793,4 +9793,28 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get ossOptional => 'pilihan';
+
+  @override
+  String get ossAccountTitle => 'Buat akaun anda';
+
+  @override
+  String get ossSignInTitle => 'Log masuk';
+
+  @override
+  String get ossEmail => 'E-mel';
+
+  @override
+  String get ossPassword => 'Kata laluan';
+
+  @override
+  String get ossCreateAccount => 'Buat akaun';
+
+  @override
+  String get ossSignIn => 'Log masuk';
+
+  @override
+  String get ossHaveAccount => 'Sudah ada akaun? Log masuk';
+
+  @override
+  String get ossNoAccount => 'Tiada akaun? Buat satu';
 }

@@ -3059,4 +3059,13 @@
     "ossUnreachable": "Không thể kết nối",
     "ossFinish": "Bắt đầu sử dụng Omi",
     "ossOptional": "tùy chọn"
+,
+    "ossAccountTitle": "Tạo tài khoản của bạn",
+    "ossSignInTitle": "Đăng nhập",
+    "ossEmail": "Email",
+    "ossPassword": "Mật khẩu",
+    "ossCreateAccount": "Tạo tài khoản",
+    "ossSignIn": "Đăng nhập",
+    "ossHaveAccount": "Đã có tài khoản? Đăng nhập",
+    "ossNoAccount": "Chưa có tài khoản? Tạo một tài khoản"
 }

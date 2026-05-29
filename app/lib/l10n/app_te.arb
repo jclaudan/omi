@@ -10632,4 +10632,13 @@
     "ossUnreachable": "అందుబాటులో లేదు",
     "ossFinish": "Omi ఉపయోగించడం ప్రారంభించండి",
     "ossOptional": "ఐచ్ఛికమైన"
+,
+    "ossAccountTitle": "మీ ఖాతాను సృష్టించండి",
+    "ossSignInTitle": "సైన్ ఇన్ చేయండి",
+    "ossEmail": "ఇమెయిల్",
+    "ossPassword": "పాస్‌వర్డ్",
+    "ossCreateAccount": "ఖాతా సృష్టించండి",
+    "ossSignIn": "సైన్ ఇన్",
+    "ossHaveAccount": "ఇప్పటికే ఖాతా ఉందా? సైన్ ఇన్ చేయండి",
+    "ossNoAccount": "ఖాతా లేదా? ఒకటి సృష్టించండి"
 }

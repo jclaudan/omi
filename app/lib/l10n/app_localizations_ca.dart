@@ -9856,4 +9856,28 @@ class AppLocalizationsCa extends AppLocalizations {
 
   @override
   String get ossOptional => 'opcional';
+
+  @override
+  String get ossAccountTitle => 'Crea el teu compte';
+
+  @override
+  String get ossSignInTitle => 'Inicia sessió';
+
+  @override
+  String get ossEmail => 'Correu electrònic';
+
+  @override
+  String get ossPassword => 'Contrasenya';
+
+  @override
+  String get ossCreateAccount => 'Crea un compte';
+
+  @override
+  String get ossSignIn => 'Inicia sessió';
+
+  @override
+  String get ossHaveAccount => 'Ja tens un compte? Inicia sessió';
+
+  @override
+  String get ossNoAccount => 'No tens compte? Crea\'n un';
 }

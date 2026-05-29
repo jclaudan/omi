@@ -9587,4 +9587,28 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get ossOptional => 'אופציונלי';
+
+  @override
+  String get ossAccountTitle => 'צרו את החשבון שלכם';
+
+  @override
+  String get ossSignInTitle => 'התחברות';
+
+  @override
+  String get ossEmail => 'אימייל';
+
+  @override
+  String get ossPassword => 'סיסמה';
+
+  @override
+  String get ossCreateAccount => 'יצירת חשבון';
+
+  @override
+  String get ossSignIn => 'התחברות';
+
+  @override
+  String get ossHaveAccount => 'כבר יש לכם חשבון? התחברו';
+
+  @override
+  String get ossNoAccount => 'אין לכם חשבון? צרו אחד';
 }

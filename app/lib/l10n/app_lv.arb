@@ -3054,4 +3054,13 @@
     "ossUnreachable": "Nesasniedzams",
     "ossFinish": "Sākt lietot Omi",
     "ossOptional": "neobligāts"
+,
+    "ossAccountTitle": "Izveidojiet savu kontu",
+    "ossSignInTitle": "Pieteikties",
+    "ossEmail": "E-pasts",
+    "ossPassword": "Parole",
+    "ossCreateAccount": "Izveidot kontu",
+    "ossSignIn": "Pieteikties",
+    "ossHaveAccount": "Jau ir konts? Piesakieties",
+    "ossNoAccount": "Nav konta? Izveidojiet vienu"
 }

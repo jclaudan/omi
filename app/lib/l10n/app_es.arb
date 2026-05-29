@@ -3055,4 +3055,13 @@
     "ossUnreachable": "Inalcanzable",
     "ossFinish": "Empieza a usar Omi",
     "ossOptional": "opcional"
+,
+    "ossAccountTitle": "Crea tu cuenta",
+    "ossSignInTitle": "Iniciar sesión",
+    "ossEmail": "Correo electrónico",
+    "ossPassword": "Contraseña",
+    "ossCreateAccount": "Crear cuenta",
+    "ossSignIn": "Iniciar sesión",
+    "ossHaveAccount": "¿Ya tienes una cuenta? Inicia sesión",
+    "ossNoAccount": "¿No tienes cuenta? Crea una"
 }

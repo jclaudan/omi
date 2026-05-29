@@ -9752,4 +9752,28 @@ class AppLocalizationsEt extends AppLocalizations {
 
   @override
   String get ossOptional => 'valikuline';
+
+  @override
+  String get ossAccountTitle => 'Loo oma konto';
+
+  @override
+  String get ossSignInTitle => 'Logi sisse';
+
+  @override
+  String get ossEmail => 'E-post';
+
+  @override
+  String get ossPassword => 'Parool';
+
+  @override
+  String get ossCreateAccount => 'Loo konto';
+
+  @override
+  String get ossSignIn => 'Logi sisse';
+
+  @override
+  String get ossHaveAccount => 'Juba on konto? Logi sisse';
+
+  @override
+  String get ossNoAccount => 'Pole kontot? Loo endale üks';
 }

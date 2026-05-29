@@ -3054,4 +3054,13 @@
     "ossUnreachable": "연결 불가",
     "ossFinish": "Omi 사용 시작",
     "ossOptional": "선택 사항"
+,
+    "ossAccountTitle": "계정을 만드세요",
+    "ossSignInTitle": "로그인",
+    "ossEmail": "이메일",
+    "ossPassword": "비밀번호",
+    "ossCreateAccount": "계정 만들기",
+    "ossSignIn": "로그인",
+    "ossHaveAccount": "이미 계정이 있으신가요? 로그인",
+    "ossNoAccount": "계정이 없으신가요? 만들기"
 }

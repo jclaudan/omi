@@ -9343,4 +9343,28 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get ossOptional => '선택 사항';
+
+  @override
+  String get ossAccountTitle => '계정을 만드세요';
+
+  @override
+  String get ossSignInTitle => '로그인';
+
+  @override
+  String get ossEmail => '이메일';
+
+  @override
+  String get ossPassword => '비밀번호';
+
+  @override
+  String get ossCreateAccount => '계정 만들기';
+
+  @override
+  String get ossSignIn => '로그인';
+
+  @override
+  String get ossHaveAccount => '이미 계정이 있으신가요? 로그인';
+
+  @override
+  String get ossNoAccount => '계정이 없으신가요? 만들기';
 }

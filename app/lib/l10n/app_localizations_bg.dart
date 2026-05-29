@@ -9832,4 +9832,28 @@ class AppLocalizationsBg extends AppLocalizations {
 
   @override
   String get ossOptional => 'незадължително';
+
+  @override
+  String get ossAccountTitle => 'Създайте своя акаунт';
+
+  @override
+  String get ossSignInTitle => 'Влизане';
+
+  @override
+  String get ossEmail => 'Имейл';
+
+  @override
+  String get ossPassword => 'Парола';
+
+  @override
+  String get ossCreateAccount => 'Създаване на акаунт';
+
+  @override
+  String get ossSignIn => 'Влизане';
+
+  @override
+  String get ossHaveAccount => 'Вече имате акаунт? Влезте';
+
+  @override
+  String get ossNoAccount => 'Нямате акаунт? Създайте един';
 }

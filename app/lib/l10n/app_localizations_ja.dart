@@ -9335,4 +9335,28 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get ossOptional => '任意';
+
+  @override
+  String get ossAccountTitle => 'アカウントを作成する';
+
+  @override
+  String get ossSignInTitle => 'サインイン';
+
+  @override
+  String get ossEmail => 'メールアドレス';
+
+  @override
+  String get ossPassword => 'パスワード';
+
+  @override
+  String get ossCreateAccount => 'アカウントを作成';
+
+  @override
+  String get ossSignIn => 'サインイン';
+
+  @override
+  String get ossHaveAccount => 'すでにアカウントをお持ちですか？サインイン';
+
+  @override
+  String get ossNoAccount => 'アカウントをお持ちでないですか？作成する';
 }

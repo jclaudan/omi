@@ -9807,4 +9807,28 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get ossOptional => 'ঐচ্ছিক';
+
+  @override
+  String get ossAccountTitle => 'আপনার অ্যাকাউন্ট তৈরি করুন';
+
+  @override
+  String get ossSignInTitle => 'সাইন ইন';
+
+  @override
+  String get ossEmail => 'ইমেইল';
+
+  @override
+  String get ossPassword => 'পাসওয়ার্ড';
+
+  @override
+  String get ossCreateAccount => 'অ্যাকাউন্ট তৈরি করুন';
+
+  @override
+  String get ossSignIn => 'সাইন ইন';
+
+  @override
+  String get ossHaveAccount => 'ইতিমধ্যে একটি অ্যাকাউন্ট আছে? সাইন ইন করুন';
+
+  @override
+  String get ossNoAccount => 'অ্যাকাউন্ট নেই? একটি তৈরি করুন';
 }

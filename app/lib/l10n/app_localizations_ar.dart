@@ -9634,4 +9634,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ossOptional => 'اختياري';
+
+  @override
+  String get ossAccountTitle => 'أنشئ حسابك';
+
+  @override
+  String get ossSignInTitle => 'تسجيل الدخول';
+
+  @override
+  String get ossEmail => 'البريد الإلكتروني';
+
+  @override
+  String get ossPassword => 'كلمة المرور';
+
+  @override
+  String get ossCreateAccount => 'إنشاء حساب';
+
+  @override
+  String get ossSignIn => 'تسجيل الدخول';
+
+  @override
+  String get ossHaveAccount => 'هل لديك حساب بالفعل؟ تسجيل الدخول';
+
+  @override
+  String get ossNoAccount => 'ليس لديك حساب؟ أنشئ واحداً';
 }

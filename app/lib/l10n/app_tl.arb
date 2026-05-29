@@ -10632,4 +10632,13 @@
     "ossUnreachable": "Hindi maabot",
     "ossFinish": "Simulan ang paggamit ng Omi",
     "ossOptional": "opsyonal"
+,
+    "ossAccountTitle": "Lumikha ng iyong account",
+    "ossSignInTitle": "Mag-sign in",
+    "ossEmail": "Email",
+    "ossPassword": "Password",
+    "ossCreateAccount": "Lumikha ng account",
+    "ossSignIn": "Mag-sign in",
+    "ossHaveAccount": "May account na? Mag-sign in",
+    "ossNoAccount": "Wala pang account? Lumikha ng isa"
 }

@@ -17402,6 +17402,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'optional'**
   String get ossOptional;
+
+  /// OSS+ auth step title for sign up
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account'**
+  String get ossAccountTitle;
+
+  /// OSS+ auth step title for sign in
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get ossSignInTitle;
+
+  /// OSS+ email field label
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get ossEmail;
+
+  /// OSS+ password field label
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get ossPassword;
+
+  /// OSS+ create account button
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get ossCreateAccount;
+
+  /// OSS+ sign in button
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get ossSignIn;
+
+  /// OSS+ toggle to sign in mode
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Sign in'**
+  String get ossHaveAccount;
+
+  /// OSS+ toggle to sign up mode
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account? Create one'**
+  String get ossNoAccount;
 }
 
 class _AppLocalizationsDelegate

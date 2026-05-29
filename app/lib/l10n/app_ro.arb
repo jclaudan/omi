@@ -3054,4 +3054,13 @@
     "ossUnreachable": "Inaccesibil",
     "ossFinish": "Începeți să utilizați Omi",
     "ossOptional": "opțional"
+,
+    "ossAccountTitle": "Creați-vă contul",
+    "ossSignInTitle": "Conectare",
+    "ossEmail": "Email",
+    "ossPassword": "Parolă",
+    "ossCreateAccount": "Creați cont",
+    "ossSignIn": "Conectare",
+    "ossHaveAccount": "Aveți deja un cont? Conectați-vă",
+    "ossNoAccount": "Nu aveți cont? Creați unul"
 }

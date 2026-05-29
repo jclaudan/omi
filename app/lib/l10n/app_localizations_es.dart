@@ -9814,4 +9814,28 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get ossOptional => 'opcional';
+
+  @override
+  String get ossAccountTitle => 'Crea tu cuenta';
+
+  @override
+  String get ossSignInTitle => 'Iniciar sesión';
+
+  @override
+  String get ossEmail => 'Correo electrónico';
+
+  @override
+  String get ossPassword => 'Contraseña';
+
+  @override
+  String get ossCreateAccount => 'Crear cuenta';
+
+  @override
+  String get ossSignIn => 'Iniciar sesión';
+
+  @override
+  String get ossHaveAccount => '¿Ya tienes una cuenta? Inicia sesión';
+
+  @override
+  String get ossNoAccount => '¿No tienes cuenta? Crea una';
 }

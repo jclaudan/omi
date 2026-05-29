@@ -9805,4 +9805,28 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get ossOptional => 'opcionalno';
+
+  @override
+  String get ossAccountTitle => 'Izradite svoj račun';
+
+  @override
+  String get ossSignInTitle => 'Prijava';
+
+  @override
+  String get ossEmail => 'E-pošta';
+
+  @override
+  String get ossPassword => 'Lozinka';
+
+  @override
+  String get ossCreateAccount => 'Izradite račun';
+
+  @override
+  String get ossSignIn => 'Prijava';
+
+  @override
+  String get ossHaveAccount => 'Već imate račun? Prijavite se';
+
+  @override
+  String get ossNoAccount => 'Nemate račun? Izradite ga';
 }

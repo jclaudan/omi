@@ -3054,4 +3054,13 @@
     "ossUnreachable": "Nepasiekiama",
     "ossFinish": "Pradėti naudoti Omi",
     "ossOptional": "neprivaloma"
+,
+    "ossAccountTitle": "Sukurkite savo paskyrą",
+    "ossSignInTitle": "Prisijungti",
+    "ossEmail": "El. paštas",
+    "ossPassword": "Slaptažodis",
+    "ossCreateAccount": "Sukurti paskyrą",
+    "ossSignIn": "Prisijungti",
+    "ossHaveAccount": "Jau turite paskyrą? Prisijunkite",
+    "ossNoAccount": "Neturite paskyros? Sukurkite ją"
 }

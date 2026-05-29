@@ -9913,4 +9913,28 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ossOptional => 'optionnel';
+
+  @override
+  String get ossAccountTitle => 'Créez votre compte';
+
+  @override
+  String get ossSignInTitle => 'Se connecter';
+
+  @override
+  String get ossEmail => 'Email';
+
+  @override
+  String get ossPassword => 'Mot de passe';
+
+  @override
+  String get ossCreateAccount => 'Créer un compte';
+
+  @override
+  String get ossSignIn => 'Se connecter';
+
+  @override
+  String get ossHaveAccount => 'Vous avez déjà un compte ? Se connecter';
+
+  @override
+  String get ossNoAccount => 'Pas de compte ? Créez-en un';
 }

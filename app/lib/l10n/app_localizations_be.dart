@@ -9815,4 +9815,28 @@ class AppLocalizationsBe extends AppLocalizations {
 
   @override
   String get ossOptional => 'неабавязкова';
+
+  @override
+  String get ossAccountTitle => 'Стварыце свой уліковы запіс';
+
+  @override
+  String get ossSignInTitle => 'Увайсці';
+
+  @override
+  String get ossEmail => 'Электронная пошта';
+
+  @override
+  String get ossPassword => 'Пароль';
+
+  @override
+  String get ossCreateAccount => 'Стварыць уліковы запіс';
+
+  @override
+  String get ossSignIn => 'Увайсці';
+
+  @override
+  String get ossHaveAccount => 'Ужо ёсць уліковы запіс? Увайсці';
+
+  @override
+  String get ossNoAccount => 'Няма ўліковага запісу? Стварыце яго';
 }

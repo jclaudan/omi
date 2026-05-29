@@ -9787,4 +9787,28 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get ossOptional => 'optioneel';
+
+  @override
+  String get ossAccountTitle => 'Maak uw account aan';
+
+  @override
+  String get ossSignInTitle => 'Inloggen';
+
+  @override
+  String get ossEmail => 'E-mail';
+
+  @override
+  String get ossPassword => 'Wachtwoord';
+
+  @override
+  String get ossCreateAccount => 'Account aanmaken';
+
+  @override
+  String get ossSignIn => 'Inloggen';
+
+  @override
+  String get ossHaveAccount => 'Al een account? Inloggen';
+
+  @override
+  String get ossNoAccount => 'Nog geen account? Maak er een aan';
 }

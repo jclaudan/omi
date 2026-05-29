@@ -9818,4 +9818,28 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get ossOptional => 'nem kötelező';
+
+  @override
+  String get ossAccountTitle => 'Hozza létre fiókját';
+
+  @override
+  String get ossSignInTitle => 'Bejelentkezés';
+
+  @override
+  String get ossEmail => 'E-mail';
+
+  @override
+  String get ossPassword => 'Jelszó';
+
+  @override
+  String get ossCreateAccount => 'Fiók létrehozása';
+
+  @override
+  String get ossSignIn => 'Bejelentkezés';
+
+  @override
+  String get ossHaveAccount => 'Már van fiókja? Jelentkezzen be';
+
+  @override
+  String get ossNoAccount => 'Nincs fiókja? Hozzon létre egyet';
 }

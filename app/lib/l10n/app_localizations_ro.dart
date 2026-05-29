@@ -9843,4 +9843,28 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get ossOptional => 'opțional';
+
+  @override
+  String get ossAccountTitle => 'Creați-vă contul';
+
+  @override
+  String get ossSignInTitle => 'Conectare';
+
+  @override
+  String get ossEmail => 'Email';
+
+  @override
+  String get ossPassword => 'Parolă';
+
+  @override
+  String get ossCreateAccount => 'Creați cont';
+
+  @override
+  String get ossSignIn => 'Conectare';
+
+  @override
+  String get ossHaveAccount => 'Aveți deja un cont? Conectați-vă';
+
+  @override
+  String get ossNoAccount => 'Nu aveți cont? Creați unul';
 }

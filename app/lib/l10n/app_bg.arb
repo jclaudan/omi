@@ -3023,4 +3023,13 @@
     "ossUnreachable": "Недостъпно",
     "ossFinish": "Започнете да използвате Omi",
     "ossOptional": "незадължително"
+,
+    "ossAccountTitle": "Създайте своя акаунт",
+    "ossSignInTitle": "Влизане",
+    "ossEmail": "Имейл",
+    "ossPassword": "Парола",
+    "ossCreateAccount": "Създаване на акаунт",
+    "ossSignIn": "Влизане",
+    "ossHaveAccount": "Вече имате акаунт? Влезте",
+    "ossNoAccount": "Нямате акаунт? Създайте един"
 }

@@ -9764,4 +9764,28 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get ossOptional => 'اختیاری';
+
+  @override
+  String get ossAccountTitle => 'اپنا اکاؤنٹ بنائیں';
+
+  @override
+  String get ossSignInTitle => 'سائن ان کریں';
+
+  @override
+  String get ossEmail => 'ای میل';
+
+  @override
+  String get ossPassword => 'پاس ورڈ';
+
+  @override
+  String get ossCreateAccount => 'اکاؤنٹ بنائیں';
+
+  @override
+  String get ossSignIn => 'سائن ان';
+
+  @override
+  String get ossHaveAccount => 'پہلے سے اکاؤنٹ ہے؟ سائن ان کریں';
+
+  @override
+  String get ossNoAccount => 'اکاؤنٹ نہیں ہے؟ ایک بنائیں';
 }

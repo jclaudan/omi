@@ -9751,4 +9751,28 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get ossOptional => 'tùy chọn';
+
+  @override
+  String get ossAccountTitle => 'Tạo tài khoản của bạn';
+
+  @override
+  String get ossSignInTitle => 'Đăng nhập';
+
+  @override
+  String get ossEmail => 'Email';
+
+  @override
+  String get ossPassword => 'Mật khẩu';
+
+  @override
+  String get ossCreateAccount => 'Tạo tài khoản';
+
+  @override
+  String get ossSignIn => 'Đăng nhập';
+
+  @override
+  String get ossHaveAccount => 'Đã có tài khoản? Đăng nhập';
+
+  @override
+  String get ossNoAccount => 'Chưa có tài khoản? Tạo một tài khoản';
 }

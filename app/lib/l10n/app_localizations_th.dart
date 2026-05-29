@@ -9641,4 +9641,28 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get ossOptional => 'ไม่บังคับ';
+
+  @override
+  String get ossAccountTitle => 'สร้างบัญชีของคุณ';
+
+  @override
+  String get ossSignInTitle => 'เข้าสู่ระบบ';
+
+  @override
+  String get ossEmail => 'อีเมล';
+
+  @override
+  String get ossPassword => 'รหัสผ่าน';
+
+  @override
+  String get ossCreateAccount => 'สร้างบัญชี';
+
+  @override
+  String get ossSignIn => 'เข้าสู่ระบบ';
+
+  @override
+  String get ossHaveAccount => 'มีบัญชีอยู่แล้ว? เข้าสู่ระบบ';
+
+  @override
+  String get ossNoAccount => 'ยังไม่มีบัญชี? สร้างบัญชี';
 }

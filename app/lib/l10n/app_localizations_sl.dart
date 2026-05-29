@@ -9792,4 +9792,28 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get ossOptional => 'neobvezno';
+
+  @override
+  String get ossAccountTitle => 'Ustvarite svoj račun';
+
+  @override
+  String get ossSignInTitle => 'Prijava';
+
+  @override
+  String get ossEmail => 'E-pošta';
+
+  @override
+  String get ossPassword => 'Geslo';
+
+  @override
+  String get ossCreateAccount => 'Ustvari račun';
+
+  @override
+  String get ossSignIn => 'Prijava';
+
+  @override
+  String get ossHaveAccount => 'Že imate račun? Prijavite se';
+
+  @override
+  String get ossNoAccount => 'Nimate računa? Ustvarite ga';
 }

@@ -3089,4 +3089,13 @@
     "ossUnreachable": "Niedostępne",
     "ossFinish": "Zacznij używać Omi",
     "ossOptional": "opcjonalne"
+,
+    "ossAccountTitle": "Utwórz swoje konto",
+    "ossSignInTitle": "Zaloguj się",
+    "ossEmail": "E-mail",
+    "ossPassword": "Hasło",
+    "ossCreateAccount": "Utwórz konto",
+    "ossSignIn": "Zaloguj się",
+    "ossHaveAccount": "Masz już konto? Zaloguj się",
+    "ossNoAccount": "Nie masz konta? Utwórz je"
 }

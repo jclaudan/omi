@@ -9783,4 +9783,28 @@ class AppLocalizationsLv extends AppLocalizations {
 
   @override
   String get ossOptional => 'neobligāts';
+
+  @override
+  String get ossAccountTitle => 'Izveidojiet savu kontu';
+
+  @override
+  String get ossSignInTitle => 'Pieteikties';
+
+  @override
+  String get ossEmail => 'E-pasts';
+
+  @override
+  String get ossPassword => 'Parole';
+
+  @override
+  String get ossCreateAccount => 'Izveidot kontu';
+
+  @override
+  String get ossSignIn => 'Pieteikties';
+
+  @override
+  String get ossHaveAccount => 'Jau ir konts? Piesakieties';
+
+  @override
+  String get ossNoAccount => 'Nav konta? Izveidojiet vienu';
 }

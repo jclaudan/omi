@@ -10632,4 +10632,13 @@
     "ossUnreachable": "অপ্রাপ্য",
     "ossFinish": "Omi ব্যবহার শুরু করুন",
     "ossOptional": "ঐচ্ছিক"
+,
+    "ossAccountTitle": "আপনার অ্যাকাউন্ট তৈরি করুন",
+    "ossSignInTitle": "সাইন ইন",
+    "ossEmail": "ইমেইল",
+    "ossPassword": "পাসওয়ার্ড",
+    "ossCreateAccount": "অ্যাকাউন্ট তৈরি করুন",
+    "ossSignIn": "সাইন ইন",
+    "ossHaveAccount": "ইতিমধ্যে একটি অ্যাকাউন্ট আছে? সাইন ইন করুন",
+    "ossNoAccount": "অ্যাকাউন্ট নেই? একটি তৈরি করুন"
 }

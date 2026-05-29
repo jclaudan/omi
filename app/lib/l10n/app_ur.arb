@@ -10632,4 +10632,13 @@
     "ossUnreachable": "ناقابل رسائی",
     "ossFinish": "Omi استعمال شروع کریں",
     "ossOptional": "اختیاری"
+,
+    "ossAccountTitle": "اپنا اکاؤنٹ بنائیں",
+    "ossSignInTitle": "سائن ان کریں",
+    "ossEmail": "ای میل",
+    "ossPassword": "پاس ورڈ",
+    "ossCreateAccount": "اکاؤنٹ بنائیں",
+    "ossSignIn": "سائن ان",
+    "ossHaveAccount": "پہلے سے اکاؤنٹ ہے؟ سائن ان کریں",
+    "ossNoAccount": "اکاؤنٹ نہیں ہے؟ ایک بنائیں"
 }

@@ -9777,4 +9777,28 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get ossOptional => 'опционо';
+
+  @override
+  String get ossAccountTitle => 'Направите свој налог';
+
+  @override
+  String get ossSignInTitle => 'Пријава';
+
+  @override
+  String get ossEmail => 'Е-пошта';
+
+  @override
+  String get ossPassword => 'Лозинка';
+
+  @override
+  String get ossCreateAccount => 'Направите налог';
+
+  @override
+  String get ossSignIn => 'Пријава';
+
+  @override
+  String get ossHaveAccount => 'Већ имате налог? Пријавите се';
+
+  @override
+  String get ossNoAccount => 'Немате налог? Направите га';
 }

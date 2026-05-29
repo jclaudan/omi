@@ -3054,4 +3054,13 @@
     "ossUnreachable": "Niet bereikbaar",
     "ossFinish": "Begin met Omi",
     "ossOptional": "optioneel"
+,
+    "ossAccountTitle": "Maak uw account aan",
+    "ossSignInTitle": "Inloggen",
+    "ossEmail": "E-mail",
+    "ossPassword": "Wachtwoord",
+    "ossCreateAccount": "Account aanmaken",
+    "ossSignIn": "Inloggen",
+    "ossHaveAccount": "Al een account? Inloggen",
+    "ossNoAccount": "Nog geen account? Maak er een aan"
 }

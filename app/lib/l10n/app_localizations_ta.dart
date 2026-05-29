@@ -9948,4 +9948,28 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get ossOptional => 'விருப்பமான';
+
+  @override
+  String get ossAccountTitle => 'உங்கள் கணக்கை உருவாக்கவும்';
+
+  @override
+  String get ossSignInTitle => 'உள்நுழைக';
+
+  @override
+  String get ossEmail => 'மின்னஞ்சல்';
+
+  @override
+  String get ossPassword => 'கடவுச்சொல்';
+
+  @override
+  String get ossCreateAccount => 'கணக்கை உருவாக்கவும்';
+
+  @override
+  String get ossSignIn => 'உள்நுழைக';
+
+  @override
+  String get ossHaveAccount => 'ஏற்கனவே கணக்கு உள்ளதா? உள்நுழைக';
+
+  @override
+  String get ossNoAccount => 'கணக்கு இல்லையா? ஒன்று உருவாக்கவும்';
 }

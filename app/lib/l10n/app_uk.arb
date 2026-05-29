@@ -3054,4 +3054,13 @@
     "ossUnreachable": "Недоступно",
     "ossFinish": "Почніть користуватися Omi",
     "ossOptional": "необов'язково"
+,
+    "ossAccountTitle": "Створіть свій обліковий запис",
+    "ossSignInTitle": "Увійти",
+    "ossEmail": "Електронна пошта",
+    "ossPassword": "Пароль",
+    "ossCreateAccount": "Створити обліковий запис",
+    "ossSignIn": "Увійти",
+    "ossHaveAccount": "Вже є обліковий запис? Увійти",
+    "ossNoAccount": "Немає облікового запису? Створіть його"
 }

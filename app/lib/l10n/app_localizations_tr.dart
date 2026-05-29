@@ -9775,4 +9775,28 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get ossOptional => 'isteğe bağlı';
+
+  @override
+  String get ossAccountTitle => 'Hesabınızı oluşturun';
+
+  @override
+  String get ossSignInTitle => 'Giriş yapın';
+
+  @override
+  String get ossEmail => 'E-posta';
+
+  @override
+  String get ossPassword => 'Şifre';
+
+  @override
+  String get ossCreateAccount => 'Hesap oluştur';
+
+  @override
+  String get ossSignIn => 'Giriş yap';
+
+  @override
+  String get ossHaveAccount => 'Hesabınız var mı? Giriş yapın';
+
+  @override
+  String get ossNoAccount => 'Hesabınız yok mu? Oluşturun';
 }

@@ -9745,4 +9745,28 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get ossOptional => 'اختیاری';
+
+  @override
+  String get ossAccountTitle => 'حساب کاربری خود را ایجاد کنید';
+
+  @override
+  String get ossSignInTitle => 'ورود';
+
+  @override
+  String get ossEmail => 'ایمیل';
+
+  @override
+  String get ossPassword => 'رمز عبور';
+
+  @override
+  String get ossCreateAccount => 'ایجاد حساب کاربری';
+
+  @override
+  String get ossSignIn => 'ورود';
+
+  @override
+  String get ossHaveAccount => 'قبلاً حساب دارید؟ وارد شوید';
+
+  @override
+  String get ossNoAccount => 'حساب ندارید؟ یکی بسازید';
 }

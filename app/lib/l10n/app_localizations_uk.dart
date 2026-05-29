@@ -9802,4 +9802,28 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get ossOptional => 'необов\'язково';
+
+  @override
+  String get ossAccountTitle => 'Створіть свій обліковий запис';
+
+  @override
+  String get ossSignInTitle => 'Увійти';
+
+  @override
+  String get ossEmail => 'Електронна пошта';
+
+  @override
+  String get ossPassword => 'Пароль';
+
+  @override
+  String get ossCreateAccount => 'Створити обліковий запис';
+
+  @override
+  String get ossSignIn => 'Увійти';
+
+  @override
+  String get ossHaveAccount => 'Вже є обліковий запис? Увійти';
+
+  @override
+  String get ossNoAccount => 'Немає облікового запису? Створіть його';
 }

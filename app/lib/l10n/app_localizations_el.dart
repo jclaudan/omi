@@ -9885,4 +9885,28 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get ossOptional => 'προαιρετικό';
+
+  @override
+  String get ossAccountTitle => 'Δημιουργήστε τον λογαριασμό σας';
+
+  @override
+  String get ossSignInTitle => 'Σύνδεση';
+
+  @override
+  String get ossEmail => 'Email';
+
+  @override
+  String get ossPassword => 'Κωδικός πρόσβασης';
+
+  @override
+  String get ossCreateAccount => 'Δημιουργία λογαριασμού';
+
+  @override
+  String get ossSignIn => 'Σύνδεση';
+
+  @override
+  String get ossHaveAccount => 'Έχετε ήδη λογαριασμό; Συνδεθείτε';
+
+  @override
+  String get ossNoAccount => 'Δεν έχετε λογαριασμό; Δημιουργήστε έναν';
 }

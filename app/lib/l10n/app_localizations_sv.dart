@@ -9741,4 +9741,28 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get ossOptional => 'valfritt';
+
+  @override
+  String get ossAccountTitle => 'Skapa ditt konto';
+
+  @override
+  String get ossSignInTitle => 'Logga in';
+
+  @override
+  String get ossEmail => 'E-post';
+
+  @override
+  String get ossPassword => 'Lösenord';
+
+  @override
+  String get ossCreateAccount => 'Skapa konto';
+
+  @override
+  String get ossSignIn => 'Logga in';
+
+  @override
+  String get ossHaveAccount => 'Har du redan ett konto? Logga in';
+
+  @override
+  String get ossNoAccount => 'Har du inget konto? Skapa ett';
 }

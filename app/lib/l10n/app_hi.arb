@@ -3055,4 +3055,13 @@
     "ossUnreachable": "अनुपलब्ध",
     "ossFinish": "Omi का उपयोग शुरू करें",
     "ossOptional": "वैकल्पिक"
+,
+    "ossAccountTitle": "अपना खाता बनाएं",
+    "ossSignInTitle": "साइन इन करें",
+    "ossEmail": "ईमेल",
+    "ossPassword": "पासवर्ड",
+    "ossCreateAccount": "खाता बनाएं",
+    "ossSignIn": "साइन इन करें",
+    "ossHaveAccount": "पहले से खाता है? साइन इन करें",
+    "ossNoAccount": "खाता नहीं है? एक बनाएं"
 }

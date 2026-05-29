@@ -9781,4 +9781,28 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get ossOptional => 'opcional';
+
+  @override
+  String get ossAccountTitle => 'Crie a sua conta';
+
+  @override
+  String get ossSignInTitle => 'Entrar';
+
+  @override
+  String get ossEmail => 'E-mail';
+
+  @override
+  String get ossPassword => 'Palavra-passe';
+
+  @override
+  String get ossCreateAccount => 'Criar conta';
+
+  @override
+  String get ossSignIn => 'Entrar';
+
+  @override
+  String get ossHaveAccount => 'Já tem uma conta? Entrar';
+
+  @override
+  String get ossNoAccount => 'Não tem conta? Crie uma';
 }

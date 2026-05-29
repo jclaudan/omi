@@ -11058,5 +11058,37 @@
     "ossOptional": "optional",
     "@ossOptional": {
         "description": "OSS+ label for optional fields/services"
+    },
+    "ossAccountTitle": "Create your account",
+    "@ossAccountTitle": {
+        "description": "OSS+ auth step title for sign up"
+    },
+    "ossSignInTitle": "Sign in",
+    "@ossSignInTitle": {
+        "description": "OSS+ auth step title for sign in"
+    },
+    "ossEmail": "Email",
+    "@ossEmail": {
+        "description": "OSS+ email field label"
+    },
+    "ossPassword": "Password",
+    "@ossPassword": {
+        "description": "OSS+ password field label"
+    },
+    "ossCreateAccount": "Create account",
+    "@ossCreateAccount": {
+        "description": "OSS+ create account button"
+    },
+    "ossSignIn": "Sign in",
+    "@ossSignIn": {
+        "description": "OSS+ sign in button"
+    },
+    "ossHaveAccount": "Already have an account? Sign in",
+    "@ossHaveAccount": {
+        "description": "OSS+ toggle to sign in mode"
+    },
+    "ossNoAccount": "Don't have an account? Create one",
+    "@ossNoAccount": {
+        "description": "OSS+ toggle to sign up mode"
     }
 }

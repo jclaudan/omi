@@ -9739,4 +9739,28 @@ class AppLocalizationsNo extends AppLocalizations {
 
   @override
   String get ossOptional => 'valgfritt';
+
+  @override
+  String get ossAccountTitle => 'Opprett kontoen din';
+
+  @override
+  String get ossSignInTitle => 'Logg inn';
+
+  @override
+  String get ossEmail => 'E-post';
+
+  @override
+  String get ossPassword => 'Passord';
+
+  @override
+  String get ossCreateAccount => 'Opprett konto';
+
+  @override
+  String get ossSignIn => 'Logg inn';
+
+  @override
+  String get ossHaveAccount => 'Har du allerede en konto? Logg inn';
+
+  @override
+  String get ossNoAccount => 'Har du ingen konto? Opprett en';
 }

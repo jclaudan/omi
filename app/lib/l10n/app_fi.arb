@@ -3054,4 +3054,13 @@
     "ossUnreachable": "Tavoittamaton",
     "ossFinish": "Aloita Omin käyttö",
     "ossOptional": "valinnainen"
+,
+    "ossAccountTitle": "Luo tilisi",
+    "ossSignInTitle": "Kirjaudu sisään",
+    "ossEmail": "Sähköposti",
+    "ossPassword": "Salasana",
+    "ossCreateAccount": "Luo tili",
+    "ossSignIn": "Kirjaudu sisään",
+    "ossHaveAccount": "Onko sinulla jo tili? Kirjaudu sisään",
+    "ossNoAccount": "Ei tiliä? Luo sellainen"
 }

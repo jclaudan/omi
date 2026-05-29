@@ -9811,4 +9811,28 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ossOptional => 'необязательно';
+
+  @override
+  String get ossAccountTitle => 'Создайте свой аккаунт';
+
+  @override
+  String get ossSignInTitle => 'Войти';
+
+  @override
+  String get ossEmail => 'Электронная почта';
+
+  @override
+  String get ossPassword => 'Пароль';
+
+  @override
+  String get ossCreateAccount => 'Создать аккаунт';
+
+  @override
+  String get ossSignIn => 'Войти';
+
+  @override
+  String get ossHaveAccount => 'Уже есть аккаунт? Войти';
+
+  @override
+  String get ossNoAccount => 'Нет аккаунта? Создайте его';
 }

@@ -3023,4 +3023,13 @@
     "ossUnreachable": "Nedostupné",
     "ossFinish": "Začněte používat Omi",
     "ossOptional": "volitelné"
+,
+    "ossAccountTitle": "Vytvořte svůj účet",
+    "ossSignInTitle": "Přihlásit se",
+    "ossEmail": "E-mail",
+    "ossPassword": "Heslo",
+    "ossCreateAccount": "Vytvořit účet",
+    "ossSignIn": "Přihlásit se",
+    "ossHaveAccount": "Již máte účet? Přihlaste se",
+    "ossNoAccount": "Nemáte účet? Vytvořte si ho"
 }

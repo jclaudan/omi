@@ -9754,4 +9754,28 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get ossOptional => 'volitelné';
+
+  @override
+  String get ossAccountTitle => 'Vytvořte svůj účet';
+
+  @override
+  String get ossSignInTitle => 'Přihlásit se';
+
+  @override
+  String get ossEmail => 'E-mail';
+
+  @override
+  String get ossPassword => 'Heslo';
+
+  @override
+  String get ossCreateAccount => 'Vytvořit účet';
+
+  @override
+  String get ossSignIn => 'Přihlásit se';
+
+  @override
+  String get ossHaveAccount => 'Již máte účet? Přihlaste se';
+
+  @override
+  String get ossNoAccount => 'Nemáte účet? Vytvořte si ho';
 }

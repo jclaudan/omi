@@ -10632,4 +10632,13 @@
     "ossUnreachable": "Nedostupno",
     "ossFinish": "Počnite koristiti Omi",
     "ossOptional": "opcionalno"
+,
+    "ossAccountTitle": "Izradite svoj račun",
+    "ossSignInTitle": "Prijava",
+    "ossEmail": "E-pošta",
+    "ossPassword": "Lozinka",
+    "ossCreateAccount": "Izradite račun",
+    "ossSignIn": "Prijava",
+    "ossHaveAccount": "Već imate račun? Prijavite se",
+    "ossNoAccount": "Nemate račun? Izradite ga"
 }

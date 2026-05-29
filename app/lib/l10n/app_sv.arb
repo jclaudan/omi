@@ -3054,4 +3054,13 @@
     "ossUnreachable": "Inte nåbar",
     "ossFinish": "Börja använda Omi",
     "ossOptional": "valfritt"
+,
+    "ossAccountTitle": "Skapa ditt konto",
+    "ossSignInTitle": "Logga in",
+    "ossEmail": "E-post",
+    "ossPassword": "Lösenord",
+    "ossCreateAccount": "Skapa konto",
+    "ossSignIn": "Logga in",
+    "ossHaveAccount": "Har du redan ett konto? Logga in",
+    "ossNoAccount": "Har du inget konto? Skapa ett"
 }

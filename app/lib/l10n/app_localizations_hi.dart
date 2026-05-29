@@ -9747,4 +9747,28 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get ossOptional => 'वैकल्पिक';
+
+  @override
+  String get ossAccountTitle => 'अपना खाता बनाएं';
+
+  @override
+  String get ossSignInTitle => 'साइन इन करें';
+
+  @override
+  String get ossEmail => 'ईमेल';
+
+  @override
+  String get ossPassword => 'पासवर्ड';
+
+  @override
+  String get ossCreateAccount => 'खाता बनाएं';
+
+  @override
+  String get ossSignIn => 'साइन इन करें';
+
+  @override
+  String get ossHaveAccount => 'पहले से खाता है? साइन इन करें';
+
+  @override
+  String get ossNoAccount => 'खाता नहीं है? एक बनाएं';
 }

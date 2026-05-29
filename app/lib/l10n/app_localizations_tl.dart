@@ -9906,4 +9906,28 @@ class AppLocalizationsTl extends AppLocalizations {
 
   @override
   String get ossOptional => 'opsyonal';
+
+  @override
+  String get ossAccountTitle => 'Lumikha ng iyong account';
+
+  @override
+  String get ossSignInTitle => 'Mag-sign in';
+
+  @override
+  String get ossEmail => 'Email';
+
+  @override
+  String get ossPassword => 'Password';
+
+  @override
+  String get ossCreateAccount => 'Lumikha ng account';
+
+  @override
+  String get ossSignIn => 'Mag-sign in';
+
+  @override
+  String get ossHaveAccount => 'May account na? Mag-sign in';
+
+  @override
+  String get ossNoAccount => 'Wala pang account? Lumikha ng isa';
 }

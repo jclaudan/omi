@@ -10632,4 +10632,13 @@
     "ossUnreachable": "அணுக முடியாத",
     "ossFinish": "Omi பயன்படுத்தத் தொடங்கு",
     "ossOptional": "விருப்பமான"
+,
+    "ossAccountTitle": "உங்கள் கணக்கை உருவாக்கவும்",
+    "ossSignInTitle": "உள்நுழைக",
+    "ossEmail": "மின்னஞ்சல்",
+    "ossPassword": "கடவுச்சொல்",
+    "ossCreateAccount": "கணக்கை உருவாக்கவும்",
+    "ossSignIn": "உள்நுழைக",
+    "ossHaveAccount": "ஏற்கனவே கணக்கு உள்ளதா? உள்நுழைக",
+    "ossNoAccount": "கணக்கு இல்லையா? ஒன்று உருவாக்கவும்"
 }

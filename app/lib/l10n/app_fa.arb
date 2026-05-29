@@ -10632,4 +10632,13 @@
     "ossUnreachable": "غیرقابل دسترس",
     "ossFinish": "استفاده از Omi را شروع کنید",
     "ossOptional": "اختیاری"
+,
+    "ossAccountTitle": "حساب کاربری خود را ایجاد کنید",
+    "ossSignInTitle": "ورود",
+    "ossEmail": "ایمیل",
+    "ossPassword": "رمز عبور",
+    "ossCreateAccount": "ایجاد حساب کاربری",
+    "ossSignIn": "ورود",
+    "ossHaveAccount": "قبلاً حساب دارید؟ وارد شوید",
+    "ossNoAccount": "حساب ندارید؟ یکی بسازید"
 }

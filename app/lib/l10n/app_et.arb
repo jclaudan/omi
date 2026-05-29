@@ -3054,4 +3054,13 @@
     "ossUnreachable": "Kättesaamatu",
     "ossFinish": "Alusta Omi kasutamist",
     "ossOptional": "valikuline"
+,
+    "ossAccountTitle": "Loo oma konto",
+    "ossSignInTitle": "Logi sisse",
+    "ossEmail": "E-post",
+    "ossPassword": "Parool",
+    "ossCreateAccount": "Loo konto",
+    "ossSignIn": "Logi sisse",
+    "ossHaveAccount": "Juba on konto? Logi sisse",
+    "ossNoAccount": "Pole kontot? Loo endale üks"
 }

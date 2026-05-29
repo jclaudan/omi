@@ -3020,5 +3020,13 @@
     "ossConnected": "متصل",
     "ossUnreachable": "غير قابل للوصول",
     "ossFinish": "ابدأ استخدام Omi",
-    "ossOptional": "اختياري"
+    "ossOptional": "اختياري",
+    "ossAccountTitle": "أنشئ حسابك",
+    "ossSignInTitle": "تسجيل الدخول",
+    "ossEmail": "البريد الإلكتروني",
+    "ossPassword": "كلمة المرور",
+    "ossCreateAccount": "إنشاء حساب",
+    "ossSignIn": "تسجيل الدخول",
+    "ossHaveAccount": "هل لديك حساب بالفعل؟ تسجيل الدخول",
+    "ossNoAccount": "ليس لديك حساب؟ أنشئ واحداً"
 }

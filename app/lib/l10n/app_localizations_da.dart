@@ -9691,4 +9691,28 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get ossOptional => 'valgfrit';
+
+  @override
+  String get ossAccountTitle => 'Opret din konto';
+
+  @override
+  String get ossSignInTitle => 'Log ind';
+
+  @override
+  String get ossEmail => 'E-mail';
+
+  @override
+  String get ossPassword => 'Adgangskode';
+
+  @override
+  String get ossCreateAccount => 'Opret konto';
+
+  @override
+  String get ossSignIn => 'Log ind';
+
+  @override
+  String get ossHaveAccount => 'Har du allerede en konto? Log ind';
+
+  @override
+  String get ossNoAccount => 'Har du ikke en konto? Opret en';
 }

@@ -9823,4 +9823,28 @@ class AppLocalizationsMk extends AppLocalizations {
 
   @override
   String get ossOptional => 'опционално';
+
+  @override
+  String get ossAccountTitle => 'Создајте ја вашата сметка';
+
+  @override
+  String get ossSignInTitle => 'Најава';
+
+  @override
+  String get ossEmail => 'Е-пошта';
+
+  @override
+  String get ossPassword => 'Лозинка';
+
+  @override
+  String get ossCreateAccount => 'Создај сметка';
+
+  @override
+  String get ossSignIn => 'Најава';
+
+  @override
+  String get ossHaveAccount => 'Веќе имате сметка? Најавете се';
+
+  @override
+  String get ossNoAccount => 'Немате сметка? Создадете една';
 }

@@ -10632,4 +10632,13 @@
     "ossUnreachable": "पोहोचता येत नाही",
     "ossFinish": "Omi वापरणे सुरू करा",
     "ossOptional": "पर्यायी"
+,
+    "ossAccountTitle": "तुमचे खाते तयार करा",
+    "ossSignInTitle": "साइन इन करा",
+    "ossEmail": "ईमेल",
+    "ossPassword": "पासवर्ड",
+    "ossCreateAccount": "खाते तयार करा",
+    "ossSignIn": "साइन इन करा",
+    "ossHaveAccount": "आधीच खाते आहे? साइन इन करा",
+    "ossNoAccount": "खाते नाही? एक तयार करा"
 }

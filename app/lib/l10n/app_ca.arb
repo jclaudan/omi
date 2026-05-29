@@ -3023,4 +3023,13 @@
     "ossUnreachable": "No accessible",
     "ossFinish": "Comença a usar Omi",
     "ossOptional": "opcional"
+,
+    "ossAccountTitle": "Crea el teu compte",
+    "ossSignInTitle": "Inicia sessió",
+    "ossEmail": "Correu electrònic",
+    "ossPassword": "Contrasenya",
+    "ossCreateAccount": "Crea un compte",
+    "ossSignIn": "Inicia sessió",
+    "ossHaveAccount": "Ja tens un compte? Inicia sessió",
+    "ossNoAccount": "No tens compte? Crea'n un"
 }

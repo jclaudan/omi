@@ -9818,4 +9818,28 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get ossOptional => 'ಐಚ್ಛಿಕ';
+
+  @override
+  String get ossAccountTitle => 'ನಿಮ್ಮ ಖಾತೆಯನ್ನು ರಚಿಸಿ';
+
+  @override
+  String get ossSignInTitle => 'ಸೈನ್ ಇನ್ ಮಾಡಿ';
+
+  @override
+  String get ossEmail => 'ಇಮೇಲ್';
+
+  @override
+  String get ossPassword => 'ಪಾಸ್‌ವರ್ಡ್';
+
+  @override
+  String get ossCreateAccount => 'ಖಾತೆ ರಚಿಸಿ';
+
+  @override
+  String get ossSignIn => 'ಸೈನ್ ಇನ್';
+
+  @override
+  String get ossHaveAccount => 'ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ? ಸೈನ್ ಇನ್ ಮಾಡಿ';
+
+  @override
+  String get ossNoAccount => 'ಖಾತೆ ಇಲ್ಲವೇ? ಒಂದನ್ನು ರಚಿಸಿ';
 }

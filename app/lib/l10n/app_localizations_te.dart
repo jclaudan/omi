@@ -9869,4 +9869,28 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get ossOptional => 'ఐచ్ఛికమైన';
+
+  @override
+  String get ossAccountTitle => 'మీ ఖాతాను సృష్టించండి';
+
+  @override
+  String get ossSignInTitle => 'సైన్ ఇన్ చేయండి';
+
+  @override
+  String get ossEmail => 'ఇమెయిల్';
+
+  @override
+  String get ossPassword => 'పాస్‌వర్డ్';
+
+  @override
+  String get ossCreateAccount => 'ఖాతా సృష్టించండి';
+
+  @override
+  String get ossSignIn => 'సైన్ ఇన్';
+
+  @override
+  String get ossHaveAccount => 'ఇప్పటికే ఖాతా ఉందా? సైన్ ఇన్ చేయండి';
+
+  @override
+  String get ossNoAccount => 'ఖాతా లేదా? ఒకటి సృష్టించండి';
 }

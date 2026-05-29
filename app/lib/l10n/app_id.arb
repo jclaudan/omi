@@ -3096,4 +3096,13 @@
     "ossUnreachable": "Tidak terjangkau",
     "ossFinish": "Mulai gunakan Omi",
     "ossOptional": "opsional"
+,
+    "ossAccountTitle": "Buat akun Anda",
+    "ossSignInTitle": "Masuk",
+    "ossEmail": "Email",
+    "ossPassword": "Kata sandi",
+    "ossCreateAccount": "Buat akun",
+    "ossSignIn": "Masuk",
+    "ossHaveAccount": "Sudah punya akun? Masuk",
+    "ossNoAccount": "Belum punya akun? Buat satu"
 }

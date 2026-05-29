@@ -3063,4 +3063,13 @@
     "ossUnreachable": "Utilgængelig",
     "ossFinish": "Begynd at bruge Omi",
     "ossOptional": "valgfrit"
+,
+    "ossAccountTitle": "Opret din konto",
+    "ossSignInTitle": "Log ind",
+    "ossEmail": "E-mail",
+    "ossPassword": "Adgangskode",
+    "ossCreateAccount": "Opret konto",
+    "ossSignIn": "Log ind",
+    "ossHaveAccount": "Har du allerede en konto? Log ind",
+    "ossNoAccount": "Har du ikke en konto? Opret en"
 }

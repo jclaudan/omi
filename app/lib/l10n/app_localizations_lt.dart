@@ -9786,4 +9786,28 @@ class AppLocalizationsLt extends AppLocalizations {
 
   @override
   String get ossOptional => 'neprivaloma';
+
+  @override
+  String get ossAccountTitle => 'Sukurkite savo paskyrą';
+
+  @override
+  String get ossSignInTitle => 'Prisijungti';
+
+  @override
+  String get ossEmail => 'El. paštas';
+
+  @override
+  String get ossPassword => 'Slaptažodis';
+
+  @override
+  String get ossCreateAccount => 'Sukurti paskyrą';
+
+  @override
+  String get ossSignIn => 'Prisijungti';
+
+  @override
+  String get ossHaveAccount => 'Jau turite paskyrą? Prisijunkite';
+
+  @override
+  String get ossNoAccount => 'Neturite paskyros? Sukurkite ją';
 }

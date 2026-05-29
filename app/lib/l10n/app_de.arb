@@ -3022,4 +3022,13 @@
     "ossUnreachable": "Nicht erreichbar",
     "ossFinish": "Omi verwenden",
     "ossOptional": "optional"
+,
+    "ossAccountTitle": "Konto erstellen",
+    "ossSignInTitle": "Anmelden",
+    "ossEmail": "E-Mail",
+    "ossPassword": "Passwort",
+    "ossCreateAccount": "Konto erstellen",
+    "ossSignIn": "Anmelden",
+    "ossHaveAccount": "Bereits ein Konto? Anmelden",
+    "ossNoAccount": "Kein Konto? Jetzt erstellen"
 }

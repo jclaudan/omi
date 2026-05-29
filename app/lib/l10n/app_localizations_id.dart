@@ -9748,4 +9748,28 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get ossOptional => 'opsional';
+
+  @override
+  String get ossAccountTitle => 'Buat akun Anda';
+
+  @override
+  String get ossSignInTitle => 'Masuk';
+
+  @override
+  String get ossEmail => 'Email';
+
+  @override
+  String get ossPassword => 'Kata sandi';
+
+  @override
+  String get ossCreateAccount => 'Buat akun';
+
+  @override
+  String get ossSignIn => 'Masuk';
+
+  @override
+  String get ossHaveAccount => 'Sudah punya akun? Masuk';
+
+  @override
+  String get ossNoAccount => 'Belum punya akun? Buat satu';
 }

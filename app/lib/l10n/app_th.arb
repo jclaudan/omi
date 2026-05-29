@@ -3054,4 +3054,13 @@
     "ossUnreachable": "ไม่สามารถเชื่อมต่อได้",
     "ossFinish": "เริ่มใช้ Omi",
     "ossOptional": "ไม่บังคับ"
+,
+    "ossAccountTitle": "สร้างบัญชีของคุณ",
+    "ossSignInTitle": "เข้าสู่ระบบ",
+    "ossEmail": "อีเมล",
+    "ossPassword": "รหัสผ่าน",
+    "ossCreateAccount": "สร้างบัญชี",
+    "ossSignIn": "เข้าสู่ระบบ",
+    "ossHaveAccount": "มีบัญชีอยู่แล้ว? เข้าสู่ระบบ",
+    "ossNoAccount": "ยังไม่มีบัญชี? สร้างบัญชี"
 }

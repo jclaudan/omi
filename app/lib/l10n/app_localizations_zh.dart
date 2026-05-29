@@ -9212,4 +9212,28 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get ossOptional => '可选';
+
+  @override
+  String get ossAccountTitle => '创建您的账户';
+
+  @override
+  String get ossSignInTitle => '登录';
+
+  @override
+  String get ossEmail => '电子邮件';
+
+  @override
+  String get ossPassword => '密码';
+
+  @override
+  String get ossCreateAccount => '创建账户';
+
+  @override
+  String get ossSignIn => '登录';
+
+  @override
+  String get ossHaveAccount => '已有账户？登录';
+
+  @override
+  String get ossNoAccount => '没有账户？创建一个';
 }

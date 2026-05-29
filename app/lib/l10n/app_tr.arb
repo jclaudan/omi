@@ -3089,4 +3089,13 @@
     "ossUnreachable": "Erişilemiyor",
     "ossFinish": "Omi'yi kullanmaya başla",
     "ossOptional": "isteğe bağlı"
+,
+    "ossAccountTitle": "Hesabınızı oluşturun",
+    "ossSignInTitle": "Giriş yapın",
+    "ossEmail": "E-posta",
+    "ossPassword": "Şifre",
+    "ossCreateAccount": "Hesap oluştur",
+    "ossSignIn": "Giriş yap",
+    "ossHaveAccount": "Hesabınız var mı? Giriş yapın",
+    "ossNoAccount": "Hesabınız yok mu? Oluşturun"
 }

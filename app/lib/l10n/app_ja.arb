@@ -3055,4 +3055,13 @@
     "ossUnreachable": "接続不可",
     "ossFinish": "Omiを使い始める",
     "ossOptional": "任意"
+,
+    "ossAccountTitle": "アカウントを作成する",
+    "ossSignInTitle": "サインイン",
+    "ossEmail": "メールアドレス",
+    "ossPassword": "パスワード",
+    "ossCreateAccount": "アカウントを作成",
+    "ossSignIn": "サインイン",
+    "ossHaveAccount": "すでにアカウントをお持ちですか？サインイン",
+    "ossNoAccount": "アカウントをお持ちでないですか？作成する"
 }

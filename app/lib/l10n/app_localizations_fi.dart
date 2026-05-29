@@ -9779,4 +9779,28 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get ossOptional => 'valinnainen';
+
+  @override
+  String get ossAccountTitle => 'Luo tilisi';
+
+  @override
+  String get ossSignInTitle => 'Kirjaudu sisään';
+
+  @override
+  String get ossEmail => 'Sähköposti';
+
+  @override
+  String get ossPassword => 'Salasana';
+
+  @override
+  String get ossCreateAccount => 'Luo tili';
+
+  @override
+  String get ossSignIn => 'Kirjaudu sisään';
+
+  @override
+  String get ossHaveAccount => 'Onko sinulla jo tili? Kirjaudu sisään';
+
+  @override
+  String get ossNoAccount => 'Ei tiliä? Luo sellainen';
 }

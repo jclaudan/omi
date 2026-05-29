@@ -9739,4 +9739,28 @@ class AppLocalizationsSk extends AppLocalizations {
 
   @override
   String get ossOptional => 'voliteľné';
+
+  @override
+  String get ossAccountTitle => 'Vytvorte si účet';
+
+  @override
+  String get ossSignInTitle => 'Prihlásiť sa';
+
+  @override
+  String get ossEmail => 'E-mail';
+
+  @override
+  String get ossPassword => 'Heslo';
+
+  @override
+  String get ossCreateAccount => 'Vytvoriť účet';
+
+  @override
+  String get ossSignIn => 'Prihlásiť sa';
+
+  @override
+  String get ossHaveAccount => 'Už máte účet? Prihláste sa';
+
+  @override
+  String get ossNoAccount => 'Nemáte účet? Vytvorte si ho';
 }
