@@ -126,10 +126,13 @@ services:
   # ==================== SPEECH-TO-TEXT (replaces Deepgram) ====================
 
   # Batch STT — used for pre-recorded audio (conversations, profiles)
+  # GPU (RTX 4090 / any NVIDIA): set WHISPER_DEVICE=cuda WHISPER_COMPUTE_TYPE=float16 in .env.selfhosted
+  #   and switch dockerfile to docker/services/faster-whisper/Dockerfile.cuda (requires nvidia-container-toolkit)
+  #   then uncomment the deploy block below.
   faster-whisper:
     build:
       context: .
-      dockerfile: docker/services/faster-whisper/Dockerfile
+      dockerfile: ${WHISPER_DOCKERFILE:-docker/services/faster-whisper/Dockerfile}
     restart: unless-stopped
     ports:
       - "8001:8001"
@@ -139,6 +142,14 @@ services:
       MODEL_SIZE: ${WHISPER_MODEL_SIZE:-base}
       DEVICE: ${WHISPER_DEVICE:-cpu}
       COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
+    # Uncomment to pass your NVIDIA GPU to the container (requires nvidia-container-toolkit):
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
       interval: 30s
@@ -147,10 +158,11 @@ services:
       start_period: 90s
 
   # Streaming STT — used for live audio (replaces Deepgram WebSocket API)
+  # GPU: same instructions as faster-whisper above (they share the same env vars and GPU setup).
   faster-whisper-ws:
     build:
       context: .
-      dockerfile: docker/services/faster-whisper-ws/Dockerfile
+      dockerfile: ${WHISPER_WS_DOCKERFILE:-docker/services/faster-whisper-ws/Dockerfile}
     restart: unless-stopped
     ports:
       - "8002:8002"
@@ -162,6 +174,14 @@ services:
       COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
       FLUSH_SECS: "1.5"
       SILENCE_SECS: "0.3"
+    # Uncomment to pass your NVIDIA GPU to the container (requires nvidia-container-toolkit):
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
       interval: 30s
