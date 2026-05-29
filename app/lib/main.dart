@@ -62,7 +62,9 @@ import 'package:omi/providers/usage_provider.dart';
 import 'package:omi/providers/user_provider.dart';
 import 'package:omi/providers/voice_recorder_provider.dart';
 import 'package:omi/providers/phone_call_provider.dart';
+import 'package:omi/backend/schema/app_mode.dart';
 import 'package:omi/services/auth_service.dart';
+import 'package:omi/services/oss_supabase_service.dart';
 import 'package:omi/services/notifications.dart';
 import 'package:omi/services/notifications/action_item_notification_handler.dart';
 import 'package:omi/services/notifications/important_conversation_notification_handler.dart';
@@ -166,6 +168,11 @@ Future _init() async {
         debugPrint('TestFlight detected: user chose production backend');
       }
     }
+  }
+
+  // Init Supabase if running in OSS+ mode (must come before getIdToken)
+  if (SharedPreferencesUtil().appMode == AppMode.opensourcePlus) {
+    await OssSupabaseService.instance.initialize();
   }
 
   // DEBUG: Log Firebase Auth state before getIdToken

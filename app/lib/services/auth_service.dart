@@ -11,12 +11,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' show AuthResponse;
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:omi/backend/http/api/users.dart';
 import 'package:omi/backend/preferences.dart';
+import 'package:omi/backend/schema/app_mode.dart';
 import 'package:omi/env/env.dart';
-import 'package:omi/utils/logger.dart';
+import 'package:omi/services/oss_supabase_service.dart';
 import 'package:omi/utils/logger.dart';
 
 class AuthService {
@@ -25,7 +27,12 @@ class AuthService {
 
   AuthService._internal();
 
-  bool isSignedIn() => FirebaseAuth.instance.currentUser != null && !FirebaseAuth.instance.currentUser!.isAnonymous;
+  bool isSignedIn() {
+    if (SharedPreferencesUtil().appMode == AppMode.opensourcePlus) {
+      return OssSupabaseService.instance.isSignedIn();
+    }
+    return FirebaseAuth.instance.currentUser != null && !FirebaseAuth.instance.currentUser!.isAnonymous;
+  }
 
   getFirebaseUser() {
     return FirebaseAuth.instance.currentUser;
@@ -154,6 +161,10 @@ class AuthService {
 
   Future<void> signOut() async {
     _clearCachedAuth();
+    if (SharedPreferencesUtil().appMode == AppMode.opensourcePlus) {
+      await OssSupabaseService.instance.signOut();
+      return;
+    }
     await FirebaseAuth.instance.signOut();
   }
 
@@ -163,6 +174,9 @@ class AuthService {
   }
 
   Future<String?> getIdToken() async {
+    if (SharedPreferencesUtil().appMode == AppMode.opensourcePlus) {
+      return _getSupabaseIdToken();
+    }
     try {
       if (FirebaseAuth.instance.currentUser == null) {
         Logger.debug('getIdToken: currentUser is null, clearing cached token');
@@ -678,5 +692,42 @@ class AuthService {
 
   Future<UserCredential?> linkWithApple() async {
     return await linkWithProvider('apple');
+  }
+
+  // --- OSS+ Supabase methods ---
+
+  Future<String?> _getSupabaseIdToken() async {
+    final token = await OssSupabaseService.instance.getAccessToken();
+    if (token != null) {
+      final user = OssSupabaseService.instance.currentUser;
+      SharedPreferencesUtil().uid = user?.id ?? SharedPreferencesUtil().uid;
+      SharedPreferencesUtil().email = user?.email ?? SharedPreferencesUtil().email;
+      SharedPreferencesUtil().authToken = token;
+      SharedPreferencesUtil().tokenExpirationTime =
+          DateTime.now().add(const Duration(hours: 1)).millisecondsSinceEpoch;
+    }
+    return token;
+  }
+
+  Future<AuthResponse> signUpWithSupabase(String email, String password) async {
+    final response = await OssSupabaseService.instance.signUp(email, password);
+    if (response.user != null) {
+      SharedPreferencesUtil().uid = response.user!.id;
+      SharedPreferencesUtil().email = response.user!.email ?? email;
+    }
+    return response;
+  }
+
+  Future<AuthResponse> signInWithSupabase(String email, String password) async {
+    final response = await OssSupabaseService.instance.signInWithPassword(email, password);
+    if (response.session != null) {
+      final token = response.session!.accessToken;
+      SharedPreferencesUtil().uid = response.user?.id ?? '';
+      SharedPreferencesUtil().email = response.user?.email ?? email;
+      SharedPreferencesUtil().authToken = token;
+      SharedPreferencesUtil().tokenExpirationTime =
+          DateTime.now().add(const Duration(hours: 1)).millisecondsSinceEpoch;
+    }
+    return response;
   }
 }
