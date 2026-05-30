@@ -9,7 +9,8 @@ import httpx
 from database.apps import get_app_by_id_db
 from utils.executors import db_executor, run_blocking
 from utils.http_client import get_auth_client
-from database.redis_db import enable_app, increase_app_installs_count
+from database.enabled_apps import enable_app
+from database.redis_db import increase_app_installs_count
 from utils.apps import is_user_app_enabled, get_is_user_paid_app, is_tester
 from models.app import App as AppModel, ActionType
 

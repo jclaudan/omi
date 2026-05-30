@@ -41,8 +41,13 @@ from database.apps import (
 from database.auth import get_user_name
 from database.conversations import get_conversations
 from database.memories import get_memories, get_user_public_memories
-from database.redis_db import (
+from database.enabled_apps import (
     get_enabled_apps,
+    enable_app,
+    disable_app,
+    is_app_enabled,
+)
+from database.redis_db import (
     get_app_reviews,
     get_generic_cache,
     set_generic_cache,

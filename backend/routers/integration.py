@@ -12,7 +12,8 @@ import utils.apps as apps_utils
 from utils.apps import verify_api_key, app_can_read_tasks
 import database.redis_db as redis_db
 import database.memories as memory_db
-from database.redis_db import get_enabled_apps, r as redis_client
+from database.enabled_apps import get_enabled_apps
+from database.redis_db import r as redis_client
 import database.notifications as notification_db
 import database.action_items as action_items_db
 import models.integrations as integration_models

@@ -32,7 +32,8 @@ from plotly.subplots import make_subplots
 
 # noinspection PyUnresolvedReferences
 from models.conversation import Conversation
-from database.redis_db import get_enabled_apps, set_app_installs_count
+from database.enabled_apps import get_enabled_apps
+from database.redis_db import set_app_installs_count
 from database._client import get_users_uid
 import database.conversations as conversations_db
 import database.chat as chat_db

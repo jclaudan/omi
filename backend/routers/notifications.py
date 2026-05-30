@@ -5,7 +5,8 @@ from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from fastapi.responses import JSONResponse
 from typing import Tuple, Optional
 
-from database.redis_db import get_enabled_apps, r as redis_client
+from database.enabled_apps import get_enabled_apps
+from database.redis_db import r as redis_client
 from database.chat import add_integration_chat_message
 from utils.apps import get_available_app_by_id, verify_api_key
 from utils.app_integrations import send_app_notification
