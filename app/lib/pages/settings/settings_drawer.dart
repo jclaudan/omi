@@ -29,6 +29,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:omi/backend/http/api/announcements.dart';
 import 'package:omi/pages/announcements/changelog_sheet.dart';
+import 'package:omi/backend/schema/app_mode.dart';
+import 'package:omi/pages/settings/oss_health_page.dart';
 import 'device_settings.dart';
 import '../conversations/auto_sync_page.dart';
 import '../conversations/sync_page.dart';
@@ -478,8 +480,26 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
   Widget _buildOmiModeContent(BuildContext context) {
     return Consumer<UsageProvider>(
       builder: (context, usageProvider, child) {
+        final isOss = SharedPreferencesUtil().appMode == AppMode.opensourcePlus;
         return Column(
           children: [
+            // OSS+ section — only shown in OSS+ mode
+            if (isOss) ...[
+              _buildSectionContainer(
+                children: [
+                  _buildSettingsItem(
+                    title: context.l10n.ossHealthTitle,
+                    icon: const Icon(Icons.monitor_heart_outlined, color: Color(0xFF8E8E93), size: 20),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const OssHealthPage()),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+            ],
             // Profile & Notifications Section
             _buildSectionContainer(
               children: [
