@@ -1,0 +1,149 @@
+================================================================================
+  OMI OSS+ SELF-HOSTED INFRASTRUCTURE
+================================================================================
+
+Quick Start (All Platforms):
+
+1. Navigate to selfhost directory:
+   cd selfhost
+
+2. Start OSS+ stack:
+
+   WINDOWS 10:
+   .\start-ossp.ps1
+
+   LINUX / macOS:
+   ./start-ossp.sh
+
+3. Wait for all services to start (30-60 seconds)
+
+4. Access services:
+   - Supabase Studio: http://localhost:3000
+   - MinIO Console: http://localhost:9001
+   - PostgREST API: http://localhost:8000
+   - Qdrant API: http://localhost:6333
+   - Ollama API: http://localhost:11434
+
+5. View logs in another terminal:
+
+   WINDOWS:
+   .\logs-ossp.ps1
+
+   LINUX / macOS:
+   ./logs-ossp.sh
+
+6. Stop services:
+
+   WINDOWS:
+   .\stop-ossp.ps1
+
+   LINUX / macOS:
+   ./stop-ossp.sh
+
+================================================================================
+
+For Complete Documentation:
+  - selfhost/QUICKSTART.md     (5-minute setup guide)
+  - selfhost/README.md          (Full reference)
+  - OSSP_IMPLEMENTATION.md      (Technical details)
+  - README_OSSP.md              (Feature guide)
+
+Requires:
+  - Docker & Docker Compose
+  - 8GB+ RAM recommended
+  - 20GB+ disk space
+
+================================================================================
+
+Available Scripts:
+
+WINDOWS (PowerShell):
+  .\start-ossp.ps1 [-NoLogs]        Start OSS+ stack
+  .\stop-ossp.ps1 [-Remove]         Stop services (remove deletes data)
+  .\logs-ossp.ps1 [options]         View logs
+
+LINUX / macOS (Bash):
+  ./start-ossp.sh [--no-logs]       Start OSS+ stack
+  ./stop-ossp.sh [--remove]         Stop services (remove deletes data)
+  ./logs-ossp.sh [options]          View logs
+
+Log Options:
+  -s, --service SERVICE             Filter by service (supabase, qdrant, etc.)
+  -n, --lines N                     Show last N lines (default: 100)
+  -f, --follow                      Follow logs (like tail -f)
+
+================================================================================
+
+Built-in Services:
+
+  🐘 PostgreSQL/Supabase   (Database + API)         5432, 8000, 3000
+  🔍 Qdrant                (Vector similarity)      6333
+  💾 MinIO                 (Object storage)         9000, 9001
+  🎤 Faster-Whisper        (Speech-to-text)         8001, 8002
+  🤖 Ollama                (Local LLM)              11434
+  📦 Redis                 (Caching)                6379
+
+================================================================================
+
+Configuration:
+
+First run automatically:
+  1. Copies .env.template → .env
+  2. Generates secure random secrets (JWT, encryption keys)
+  3. Sets reasonable defaults
+
+To customize, edit: selfhost/.env
+
+Environment Variables:
+  DB_PASSWORD              PostgreSQL password
+  SUPABASE_URL            Database API endpoint
+  MINIO_ROOT_USER         Storage admin user
+  WHISPER_MODEL           STT model (base|small|medium|large)
+  OLLAMA_MODEL            LLM model (llama2|mistral|neural-chat)
+  OMI_DB_BACKEND=supabase Force database backend
+
+================================================================================
+
+Built Android APK:
+
+The Omi Android APK (OSS+ mode) is ready at:
+  app/build/app/outputs/flutter-apk/app-dev-release.apk
+
+Install on Android device/emulator:
+  adb install app/build/app/outputs/flutter-apk/app-dev-release.apk
+
+Configure app to use local OSS+:
+  1. Launch app
+  2. Select "OSS+ Self-Hosted" mode
+  3. Enter your server IP/hostname
+  4. Follow onboarding wizard
+
+================================================================================
+
+Troubleshooting:
+
+Services won't start?
+  → Check Docker is running: docker ps
+  → View logs: ./logs-ossp.sh (or .\logs-ossp.ps1)
+
+Port conflict?
+  → Edit docker-compose.yml to use different ports
+  → Update .env accordingly
+
+Out of disk space?
+  → docker system prune -a
+  → ./stop-ossp.sh --remove
+
+Performance issues?
+  → Allocate more RAM in Docker Desktop settings
+  → Check service logs for errors
+
+More help?
+  → See selfhost/QUICKSTART.md
+  → Read selfhost/README.md for complete reference
+
+================================================================================
+
+Happy self-hosting! 🚀
+
+Questions? Check the documentation files or open a GitHub issue.
