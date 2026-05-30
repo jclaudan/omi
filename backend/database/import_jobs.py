@@ -1,13 +1,18 @@
-from datetime import datetime
+﻿from datetime import datetime
 from typing import List, Optional
 
 from google.cloud.firestore_v1 import FieldFilter
 
+import os
 from ._client import db
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 
 
 def create_import_job(job_data: dict) -> str:
     """Create a new import job in Firestore."""
+    if _SUPABASE:
+        return job_data.get('id', '')
     job_id = job_data['id']
     job_ref = db.collection('import_jobs').document(job_id)
     job_ref.set(job_data)
@@ -16,12 +21,16 @@ def create_import_job(job_data: dict) -> str:
 
 def update_import_job(job_id: str, updates: dict) -> None:
     """Update an existing import job."""
+    if _SUPABASE:
+        return
     job_ref = db.collection('import_jobs').document(job_id)
     job_ref.update(updates)
 
 
 def get_import_job(job_id: str) -> Optional[dict]:
     """Get a single import job by ID."""
+    if _SUPABASE:
+        return None
     job_ref = db.collection('import_jobs').document(job_id)
     job_doc = job_ref.get()
     if job_doc.exists:
@@ -31,6 +40,8 @@ def get_import_job(job_id: str) -> Optional[dict]:
 
 def get_import_jobs(uid: str, limit: int = 50) -> List[dict]:
     """Get all import jobs for a user, ordered by created_at descending."""
+    if _SUPABASE:
+        return []
     query = (
         db.collection('import_jobs')
         .where(filter=FieldFilter('uid', '==', uid))

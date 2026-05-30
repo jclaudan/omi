@@ -1,11 +1,14 @@
-"""
+﻿"""
 Database operations for Wrapped (yearly recap) stored in users/{uid}/wrapped/{year}.
 """
 
 from datetime import datetime, timezone
 from typing import Optional
 
+import os
 from ._client import db
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 
 # Collection name under user document
 WRAPPED_COLLECTION = 'wrapped'
@@ -29,6 +32,8 @@ def get_wrapped(uid: str, year: int) -> Optional[dict]:
     Returns:
         Wrapped document data or None if not found
     """
+    if _SUPABASE:
+        return None
     user_ref = db.collection('users').document(uid)
     wrapped_ref = user_ref.collection(WRAPPED_COLLECTION).document(str(year))
     doc = wrapped_ref.get()
@@ -58,6 +63,8 @@ def create_wrapped(uid: str, year: int) -> dict:
     Returns:
         The created wrapped document data
     """
+    if _SUPABASE:
+        return {}
     now = datetime.now(timezone.utc)
     wrapped_data = {
         'year': year,

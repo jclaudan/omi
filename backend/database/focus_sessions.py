@@ -1,4 +1,4 @@
-"""Focus sessions — focus/distraction tracking and statistics.
+﻿"""Focus sessions â€” focus/distraction tracking and statistics.
 
 Collection: users/{uid}/focus_sessions
 """
@@ -11,7 +11,10 @@ from typing import List
 from google.cloud import firestore
 from google.cloud.firestore_v1.base_query import FieldFilter
 
+import os
 from ._client import db
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 
 logger = logging.getLogger(__name__)
 
@@ -22,6 +25,8 @@ def _user_col(uid: str, collection: str):
 
 
 def create_focus_session(uid: str, status: str, app_or_site: str, description: str, **kwargs) -> dict:
+    if _SUPABASE:
+        return {}
     session_id = str(uuid.uuid4())
     now = datetime.now(timezone.utc)
     doc = {
@@ -38,6 +43,8 @@ def create_focus_session(uid: str, status: str, app_or_site: str, description: s
 
 
 def get_focus_sessions(uid: str, date: str = None, limit: int = 100, offset: int = 0) -> List[dict]:
+    if _SUPABASE:
+        return []
     col = _user_col(uid, 'focus_sessions')
     query = col.order_by('created_at', direction=firestore.Query.DESCENDING)
 

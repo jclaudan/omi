@@ -1,4 +1,4 @@
-"""Advice — proactive coaching items.
+﻿"""Advice â€” proactive coaching items.
 
 Collection: users/{uid}/advice
 """
@@ -11,7 +11,10 @@ from typing import List, Optional
 from google.cloud import firestore
 from google.cloud.firestore_v1.base_query import FieldFilter
 
+import os
 from ._client import db
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +27,8 @@ def _user_col(uid: str, collection: str):
 
 
 def create_advice(uid: str, content: str, category: str = 'other', **kwargs) -> dict:
+    if _SUPABASE:
+        return {}
     advice_id = str(uuid.uuid4())
     now = datetime.now(timezone.utc)
     doc = {
@@ -47,6 +52,8 @@ def create_advice(uid: str, content: str, category: str = 'other', **kwargs) -> 
 def get_advice(
     uid: str, category: str = None, limit: int = 50, offset: int = 0, include_dismissed: bool = False
 ) -> List[dict]:
+    if _SUPABASE:
+        return []
     col = _user_col(uid, 'advice')
     query = col.order_by('created_at', direction=firestore.Query.DESCENDING)
     if category:

@@ -1,14 +1,19 @@
-from datetime import datetime, timezone
+﻿from datetime import datetime, timezone
 from typing import List, Optional
 
 from google.cloud.firestore_v1 import FieldFilter
 
+import os
 from ._client import db
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 from models.announcement import Announcement, AnnouncementType, TriggerType
 
 
 def get_announcement_by_id(announcement_id: str) -> Optional[Announcement]:
     """Get a single announcement by ID."""
+    if _SUPABASE:
+        return None
     doc_ref = db.collection("announcements").document(announcement_id)
     doc = doc_ref.get()
     if doc.exists:
@@ -22,6 +27,8 @@ def get_app_changelogs(from_version: str, to_version: str) -> List[Announcement]
     Returns changelogs where from_version < app_version <= to_version.
     Sorted by app_version descending (newest first).
     """
+    if _SUPABASE:
+        return []
     announcements_ref = db.collection("announcements")
     query = announcements_ref.where(filter=FieldFilter("type", "==", AnnouncementType.CHANGELOG.value)).where(
         filter=FieldFilter("active", "==", True)

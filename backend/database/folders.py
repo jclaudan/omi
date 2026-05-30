@@ -1,11 +1,14 @@
-import uuid
+﻿import uuid
 from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 
 from google.cloud import firestore
 from google.cloud.firestore_v1 import FieldFilter
 
+import os
 from ._client import db
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 from models.folder import Folder
 
 # System folders that are created for new users
@@ -13,21 +16,21 @@ SYSTEM_FOLDERS = [
     {
         'name': 'Work',
         'category_mapping': 'work',
-        'icon': '💼',
+        'icon': 'ðŸ’¼',
         'color': '#3B82F6',
         'description': 'Work, business, professional, and career-related conversations',
     },
     {
         'name': 'Personal',
         'category_mapping': 'personal',
-        'icon': '👤',
+        'icon': 'ðŸ‘¤',
         'color': '#10B981',
         'description': 'Personal life, family, health, hobbies, and self-improvement',
     },
     {
         'name': 'Social',
         'category_mapping': 'social',
-        'icon': '👥',
+        'icon': 'ðŸ‘¥',
         'color': '#8B5CF6',
         'description': 'Friends, social gatherings, entertainment, and casual conversations',
     },
@@ -77,6 +80,8 @@ CATEGORY_TO_FOLDER_MAPPING = {
 
 def get_folders(uid: str) -> List[dict]:
     """Get all folders for a user, sorted by order."""
+    if _SUPABASE:
+        return []
     user_ref = db.collection('users').document(uid)
     folders_ref = user_ref.collection('folders')
 
@@ -110,6 +115,8 @@ def create_folder(
     icon: Optional[str] = None,
 ) -> dict:
     """Create a new custom folder for a user."""
+    if _SUPABASE:
+        return {}
     user_ref = db.collection('users').document(uid)
     folders_ref = user_ref.collection('folders')
 
@@ -125,7 +132,7 @@ def create_folder(
         'name': name,
         'description': description,
         'color': color or '#6B7280',
-        'icon': icon or '📁',
+        'icon': icon or 'ðŸ“',
         'created_at': now,
         'updated_at': now,
         'order': max_order + 1,

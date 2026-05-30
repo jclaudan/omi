@@ -1,4 +1,4 @@
-"""Raw storage for X (Twitter) posts ingested by the X connector.
+﻿"""Raw storage for X (Twitter) posts ingested by the X connector.
 
 Unlike the legacy persona flow (which fetched tweets, distilled a few memories,
 and threw the raw tweets away), the X connector keeps every post as a
@@ -15,7 +15,10 @@ from typing import Dict, List, Optional
 from google.cloud import firestore
 from google.cloud.firestore_v1 import FieldFilter
 
+import os
 from ._client import db
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 
 logger = logging.getLogger(__name__)
 
@@ -39,6 +42,8 @@ def save_x_posts(uid: str, posts: List[dict]) -> int:
     kind. We dedupe on the document id (the tweet id), so calling this repeatedly
     with overlapping pages only ever inserts each post once.
     """
+    if _SUPABASE:
+        return 0
     if not posts:
         return 0
 
@@ -72,12 +77,8 @@ def save_x_posts(uid: str, posts: List[dict]) -> int:
 
 
 def get_x_posts(uid: str, limit: int = 100, kind: Optional[str] = None) -> List[dict]:
-    """Return stored posts, newest first. Optionally filter by kind.
-
-    A kind filter + order_by would require a composite index, so when filtering
-    by kind we use the single-field equality query (auto-indexed) and sort in
-    Python — post volumes per user are small enough for this to be cheap.
-    """
+    if _SUPABASE:
+        return []
     coll = _posts_ref(uid)
     if kind:
         docs = [d.to_dict() for d in coll.where(filter=FieldFilter('kind', '==', kind)).limit(limit * 3).stream()]
@@ -112,7 +113,7 @@ def count_x_posts(uid: str) -> int:
 def get_newest_tweet_id(uid: str) -> Optional[str]:
     """Highest stored tweet id for incremental sync (X `since_id`).
 
-    Tweet ids are snowflake ids — lexicographically larger ids are newer once
+    Tweet ids are snowflake ids â€” lexicographically larger ids are newer once
     zero-padded, but they're numeric strings of equal-ish length so we compare
     as ints to be safe.
     """

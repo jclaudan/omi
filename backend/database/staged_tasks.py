@@ -1,4 +1,4 @@
-"""Staged tasks — AI-generated tasks awaiting user promotion to action items.
+﻿"""Staged tasks â€” AI-generated tasks awaiting user promotion to action items.
 
 Collection: users/{uid}/staged_tasks
 """
@@ -11,7 +11,10 @@ from typing import List, Optional
 from google.cloud import firestore
 from google.cloud.firestore_v1.base_query import FieldFilter
 
+import os
 from ._client import db
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 import database.action_items as action_items_db
 
 logger = logging.getLogger(__name__)
@@ -34,6 +37,8 @@ def _commit_batch(batch, count):
 
 def create_staged_task(uid: str, description: str, **kwargs) -> dict:
     """Create a staged task.  Deduplicates by case-insensitive description."""
+    if _SUPABASE:
+        return {}
     col = _user_col(uid, 'staged_tasks')
 
     # Deduplicate
@@ -63,6 +68,8 @@ def create_staged_task(uid: str, description: str, **kwargs) -> dict:
 
 def get_staged_tasks(uid: str, limit: int = 100, offset: int = 0) -> List[dict]:
     """Fetch uncompleted staged tasks ordered by relevance (ascending)."""
+    if _SUPABASE:
+        return []
     col = _user_col(uid, 'staged_tasks')
     query = col.where(filter=FieldFilter('completed', '==', False))
     query = query.order_by('relevance_score', direction=firestore.Query.ASCENDING)
