@@ -154,6 +154,8 @@ class SupabaseConversationRepo:
         return [_apply_decryption(r, uid) for r in rows]
 
     def update_conversation(self, uid: str, conversation_id: str, updates: dict) -> None:
+        if 'transcript_segments' in updates and isinstance(updates['transcript_segments'], list):
+            updates = _apply_encryption(dict(updates), uid)
         _patch(uid, conversation_id, updates)
 
     def delete_conversation(self, uid: str, conversation_id: str) -> None:
@@ -161,6 +163,35 @@ class SupabaseConversationRepo:
 
     def conversation_exists(self, uid: str, conversation_id: str) -> bool:
         return self.get_conversation(uid, conversation_id) is not None
+
+    def get_conversations_count(self, uid: str, include_discarded: bool = False, statuses: List[str] = []) -> int:
+        if not _is_configured():
+            return 0
+        try:
+            params: dict = {'uid': f'eq.{uid}', 'deleted': 'eq.false', 'select': 'id'}
+            if not include_discarded:
+                params['discarded'] = 'eq.false'
+            if statuses:
+                params['status'] = f'in.({",".join(statuses)})'
+            with httpx.Client(timeout=10.0) as client:
+                resp = client.get(
+                    f'{_SUPABASE_URL}/rest/v1/{_TABLE}',
+                    headers={**_rest_headers(), 'Prefer': 'count=exact'},
+                    params={**params, 'limit': '0'},
+                )
+                cr = resp.headers.get('Content-Range', '')
+                if '/' in cr:
+                    return int(cr.split('/')[-1])
+        except Exception as exc:
+            logger.error('supabase conversations count error: %s', exc)
+        return 0
+
+    def get_conversations_by_id(self, uid: str, conversation_ids: List[str]) -> List[Dict[str, Any]]:
+        if not conversation_ids:
+            return []
+        id_list = ','.join(str(cid) for cid in conversation_ids)
+        rows = _get({'uid': f'eq.{uid}', 'id': f'in.({id_list})', 'deleted': 'eq.false', 'discarded': 'eq.false'})
+        return [_apply_decryption(r, uid) for r in rows]
 
     def get_by_status(self, uid: str, status: str, limit: int = 100) -> List[Dict[str, Any]]:
         rows = _get(
