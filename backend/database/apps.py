@@ -13,6 +13,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
+
 # *****************************
 # ********** CRUD *************
 # *****************************
@@ -23,6 +25,8 @@ testers_collection = 'testers'
 
 
 def get_app_by_id_db(app_id: str):
+    if _SUPABASE:
+        return None  # Apps marketplace not available in OSS+ mode
     app_ref = db.collection(apps_collection).document(app_id)
     doc = app_ref.get()
     if doc.exists:
@@ -53,6 +57,8 @@ def get_unapproved_public_apps_db() -> List:
 
 
 def get_public_approved_apps_db() -> List:
+    if _SUPABASE:
+        return []
     filters = [FieldFilter('approved', '==', True), FieldFilter('private', '==', False)]
     public_apps = db.collection(apps_collection).where(filter=BaseCompositeFilter('AND', filters)).stream()
     return [doc.to_dict() for doc in public_apps]
@@ -330,6 +336,8 @@ def record_app_usage(
     message_id: str = None,
     timestamp: datetime = None,
 ):
+    if _SUPABASE:
+        return  # App usage tracking not available in OSS+ mode
     if not conversation_id and not message_id:
         raise ValueError('memory_id or message_id must be provided')
 

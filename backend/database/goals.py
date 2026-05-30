@@ -1,8 +1,10 @@
 """
 Goal tracking database operations for user goals.
 Stores user goals in Firestore under users/{uid}/goals collection.
+In OSS+ (OMI_DB_BACKEND=supabase) mode, all functions are no-ops returning empty data.
 """
 
+import os
 from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 
@@ -13,6 +15,8 @@ from ._client import db
 
 goals_collection = 'goals'
 goal_history_collection = 'goal_history'
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 users_collection = 'users'
 
 
@@ -26,6 +30,8 @@ def _goal_dict(doc) -> Dict[str, Any]:
 
 def get_user_goal(uid: str) -> Optional[Dict[str, Any]]:
     """Get the current active goal for a user (backward compatibility - returns first active goal)."""
+    if _SUPABASE:
+        return None
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
 
@@ -40,6 +46,8 @@ def get_user_goal(uid: str) -> Optional[Dict[str, Any]]:
 
 def get_user_goals(uid: str, limit: int = 3) -> List[Dict[str, Any]]:
     """Get all active goals for a user (up to limit)."""
+    if _SUPABASE:
+        return []
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
 
@@ -56,6 +64,8 @@ def get_user_goals(uid: str, limit: int = 3) -> List[Dict[str, Any]]:
 
 def create_goal(uid: str, goal_data: Dict[str, Any], max_goals: int = 4) -> Dict[str, Any]:
     """Create a new goal for a user. Supports up to max_goals active goals."""
+    if _SUPABASE:
+        return goal_data
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
 

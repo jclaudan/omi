@@ -18,6 +18,7 @@ users/{uid}/daily_summaries/{summary_id}
     └── overall_sentiment: str
 """
 
+import os
 from typing import List, Optional
 from datetime import datetime
 from google.cloud.firestore_v1.base_query import FieldFilter
@@ -27,8 +28,13 @@ from . import redis_db
 
 DAILY_SUMMARIES_COLLECTION = 'daily_summaries'
 
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
+
 
 def create_daily_summary(uid: str, summary_data: dict) -> str:
+    if _SUPABASE:
+        return summary_data.get('id', '')
+
     """
     Create a new daily summary document.
 
@@ -46,6 +52,9 @@ def create_daily_summary(uid: str, summary_data: dict) -> str:
 
 
 def get_daily_summary(uid: str, summary_id: str) -> Optional[dict]:
+    if _SUPABASE:
+        return None
+
     """
     Get a single daily summary by ID.
 
@@ -66,6 +75,9 @@ def get_daily_summary(uid: str, summary_id: str) -> Optional[dict]:
 
 
 def get_daily_summary_by_date(uid: str, date: str) -> Optional[dict]:
+    if _SUPABASE:
+        return None
+
     """
     Get a daily summary by date (YYYY-MM-DD format).
 
@@ -92,6 +104,9 @@ def get_daily_summaries(
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
 ) -> List[dict]:
+    if _SUPABASE:
+        return []
+
     """
     Get list of daily summaries for a user, ordered by date descending.
 
