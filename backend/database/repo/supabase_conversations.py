@@ -204,3 +204,78 @@ class SupabaseConversationRepo:
             }
         )
         return [_apply_decryption(r, uid) for r in rows]
+
+    def get_closest_to_timestamps(self, uid: str, start_timestamp: int, end_timestamp: int) -> Optional[Dict[str, Any]]:
+        from datetime import timedelta
+
+        start_dt = (datetime.fromtimestamp(start_timestamp, tz=timezone.utc) - timedelta(minutes=2)).isoformat()
+        end_dt = (datetime.fromtimestamp(end_timestamp, tz=timezone.utc) + timedelta(minutes=2)).isoformat()
+        rows = _get(
+            {
+                'uid': f'eq.{uid}',
+                'deleted': 'eq.false',
+                'finished_at': f'gte.{start_dt}',
+                'started_at': f'lte.{end_dt}',
+                'order': 'created_at.desc',
+            }
+        )
+        if not rows:
+            return None
+        best, min_diff = None, float('inf')
+        for row in rows:
+            try:
+                s = datetime.fromisoformat(row['started_at'].replace('Z', '+00:00')).timestamp()
+                e = datetime.fromisoformat(row['finished_at'].replace('Z', '+00:00')).timestamp()
+                diff = min(abs(s - start_timestamp), abs(e - end_timestamp))
+                if diff < min_diff:
+                    min_diff, best = diff, row
+            except Exception:
+                continue
+        return _apply_decryption(best, uid) if best else None
+
+    def unlock_all_conversations(self, uid: str) -> None:
+        if not _is_configured():
+            return
+        try:
+            with httpx.Client(timeout=30.0) as client:
+                client.patch(
+                    f'{_SUPABASE_URL}/rest/v1/{_TABLE}',
+                    headers=_rest_headers(),
+                    params={'uid': f'eq.{uid}', 'is_locked': 'eq.true', 'deleted': 'eq.false'},
+                    json={'is_locked': False},
+                )
+        except Exception as exc:
+            logger.error('supabase conversations unlock_all error: %s', exc)
+
+    def store_photos(self, uid: str, conversation_id: str, photos: list) -> None:
+        if not _is_configured() or not photos:
+            return
+        try:
+            with httpx.Client(timeout=15.0) as client:
+                for photo in photos:
+                    data = {**photo, 'uid': uid, 'conversation_id': conversation_id}
+                    if 'id' not in data or not data['id']:
+                        data['id'] = str(uuid.uuid4())
+                    client.post(
+                        f'{_SUPABASE_URL}/rest/v1/conversation_photos',
+                        headers=_rest_headers(),
+                        json=data,
+                    )
+        except Exception as exc:
+            logger.error('supabase conversation_photos POST error: %s', exc)
+
+    def get_photos(self, uid: str, conversation_id: str) -> list:
+        if not _is_configured():
+            return []
+        try:
+            with httpx.Client(timeout=10.0) as client:
+                resp = client.get(
+                    f'{_SUPABASE_URL}/rest/v1/conversation_photos',
+                    headers={**_rest_headers(), 'Prefer': 'return=representation'},
+                    params={'uid': f'eq.{uid}', 'conversation_id': f'eq.{conversation_id}'},
+                )
+                if resp.status_code == 200:
+                    return resp.json()
+        except Exception as exc:
+            logger.error('supabase conversation_photos GET error: %s', exc)
+        return []
