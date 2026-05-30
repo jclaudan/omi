@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from typing import Dict, List
 
@@ -10,8 +11,12 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
+
 
 def get_trends_data() -> List[Dict]:
+    if _SUPABASE:
+        return []
     trends_ref = db.collection('trends')
     trends_docs = [doc for doc in trends_ref.stream(retry=Retry())]
     trends_data = []
@@ -48,6 +53,8 @@ def get_trends_data() -> List[Dict]:
 
 
 def save_trends(memory_id: str, trends: List[Trend]):
+    if _SUPABASE:
+        return
     trends_coll_ref = db.collection('trends')
 
     for trend in trends:

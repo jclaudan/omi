@@ -1,9 +1,12 @@
+import os
 from datetime import datetime
 from typing import Dict, List, Optional
 
 from google.cloud import firestore
 
 from ._client import db
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 
 
 def _get_meetings_collection(uid: str):
@@ -12,6 +15,8 @@ def _get_meetings_collection(uid: str):
 
 
 def create_meeting(uid: str, meeting_data: Dict) -> str:
+    if _SUPABASE:
+        return ''
     """
     Create a new calendar meeting in Firestore.
     Returns the Firestore document ID.
@@ -33,6 +38,8 @@ def create_meeting(uid: str, meeting_data: Dict) -> str:
 
 
 def update_meeting(uid: str, meeting_id: str, meeting_data: Dict) -> None:
+    if _SUPABASE:
+        return
     """
     Update an existing calendar meeting.
 
@@ -48,6 +55,8 @@ def update_meeting(uid: str, meeting_id: str, meeting_data: Dict) -> None:
 
 
 def get_meeting(uid: str, meeting_id: str) -> Optional[Dict]:
+    if _SUPABASE:
+        return None
     """Get a calendar meeting by its Firestore document ID"""
     doc = _get_meetings_collection(uid).document(meeting_id).get()
 
@@ -60,6 +69,8 @@ def get_meeting(uid: str, meeting_id: str) -> Optional[Dict]:
 
 
 def get_meeting_id_by_calendar_event(uid: str, calendar_event_id: str, calendar_source: str) -> Optional[str]:
+    if _SUPABASE:
+        return None
     """
     Find a meeting by its external calendar event ID and source.
     Returns the Firestore document ID if found, None otherwise.
@@ -81,6 +92,8 @@ def get_meeting_id_by_calendar_event(uid: str, calendar_event_id: str, calendar_
 def list_meetings(
     uid: str, start_date: Optional[datetime] = None, end_date: Optional[datetime] = None, limit: int = 50
 ) -> List[Dict]:
+    if _SUPABASE:
+        return []
     """
     List calendar meetings, optionally filtered by date range.
     Returns meetings sorted by start_time descending.

@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 import uuid
@@ -10,6 +11,8 @@ from ._client import db
 users_collection = 'users'
 knowledge_nodes_collection = 'knowledge_nodes'
 knowledge_edges_collection = 'knowledge_edges'
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 
 
 class KnowledgeNode:
@@ -97,12 +100,16 @@ class KnowledgeEdge:
 
 
 def get_knowledge_nodes(uid: str) -> List[Dict[str, Any]]:
+    if _SUPABASE:
+        return []
     user_ref = db.collection(users_collection).document(uid)
     nodes_ref = user_ref.collection(knowledge_nodes_collection)
     return [doc.to_dict() for doc in nodes_ref.stream()]
 
 
 def get_knowledge_node(uid: str, node_id: str) -> Optional[Dict[str, Any]]:
+    if _SUPABASE:
+        return None
     user_ref = db.collection(users_collection).document(uid)
     node_ref = user_ref.collection(knowledge_nodes_collection).document(node_id)
     doc = node_ref.get()
@@ -110,6 +117,8 @@ def get_knowledge_node(uid: str, node_id: str) -> Optional[Dict[str, Any]]:
 
 
 def upsert_knowledge_node(uid: str, node_data: Dict[str, Any]) -> Dict[str, Any]:
+    if _SUPABASE:
+        return node_data
     user_ref = db.collection(users_collection).document(uid)
     nodes_ref = user_ref.collection(knowledge_nodes_collection)
 
@@ -161,7 +170,7 @@ def upsert_knowledge_node(uid: str, node_data: Dict[str, Any]) -> Dict[str, Any]
 
 
 def find_node_by_label_or_alias(uid: str, label: str) -> Optional[Dict[str, Any]]:
-    if not label:
+    if _SUPABASE or not label:
         return None
 
     nodes_ref = db.collection(users_collection).document(uid).collection(knowledge_nodes_collection)
@@ -181,12 +190,16 @@ def find_node_by_label_or_alias(uid: str, label: str) -> Optional[Dict[str, Any]
 
 
 def get_knowledge_edges(uid: str) -> List[Dict[str, Any]]:
+    if _SUPABASE:
+        return []
     user_ref = db.collection(users_collection).document(uid)
     edges_ref = user_ref.collection(knowledge_edges_collection)
     return [doc.to_dict() for doc in edges_ref.stream()]
 
 
 def upsert_knowledge_edge(uid: str, edge_data: Dict[str, Any]) -> Dict[str, Any]:
+    if _SUPABASE:
+        return edge_data
     user_ref = db.collection(users_collection).document(uid)
     edges_ref = user_ref.collection(knowledge_edges_collection)
 
@@ -222,6 +235,8 @@ def get_knowledge_graph(uid: str) -> Dict[str, Any]:
 
 
 def delete_knowledge_graph(uid: str) -> None:
+    if _SUPABASE:
+        return
     user_ref = db.collection(users_collection).document(uid)
 
     def _batch_delete(coll_ref):
