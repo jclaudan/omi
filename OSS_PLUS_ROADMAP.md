@@ -229,16 +229,29 @@ Création et gestion du profil utilisateur sur l'instance Supabase self-hosted.
 
 ---
 
-### Étape 7 — Migration Firestore → Supabase PostgreSQL *(futur)*
-**Complexité : Très haute | Priorité : Basse (v2)**
+### Étape 7 — Migration Firestore → Supabase PostgreSQL
+**Complexité : Très haute | Priorité : Basse (v2)** ✅ **DONE (fondation)**
 
-Remplacement du stockage de données principal. Non bloquant pour la v1 — en OSS+, Supabase
-gère l'auth mais Firestore peut rester pour les données dans un premier temps.
+Remplacement du stockage de données principal. En OSS+, Supabase gère l'auth ;
+cette étape ajoute les tables Postgres et la couche repository pour migrer les données.
 
-- [ ] Schéma PostgreSQL équivalent aux collections Firestore (users, conversations, memories, apps…)
-- [ ] Couche repository abstraite : `ConversationRepository` → implémentée par Firestore ou Supabase Postgres
-- [ ] Migration des données existantes (script de migration Firestore → Postgres)
-- [ ] Tests de non-régression
+- [x] Schéma PostgreSQL — `selfhost/supabase/migrations/002_core_schema.sql` : tables `conversations`, `memories`, `action_items`, `people` avec RLS et index
+- [x] Couche repository abstraite — `backend/database/repo/base.py` : Protocols Python `ConversationRepo`, `MemoryRepo`, `ActionItemRepo`
+- [x] Implémentations Supabase — `repo/supabase_conversations.py`, `repo/supabase_memories.py`, `repo/supabase_action_items.py` via REST API httpx (zero nouvelle dépendance)
+- [x] Adaptateurs Firestore — wrap des modules existants sans les modifier
+- [x] Factory — `backend/database/repo/factory.py` : sélectionne selon `OMI_DB_BACKEND=firestore|supabase`
+- [x] Script de migration — `selfhost/scripts/migrate_firestore_to_supabase.py` : Firestore → Supabase Postgres (un user ou --all avec fichier de mapping)
+- [x] Tests — `backend/tests/unit/test_repo_factory.py` : factory, adapters, fail-open sans config
+
+**Variables d'env backend à ajouter (en plus de SUPABASE_URL/KEY) :**
+```
+OMI_DB_BACKEND=supabase   # défaut: firestore
+```
+
+**Ce qui reste (scope v2) :**
+- Routing de TOUS les routers vers la factory (actuellement seuls les nouveaux endpoints peuvent l'utiliser)
+- Chiffrement côté application pour les segments dans Postgres
+- Migration des sous-collections Firestore (chat, daily_summaries, goals…)
 
 ---
 
