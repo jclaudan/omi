@@ -262,6 +262,10 @@ def review_memory(uid: str, memory_id: str, value: bool):
 
 
 def set_memory_kg_extracted(uid: str, memory_id: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_memory_fields(uid, memory_id, {'kg_extracted': True})
+        return
+
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
     memory_ref = memories_ref.document(memory_id)
@@ -364,6 +368,12 @@ def get_memory_ids_for_conversation(uid: str, conversation_id: str) -> List[str]
 
 
 def delete_memories_for_conversation(uid: str, memory_id: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        get_memory_repo().delete_memories_for_conversation(uid, memory_id)
+        return
+
     batch = db.batch()
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
@@ -381,6 +391,12 @@ def unlock_all_memories(uid: str):
     """
     Finds all memories for a user with is_locked: True and updates them to is_locked = False.
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        get_memory_repo().unlock_all_memories(uid)
+        return
+
     memories_ref = db.collection(users_collection).document(uid).collection(memories_collection)
     locked_memories_query = memories_ref.where(filter=FieldFilter('is_locked', '==', True))
 

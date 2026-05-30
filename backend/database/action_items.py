@@ -290,6 +290,11 @@ def get_action_items_by_ids(uid: str, action_item_ids: List[str]) -> List[dict]:
     if not action_item_ids:
         return []
 
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_action_item_repo
+
+        return get_action_item_repo().get_action_items_by_ids(uid, action_item_ids)
+
     user_ref = db.collection('users').document(uid)
     action_items_ref = user_ref.collection(action_items_collection)
 
