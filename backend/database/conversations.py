@@ -267,6 +267,13 @@ def _get_conversations_firestore(
 
 
 def get_conversations_count(uid: str, include_discarded: bool = False, statuses: List[str] = []):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        return get_conversation_repo().get_conversations_count(
+            uid, include_discarded=include_discarded, statuses=statuses
+        )
+
     conversations_ref = db.collection('users').document(uid).collection(conversations_collection)
     if not include_discarded:
         conversations_ref = conversations_ref.where(filter=FieldFilter('discarded', '==', False))
@@ -536,6 +543,27 @@ def update_conversation_segment_text(uid: str, conversation_id: str, segment_id:
         'ok' on success, 'not_found' if conversation missing, 'locked' if conversation is locked,
         'segment_not_found' if segment_id not found.
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        repo = get_conversation_repo()
+        conv = repo.get_conversation(uid, conversation_id)
+        if not conv:
+            return 'not_found'
+        if conv.get('is_locked', False):
+            return 'locked'
+        segments = conv.get('transcript_segments') or []
+        found = False
+        for seg in segments:
+            if isinstance(seg, dict) and seg.get('id') == segment_id:
+                seg['text'] = text
+                found = True
+                break
+        if not found:
+            return 'segment_not_found'
+        repo.update_conversation(uid, conversation_id, {'transcript_segments': segments})
+        return 'ok'
+
     doc_ref = db.collection('users').document(uid).collection(conversations_collection).document(conversation_id)
     doc_snapshot = doc_ref.get()
     if not doc_snapshot.exists:
@@ -634,6 +662,11 @@ def delete_conversation(uid, conversation_id):
 @prepare_for_read(decrypt_func=_prepare_conversation_for_read)
 @with_photos(get_conversation_photos)
 def get_conversations_by_id(uid, conversation_ids):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        return get_conversation_repo().get_conversations_by_id(uid, list(conversation_ids))
+
     user_ref = db.collection('users').document(uid)
     conversations_ref = user_ref.collection(conversations_collection)
 
@@ -953,6 +986,10 @@ def get_action_items(
 
 
 def update_conversation_finished_at(uid: str, conversation_id: str, finished_at: datetime):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_conversation(uid, conversation_id, {'finished_at': finished_at.isoformat() if finished_at else None})
+        return
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
     conversation_ref.update({'finished_at': finished_at})
@@ -965,6 +1002,13 @@ def update_conversation_segments(
     finished_at: datetime = None,
     data_protection_level: str = None,
 ):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        payload: dict = {'transcript_segments': segments}
+        if finished_at:
+            payload['finished_at'] = finished_at.isoformat() if finished_at else None
+        update_conversation(uid, conversation_id, payload)
+        return
+
     doc_ref = db.collection('users').document(uid).collection(conversations_collection).document(conversation_id)
     if data_protection_level is not None:
         doc_level = data_protection_level
@@ -990,12 +1034,20 @@ def update_conversation_segments(
 
 
 def set_conversation_visibility(uid: str, conversation_id: str, visibility: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_conversation(uid, conversation_id, {'visibility': visibility})
+        return
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
     conversation_ref.update({'visibility': visibility})
 
 
 def set_conversation_starred(uid: str, conversation_id: str, starred: bool):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_conversation(uid, conversation_id, {'starred': starred})
+        return
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
     conversation_ref.update({'starred': starred})
@@ -1035,6 +1087,12 @@ def set_postprocessing_status(
     fail_reason: str = None,
     model: PostProcessingModel = PostProcessingModel.fal_whisperx,
 ):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_conversation(
+            uid, conversation_id, {'postprocessing': {'status': status, 'model': model, 'fail_reason': fail_reason}}
+        )
+        return
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
     conversation_ref.update(
@@ -1043,6 +1101,11 @@ def set_postprocessing_status(
 
 
 def store_model_segments_result(uid: str, conversation_id: str, model_name: str, segments: List[TranscriptSegment]):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        # Sub-collections not supported in Supabase — model comparison results discarded
+        logger.debug('store_model_segments_result: no-op in supabase mode uid=%s conversation=%s', uid, conversation_id)
+        return
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
     segments_ref = conversation_ref.collection(model_name)
@@ -1060,6 +1123,10 @@ def store_model_segments_result(uid: str, conversation_id: str, model_name: str,
 def store_model_emotion_predictions_result(
     uid: str, conversation_id: str, model_name: str, predictions: List[hume.HumeJobModelPredictionResponseModel]
 ):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        logger.debug('store_model_emotion_predictions_result: no-op in supabase mode uid=%s', uid)
+        return
+
     now = datetime.now()
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
@@ -1087,6 +1154,10 @@ def store_model_emotion_predictions_result(
 
 
 def get_conversation_transcripts_by_model(uid: str, conversation_id: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        # Model comparison sub-collections not supported in Supabase
+        return {'deepgram': [], 'soniox': [], 'speechmatics': [], 'whisperx': []}
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
     deepgram_ref = conversation_ref.collection('deepgram_streaming')
