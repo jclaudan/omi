@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:omi/backend/http/api/oss_user.dart';
 import 'package:omi/backend/preferences.dart';
 import 'package:omi/pages/home/page.dart';
 import 'package:omi/services/auth_service.dart';
@@ -34,11 +35,13 @@ class _StepAuthState extends State<StepAuth> {
       _error = null;
     });
     try {
+      final email = _emailCtrl.text.trim();
       if (_isSignUp) {
-        await AuthService.instance.signUpWithSupabase(_emailCtrl.text.trim(), _passwordCtrl.text);
+        await AuthService.instance.signUpWithSupabase(email, _passwordCtrl.text);
       } else {
-        await AuthService.instance.signInWithSupabase(_emailCtrl.text.trim(), _passwordCtrl.text);
+        await AuthService.instance.signInWithSupabase(email, _passwordCtrl.text);
       }
+      await initOssUserProfile(email);
       if (!mounted) return;
       SharedPreferencesUtil().onboardingCompleted = true;
       SharedPreferencesUtil().permissionsCompleted = true;
