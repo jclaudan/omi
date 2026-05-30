@@ -387,12 +387,46 @@ OLLAMA_MODEL=llama3.2             # défaut
 | Chiffrement Postgres memories | ✅ Étape 12c | `SUPABASE_ENCRYPT_MEMORIES=true` (défaut) |
 | Routage LLM Ollama | ✅ Déjà présent | `OLLAMA_BASE_URL` + pas de `OPENAI_API_KEY` |
 
+### Étape 13 — Scope v5 : photos, timeline, unlock, batch queries
+**Complexité : Haute** ✅ **DONE**
+
+**Migration SQL :**
+- [x] `007_conversation_photos.sql` : table `conversation_photos` + RLS + index, `is_locked` sur `memories`
+
+**Extensions repos Supabase :**
+- [x] `SupabaseConversationRepo.get_closest_to_timestamps` : range query `started_at`/`finished_at`
+- [x] `SupabaseConversationRepo.unlock_all_conversations` : PATCH `is_locked=false`
+- [x] `SupabaseConversationRepo.store_photos / get_photos` : table `conversation_photos`
+- [x] `SupabaseMemoryRepo.unlock_all_memories` : PATCH `is_locked=false`
+- [x] `SupabaseMemoryRepo.delete_memories_for_conversation` : soft-delete par `conversation_id`
+- [x] `SupabaseActionItemRepo.get_action_items_by_ids` : `id=in.(ids)`
+
+**Conversations — fonctions v5 :**
+- [x] `get_conversations_without_photos` → wrapper + `_get_conversations_without_photos_firestore`
+- [x] `get_conversation_photos` → `SupabaseConversationRepo.get_photos`
+- [x] `store_conversation_photos` → `SupabaseConversationRepo.store_photos`
+- [x] `get_closest_conversation_to_timestamps` → wrapper + firestore (décorée)
+- [x] `get_last_completed_conversation` → wrapper + firestore (décorée)
+- [x] `create_audio_files_from_chunks` → `[]` no-op (sous-collections audio non supportées)
+- [x] `unlock_all_conversations` → `SupabaseConversationRepo.unlock_all_conversations`
+
+**Memories — fonctions v5 :**
+- [x] `set_memory_kg_extracted` → `update_memory_fields({kg_extracted: True})`
+- [x] `delete_memories_for_conversation` → `SupabaseMemoryRepo.delete_memories_for_conversation`
+- [x] `unlock_all_memories` → `SupabaseMemoryRepo.unlock_all_memories`
+
+**Action items — fonctions v5 :**
+- [x] `get_action_items_by_ids` → `SupabaseActionItemRepo.get_action_items_by_ids`
+- [x] `get_action_items_by_conversation` → déjà couvert par `get_action_items(conversation_id=...)` ✅
+
 ### Ce qui reste à faire 🔲
 
-| Composant | Scope | Complexité |
-|---|---|---|
-| Sous-collections Firestore (photos, chat, goals, daily_summaries) | v5 | Très haute |
-| Fonctions très spécialisées (audio_chunks, fal_whisperx sub-collections) | v5 | Haute |
+| Composant | Notes |
+|---|---|
+| `create_audio_files_from_chunks` | No-op — audio chunk sub-collections non migrées |
+| Fonctions de migration Firestore→Postgres (bulk, level migration) | Admin only, non critique |
+| `get_action_items_text` (tools router) | Formatage texte, Firestore-only OK |
+| `iter_all_conversations` (export) | Firestore-only OK pour export |
 
 ---
 
