@@ -74,6 +74,7 @@ from utils.stt.streaming import (
     STTService,
     get_stt_service_for_language,
     process_audio_dg,
+    process_audio_whisper_ws,
 )
 from utils.stt.vad_gate import VADStreamingGate, VAD_GATE_MODE, is_gate_enabled
 from utils.fair_use import (
@@ -998,13 +999,21 @@ async def _stream_handler(
                         return cb
 
                     callback = make_multi_channel_callback(ch_config)
-                    stt_sockets_multi[i] = await process_audio_dg(
-                        callback,
-                        stt_language,
-                        TARGET_SAMPLE_RATE,
-                        1,
-                        model=stt_model,
-                    )
+                    if stt_service == STTService.whisper_ws:
+                        stt_sockets_multi[i] = await process_audio_whisper_ws(
+                            callback,
+                            stt_language,
+                            TARGET_SAMPLE_RATE,
+                            1,
+                        )
+                    else:
+                        stt_sockets_multi[i] = await process_audio_dg(
+                            callback,
+                            stt_language,
+                            TARGET_SAMPLE_RATE,
+                            1,
+                            model=stt_model,
+                        )
                 logger.info(
                     f"Multi-channel STT connections established ({len(channel_configs)} channels) {uid} {session_id}"
                 )
@@ -1040,16 +1049,26 @@ async def _stream_handler(
                     logger.exception('VAD gate init failed, continuing without gate uid=%s session=%s', uid, session_id)
                     vad_gate = None
 
-            deepgram_socket = await process_audio_dg(
-                stream_transcript,
-                stt_language,
-                sample_rate,
-                1,
-                model=stt_model,
-                keywords=vocabulary[:100] if vocabulary else None,
-                vad_gate=vad_gate,
-                is_active=lambda: websocket_active,
-            )
+            if stt_service == STTService.whisper_ws:
+                deepgram_socket = await process_audio_whisper_ws(
+                    stream_transcript,
+                    stt_language,
+                    sample_rate,
+                    1,
+                    vad_gate=vad_gate,
+                    is_active=lambda: websocket_active,
+                )
+            else:
+                deepgram_socket = await process_audio_dg(
+                    stream_transcript,
+                    stt_language,
+                    sample_rate,
+                    1,
+                    model=stt_model,
+                    keywords=vocabulary[:100] if vocabulary else None,
+                    vad_gate=vad_gate,
+                    is_active=lambda: websocket_active,
+                )
             return None
 
         except Exception as e:
