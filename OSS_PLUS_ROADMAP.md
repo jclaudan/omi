@@ -382,17 +382,64 @@ OLLAMA_MODEL=llama3.2             # défaut
 | `SELFHOST.md` | ✅ Documentation | Prêt |
 | Supabase Auth | ✅ Étapes 4-5 | `OMI_AUTH_BACKEND=supabase` |
 | Dashboard santé services | ✅ Étape 6 | Mode OSS+ uniquement |
-| DB factory Supabase | ✅ Étapes 7+10+11 | `OMI_DB_BACKEND=supabase` |
+| DB factory Supabase | ✅ Étapes 7+10+11+12 | `OMI_DB_BACKEND=supabase` |
 | Chiffrement Postgres segments | ✅ Étape 11b | `SUPABASE_ENCRYPT_SEGMENTS=true` (défaut) |
+| Chiffrement Postgres memories | ✅ Étape 12c | `SUPABASE_ENCRYPT_MEMORIES=true` (défaut) |
 | Routage LLM Ollama | ✅ Déjà présent | `OLLAMA_BASE_URL` + pas de `OPENAI_API_KEY` |
 
 ### Ce qui reste à faire 🔲
 
 | Composant | Scope | Complexité |
 |---|---|---|
-| Sous-collections Firestore (photos, chat, goals, daily_summaries) | v4 | Très haute |
-| Fonctions DB très spécialisées (segment_text, audio_chunks, fal_whisperx) | v4 | Haute |
-| Chiffrement contenu memories dans Postgres | v4 | Faible |
+| Sous-collections Firestore (photos, chat, goals, daily_summaries) | v5 | Très haute |
+| Fonctions très spécialisées (audio_chunks, fal_whisperx sub-collections) | v5 | Haute |
+
+---
+
+### Étape 12 — Scope v4 : fonctions complètes + chiffrement memories
+**Complexité : Haute** ✅ **DONE**
+
+**Migrations SQL :**
+- [x] `005_conversations_extra_cols.sql` : `visibility`, `starred`, `is_locked` sur `conversations`
+- [x] `006_memories_content_encryption.sql` : `content_encrypted` sur `memories`
+
+**Extensions SupabaseConversationRepo :**
+- [x] `update_conversation` : chiffre automatiquement `transcript_segments` si la liste est présente dans updates
+- [x] `get_conversations_count` : `Prefer: count=exact` → `Content-Range` header
+- [x] `get_conversations_by_id` : `id=in.(id1,id2,...)`
+
+**Chiffrement content memories (`SupabaseMemoryRepo`) :**
+- [x] `_apply_memory_encryption/decryption` : AES-256-GCM sur `content`
+- [x] Toutes les lectures déchiffrent, toutes les écritures chiffrent
+- [x] Désactivable via `SUPABASE_ENCRYPT_MEMORIES=false`
+
+**Extensions SupabaseMemoryRepo :**
+- [x] `save_memories_batch`, `get_memories_by_ids`, `get_memory_ids_for_conversation`, `delete_all_memories`
+
+**Conversations — fonctions v4 :**
+- [x] `update_conversation_segments` → `update_conversation` (segments re-chiffrés automatiquement)
+- [x] `update_conversation_finished_at` → `update_conversation`
+- [x] `get_conversations_count` → `SupabaseConversationRepo.get_conversations_count`
+- [x] `get_conversations_by_id` → `SupabaseConversationRepo.get_conversations_by_id`
+- [x] `update_conversation_segment_text` → get + modify + `update_conversation`
+- [x] `set_conversation_visibility`, `set_conversation_starred` → `update_conversation`
+- [x] `set_postprocessing_status` → `update_conversation` (JSONB `postprocessing`)
+- [x] `store_model_segments_result` → no-op (sous-collections non supportées en Supabase)
+- [x] `store_model_emotion_predictions_result` → no-op
+- [x] `get_conversation_transcripts_by_model` → retourne dict vide
+
+**Memories — fonctions v4 :**
+- [x] `save_memories` : wrapper public + `_save_memories_firestore` (décorée) — même pattern que `create_memory`
+- [x] `get_user_public_memories` → `get_memories(visibility='public')`
+- [x] `get_non_filtered_memories` → `get_memories`
+- [x] `get_memories_by_ids` → `SupabaseMemoryRepo.get_memories_by_ids`
+- [x] `delete_all_memories` → `SupabaseMemoryRepo.delete_all_memories`
+- [x] `get_memory_ids_for_conversation` → `SupabaseMemoryRepo.get_memory_ids_for_conversation`
+
+**Variables d'env :**
+```
+SUPABASE_ENCRYPT_MEMORIES=false   # désactive chiffrement content memories (défaut: true)
+```
 
 ---
 
