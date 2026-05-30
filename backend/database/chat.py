@@ -1,10 +1,20 @@
 import copy
+import os
 import uuid
 from datetime import datetime, timezone
 from typing import Optional, List, Dict, Any
 
 from google.cloud import firestore
 from google.cloud.firestore_v1 import FieldFilter
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
+
+
+def _sc():
+    from database.repo import supabase_chat as _c
+
+    return _c
+
 
 from database import users as users_db
 from models.chat import Message
@@ -65,9 +75,16 @@ def _prepare_message_for_read(message_data: Optional[Dict[str, Any]], uid: str) 
 # *****************************
 
 
+def add_message(uid: str, message_data: dict):
+    if _SUPABASE:
+        _sc().add_message(uid, message_data)
+        return message_data
+    return _add_message_firestore(uid, message_data)
+
+
 @set_data_protection_level(data_arg_name='message_data')
 @prepare_for_write(data_arg_name='message_data', prepare_func=_prepare_data_for_write)
-def add_message(uid: str, message_data: dict):
+def _add_message_firestore(uid: str, message_data: dict):
     del message_data['memories']
     user_ref = db.collection('users').document(uid)
     user_ref.collection('messages').add(message_data)
@@ -171,8 +188,28 @@ def get_app_messages(uid: str, app_id: str, limit: int = 20, offset: int = 0, in
     return messages
 
 
-@prepare_for_read(decrypt_func=_prepare_message_for_read)
 def get_messages(
+    uid: str,
+    limit: int = 20,
+    offset: int = 0,
+    include_conversations: bool = False,
+    app_id: Optional[str] = None,
+    chat_session_id: Optional[str] = None,
+):
+    if _SUPABASE:
+        return _sc().get_messages(uid, limit=limit, offset=offset, session_id=chat_session_id, app_id=app_id)
+    return _get_messages_firestore(
+        uid,
+        limit=limit,
+        offset=offset,
+        include_conversations=include_conversations,
+        app_id=app_id,
+        chat_session_id=chat_session_id,
+    )
+
+
+@prepare_for_read(decrypt_func=_prepare_message_for_read)
+def _get_messages_firestore(
     uid: str,
     limit: int = 20,
     offset: int = 0,
@@ -246,6 +283,8 @@ def get_messages(
 
 def get_message_count(uid: str) -> int:
     """Return the total number of chat messages for a user."""
+    if _SUPABASE:
+        return _sc().get_message_count(uid)
     user_ref = db.collection('users').document(uid)
     docs = user_ref.collection('messages').count().get()
     return int(docs[0][0].value) if docs and docs[0] else 0
@@ -353,6 +392,9 @@ def batch_delete_messages(
 
 
 def clear_chat(uid: str, app_id: Optional[str] = None, chat_session_id: Optional[str] = None):
+    if _SUPABASE:
+        _sc().clear_chat(uid, session_id=chat_session_id)
+        return None
     try:
         user_ref = db.collection('users').document(uid)
         logger.info(f"Deleting messages for user: {uid}")
@@ -440,12 +482,17 @@ def delete_multi_files(uid: str, files_data: list):
 
 
 def add_chat_session(uid: str, chat_session_data: dict):
+    if _SUPABASE:
+        _sc().add_chat_session(uid, chat_session_data)
+        return chat_session_data
     user_ref = db.collection('users').document(uid)
     user_ref.collection('chat_sessions').document(chat_session_data['id']).set(chat_session_data)
     return chat_session_data
 
 
 def get_chat_session(uid: str, app_id: Optional[str] = None):
+    if _SUPABASE:
+        return _sc().get_chat_session(uid, app_id=app_id)
     session_ref = (
         db.collection('users')
         .document(uid)
@@ -463,6 +510,8 @@ def get_chat_session(uid: str, app_id: Optional[str] = None):
 
 def get_chat_session_by_id(uid: str, chat_session_id: str):
     """Get a specific chat session by its ID"""
+    if _SUPABASE:
+        return _sc().get_chat_session_by_id(uid, chat_session_id)
     user_ref = db.collection('users').document(uid)
     session_ref = user_ref.collection('chat_sessions').document(chat_session_id)
     session_doc = session_ref.get()
@@ -474,6 +523,9 @@ def get_chat_session_by_id(uid: str, chat_session_id: str):
 
 
 def delete_chat_session(uid, chat_session_id, cascade_messages: bool = False):
+    if _SUPABASE:
+        _sc().delete_chat_session(uid, chat_session_id)
+        return True
     user_ref = db.collection('users').document(uid)
     session_ref = user_ref.collection('chat_sessions').document(chat_session_id)
 
