@@ -187,15 +187,19 @@ Remplacement de Firebase Auth en mode OSS+. En mode Officiel, Firebase Auth est 
 ---
 
 ### Étape 5 — Initialisation utilisateur sur Supabase
-**Complexité : Moyenne | Priorité : Haute**
+**Complexité : Moyenne | Priorité : Haute** ✅ **DONE**
 
 Création et gestion du profil utilisateur sur l'instance Supabase self-hosted.
 
-- [ ] Écran inscription/connexion Supabase (email + password ou OAuth2 Google/Apple via Supabase)
-- [ ] Création du profil dans la table `users` Supabase après inscription
-- [ ] Migration du token Supabase dans les headers API (`Authorization: Bearer <supabase_jwt>`)
-- [ ] Refresh automatique du token (même logique que Firebase actuellement)
-- [ ] Script SQL Supabase pour créer les tables minimales nécessaires au démarrage
+- [x] Écran inscription/connexion Supabase (email + password) — fait à l'Étape 4 (`StepAuth`)
+- [x] Script SQL Supabase — `selfhost/supabase/migrations/001_profiles.sql` : table `profiles` + trigger auto-create + RLS
+- [x] Création du profil dans la table `profiles` Supabase après inscription (trigger PostgreSQL + belt-and-suspenders via endpoint)
+- [x] Backend `backend/utils/oss_supabase_client.py` — client REST Supabase (httpx, sans nouvelle dépendance)
+- [x] Backend `backend/routers/oss_user.py` — POST `/v1/oss/profile/init` (upsert profil, auth via JWT existant)
+- [x] Flutter `app/lib/backend/http/api/oss_user.dart` — helper `initOssUserProfile(email)`
+- [x] `StepAuth` appelle `initOssUserProfile` après sign-up/sign-in Supabase
+- [x] Migration du token Supabase dans les headers API — fait à l'Étape 4 (`AuthService.getIdToken()`)
+- [x] Refresh automatique du token — fait à l'Étape 4 (`OssSupabaseService.getAccessToken()`)
 
 ---
 
