@@ -219,6 +219,10 @@ def get_memories_by_ids(uid: str, memory_ids: List[str]) -> List[dict]:
 
 
 def review_memory(uid: str, memory_id: str, value: bool):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_memory_fields(uid, memory_id, {'reviewed': True, 'user_review': value})
+        return
+
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
     memory_ref = memories_ref.document(memory_id)
@@ -233,6 +237,10 @@ def set_memory_kg_extracted(uid: str, memory_id: str):
 
 
 def change_memory_visibility(uid: str, memory_id: str, value: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_memory_fields(uid, memory_id, {'visibility': value})
+        return
+
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
     memory_ref = memories_ref.document(memory_id)
@@ -260,6 +268,10 @@ def update_memory_fields(uid: str, memory_id: str, data: dict):
 
 
 def edit_memory(uid: str, memory_id: str, value: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_memory_fields(uid, memory_id, {'content': value, 'edited': True})
+        return
+
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
     memory_ref = memories_ref.document(memory_id)
