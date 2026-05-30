@@ -324,6 +324,46 @@ Les fonctions CRUD de base dans les modules `database/` existants routent mainte
 
 ---
 
+### Étape 11 — Scope v3 : fonctions spécialisées + chiffrement Postgres
+**Complexité : Haute** ✅ **DONE**
+
+**Migrations SQL :**
+- [x] `003_memories_extra_fields.sql` : `user_review`, `reviewed`, `edited`, `kg_extracted`, `conversation_id` sur `memories`
+- [x] `004_conversations_encryption.sql` : `transcript_segments_encrypted` (flag) sur `conversations`
+
+**Chiffrement AES-256-GCM des segments (`SupabaseConversationRepo`) :**
+- [x] `_apply_encryption` : sérialise + chiffre `transcript_segments` avant POST Supabase
+- [x] `_apply_decryption` : déchiffre + désérialise au retour de GET
+- [x] Toutes les lectures (get_conversation, get_conversations, get_by_status) déchiffrent
+- [x] Désactivable via `SUPABASE_ENCRYPT_SEGMENTS=false`
+- [x] Réutilise `ENCRYPTION_SECRET` + dérivation HKDF-SHA256 par uid
+
+**Conversations — fonctions spécialisées :**
+- [x] `upsert_conversation` : refactorisé en wrapper public + `_upsert_conversation_firestore` (décorée) — corrige bug double chiffrement
+- [x] `update_conversation_title` → `update_conversation(uid, id, {'title': title})`
+- [x] `update_conversation_summary` → `overview` column ou `apps_response` JSONB
+- [x] `update_conversation_status` → `update_conversation(uid, id, {'status': status})`
+- [x] `set_conversation_as_discarded` → `update_conversation(uid, id, {'discarded': True})`
+- [x] `get_in_progress_conversation` → `SupabaseConversationRepo.get_by_status(uid, 'in_progress')`
+- [x] `get_processing_conversations` → wrapper public + `_get_processing_conversations_firestore`
+
+**Memories — fonctions spécialisées :**
+- [x] `edit_memory` → `update_memory_fields(uid, id, {'content': value, 'edited': True})`
+- [x] `change_memory_visibility` → `update_memory_fields(uid, id, {'visibility': value})`
+- [x] `review_memory` → `update_memory_fields(uid, id, {'reviewed': True, 'user_review': value})`
+
+**LLM Ollama :**
+- [x] Déjà présent depuis l'étape 1 dans `utils/llm/clients.py` — `OLLAMA_BASE_URL` + pas de `OPENAI_API_KEY`
+
+**Variables d'env :**
+```
+SUPABASE_ENCRYPT_SEGMENTS=false   # pour désactiver le chiffrement (défaut: true)
+OLLAMA_BASE_URL=http://ollama:11434
+OLLAMA_MODEL=llama3.2             # défaut
+```
+
+---
+
 ## État actuel de la branche
 
 ### Ce qui est fait ✅
@@ -342,16 +382,17 @@ Les fonctions CRUD de base dans les modules `database/` existants routent mainte
 | `SELFHOST.md` | ✅ Documentation | Prêt |
 | Supabase Auth | ✅ Étapes 4-5 | `OMI_AUTH_BACKEND=supabase` |
 | Dashboard santé services | ✅ Étape 6 | Mode OSS+ uniquement |
-| DB factory Supabase | ✅ Étapes 7+10 | `OMI_DB_BACKEND=supabase` |
+| DB factory Supabase | ✅ Étapes 7+10+11 | `OMI_DB_BACKEND=supabase` |
+| Chiffrement Postgres segments | ✅ Étape 11b | `SUPABASE_ENCRYPT_SEGMENTS=true` (défaut) |
+| Routage LLM Ollama | ✅ Déjà présent | `OLLAMA_BASE_URL` + pas de `OPENAI_API_KEY` |
 
 ### Ce qui reste à faire 🔲
 
 | Composant | Scope | Complexité |
 |---|---|---|
-| Fonctions DB spécialisées (status, visibility, photos…) | v3 | Haute |
-| Chiffrement Postgres côté application | v3 | Moyenne |
-| Migration sous-collections Firestore | v3 | Très haute |
-| Routage LLM Ollama | v3 | Faible |
+| Sous-collections Firestore (photos, chat, goals, daily_summaries) | v4 | Très haute |
+| Fonctions DB très spécialisées (segment_text, audio_chunks, fal_whisperx) | v4 | Haute |
+| Chiffrement contenu memories dans Postgres | v4 | Faible |
 
 ---
 
