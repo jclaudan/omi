@@ -1,3 +1,4 @@
+import os
 from calendar import monthrange
 from datetime import datetime, timezone
 from typing import Optional
@@ -6,6 +7,8 @@ from google.cloud.firestore_v1 import FieldFilter
 
 from ._client import db
 from models.user_usage import UsageStats
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 
 
 def get_monthly_chat_usage(uid: str, now: Optional[datetime] = None) -> dict:
@@ -19,6 +22,8 @@ def get_monthly_chat_usage(uid: str, now: Optional[datetime] = None) -> dict:
     Proactive, memory-extraction, knowledge-graph, conversation-processing etc. are
     excluded on purpose — those are company-driven, not user-initiated questions.
     """
+    if _SUPABASE:
+        return {'questions': 0, 'audio_seconds': 0}
     now = now or datetime.now(timezone.utc)
     month_prefix = f'{now.year}-{now.month:02d}-'
 
@@ -66,6 +71,8 @@ def update_hourly_usage(uid: str, date: datetime, updates: dict, platform: Optio
     ArrayUnion so a single `hourly_usage/{date-hour}` doc can record activity
     from both platforms in the same hour without double-writing.
     """
+    if _SUPABASE:
+        return
     user_ref = db.collection('users').document(uid)
     doc_id = f'{date.year}-{date.month:02d}-{date.day:02d}-{date.hour:02d}'
     hourly_usage_ref = user_ref.collection('hourly_usage').document(doc_id)
@@ -99,6 +106,8 @@ def update_hourly_usage(uid: str, date: datetime, updates: dict, platform: Optio
 
 def batch_update_hourly_usage(uid: str, hourly_updates: dict):
     """Batch updates or creates usage stats for multiple hours."""
+    if _SUPABASE:
+        return
     batch_size = 400
     items = list(hourly_updates.items())
 
@@ -124,6 +133,8 @@ def batch_update_hourly_usage(uid: str, hourly_updates: dict):
 
 def get_today_usage_stats(uid: str, date: datetime) -> dict:
     """Aggregates hourly usage stats for a given day from Firestore."""
+    if _SUPABASE:
+        return {}
     user_ref = db.collection('users').document(uid)
     hourly_usage_collection = user_ref.collection('hourly_usage')
 
@@ -156,6 +167,8 @@ def _aggregate_stats(query) -> dict:
 
 def get_monthly_usage_stats(uid: str, date: datetime) -> dict:
     """Aggregates hourly usage stats for a given month from Firestore."""
+    if _SUPABASE:
+        return {}
     user_ref = db.collection('users').document(uid)
     hourly_usage_collection = user_ref.collection('hourly_usage')
 

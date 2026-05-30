@@ -10,6 +10,7 @@ users/{uid}/fcm_tokens (subcollection)
 """
 
 import asyncio
+import os
 
 from google.cloud.firestore_v1.base_query import FieldFilter
 from google.cloud import firestore
@@ -20,6 +21,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
+
 
 def save_token(uid: str, data: dict):
     """
@@ -28,6 +31,8 @@ def save_token(uid: str, data: dict):
     Also maintains time_zone in main user document for backward compatibility
     Migrates legacy fcm_token to subcollection
     """
+    if _SUPABASE:
+        return  # FCM tokens not stored in OSS+ mode (Firebase Cloud Messaging not available)
     device_key = data.get('device_key', 'unknown_default')
     token = data.get('fcm_token')
     time_zone = data.get('time_zone')
@@ -80,6 +85,10 @@ def save_token(uid: str, data: dict):
 
 def get_user_time_zone(uid: str):
     """Get timezone from main user document"""
+    if _SUPABASE:
+        from database.users import get_user_profile
+
+        return (get_user_profile(uid) or {}).get('time_zone')
     user_ref = db.collection('users').document(uid).get()
     if user_ref.exists:
         user_data = user_ref.to_dict()
@@ -97,6 +106,8 @@ DEFAULT_DAILY_SUMMARY_HOUR_LOCAL = 22
 
 def get_daily_summary_hour_local(uid: str) -> int | None:
     """Get user's preferred daily summary hour in local time. Returns None if not set."""
+    if _SUPABASE:
+        return None
     user_ref = db.collection('users').document(uid).get()
     if user_ref.exists:
         user_data = user_ref.to_dict()
@@ -125,6 +136,8 @@ def set_daily_summary_hour_local(uid: str, hour_local: int) -> bool:
 
 def get_daily_summary_enabled(uid: str) -> bool:
     """Check if daily summary is enabled for user. Enabled by default."""
+    if _SUPABASE:
+        return False  # Daily summaries not available in OSS+ mode
     user_ref = db.collection('users').document(uid).get()
     if user_ref.exists:
         user_data = user_ref.to_dict()
@@ -198,6 +211,8 @@ def set_mentor_notification_frequency(uid: str, frequency: int) -> bool:
 
 def get_all_tokens(uid: str) -> list[str]:
     """Get all device tokens for a user from subcollection and legacy field"""
+    if _SUPABASE:
+        return []  # FCM push notifications not available in OSS+ mode
     tokens = []
 
     # Get tokens from new subcollection

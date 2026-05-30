@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 
@@ -11,9 +12,13 @@ logger = logging.getLogger(__name__)
 SCREEN_ACTIVITY_COLLECTION = 'screen_activity'
 USERS_COLLECTION = 'users'
 
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
+
 
 def upsert_screen_activity(uid: str, rows: List[Dict[str, Any]]) -> int:
     """Batch write screen activity rows to Firestore users/{uid}/screen_activity/{id}."""
+    if _SUPABASE:
+        return 0
     if not rows:
         return 0
 
@@ -47,6 +52,8 @@ def get_screen_activity(
     limit: int = 500,
 ) -> List[Dict[str, Any]]:
     """Query screen activity by date range with optional app filter."""
+    if _SUPABASE:
+        return []
     collection_ref = db.collection(USERS_COLLECTION).document(uid).collection(SCREEN_ACTIVITY_COLLECTION)
 
     query = collection_ref.order_by('timestamp', direction=firestore.Query.ASCENDING)

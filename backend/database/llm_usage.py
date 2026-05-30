@@ -5,6 +5,7 @@ Stores and queries LLM token usage by feature in Firestore.
 Schema: users/{uid}/llm_usage/{date} -> {feature -> {model -> {input_tokens, output_tokens}}}
 """
 
+import os
 from datetime import datetime, timedelta, timezone
 from typing import Dict, List, Optional
 
@@ -12,9 +13,11 @@ from google.cloud import firestore
 
 from ._client import db
 
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
+
 
 def record_llm_usage(
-    uid: str,
+    uid: str,  # type: ignore[override]
     feature: str,
     model: str,
     input_tokens: int,
@@ -32,6 +35,8 @@ def record_llm_usage(
         input_tokens: Number of input/prompt tokens
         output_tokens: Number of output/completion tokens
     """
+    if _SUPABASE:
+        return  # LLM usage tracking not stored in OSS+ mode
     if input_tokens == 0 and output_tokens == 0:
         return
 
@@ -69,6 +74,8 @@ def record_llm_usage(
 
 
 def get_daily_usage(uid: str, date: Optional[datetime] = None) -> Dict:
+    if _SUPABASE:
+        return {}
     """
     Get LLM usage for a specific day.
 
@@ -93,6 +100,8 @@ def get_daily_usage(uid: str, date: Optional[datetime] = None) -> Dict:
 
 
 def get_usage_summary(uid: str, days: int = 30) -> Dict:
+    if _SUPABASE:
+        return {}
     """
     Get aggregated LLM usage summary for the last N days.
 

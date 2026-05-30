@@ -26,6 +26,7 @@ Create via gcloud:
 """
 
 import logging
+import os
 import uuid
 from datetime import datetime, timedelta
 from typing import Optional
@@ -36,6 +37,8 @@ from ._client import db
 
 logger = logging.getLogger(__name__)
 
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
+
 
 # ---------------------------------------------------------------------------
 # Fair-use state (users/{uid}/fair_use_state/current)
@@ -44,6 +47,8 @@ logger = logging.getLogger(__name__)
 
 def get_fair_use_state(uid: str) -> dict:
     """Get the current fair-use enforcement state for a user."""
+    if _SUPABASE:
+        return {}  # No fair-use enforcement in OSS+ self-hosted mode
     ref = db.collection('users').document(uid).collection('fair_use_state').document('current')
     doc = ref.get()
     if doc.exists:
@@ -53,6 +58,8 @@ def get_fair_use_state(uid: str) -> dict:
 
 def update_fair_use_state(uid: str, updates: dict) -> None:
     """Update fair-use state atomically."""
+    if _SUPABASE:
+        return
     ref = db.collection('users').document(uid).collection('fair_use_state').document('current')
     updates['updated_at'] = datetime.utcnow()
     ref.set(updates, merge=True)
@@ -80,6 +87,8 @@ def _generate_case_ref() -> str:
 
 def create_fair_use_event(uid: str, event_data: dict) -> str:
     """Create a new fair-use violation event. Returns the event ID."""
+    if _SUPABASE:
+        return ''
     ref = db.collection('users').document(uid).collection('fair_use_events').document()
     event_data['created_at'] = datetime.utcnow()
     event_data['case_ref'] = _generate_case_ref()
@@ -89,6 +98,8 @@ def create_fair_use_event(uid: str, event_data: dict) -> str:
 
 def get_fair_use_events(uid: str, limit: int = 50) -> list:
     """Get recent fair-use events for a user, newest first."""
+    if _SUPABASE:
+        return []
     ref = db.collection('users').document(uid).collection('fair_use_events')
     docs = ref.order_by('created_at', direction=firestore.Query.DESCENDING).limit(limit).stream()
     events = []
