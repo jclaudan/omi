@@ -1,5 +1,6 @@
 import copy
 import json
+import os
 import uuid
 import zlib
 from datetime import datetime, timedelta, timezone
@@ -152,6 +153,12 @@ def get_conversation_photos(uid: str, conversation_id: str):
 @set_data_protection_level(data_arg_name='conversation_data')
 @prepare_for_write(data_arg_name='conversation_data', prepare_func=_prepare_conversation_for_write)
 def upsert_conversation(uid: str, conversation_data: dict):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        get_conversation_repo().upsert_conversation(uid, conversation_data)
+        return
+
     if 'audio_base64_url' in conversation_data:
         del conversation_data['audio_base64_url']
     if 'photos' in conversation_data:
@@ -162,18 +169,58 @@ def upsert_conversation(uid: str, conversation_data: dict):
     conversation_ref.set(conversation_data)
 
 
+def get_conversation(uid, conversation_id):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        return get_conversation_repo().get_conversation(uid, conversation_id)
+    return _get_conversation_firestore(uid, conversation_id)
+
+
 @prepare_for_read(decrypt_func=_prepare_conversation_for_read)
 @with_photos(get_conversation_photos)
-def get_conversation(uid, conversation_id):
+def _get_conversation_firestore(uid, conversation_id):
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
     conversation_data = conversation_ref.get().to_dict()
     return conversation_data
 
 
+def get_conversations(
+    uid: str,
+    limit: int = 100,
+    offset: int = 0,
+    include_discarded: bool = False,
+    statuses: List[str] = [],
+    start_date: Optional[datetime] = None,
+    end_date: Optional[datetime] = None,
+    categories: Optional[List[str]] = None,
+    folder_id: Optional[str] = None,
+    starred: Optional[bool] = None,
+):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        return get_conversation_repo().get_conversations(
+            uid, limit=limit, offset=offset, include_discarded=include_discarded
+        )
+    return _get_conversations_firestore(
+        uid,
+        limit=limit,
+        offset=offset,
+        include_discarded=include_discarded,
+        statuses=statuses,
+        start_date=start_date,
+        end_date=end_date,
+        categories=categories,
+        folder_id=folder_id,
+        starred=starred,
+    )
+
+
 @prepare_for_read(decrypt_func=_prepare_conversation_for_read)
 @with_photos(get_conversation_photos)
-def get_conversations(
+def _get_conversations_firestore(
     uid: str,
     limit: int = 100,
     offset: int = 0,
@@ -295,6 +342,12 @@ def iter_all_conversations(uid: str, batch_size: int = 400, include_discarded: b
 
 
 def update_conversation(uid: str, conversation_id: str, update_data: dict):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        get_conversation_repo().update_conversation(uid, conversation_id, update_data)
+        return
+
     doc_ref = db.collection('users').document(uid).collection(conversations_collection).document(conversation_id)
     doc_snapshot = doc_ref.get()
     if not doc_snapshot.exists:
@@ -535,6 +588,12 @@ def delete_conversation(uid, conversation_id):
         uid: User ID
         conversation_id: Conversation ID
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        get_conversation_repo().delete_conversation(uid, conversation_id)
+        return
+
     # Delete photos subcollection first
     delete_conversation_photos(uid, conversation_id)
 
