@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "계정 만들기",
     "ossSignIn": "로그인",
     "ossHaveAccount": "이미 계정이 있으신가요? 로그인",
-    "ossNoAccount": "계정이 없으신가요? 만들기"
+    "ossNoAccount": "계정이 없으신가요? 만들기",
+    "ossHealthTitle": "OSS+ 서비스",
+    "ossHealthSubtitle": "자체 호스팅 스택 상태",
+    "ossHealthTestNow": "지금 테스트",
+    "ossHealthReconfigure": "재구성",
+    "ossHealthSlow": "느림"
 }

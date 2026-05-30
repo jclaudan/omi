@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "Buat akaun",
     "ossSignIn": "Log masuk",
     "ossHaveAccount": "Sudah ada akaun? Log masuk",
-    "ossNoAccount": "Tiada akaun? Buat satu"
+    "ossNoAccount": "Tiada akaun? Buat satu",
+    "ossHealthTitle": "Perkhidmatan OSS+",
+    "ossHealthSubtitle": "Status tindanan yang dihoskan sendiri",
+    "ossHealthTestNow": "Uji Sekarang",
+    "ossHealthReconfigure": "Konfigur Semula",
+    "ossHealthSlow": "Perlahan"
 }

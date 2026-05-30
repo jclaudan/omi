@@ -3084,5 +3084,10 @@
     "ossCreateAccount": "创建账户",
     "ossSignIn": "登录",
     "ossHaveAccount": "已有账户？登录",
-    "ossNoAccount": "没有账户？创建一个"
+    "ossNoAccount": "没有账户？创建一个",
+    "ossHealthTitle": "OSS+ 服务",
+    "ossHealthSubtitle": "您的自托管堆栈状态",
+    "ossHealthTestNow": "立即测试",
+    "ossHealthReconfigure": "重新配置",
+    "ossHealthSlow": "慢"
 }

@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "ఖాతా సృష్టించండి",
     "ossSignIn": "సైన్ ఇన్",
     "ossHaveAccount": "ఇప్పటికే ఖాతా ఉందా? సైన్ ఇన్ చేయండి",
-    "ossNoAccount": "ఖాతా లేదా? ఒకటి సృష్టించండి"
+    "ossNoAccount": "ఖాతా లేదా? ఒకటి సృష్టించండి",
+    "ossHealthTitle": "OSS+ సేవలు",
+    "ossHealthSubtitle": "మీ స్వీయ-హోస్ట్ చేసిన స్టాక్ స్థితి",
+    "ossHealthTestNow": "ఇప్పుడే పరీక్షించండి",
+    "ossHealthReconfigure": "తిరిగి కాన్ఫిగర్ చేయండి",
+    "ossHealthSlow": "నెమ్మది"
 }

@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "יצירת חשבון",
     "ossSignIn": "התחברות",
     "ossHaveAccount": "כבר יש לכם חשבון? התחברו",
-    "ossNoAccount": "אין לכם חשבון? צרו אחד"
+    "ossNoAccount": "אין לכם חשבון? צרו אחד",
+    "ossHealthTitle": "שירותי OSS+",
+    "ossHealthSubtitle": "מצב הסטק המאוחסן עצמאית שלך",
+    "ossHealthTestNow": "בדוק עכשיו",
+    "ossHealthReconfigure": "הגדר מחדש",
+    "ossHealthSlow": "איטי"
 }

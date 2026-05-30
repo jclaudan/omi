@@ -3028,5 +3028,10 @@
     "ossCreateAccount": "إنشاء حساب",
     "ossSignIn": "تسجيل الدخول",
     "ossHaveAccount": "هل لديك حساب بالفعل؟ تسجيل الدخول",
-    "ossNoAccount": "ليس لديك حساب؟ أنشئ واحداً"
+    "ossNoAccount": "ليس لديك حساب؟ أنشئ واحداً",
+    "ossHealthTitle": "خدمات OSS+",
+    "ossHealthSubtitle": "حالة خادمك الذاتي",
+    "ossHealthTestNow": "اختبر الآن",
+    "ossHealthReconfigure": "إعادة الضبط",
+    "ossHealthSlow": "بطيء"
 }

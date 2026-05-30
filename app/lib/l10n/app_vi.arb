@@ -3067,5 +3067,10 @@
     "ossCreateAccount": "Tạo tài khoản",
     "ossSignIn": "Đăng nhập",
     "ossHaveAccount": "Đã có tài khoản? Đăng nhập",
-    "ossNoAccount": "Chưa có tài khoản? Tạo một tài khoản"
+    "ossNoAccount": "Chưa có tài khoản? Tạo một tài khoản",
+    "ossHealthTitle": "Dịch vụ OSS+",
+    "ossHealthSubtitle": "Trạng thái ngăn xếp tự lưu trữ của bạn",
+    "ossHealthTestNow": "Kiểm tra ngay",
+    "ossHealthReconfigure": "Cấu hình lại",
+    "ossHealthSlow": "Chậm"
 }

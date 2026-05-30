@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "Account aanmaken",
     "ossSignIn": "Inloggen",
     "ossHaveAccount": "Al een account? Inloggen",
-    "ossNoAccount": "Nog geen account? Maak er een aan"
+    "ossNoAccount": "Nog geen account? Maak er een aan",
+    "ossHealthTitle": "OSS+ Services",
+    "ossHealthSubtitle": "Status van uw zelfgehoste stack",
+    "ossHealthTestNow": "Nu testen",
+    "ossHealthReconfigure": "Herconfigureren",
+    "ossHealthSlow": "Langzaam"
 }

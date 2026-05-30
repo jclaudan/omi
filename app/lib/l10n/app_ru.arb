@@ -3097,5 +3097,10 @@
     "ossCreateAccount": "Создать аккаунт",
     "ossSignIn": "Войти",
     "ossHaveAccount": "Уже есть аккаунт? Войти",
-    "ossNoAccount": "Нет аккаунта? Создайте его"
+    "ossNoAccount": "Нет аккаунта? Создайте его",
+    "ossHealthTitle": "Сервисы OSS+",
+    "ossHealthSubtitle": "Статус вашего самостоятельно размещённого стека",
+    "ossHealthTestNow": "Проверить сейчас",
+    "ossHealthReconfigure": "Перенастроить",
+    "ossHealthSlow": "Медленно"
 }

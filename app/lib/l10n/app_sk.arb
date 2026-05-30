@@ -3067,5 +3067,10 @@
     "ossCreateAccount": "Vytvoriť účet",
     "ossSignIn": "Prihlásiť sa",
     "ossHaveAccount": "Už máte účet? Prihláste sa",
-    "ossNoAccount": "Nemáte účet? Vytvorte si ho"
+    "ossNoAccount": "Nemáte účet? Vytvorte si ho",
+    "ossHealthTitle": "Služby OSS+",
+    "ossHealthSubtitle": "Stav vášho samohostovaného stacku",
+    "ossHealthTestNow": "Testovať teraz",
+    "ossHealthReconfigure": "Prekonfigovať",
+    "ossHealthSlow": "Pomalý"
 }

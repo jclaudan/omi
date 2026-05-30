@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "Стварыць уліковы запіс",
     "ossSignIn": "Увайсці",
     "ossHaveAccount": "Ужо ёсць уліковы запіс? Увайсці",
-    "ossNoAccount": "Няма ўліковага запісу? Стварыце яго"
+    "ossNoAccount": "Няма ўліковага запісу? Стварыце яго",
+    "ossHealthTitle": "Сэрвісы OSS+",
+    "ossHealthSubtitle": "Статус вашага самастойна размешчанага стэка",
+    "ossHealthTestNow": "Праверыць зараз",
+    "ossHealthReconfigure": "Перанастроіць",
+    "ossHealthSlow": "Павольна"
 }

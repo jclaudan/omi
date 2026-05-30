@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "Lumikha ng account",
     "ossSignIn": "Mag-sign in",
     "ossHaveAccount": "May account na? Mag-sign in",
-    "ossNoAccount": "Wala pang account? Lumikha ng isa"
+    "ossNoAccount": "Wala pang account? Lumikha ng isa",
+    "ossHealthTitle": "Mga Serbisyo ng OSS+",
+    "ossHealthSubtitle": "Katayuan ng iyong self-hosted na stack",
+    "ossHealthTestNow": "Subukan Ngayon",
+    "ossHealthReconfigure": "I-reconfigure",
+    "ossHealthSlow": "Mabagal"
 }

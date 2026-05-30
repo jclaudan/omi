@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "Luo tili",
     "ossSignIn": "Kirjaudu sisään",
     "ossHaveAccount": "Onko sinulla jo tili? Kirjaudu sisään",
-    "ossNoAccount": "Ei tiliä? Luo sellainen"
+    "ossNoAccount": "Ei tiliä? Luo sellainen",
+    "ossHealthTitle": "OSS+-palvelut",
+    "ossHealthSubtitle": "Itsehostattavan pinosi tila",
+    "ossHealthTestNow": "Testaa nyt",
+    "ossHealthReconfigure": "Konfiguroi uudelleen",
+    "ossHealthSlow": "Hidas"
 }

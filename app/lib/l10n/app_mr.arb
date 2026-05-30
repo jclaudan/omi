@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "खाते तयार करा",
     "ossSignIn": "साइन इन करा",
     "ossHaveAccount": "आधीच खाते आहे? साइन इन करा",
-    "ossNoAccount": "खाते नाही? एक तयार करा"
+    "ossNoAccount": "खाते नाही? एक तयार करा",
+    "ossHealthTitle": "OSS+ सेवा",
+    "ossHealthSubtitle": "तुमच्या स्व-होस्ट केलेल्या स्टॅकची स्थिती",
+    "ossHealthTestNow": "आत्ता चाचणी करा",
+    "ossHealthReconfigure": "पुन्हा कॉन्फिगर करा",
+    "ossHealthSlow": "संथ"
 }

@@ -3104,5 +3104,10 @@
     "ossCreateAccount": "Buat akun",
     "ossSignIn": "Masuk",
     "ossHaveAccount": "Sudah punya akun? Masuk",
-    "ossNoAccount": "Belum punya akun? Buat satu"
+    "ossNoAccount": "Belum punya akun? Buat satu",
+    "ossHealthTitle": "Layanan OSS+",
+    "ossHealthSubtitle": "Status tumpukan yang dihosting sendiri",
+    "ossHealthTestNow": "Uji Sekarang",
+    "ossHealthReconfigure": "Konfigurasikan Ulang",
+    "ossHealthSlow": "Lambat"
 }

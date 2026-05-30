@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "கணக்கை உருவாக்கவும்",
     "ossSignIn": "உள்நுழைக",
     "ossHaveAccount": "ஏற்கனவே கணக்கு உள்ளதா? உள்நுழைக",
-    "ossNoAccount": "கணக்கு இல்லையா? ஒன்று உருவாக்கவும்"
+    "ossNoAccount": "கணக்கு இல்லையா? ஒன்று உருவாக்கவும்",
+    "ossHealthTitle": "OSS+ சேவைகள்",
+    "ossHealthSubtitle": "உங்கள் சுய-ஹோஸ்ட் செய்யப்பட்ட அடுக்கின் நிலை",
+    "ossHealthTestNow": "இப்போது சோதிக்கவும்",
+    "ossHealthReconfigure": "மீண்டும் கட்டமைக்கவும்",
+    "ossHealthSlow": "மெதுவாக"
 }

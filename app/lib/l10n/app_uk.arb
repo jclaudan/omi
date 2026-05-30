@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "Створити обліковий запис",
     "ossSignIn": "Увійти",
     "ossHaveAccount": "Вже є обліковий запис? Увійти",
-    "ossNoAccount": "Немає облікового запису? Створіть його"
+    "ossNoAccount": "Немає облікового запису? Створіть його",
+    "ossHealthTitle": "Сервіси OSS+",
+    "ossHealthSubtitle": "Статус вашого стека з самостійним хостингом",
+    "ossHealthTestNow": "Перевірити зараз",
+    "ossHealthReconfigure": "Перелаштувати",
+    "ossHealthSlow": "Повільно"
 }

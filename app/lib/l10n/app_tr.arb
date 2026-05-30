@@ -3097,5 +3097,10 @@
     "ossCreateAccount": "Hesap oluştur",
     "ossSignIn": "Giriş yap",
     "ossHaveAccount": "Hesabınız var mı? Giriş yapın",
-    "ossNoAccount": "Hesabınız yok mu? Oluşturun"
+    "ossNoAccount": "Hesabınız yok mu? Oluşturun",
+    "ossHealthTitle": "OSS+ Hizmetleri",
+    "ossHealthSubtitle": "Kendi barındırdığınız yığının durumu",
+    "ossHealthTestNow": "Şimdi Test Et",
+    "ossHealthReconfigure": "Yeniden Yapılandır",
+    "ossHealthSlow": "Yavaş"
 }

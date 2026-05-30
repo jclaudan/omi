@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "Δημιουργία λογαριασμού",
     "ossSignIn": "Σύνδεση",
     "ossHaveAccount": "Έχετε ήδη λογαριασμό; Συνδεθείτε",
-    "ossNoAccount": "Δεν έχετε λογαριασμό; Δημιουργήστε έναν"
+    "ossNoAccount": "Δεν έχετε λογαριασμό; Δημιουργήστε έναν",
+    "ossHealthTitle": "Υπηρεσίες OSS+",
+    "ossHealthSubtitle": "Κατάσταση του αυτο-φιλοξενούμενου stack σας",
+    "ossHealthTestNow": "Δοκιμή τώρα",
+    "ossHealthReconfigure": "Επαναδιαμόρφωση",
+    "ossHealthSlow": "Αργό"
 }

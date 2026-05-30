@@ -3031,5 +3031,10 @@
     "ossCreateAccount": "Създаване на акаунт",
     "ossSignIn": "Влизане",
     "ossHaveAccount": "Вече имате акаунт? Влезте",
-    "ossNoAccount": "Нямате акаунт? Създайте един"
+    "ossNoAccount": "Нямате акаунт? Създайте един",
+    "ossHealthTitle": "OSS+ Услуги",
+    "ossHealthSubtitle": "Статус на вашия самостоятелен стек",
+    "ossHealthTestNow": "Тествай сега",
+    "ossHealthReconfigure": "Преконфигурирай",
+    "ossHealthSlow": "Бавен"
 }

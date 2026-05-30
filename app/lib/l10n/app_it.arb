@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "Crea account",
     "ossSignIn": "Accedi",
     "ossHaveAccount": "Hai già un account? Accedi",
-    "ossNoAccount": "Non hai un account? Creane uno"
+    "ossNoAccount": "Non hai un account? Creane uno",
+    "ossHealthTitle": "Servizi OSS+",
+    "ossHealthSubtitle": "Stato del tuo stack auto-ospitato",
+    "ossHealthTestNow": "Testa ora",
+    "ossHealthReconfigure": "Riconfigura",
+    "ossHealthSlow": "Lento"
 }

@@ -3063,5 +3063,10 @@
     "ossCreateAccount": "Crear cuenta",
     "ossSignIn": "Iniciar sesión",
     "ossHaveAccount": "¿Ya tienes una cuenta? Inicia sesión",
-    "ossNoAccount": "¿No tienes cuenta? Crea una"
+    "ossNoAccount": "¿No tienes cuenta? Crea una",
+    "ossHealthTitle": "Servicios OSS+",
+    "ossHealthSubtitle": "Estado de tu pila auto-alojada",
+    "ossHealthTestNow": "Probar ahora",
+    "ossHealthReconfigure": "Reconfigurar",
+    "ossHealthSlow": "Lento"
 }

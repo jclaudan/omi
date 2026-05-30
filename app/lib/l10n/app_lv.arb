@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "Izveidot kontu",
     "ossSignIn": "Pieteikties",
     "ossHaveAccount": "Jau ir konts? Piesakieties",
-    "ossNoAccount": "Nav konta? Izveidojiet vienu"
+    "ossNoAccount": "Nav konta? Izveidojiet vienu",
+    "ossHealthTitle": "OSS+ Pakalpojumi",
+    "ossHealthSubtitle": "Jūsų pašu mitinātā steka statuss",
+    "ossHealthTestNow": "Testēt tagad",
+    "ossHealthReconfigure": "Pārkonfigurēt",
+    "ossHealthSlow": "Lēns"
 }

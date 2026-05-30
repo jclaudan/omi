@@ -3063,5 +3063,10 @@
     "ossCreateAccount": "アカウントを作成",
     "ossSignIn": "サインイン",
     "ossHaveAccount": "すでにアカウントをお持ちですか？サインイン",
-    "ossNoAccount": "アカウントをお持ちでないですか？作成する"
+    "ossNoAccount": "アカウントをお持ちでないですか？作成する",
+    "ossHealthTitle": "OSS+ サービス",
+    "ossHealthSubtitle": "セルフホストスタックの状態",
+    "ossHealthTestNow": "今すぐテスト",
+    "ossHealthReconfigure": "再設定",
+    "ossHealthSlow": "遅い"
 }

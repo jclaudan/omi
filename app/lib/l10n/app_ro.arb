@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "Creați cont",
     "ossSignIn": "Conectare",
     "ossHaveAccount": "Aveți deja un cont? Conectați-vă",
-    "ossNoAccount": "Nu aveți cont? Creați unul"
+    "ossNoAccount": "Nu aveți cont? Creați unul",
+    "ossHealthTitle": "Servicii OSS+",
+    "ossHealthSubtitle": "Starea stivei dvs. auto-găzduite",
+    "ossHealthTestNow": "Testează acum",
+    "ossHealthReconfigure": "Reconfigurează",
+    "ossHealthSlow": "Lent"
 }

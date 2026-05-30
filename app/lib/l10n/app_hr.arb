@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "Izradite račun",
     "ossSignIn": "Prijava",
     "ossHaveAccount": "Već imate račun? Prijavite se",
-    "ossNoAccount": "Nemate račun? Izradite ga"
+    "ossNoAccount": "Nemate račun? Izradite ga",
+    "ossHealthTitle": "OSS+ Usluge",
+    "ossHealthSubtitle": "Status vašeg samohostiranog stoška",
+    "ossHealthTestNow": "Testiraj sada",
+    "ossHealthReconfigure": "Ponovo konfiguriraj",
+    "ossHealthSlow": "Sporo"
 }

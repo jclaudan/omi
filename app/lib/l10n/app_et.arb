@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "Loo konto",
     "ossSignIn": "Logi sisse",
     "ossHaveAccount": "Juba on konto? Logi sisse",
-    "ossNoAccount": "Pole kontot? Loo endale üks"
+    "ossNoAccount": "Pole kontot? Loo endale üks",
+    "ossHealthTitle": "OSS+ Teenused",
+    "ossHealthSubtitle": "Teie ise majutatud pinu olek",
+    "ossHealthTestNow": "Testi kohe",
+    "ossHealthReconfigure": "Konfigureeri uuesti",
+    "ossHealthSlow": "Aeglane"
 }

@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "اکاؤنٹ بنائیں",
     "ossSignIn": "سائن ان",
     "ossHaveAccount": "پہلے سے اکاؤنٹ ہے؟ سائن ان کریں",
-    "ossNoAccount": "اکاؤنٹ نہیں ہے؟ ایک بنائیں"
+    "ossNoAccount": "اکاؤنٹ نہیں ہے؟ ایک بنائیں",
+    "ossHealthTitle": "OSS+ خدمات",
+    "ossHealthSubtitle": "آپ کے سیلف ہوسٹڈ اسٹیک کی حالت",
+    "ossHealthTestNow": "ابھی ٹیسٹ کریں",
+    "ossHealthReconfigure": "دوبارہ ترتیب دیں",
+    "ossHealthSlow": "سست"
 }

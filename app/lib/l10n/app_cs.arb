@@ -3031,5 +3031,10 @@
     "ossCreateAccount": "Vytvořit účet",
     "ossSignIn": "Přihlásit se",
     "ossHaveAccount": "Již máte účet? Přihlaste se",
-    "ossNoAccount": "Nemáte účet? Vytvořte si ho"
+    "ossNoAccount": "Nemáte účet? Vytvořte si ho",
+    "ossHealthTitle": "Služby OSS+",
+    "ossHealthSubtitle": "Stav vašeho samohostovaného stacku",
+    "ossHealthTestNow": "Testovat nyní",
+    "ossHealthReconfigure": "Překonfigurovat",
+    "ossHealthSlow": "Pomalý"
 }

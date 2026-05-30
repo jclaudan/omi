@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "Создај сметка",
     "ossSignIn": "Најава",
     "ossHaveAccount": "Веќе имате сметка? Најавете се",
-    "ossNoAccount": "Немате сметка? Создадете една"
+    "ossNoAccount": "Немате сметка? Создадете една",
+    "ossHealthTitle": "OSS+ Услуги",
+    "ossHealthSubtitle": "Статус на вашиот самостојно хостиран стек",
+    "ossHealthTestNow": "Тестирај сега",
+    "ossHealthReconfigure": "Реконфигурирај",
+    "ossHealthSlow": "Бавно"
 }

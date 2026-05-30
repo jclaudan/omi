@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "สร้างบัญชี",
     "ossSignIn": "เข้าสู่ระบบ",
     "ossHaveAccount": "มีบัญชีอยู่แล้ว? เข้าสู่ระบบ",
-    "ossNoAccount": "ยังไม่มีบัญชี? สร้างบัญชี"
+    "ossNoAccount": "ยังไม่มีบัญชี? สร้างบัญชี",
+    "ossHealthTitle": "บริการ OSS+",
+    "ossHealthSubtitle": "สถานะสแตกที่โฮสต์เอง",
+    "ossHealthTestNow": "ทดสอบตอนนี้",
+    "ossHealthReconfigure": "กำหนดค่าใหม่",
+    "ossHealthSlow": "ช้า"
 }

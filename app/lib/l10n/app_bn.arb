@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "অ্যাকাউন্ট তৈরি করুন",
     "ossSignIn": "সাইন ইন",
     "ossHaveAccount": "ইতিমধ্যে একটি অ্যাকাউন্ট আছে? সাইন ইন করুন",
-    "ossNoAccount": "অ্যাকাউন্ট নেই? একটি তৈরি করুন"
+    "ossNoAccount": "অ্যাকাউন্ট নেই? একটি তৈরি করুন",
+    "ossHealthTitle": "OSS+ পরিষেবা",
+    "ossHealthSubtitle": "আপনার স্ব-হোস্টেড স্ট্যাকের অবস্থা",
+    "ossHealthTestNow": "এখনই পরীক্ষা করুন",
+    "ossHealthReconfigure": "পুনরায় কনফিগার করুন",
+    "ossHealthSlow": "ধীর"
 }

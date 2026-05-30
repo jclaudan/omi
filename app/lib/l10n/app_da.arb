@@ -3071,5 +3071,10 @@
     "ossCreateAccount": "Opret konto",
     "ossSignIn": "Log ind",
     "ossHaveAccount": "Har du allerede en konto? Log ind",
-    "ossNoAccount": "Har du ikke en konto? Opret en"
+    "ossNoAccount": "Har du ikke en konto? Opret en",
+    "ossHealthTitle": "OSS+ Tjenester",
+    "ossHealthSubtitle": "Status for din selvhostede stak",
+    "ossHealthTestNow": "Test nu",
+    "ossHealthReconfigure": "Rekonfigurer",
+    "ossHealthSlow": "Langsom"
 }

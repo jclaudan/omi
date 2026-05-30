@@ -10640,5 +10640,10 @@
     "ossCreateAccount": "ایجاد حساب کاربری",
     "ossSignIn": "ورود",
     "ossHaveAccount": "قبلاً حساب دارید؟ وارد شوید",
-    "ossNoAccount": "حساب ندارید؟ یکی بسازید"
+    "ossNoAccount": "حساب ندارید؟ یکی بسازید",
+    "ossHealthTitle": "سرویس‌های OSS+",
+    "ossHealthSubtitle": "وضعیت پشته خود-میزبانی شما",
+    "ossHealthTestNow": "همین الان تست کن",
+    "ossHealthReconfigure": "بازپیکربندی",
+    "ossHealthSlow": "کند"
 }

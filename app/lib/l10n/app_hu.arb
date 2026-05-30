@@ -3158,5 +3158,10 @@
     "ossCreateAccount": "Fiók létrehozása",
     "ossSignIn": "Bejelentkezés",
     "ossHaveAccount": "Már van fiókja? Jelentkezzen be",
-    "ossNoAccount": "Nincs fiókja? Hozzon létre egyet"
+    "ossNoAccount": "Nincs fiókja? Hozzon létre egyet",
+    "ossHealthTitle": "OSS+ Szolgáltatások",
+    "ossHealthSubtitle": "Az önállóan üzemeltetett verem állapota",
+    "ossHealthTestNow": "Tesztelés most",
+    "ossHealthReconfigure": "Újrakonfigurálás",
+    "ossHealthSlow": "Lassú"
 }

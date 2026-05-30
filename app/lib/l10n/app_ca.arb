@@ -3031,5 +3031,10 @@
     "ossCreateAccount": "Crea un compte",
     "ossSignIn": "Inicia sessió",
     "ossHaveAccount": "Ja tens un compte? Inicia sessió",
-    "ossNoAccount": "No tens compte? Crea'n un"
+    "ossNoAccount": "No tens compte? Crea'n un",
+    "ossHealthTitle": "Serveis OSS+",
+    "ossHealthSubtitle": "Estat de la vostra pila auto-allotjada",
+    "ossHealthTestNow": "Prova ara",
+    "ossHealthReconfigure": "Reconfigura",
+    "ossHealthSlow": "Lent"
 }

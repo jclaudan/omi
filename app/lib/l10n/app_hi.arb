@@ -3063,5 +3063,10 @@
     "ossCreateAccount": "खाता बनाएं",
     "ossSignIn": "साइन इन करें",
     "ossHaveAccount": "पहले से खाता है? साइन इन करें",
-    "ossNoAccount": "खाता नहीं है? एक बनाएं"
+    "ossNoAccount": "खाता नहीं है? एक बनाएं",
+    "ossHealthTitle": "OSS+ सेवाएं",
+    "ossHealthSubtitle": "आपके स्व-होस्टेड स्टैक की स्थिति",
+    "ossHealthTestNow": "अभी परीक्षण करें",
+    "ossHealthReconfigure": "पुनः कॉन्फ़िगर करें",
+    "ossHealthSlow": "धीमा"
 }

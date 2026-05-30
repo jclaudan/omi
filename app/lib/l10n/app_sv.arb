@@ -3062,5 +3062,10 @@
     "ossCreateAccount": "Skapa konto",
     "ossSignIn": "Logga in",
     "ossHaveAccount": "Har du redan ett konto? Logga in",
-    "ossNoAccount": "Har du inget konto? Skapa ett"
+    "ossNoAccount": "Har du inget konto? Skapa ett",
+    "ossHealthTitle": "OSS+ Tjänster",
+    "ossHealthSubtitle": "Status för din självhostade stack",
+    "ossHealthTestNow": "Testa nu",
+    "ossHealthReconfigure": "Omkonfigurera",
+    "ossHealthSlow": "Långsam"
 }
