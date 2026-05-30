@@ -1,0 +1,143 @@
+version: '3.8'
+
+services:
+  # PostgreSQL + Supabase
+  supabase:
+    image: supabase/supabase:latest
+    container_name: omi-supabase
+    ports:
+      - "5432:5432"      # PostgreSQL
+      - "8000:8000"      # PostgREST API
+      - "3000:3000"      # Studio UI
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-change-me}
+      ANON_KEY: ${ANON_KEY:-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4YW1wbGUiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNDIwOTIwMCwiZXhwIjoxNjQ1OzQ1MjAwfQ.UJTIOA1f9sErKgE6bpmArrEGghU-3vhVYWMuNxqHCCk}
+      SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY:-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4YW1wbGUiLCJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjE0MjA5MjAwLCJleHAiOjE2NDU3NDUyMDB9.DaYlNKVe0N-1UYx2l6kZjNSsGVLkLfKYYjvP4Hx3wkE}
+    volumes:
+      - supabase_data:/var/lib/postgresql/data
+      - ./selfhost/supabase/migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - omi-network
+
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: omi-qdrant
+    ports:
+      - "6333:6333"      # Qdrant API
+      - "6334:6334"      # gRPC
+    environment:
+      QDRANT_TELEMETRY_DISABLED: "true"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test: curl -f http://localhost:6333/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - omi-network
+
+  # MinIO Object Storage
+  minio:
+    image: minio/minio:latest
+    container_name: omi-minio
+    ports:
+      - "9000:9000"      # MinIO API
+      - "9001:9001"      # MinIO Console
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin123}
+    volumes:
+      - minio_data:/minio/data
+    command: server /minio/data --console-address ":9001"
+    healthcheck:
+      test: curl -f http://localhost:9000/minio/health/live || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - omi-network
+
+  # Faster-Whisper STT Service
+  faster-whisper:
+    image: ghcr.io/fedirz/faster-whisper-server:latest
+    container_name: omi-faster-whisper
+    ports:
+      - "8001:8000"      # HTTP API
+      - "8002:8001"      # WebSocket
+    environment:
+      MODEL_NAME: ${WHISPER_MODEL:-base}
+      DEVICE: ${WHISPER_DEVICE:-cpu}
+      COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-default}
+    volumes:
+      - whisper_models:/root/.cache/huggingface
+    healthcheck:
+      test: curl -f http://localhost:8000/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - omi-network
+
+  # Ollama LLM Service
+  ollama:
+    image: ollama/ollama:latest
+    container_name: omi-ollama
+    ports:
+      - "11434:11434"    # Ollama API
+    environment:
+      OLLAMA_HOST: 0.0.0.0:11434
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: curl -f http://localhost:11434/api/tags || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - omi-network
+    # Note: Uncomment for GPU support (NVIDIA)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # Redis Cache (Optional)
+  redis:
+    image: redis:7-alpine
+    container_name: omi-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - omi-network
+
+volumes:
+  supabase_data:
+  qdrant_data:
+  minio_data:
+  whisper_models:
+  ollama_data:
+  redis_data:
+
+networks:
+  omi-network:
+    driver: bridge
