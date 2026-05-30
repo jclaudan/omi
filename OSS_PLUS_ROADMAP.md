@@ -248,10 +248,79 @@ cette étape ajoute les tables Postgres et la couche repository pour migrer les 
 OMI_DB_BACKEND=supabase   # défaut: firestore
 ```
 
-**Ce qui reste (scope v2) :**
-- Routing de TOUS les routers vers la factory (actuellement seuls les nouveaux endpoints peuvent l'utiliser)
+**Routing implémenté (Étape 10) :**
+- `database/conversations.py` : `upsert_conversation`, `get_conversation`, `get_conversations`, `update_conversation`, `delete_conversation` routent vers `SupabaseConversationRepo` quand `OMI_DB_BACKEND=supabase`
+- `database/memories.py` : `create_memory`, `get_memory`, `get_memories`, `update_memory_fields`, `delete_memory` routent vers `SupabaseMemoryRepo`
+- `database/action_items.py` : `create_action_item`, `get_action_item`, `get_action_items`, `update_action_item`, `delete_action_item` routent vers `SupabaseActionItemRepo`
+
+**Ce qui reste (scope v3) :**
+- Fonctions spécialisées non couvertes par le repo : `update_conversation_status`, `mark_action_item_completed`, `edit_memory`, sous-collections photos, goals, daily_summaries
 - Chiffrement côté application pour les segments dans Postgres
 - Migration des sous-collections Firestore (chat, daily_summaries, goals…)
+
+---
+
+### Étape 8 — STT streaming : routing Faster-Whisper dans transcribe.py
+**Complexité : Faible** ✅ **DONE**
+
+- [x] Import `process_audio_whisper_ws` dans `routers/transcribe.py`
+- [x] Dispatch dans `_process_stt()` : si `stt_service == STTService.whisper_ws` → `process_audio_whisper_ws`, sinon `process_audio_dg`
+- [x] Idem pour le cas multi-channel (une connexion Whisper WS par channel)
+
+**Variable d'env backend :**
+```
+FASTER_WHISPER_WS_URL=ws://faster-whisper-ws:8002   # active le backend Whisper streaming
+# DEEPGRAM_API_KEY doit être absent pour que la sélection soit automatique
+```
+
+---
+
+### Étape 9 — STT batch : routing Faster-Whisper dans sync.py
+**Complexité : Faible** ✅ **DONE**
+
+- [x] `faster_whisper_prerecorded_from_bytes` dans `utils/stt/pre_recorded.py` — POST multipart vers `/transcribe`
+- [x] `faster_whisper_prerecorded(audio_url)` — télécharge l'audio puis appelle `from_bytes`
+- [x] `get_prerecorded_transcript(audio_url, ...)` — factory : route vers FW si `FASTER_WHISPER_URL` est défini et `DEEPGRAM_API_KEY` absent
+- [x] `routers/sync.py` appelle `get_prerecorded_transcript` à la place de `deepgram_prerecorded`
+
+**Variable d'env backend :**
+```
+FASTER_WHISPER_URL=http://faster-whisper:8001   # active le backend batch Whisper
+```
+
+---
+
+### Étape 10 — DB factory : routing CRUD vers Supabase dans les modules database/
+**Complexité : Haute** ✅ **DONE (CRUD de base)**
+
+Les fonctions CRUD de base dans les modules `database/` existants routent maintenant vers `SupabaseConversationRepo` / `SupabaseMemoryRepo` / `SupabaseActionItemRepo` quand `OMI_DB_BACKEND=supabase`.
+
+**`database/conversations.py` :**
+- [x] `upsert_conversation` — dispatch Supabase en tête de fonction
+- [x] `get_conversation` — refactoré : dispatch public + `_get_conversation_firestore` (décorée)
+- [x] `get_conversations` — refactoré : dispatch public + `_get_conversations_firestore` (décorée)
+- [x] `update_conversation` — dispatch Supabase en tête de fonction
+- [x] `delete_conversation` — dispatch Supabase en tête de fonction
+
+**`database/memories.py` :**
+- [x] `create_memory` — dispatch public + `_create_memory_firestore` (décorée)
+- [x] `get_memory` — refactoré : dispatch public + `_get_memory_firestore` (décorée)
+- [x] `get_memories` — dispatch Supabase en tête de fonction
+- [x] `update_memory_fields` — dispatch Supabase en tête de fonction
+- [x] `delete_memory` — dispatch Supabase en tête de fonction
+
+**`database/action_items.py` :**
+- [x] `create_action_item` — dispatch Supabase en tête de fonction
+- [x] `get_action_item` — dispatch Supabase en tête de fonction
+- [x] `get_action_items` — dispatch Supabase en tête de fonction
+- [x] `update_action_item` — dispatch Supabase en tête de fonction
+- [x] `delete_action_item` — dispatch Supabase en tête de fonction
+
+**Fonctions spécialisées non routées (scope v3) :**
+- `update_conversation_status`, `set_conversation_as_discarded`, `get_in_progress_conversation` → Firestore only
+- `edit_memory`, `change_memory_visibility`, `review_memory` → Firestore only
+- `mark_action_item_completed`, `batch_update_action_items` → via `update_action_item` donc OK en Supabase
+- Sous-collections Firestore (photos, fal_whisperx, chat, goals, daily_summaries) → scope v3
 
 ---
 
@@ -261,29 +330,28 @@ OMI_DB_BACKEND=supabase   # défaut: firestore
 
 | Composant | Statut | Notes |
 |---|---|---|
-| MinIO (remplace GCS) | ✅ Backend modifié | À refactorer en Strategy (étape 1) |
-| Qdrant (remplace Pinecone) | ✅ Backend modifié | À refactorer en Strategy (étape 1) |
-| Faster-Whisper batch STT | ✅ Service + Dockerfile CPU + GPU | Prêt |
-| Faster-Whisper-WS streaming | ✅ Service + Dockerfile CPU + GPU | Prêt |
+| MinIO (remplace GCS) | ✅ Strategy pattern | `OMI_STORAGE_BACKEND=minio` |
+| Qdrant (remplace Pinecone) | ✅ Strategy pattern | `QDRANT_URL` |
+| Faster-Whisper streaming | ✅ Routé dans transcribe.py | `FASTER_WHISPER_WS_URL` |
+| Faster-Whisper batch | ✅ Routé dans sync.py | `FASTER_WHISPER_URL` |
 | Typesense self-hosted | ✅ Dans docker-compose | Prêt |
 | Ollama LLM local | ✅ Dans docker-compose (optionnel) | Prêt |
 | GPU NVIDIA (RTX 4090) | ✅ Dockerfile.cuda + deploy block | Prêt |
 | docker-compose.yml complet | ✅ Tous les services | Prêt |
 | `.env.selfhosted.example` | ✅ Template commenté | Prêt |
 | `SELFHOST.md` | ✅ Documentation | Prêt |
+| Supabase Auth | ✅ Étapes 4-5 | `OMI_AUTH_BACKEND=supabase` |
+| Dashboard santé services | ✅ Étape 6 | Mode OSS+ uniquement |
+| DB factory Supabase | ✅ Étapes 7+10 | `OMI_DB_BACKEND=supabase` |
 
 ### Ce qui reste à faire 🔲
 
-| Composant | Étape | Complexité |
+| Composant | Scope | Complexité |
 |---|---|---|
-| Refactoring Strategy (éviter conflits) | 1 | Moyenne |
-| Mode selector Flutter | 2 | Faible |
-| Onboarding OSS+ Flutter | 3 | Moyenne |
-| Supabase Auth backend | 4 | Haute |
-| Supabase Auth Flutter | 4 | Haute |
-| Initialisation user Supabase | 5 | Moyenne |
-| Dashboard santé services | 6 | Faible |
-| Migration Firestore → Postgres | 7 | Très haute |
+| Fonctions DB spécialisées (status, visibility, photos…) | v3 | Haute |
+| Chiffrement Postgres côté application | v3 | Moyenne |
+| Migration sous-collections Firestore | v3 | Très haute |
+| Routage LLM Ollama | v3 | Faible |
 
 ---
 
