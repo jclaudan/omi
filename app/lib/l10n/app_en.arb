@@ -11090,5 +11090,25 @@
     "ossNoAccount": "Don't have an account? Create one",
     "@ossNoAccount": {
         "description": "OSS+ toggle to sign up mode"
+    },
+    "ossHealthTitle": "OSS+ Services",
+    "@ossHealthTitle": {
+        "description": "OSS+ health dashboard page title"
+    },
+    "ossHealthSubtitle": "Status of your self-hosted stack",
+    "@ossHealthSubtitle": {
+        "description": "OSS+ health dashboard subtitle"
+    },
+    "ossHealthTestNow": "Test Now",
+    "@ossHealthTestNow": {
+        "description": "OSS+ health dashboard: force immediate health check"
+    },
+    "ossHealthReconfigure": "Reconfigure",
+    "@ossHealthReconfigure": {
+        "description": "OSS+ health dashboard: link to reconfigure a service"
+    },
+    "ossHealthSlow": "Slow",
+    "@ossHealthSlow": {
+        "description": "OSS+ health dashboard: high latency status label"
     }
 }

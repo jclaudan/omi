@@ -204,15 +204,17 @@ Création et gestion du profil utilisateur sur l'instance Supabase self-hosted.
 ---
 
 ### Étape 6 — Dashboard santé des services
-**Complexité : Faible | Priorité : Moyenne**
+**Complexité : Faible | Priorité : Moyenne** ✅ **DONE**
 
 Écran accessible depuis les paramètres en mode OSS+.
 
-- [ ] Ping de chaque service toutes les 30 secondes
-- [ ] Indicateur visuel : ● vert (connecté) / ● rouge (hors ligne) / ● orange (latence élevée)
-- [ ] Affichage de la latence en ms
-- [ ] Bouton "Reconfigurer" → retourne à l'onboarding du service concerné
-- [ ] Bouton "Tester maintenant" pour forcer un check immédiat
+- [x] Ping de chaque service toutes les 30 secondes (Timer.periodic 30s)
+- [x] Indicateur visuel : ● vert (connecté) / ● rouge (hors ligne) / ● orange (latence élevée > 2000ms)
+- [x] Affichage de la latence en ms
+- [x] Bouton "Reconfigurer" → ouvre l'écran de config du service concerné (StepSupabase, StepStt, StepQdrant, StepMinio, StepOllama)
+- [x] Bouton "Tester maintenant" pour forcer un check immédiat
+- [x] Entrée "Services OSS+" dans le settings drawer (uniquement en mode OSS+)
+- [x] L10n : 5 nouvelles clés traduites en 49 langues
 
 **Services monitorés :**
 | Service | Endpoint de santé |
