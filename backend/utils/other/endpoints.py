@@ -5,47 +5,54 @@ import time
 from fastapi import Depends, Header, HTTPException, WebSocketException
 from fastapi import Request
 from starlette.websockets import WebSocket
-from firebase_admin import auth
-from firebase_admin.auth import InvalidIdTokenError
 import logging
 import redis as redis_pkg
 
 from database.redis_db import check_rate_limit, try_acquire_listen_lock
 from database.users import record_user_platform
+from utils.auth.factory import verify_token as _factory_verify_token
 from utils.byok import extract_byok_from_websocket, set_byok_keys, validate_byok_request, validate_byok_websocket
 from utils.executors import critical_executor, run_blocking
 from utils.rate_limit_config import RATE_POLICIES, RATE_LIMIT_SHADOW, get_effective_limit
 
 logger = logging.getLogger(__name__)
 
+_AUTH_BACKEND = os.environ.get('OMI_AUTH_BACKEND', 'firebase').lower()
 
-def get_user(uid: str):
-    user = auth.get_user(uid)
-    return user
+if _AUTH_BACKEND != 'supabase':
+    from firebase_admin import auth as _firebase_auth
+
+    def get_user(uid: str):
+        return _firebase_auth.get_user(uid)
+
+else:
+
+    def get_user(uid: str):  # noqa: F811
+        raise NotImplementedError('get_user() not supported in Supabase auth mode')
+
+
+# Sentinel exception class — still imported by some routers for except clauses.
+# In Firebase mode, real InvalidIdTokenError exceptions are raised by verify_token.
+# In Supabase mode, HTTPException is raised instead (FastAPI catches it directly).
+try:
+    from firebase_admin.auth import InvalidIdTokenError
+except Exception:
+
+    class InvalidIdTokenError(Exception):  # type: ignore[no-redef]
+        pass
 
 
 def verify_token(token: str) -> str:
+    """Verify a token (Firebase or Supabase JWT) and return uid.
+
+    Also handles ADMIN_KEY bypass for local development and LOCAL_DEVELOPMENT fallback.
     """
-    Verify a Firebase token or ADMIN_KEY and return the uid.
-
-    Args:
-        token: The token to verify (Firebase ID token or ADMIN_KEY format)
-
-    Returns:
-        The user's uid
-
-    Raises:
-        InvalidIdTokenError: If the token is invalid
-    """
-    # Check for ADMIN_KEY format
     admin_key = os.getenv('ADMIN_KEY')
     if admin_key and token.startswith(admin_key):
         return token[len(admin_key) :]
 
-    # Verify Firebase token
     try:
-        decoded_token = auth.verify_id_token(token)
-        return decoded_token['uid']
+        return _factory_verify_token(token)
     except InvalidIdTokenError:
         if os.getenv('LOCAL_DEVELOPMENT') == 'true':
             return '123'
