@@ -31,7 +31,8 @@ def _goal_dict(doc) -> Dict[str, Any]:
 def get_user_goal(uid: str) -> Optional[Dict[str, Any]]:
     """Get the current active goal for a user (backward compatibility - returns first active goal)."""
     if _SUPABASE:
-        return None
+        from database.repo.supabase_goals import get_user_goal as get_goal_supabase
+        return get_goal_supabase(uid)
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
 
@@ -47,7 +48,8 @@ def get_user_goal(uid: str) -> Optional[Dict[str, Any]]:
 def get_user_goals(uid: str, limit: int = 3) -> List[Dict[str, Any]]:
     """Get all active goals for a user (up to limit)."""
     if _SUPABASE:
-        return []
+        from database.repo.supabase_goals import get_user_goals as get_goals_supabase
+        return get_goals_supabase(uid, limit)
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
 
@@ -65,7 +67,8 @@ def get_user_goals(uid: str, limit: int = 3) -> List[Dict[str, Any]]:
 def create_goal(uid: str, goal_data: Dict[str, Any], max_goals: int = 4) -> Dict[str, Any]:
     """Create a new goal for a user. Supports up to max_goals active goals."""
     if _SUPABASE:
-        return goal_data
+        from database.repo.supabase_goals import create_goal as create_goal_supabase
+        return create_goal_supabase(uid, goal_data, max_goals)
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
 
@@ -95,6 +98,9 @@ def create_goal(uid: str, goal_data: Dict[str, Any], max_goals: int = 4) -> Dict
 
 def update_goal(uid: str, goal_id: str, updates: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     """Update an existing goal."""
+    if _SUPABASE:
+        from database.repo.supabase_goals import update_goal as update_goal_supabase
+        return update_goal_supabase(uid, goal_id, updates)
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
     goal_ref = goals_ref.document(goal_id)
@@ -111,6 +117,9 @@ def update_goal(uid: str, goal_id: str, updates: Dict[str, Any]) -> Optional[Dic
 
 def update_goal_progress(uid: str, goal_id: str, current_value: float) -> Optional[Dict[str, Any]]:
     """Update the current progress value of a goal."""
+    if _SUPABASE:
+        from database.repo.supabase_goals import update_goal_progress as update_progress_supabase
+        return update_progress_supabase(uid, goal_id, current_value)
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
     goal_ref = goals_ref.document(goal_id)
@@ -129,6 +138,10 @@ def update_goal_progress(uid: str, goal_id: str, current_value: float) -> Option
 
 def save_goal_progress_history(uid: str, goal_id: str, value: float):
     """Save a progress data point to history."""
+    if _SUPABASE:
+        from database.repo.supabase_goals import save_goal_progress_history as save_history_supabase
+        save_history_supabase(uid, goal_id, value)
+        return
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
     goal_ref = goals_ref.document(goal_id)
@@ -142,6 +155,9 @@ def save_goal_progress_history(uid: str, goal_id: str, value: float):
 
 def get_goal_history(uid: str, goal_id: str, days: int = 30) -> List[Dict[str, Any]]:
     """Get progress history for a goal."""
+    if _SUPABASE:
+        from database.repo.supabase_goals import get_goal_history as get_history_supabase
+        return get_history_supabase(uid, goal_id, days)
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
     goal_ref = goals_ref.document(goal_id)
@@ -155,6 +171,9 @@ def get_goal_history(uid: str, goal_id: str, days: int = 30) -> List[Dict[str, A
 
 def get_all_goals(uid: str, include_inactive: bool = False) -> List[Dict[str, Any]]:
     """Get all goals for a user."""
+    if _SUPABASE:
+        from database.repo.supabase_goals import get_all_goals as get_all_goals_supabase
+        return get_all_goals_supabase(uid, include_inactive)
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
 
@@ -168,6 +187,9 @@ def get_all_goals(uid: str, include_inactive: bool = False) -> List[Dict[str, An
 
 def delete_goal(uid: str, goal_id: str) -> bool:
     """Delete a goal."""
+    if _SUPABASE:
+        from database.repo.supabase_goals import delete_goal as delete_goal_supabase
+        return delete_goal_supabase(uid, goal_id)
     user_ref = db.collection(users_collection).document(uid)
     goals_ref = user_ref.collection(goals_collection)
     goal_ref = goals_ref.document(goal_id)

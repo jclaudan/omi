@@ -33,7 +33,8 @@ _SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 
 def create_daily_summary(uid: str, summary_data: dict) -> str:
     if _SUPABASE:
-        return summary_data.get('id', '')
+        from database.repo.supabase_daily_summaries import create_daily_summary as create_summary_supabase
+        return create_summary_supabase(uid, summary_data)
 
     """
     Create a new daily summary document.
@@ -53,7 +54,8 @@ def create_daily_summary(uid: str, summary_data: dict) -> str:
 
 def get_daily_summary(uid: str, summary_id: str) -> Optional[dict]:
     if _SUPABASE:
-        return None
+        from database.repo.supabase_daily_summaries import get_daily_summary as get_summary_supabase
+        return get_summary_supabase(uid, summary_id)
 
     """
     Get a single daily summary by ID.
@@ -76,7 +78,8 @@ def get_daily_summary(uid: str, summary_id: str) -> Optional[dict]:
 
 def get_daily_summary_by_date(uid: str, date: str) -> Optional[dict]:
     if _SUPABASE:
-        return None
+        from database.repo.supabase_daily_summaries import get_daily_summary_by_date as get_summary_by_date_supabase
+        return get_summary_by_date_supabase(uid, date)
 
     """
     Get a daily summary by date (YYYY-MM-DD format).
@@ -105,7 +108,8 @@ def get_daily_summaries(
     end_date: Optional[str] = None,
 ) -> List[dict]:
     if _SUPABASE:
-        return []
+        from database.repo.supabase_daily_summaries import get_daily_summaries as get_summaries_supabase
+        return get_summaries_supabase(uid, limit, offset, start_date, end_date)
 
     """
     Get list of daily summaries for a user, ordered by date descending.
@@ -146,6 +150,12 @@ def delete_daily_summary(uid: str, summary_id: str) -> bool:
     Returns:
         True if deleted successfully
     """
+    if _SUPABASE:
+        from database.repo.supabase_daily_summaries import delete_daily_summary as delete_summary_supabase
+        result = delete_summary_supabase(uid, summary_id)
+        redis_db.remove_daily_summary_to_uid(summary_id)
+        return result
+
     user_ref = db.collection('users').document(uid)
     summary_ref = user_ref.collection(DAILY_SUMMARIES_COLLECTION).document(summary_id)
     summary_ref.delete()
@@ -154,6 +164,11 @@ def delete_daily_summary(uid: str, summary_id: str) -> bool:
 
 
 def set_daily_summary_visibility(uid: str, summary_id: str, visibility: str):
+    if _SUPABASE:
+        from database.repo.supabase_daily_summaries import set_daily_summary_visibility as set_visibility_supabase
+        set_visibility_supabase(uid, summary_id, visibility)
+        return
+
     user_ref = db.collection('users').document(uid)
     summary_ref = user_ref.collection(DAILY_SUMMARIES_COLLECTION).document(summary_id)
     summary_ref.update({'visibility': visibility})
@@ -169,6 +184,10 @@ def get_summaries_count(uid: str) -> int:
     Returns:
         Count of summaries
     """
+    if _SUPABASE:
+        from database.repo.supabase_daily_summaries import get_summaries_count as get_count_supabase
+        return get_count_supabase(uid)
+
     user_ref = db.collection('users').document(uid)
     count_query = user_ref.collection(DAILY_SUMMARIES_COLLECTION).count()
     result = count_query.get()
