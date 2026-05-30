@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timezone
 from typing import Optional
 
@@ -9,6 +10,15 @@ from database.redis_db import try_acquire_user_platform_write_lock
 from models.users import Subscription, PlanLimits, PlanType, SubscriptionStatus
 from utils.subscription import get_default_basic_subscription
 import logging
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
+
+
+def _sb():
+    from database.repo import supabase_users as _u
+
+    return _u
+
 
 logger = logging.getLogger(__name__)
 
@@ -58,12 +68,6 @@ def record_user_platform(uid: str, raw_platform: Optional[str]) -> None:
     per (uid, coarse_platform) every 10 minutes via Redis so chatty endpoints
     don't hot-spot the user doc. Fail-open: any error is logged and swallowed
     because this is a telemetry side-effect, not a request-correctness path.
-
-    - `signup_platform` is set once via `Firestore.ArrayUnion` semantics:
-      we read the doc and only write it if it's not already present.
-    - `last_active_platform` / `last_active_os` / `last_active_at` are
-      overwritten every throttle-window.
-    - `platforms_used` accumulates via `firestore.ArrayUnion`.
     """
     coarse, os_value = _normalize_platform(raw_platform)
     if not coarse:
@@ -71,6 +75,12 @@ def record_user_platform(uid: str, raw_platform: Optional[str]) -> None:
 
     try:
         if not try_acquire_user_platform_write_lock(uid, coarse):
+            return
+
+        if _SUPABASE:
+            now = datetime.now(timezone.utc).isoformat()
+            _sb().patch_user_metadata(uid, 'last_active_platform', coarse)
+            _sb().patch_user_metadata(uid, 'last_active_at', now)
             return
 
         now = datetime.now(timezone.utc)
@@ -106,6 +116,8 @@ def record_user_platform(uid: str, raw_platform: Optional[str]) -> None:
 
 
 def is_exists_user(uid: str):
+    if _SUPABASE:
+        return _sb().is_exists_user(uid)
     user_ref = db.collection('users').document(uid)
     if not user_ref.get().exists:
         return False
@@ -114,6 +126,8 @@ def is_exists_user(uid: str):
 
 def get_user_profile(uid: str) -> dict:
     """Gets the full user profile document."""
+    if _SUPABASE:
+        return _sb().get_user_profile(uid)
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get()
     if user_doc.exists:
@@ -122,18 +136,25 @@ def get_user_profile(uid: str) -> dict:
 
 
 def get_user_store_recording_permission(uid: str):
+    if _SUPABASE:
+        return _sb().get_user_field(uid, 'store_recording_permission', False)
     user_ref = db.collection('users').document(uid)
     user_data = user_ref.get().to_dict()
     return user_data.get('store_recording_permission', False)
 
 
 def set_user_store_recording_permission(uid: str, value: bool):
+    if _SUPABASE:
+        _sb().patch_user_field(uid, 'store_recording_permission', value)
+        return
     user_ref = db.collection('users').document(uid)
     user_ref.update({'store_recording_permission': value})
 
 
 def get_user_private_cloud_sync_enabled(uid: str) -> bool:
     """Check if user has private cloud sync enabled."""
+    if _SUPABASE:
+        return _sb().get_user_field(uid, 'private_cloud_sync_enabled', True)
     user_ref = db.collection('users').document(uid)
     user_data = user_ref.get().to_dict()
     return user_data.get('private_cloud_sync_enabled', True)
@@ -141,6 +162,9 @@ def get_user_private_cloud_sync_enabled(uid: str) -> bool:
 
 def set_user_private_cloud_sync_enabled(uid: str, value: bool):
     """Enable or disable private cloud sync for a user."""
+    if _SUPABASE:
+        _sb().patch_user_field(uid, 'private_cloud_sync_enabled', value)
+        return
     user_ref = db.collection('users').document(uid)
     user_ref.update({'private_cloud_sync_enabled': value})
 
@@ -167,6 +191,8 @@ BYOK_HEARTBEAT_TTL_SECONDS = 7 * 24 * 60 * 60  # 7 days
 
 
 def get_byok_state(uid: str) -> dict:
+    if _SUPABASE:
+        return _sb().get_user_field(uid, 'byok') or {}
     user_ref = db.collection('users').document(uid)
     data = user_ref.get().to_dict() or {}
     return data.get('byok', {})
@@ -182,12 +208,29 @@ def is_byok_active(uid: str) -> bool:
         return False
     if isinstance(last_seen, datetime):
         age = (datetime.now(timezone.utc) - last_seen).total_seconds()
+    elif isinstance(last_seen, str):
+        try:
+            dt = datetime.fromisoformat(last_seen.replace('Z', '+00:00'))
+            age = (datetime.now(timezone.utc) - dt).total_seconds()
+        except Exception:
+            return False
     else:
         return False
     return age <= BYOK_HEARTBEAT_TTL_SECONDS
 
 
 def set_byok_active(uid: str, fingerprints: dict):
+    if _SUPABASE:
+        _sb().patch_user_field(
+            uid,
+            'byok',
+            {
+                'active': True,
+                'fingerprints': fingerprints,
+                'last_seen_at': datetime.now(timezone.utc).isoformat(),
+            },
+        )
+        return
     user_ref = db.collection('users').document(uid)
     user_ref.set(
         {
@@ -228,12 +271,17 @@ def set_user_deletion_feedback(uid: str, reason: Optional[str], reason_details: 
 
 
 def create_person(uid: str, data: dict):
+    if _SUPABASE:
+        _sb().create_person(uid, data)
+        return data
     people_ref = db.collection('users').document(uid).collection('people')
     people_ref.document(data['id']).set(data)
     return data
 
 
 def get_person(uid: str, person_id: str):
+    if _SUPABASE:
+        return _sb().get_person(uid, person_id)
     person_ref = db.collection('users').document(uid).collection('people').document(person_id)
     person_doc = person_ref.get()
     if not person_doc.exists:
@@ -244,6 +292,8 @@ def get_person(uid: str, person_id: str):
 
 
 def get_people(uid: str):
+    if _SUPABASE:
+        return _sb().get_people(uid)
     people_ref = db.collection('users').document(uid).collection('people')
     result = []
     for person in people_ref.stream():
@@ -254,6 +304,8 @@ def get_people(uid: str):
 
 
 def get_person_by_name(uid: str, name: str):
+    if _SUPABASE:
+        return _sb().get_person_by_name(uid, name)
     people_ref = db.collection('users').document(uid).collection('people')
     query = people_ref.where(filter=FieldFilter('name', '==', name)).limit(1)
     docs = list(query.stream())
@@ -265,16 +317,12 @@ def get_person_by_name(uid: str, name: str):
 
 
 def get_people_by_ids(uid: str, person_ids: list[str]):
-    """Fetch people docs by ID using db.get_all().
-
-    Note: db.get_all() returns results in arbitrary order (Firestore behavior).
-    Callers must not assume the result order matches person_ids order.
-    """
+    """Fetch people docs by ID."""
     if not person_ids:
         return []
+    if _SUPABASE:
+        return _sb().get_people_by_ids(uid, person_ids)
     people_ref = db.collection('users').document(uid).collection('people')
-    # Use document ID fetches instead of where("id", "in", ...) to handle
-    # legacy docs that may not have a stored 'id' field.
     doc_refs = [people_ref.document(pid) for pid in person_ids]
     all_people = []
     for doc in db.get_all(doc_refs):
@@ -286,11 +334,17 @@ def get_people_by_ids(uid: str, person_ids: list[str]):
 
 
 def update_person(uid: str, person_id: str, name: str):
+    if _SUPABASE:
+        _sb().update_person(uid, person_id, name)
+        return
     person_ref = db.collection('users').document(uid).collection('people').document(person_id)
     person_ref.update({'name': name})
 
 
 def delete_person(uid: str, person_id: str):
+    if _SUPABASE:
+        _sb().delete_person(uid, person_id)
+        return
     person_ref = db.collection('users').document(uid).collection('people').document(person_id)
     person_ref.delete()
 
@@ -414,6 +468,9 @@ def remove_person_speech_sample(uid: str, person_id: str, sample_path: str) -> b
 
 def set_user_speaker_embedding(uid: str, embedding: list) -> bool:
     """Store speaker embedding for the user's own voice on their user document."""
+    if _SUPABASE:
+        _sb().set_user_speaker_embedding(uid, embedding)
+        return True
     user_ref = db.collection('users').document(uid)
     user_ref.update(
         {
@@ -426,6 +483,8 @@ def set_user_speaker_embedding(uid: str, embedding: list) -> bool:
 
 def get_user_speaker_embedding(uid: str) -> Optional[list]:
     """Get the user's own speaker embedding from their user document."""
+    if _SUPABASE:
+        return _sb().get_user_speaker_embedding(uid)
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get()
     if not user_doc.exists:
@@ -445,6 +504,9 @@ def set_person_speaker_embedding(uid: str, person_id: str, embedding: list) -> b
     Returns:
         True if stored successfully, False if person not found
     """
+    if _SUPABASE:
+        _sb().set_person_speaker_embedding(uid, person_id, embedding)
+        return True
     person_ref = db.collection('users').document(uid).collection('people').document(person_id)
     person_doc = person_ref.get()
 
@@ -471,6 +533,8 @@ def get_person_speaker_embedding(uid: str, person_id: str) -> Optional[list]:
     Returns:
         List of floats representing the embedding, or None if not found
     """
+    if _SUPABASE:
+        return _sb().get_person_speaker_embedding(uid, person_id)
     person_ref = db.collection('users').document(uid).collection('people').document(person_id)
     person_doc = person_ref.get()
 
@@ -798,6 +862,10 @@ def update_user_subscription(uid: str, subscription_data: dict):
     subscription_data_to_store.pop('features', None)
     subscription_data_to_store.pop('limits', None)
 
+    if _SUPABASE:
+        _sb().patch_user_field(uid, 'subscription', subscription_data_to_store)
+        return
+
     user_ref = db.collection('users').document(uid)
     user_ref.update({'subscription': subscription_data_to_store})
 
@@ -817,6 +885,8 @@ def get_data_protection_level(uid: str) -> str:
     Returns:
         'enhanced' or 'e2ee'. Defaults to 'enhanced'.
     """
+    if _SUPABASE:
+        return _sb().get_user_field(uid, 'data_protection_level', 'standard')
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get()
 
@@ -869,6 +939,8 @@ def get_user_language_preference(uid: str) -> str:
     Returns:
         Language code (e.g., 'en', 'vi') or empty string if not set
     """
+    if _SUPABASE:
+        return _sb().get_user_field(uid, 'language', '') or ''
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get()
 
@@ -909,6 +981,12 @@ def set_user_onboarding_state(uid: str, onboarding_data: dict) -> None:
 
 def get_user_subscription(uid: str) -> Subscription:
     """Gets the user's subscription, creating a default free one if it doesn't exist."""
+    if _SUPABASE:
+        # In OSS+ mode, all users have a pro subscription (self-hosted, no paywall).
+        from database.repo.supabase_users import _OSS_SUBSCRIPTION
+
+        return Subscription(**_OSS_SUBSCRIPTION)
+
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get(['subscription'])
     if user_doc.exists:
@@ -1005,16 +1083,9 @@ def get_task_integrations(uid: str) -> dict:
 
 
 def get_task_integration(uid: str, app_key: str) -> Optional[dict]:
-    """
-    Get a specific task integration connection.
-
-    Args:
-        uid: User ID
-        app_key: Task integration app key (e.g., 'asana', 'todoist')
-
-    Returns:
-        Connection details or None if not found
-    """
+    """Get a specific task integration connection."""
+    if _SUPABASE:
+        return _sb().get_task_integration(uid, app_key)
     user_ref = db.collection('users').document(uid)
     integration_ref = user_ref.collection('task_integrations').document(app_key)
     doc = integration_ref.get()
@@ -1025,14 +1096,10 @@ def get_task_integration(uid: str, app_key: str) -> Optional[dict]:
 
 
 def set_task_integration(uid: str, app_key: str, data: dict) -> None:
-    """
-    Save or update a task integration connection.
-
-    Args:
-        uid: User ID
-        app_key: Task integration app key (e.g., 'asana', 'todoist')
-        data: Connection details to save
-    """
+    """Save or update a task integration connection."""
+    if _SUPABASE:
+        _sb().set_task_integration(uid, app_key, data)
+        return
     user_ref = db.collection('users').document(uid)
     integration_ref = user_ref.collection('task_integrations').document(app_key)
 
@@ -1080,15 +1147,9 @@ def delete_task_integration(uid: str, app_key: str) -> bool:
 
 
 def get_default_task_integration(uid: str) -> Optional[str]:
-    """
-    Get the user's default task integration app.
-
-    Args:
-        uid: User ID
-
-    Returns:
-        App key of default integration or None
-    """
+    """Get the user's default task integration app."""
+    if _SUPABASE:
+        return _sb().get_default_task_integration(uid)
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get()
 
@@ -1100,13 +1161,10 @@ def get_default_task_integration(uid: str) -> Optional[str]:
 
 
 def set_default_task_integration(uid: str, app_key: str) -> None:
-    """
-    Set the user's default task integration app.
-
-    Args:
-        uid: User ID
-        app_key: Task integration app key to set as default
-    """
+    """Set the user's default task integration app."""
+    if _SUPABASE:
+        _sb().set_default_task_integration(uid, app_key)
+        return
     user_ref = db.collection('users').document(uid)
     user_ref.set({'default_task_integration': app_key}, merge=True)
 
@@ -1117,16 +1175,9 @@ def set_default_task_integration(uid: str, app_key: str) -> None:
 
 
 def get_integration(uid: str, app_key: str) -> Optional[dict]:
-    """
-    Get a specific integration connection.
-
-    Args:
-        uid: User ID
-        app_key: Integration app key (e.g., 'google_calendar', 'whoop')
-
-    Returns:
-        Connection details or None if not found
-    """
+    """Get a specific integration connection."""
+    if _SUPABASE:
+        return _sb().get_integration(uid, app_key)
     user_ref = db.collection('users').document(uid)
     integration_ref = user_ref.collection('integrations').document(app_key)
     doc = integration_ref.get()
@@ -1137,14 +1188,10 @@ def get_integration(uid: str, app_key: str) -> Optional[dict]:
 
 
 def set_integration(uid: str, app_key: str, data: dict) -> None:
-    """
-    Save or update an integration connection.
-
-    Args:
-        uid: User ID
-        app_key: Integration app key (e.g., 'google_calendar', 'whoop')
-        data: Connection details to save
-    """
+    """Save or update an integration connection."""
+    if _SUPABASE:
+        _sb().set_integration(uid, app_key, data)
+        return
     user_ref = db.collection('users').document(uid)
     integration_ref = user_ref.collection('integrations').document(app_key)
 
@@ -1189,6 +1236,14 @@ def get_user_transcription_preferences(uid: str) -> dict:
     Returns:
         dict with 'single_language_mode' (bool), 'vocabulary' (List[str]), and 'language' (str)
     """
+    if _SUPABASE:
+        prefs = _sb().get_user_field(uid, 'transcription_prefs') or {}
+        lang = _sb().get_user_field(uid, 'language', '') or ''
+        return {
+            'single_language_mode': prefs.get('single_language_mode', False),
+            'vocabulary': prefs.get('vocabulary', []),
+            'language': lang,
+        }
     user_ref = db.collection('users').document(uid)
     user_doc = user_ref.get()
 
