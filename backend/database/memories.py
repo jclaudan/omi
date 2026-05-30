@@ -104,8 +104,16 @@ def get_memories(
     return result
 
 
-@prepare_for_read(decrypt_func=_prepare_memory_for_read)
 def get_user_public_memories(uid: str, limit: int = 100, offset: int = 0):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        return get_memory_repo().get_memories(uid, limit=limit, offset=offset, visibility='public')
+    return _get_user_public_memories_firestore(uid, limit=limit, offset=offset)
+
+
+@prepare_for_read(decrypt_func=_prepare_memory_for_read)
+def _get_user_public_memories_firestore(uid: str, limit: int = 100, offset: int = 0):
     logger.info(f'get_public_memories {limit} {offset}')
 
     memories_ref = db.collection(users_collection).document(uid).collection(memories_collection)
@@ -123,8 +131,16 @@ def get_user_public_memories(uid: str, limit: int = 100, offset: int = 0):
     return public_memories
 
 
-@prepare_for_read(decrypt_func=_prepare_memory_for_read)
 def get_non_filtered_memories(uid: str, limit: int = 100, offset: int = 0):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        return get_memory_repo().get_memories(uid, limit=limit, offset=offset)
+    return _get_non_filtered_memories_firestore(uid, limit=limit, offset=offset)
+
+
+@prepare_for_read(decrypt_func=_prepare_memory_for_read)
+def _get_non_filtered_memories_firestore(uid: str, limit: int = 100, offset: int = 0):
     logger.info(f'get_non_filtered_memories {uid} {limit} {offset}')
     memories_ref = db.collection(users_collection).document(uid).collection(memories_collection)
     memories_ref = memories_ref.order_by('created_at', direction=firestore.Query.DESCENDING)
@@ -151,9 +167,20 @@ def _create_memory_firestore(uid: str, data: dict):
     memory_ref.set(data)
 
 
+def save_memories(uid: str, data: List[dict]):
+    if not data:
+        return
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        get_memory_repo().save_memories_batch(uid, data)
+        return
+    _save_memories_firestore(uid, data)
+
+
 @set_data_protection_level(data_arg_name='data')
 @prepare_for_write(data_arg_name='data', prepare_func=_prepare_data_for_write)
-def save_memories(uid: str, data: List[dict]):
+def _save_memories_firestore(uid: str, data: List[dict]):
     if not data:
         return
 
@@ -199,6 +226,11 @@ def get_memories_by_ids(uid: str, memory_ids: List[str]) -> List[dict]:
     """
     if not memory_ids:
         return []
+
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        return get_memory_repo().get_memories_by_ids(uid, memory_ids)
 
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
@@ -302,6 +334,12 @@ def delete_memory(uid: str, memory_id: str):
 
 
 def delete_all_memories(uid: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        get_memory_repo().delete_all_memories(uid)
+        return
+
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
     batch = db.batch()
@@ -312,6 +350,11 @@ def delete_all_memories(uid: str):
 
 def get_memory_ids_for_conversation(uid: str, conversation_id: str) -> List[str]:
     """Get all memory IDs associated with a conversation."""
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        return get_memory_repo().get_memory_ids_for_conversation(uid, conversation_id)
+
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
     query = memories_ref.where(filter=FieldFilter('memory_id', '==', conversation_id))
