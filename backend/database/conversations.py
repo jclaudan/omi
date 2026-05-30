@@ -150,15 +150,18 @@ def get_conversation_photos(uid: str, conversation_id: str):
 # *****************************
 
 
-@set_data_protection_level(data_arg_name='conversation_data')
-@prepare_for_write(data_arg_name='conversation_data', prepare_func=_prepare_conversation_for_write)
 def upsert_conversation(uid: str, conversation_data: dict):
     if os.environ.get('OMI_DB_BACKEND') == 'supabase':
         from database.repo.factory import get_conversation_repo
 
         get_conversation_repo().upsert_conversation(uid, conversation_data)
         return
+    _upsert_conversation_firestore(uid, conversation_data)
 
+
+@set_data_protection_level(data_arg_name='conversation_data')
+@prepare_for_write(data_arg_name='conversation_data', prepare_func=_prepare_conversation_for_write)
+def _upsert_conversation_firestore(uid: str, conversation_data: dict):
     if 'audio_base64_url' in conversation_data:
         del conversation_data['audio_base64_url']
     if 'photos' in conversation_data:
@@ -452,6 +455,10 @@ def _finalize_audio_file_group(
 
 
 def update_conversation_title(uid: str, conversation_id: str, title: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_conversation(uid, conversation_id, {'title': title})
+        return
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
 
@@ -473,6 +480,28 @@ def update_conversation_summary(uid: str, conversation_id: str, app_id: Optional
         'ok' on success, 'not_found' if conversation missing,
         'app_result_not_found' if app_id given but no matching apps_results entry.
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        repo = get_conversation_repo()
+        conv = repo.get_conversation(uid, conversation_id)
+        if not conv:
+            return 'not_found'
+        if app_id is None:
+            update_conversation(uid, conversation_id, {'overview': content})
+            return 'ok'
+        apps_response = list(conv.get('apps_response') or [])
+        found = False
+        for entry in apps_response:
+            if isinstance(entry, dict) and entry.get('app_id') == app_id:
+                entry['content'] = content
+                found = True
+                break
+        if not found:
+            return 'app_result_not_found'
+        update_conversation(uid, conversation_id, {'apps_response': apps_response})
+        return 'ok'
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
 
@@ -738,6 +767,12 @@ def migrate_conversations_level_batch(uid: str, conversation_ids: List[str], tar
 @prepare_for_read(decrypt_func=_prepare_conversation_for_read)
 @with_photos(get_conversation_photos)
 def get_in_progress_conversation(uid: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        rows = get_conversation_repo().get_by_status(uid, 'in_progress', limit=1)
+        return rows[0] if rows else None
+
     user_ref = db.collection('users').document(uid)
     conversations_ref = (
         user_ref.collection(conversations_collection)
@@ -750,9 +785,17 @@ def get_in_progress_conversation(uid: str):
     return conversation
 
 
+def get_processing_conversations(uid: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        return get_conversation_repo().get_by_status(uid, 'processing')
+    return _get_processing_conversations_firestore(uid)
+
+
 @prepare_for_read(decrypt_func=_prepare_conversation_for_read)
 @with_photos(get_conversation_photos)
-def get_processing_conversations(uid: str):
+def _get_processing_conversations_firestore(uid: str):
     user_ref = db.collection('users').document(uid)
     conversations_ref = user_ref.collection(conversations_collection).where(
         filter=FieldFilter('status', '==', 'processing')
@@ -762,12 +805,20 @@ def get_processing_conversations(uid: str):
 
 
 def update_conversation_status(uid: str, conversation_id: str, status: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_conversation(uid, conversation_id, {'status': status})
+        return
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
     conversation_ref.update({'status': status})
 
 
 def set_conversation_as_discarded(uid: str, conversation_id: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        update_conversation(uid, conversation_id, {'discarded': True})
+        return
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
     conversation_ref.update({'discarded': True})
