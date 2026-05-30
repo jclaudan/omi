@@ -1,11 +1,14 @@
 import copy
 import hashlib
+import os
 from datetime import datetime, timezone
 from typing import List, Optional
 
 from database._client import db
 from database.helpers import set_data_protection_level, prepare_for_write, prepare_for_read
 from utils import encryption
+
+_SUPABASE = os.environ.get('OMI_DB_BACKEND', 'firestore').lower() == 'supabase'
 
 phone_numbers_collection = 'phone_numbers'
 
@@ -51,6 +54,10 @@ def _prepare_phone_number_for_read(data: dict, uid: str) -> dict:
 @prepare_for_write(data_arg_name='phone_number_data', prepare_func=_prepare_phone_number_for_write)
 def upsert_phone_number(uid: str, phone_number_data: dict):
     """Create or update a verified phone number for a user."""
+    if _SUPABASE:
+        from database.repo.supabase_phone_calls import upsert_phone_number as upsert_supabase
+        upsert_supabase(uid, phone_number_data)
+        return
     user_ref = db.collection('users').document(uid)
     phone_ref = user_ref.collection(phone_numbers_collection).document(phone_number_data['id'])
     phone_ref.set(phone_number_data)
@@ -59,6 +66,9 @@ def upsert_phone_number(uid: str, phone_number_data: dict):
 @prepare_for_read(decrypt_func=_prepare_phone_number_for_read)
 def get_phone_numbers(uid: str) -> List[dict]:
     """Get all verified phone numbers for a user."""
+    if _SUPABASE:
+        from database.repo.supabase_phone_calls import get_phone_numbers as get_numbers_supabase
+        return get_numbers_supabase(uid)
     user_ref = db.collection('users').document(uid)
     phone_refs = user_ref.collection(phone_numbers_collection).stream()
     return [doc.to_dict() for doc in phone_refs]
@@ -67,6 +77,9 @@ def get_phone_numbers(uid: str) -> List[dict]:
 @prepare_for_read(decrypt_func=_prepare_phone_number_for_read)
 def get_phone_number(uid: str, phone_number_id: str) -> Optional[dict]:
     """Get a specific verified phone number."""
+    if _SUPABASE:
+        from database.repo.supabase_phone_calls import get_phone_number as get_number_supabase
+        return get_number_supabase(uid, phone_number_id)
     user_ref = db.collection('users').document(uid)
     phone_ref = user_ref.collection(phone_numbers_collection).document(phone_number_id)
     doc = phone_ref.get()
@@ -81,6 +94,10 @@ def get_phone_number_by_number(uid: str, phone_number: str) -> Optional[dict]:
     For enhanced protection, queries by hash since the phone_number field is encrypted.
     Falls back to plaintext query for standard protection (backward compatibility).
     """
+    if _SUPABASE:
+        from database.repo.supabase_phone_calls import get_phone_number_by_number as get_by_number_supabase
+        return get_by_number_supabase(uid, phone_number)
+
     user_ref = db.collection('users').document(uid)
     phone_hash = _hash_phone_number(phone_number)
 
@@ -102,6 +119,10 @@ def get_phone_number_by_number(uid: str, phone_number: str) -> Optional[dict]:
 
 def delete_phone_number(uid: str, phone_number_id: str):
     """Delete a verified phone number."""
+    if _SUPABASE:
+        from database.repo.supabase_phone_calls import delete_phone_number as delete_supabase
+        delete_supabase(uid, phone_number_id)
+        return
     user_ref = db.collection('users').document(uid)
     phone_ref = user_ref.collection(phone_numbers_collection).document(phone_number_id)
     phone_ref.delete()
@@ -110,6 +131,11 @@ def delete_phone_number(uid: str, phone_number_id: str):
 @prepare_for_read(decrypt_func=_prepare_phone_number_for_read)
 def get_primary_phone_number(uid: str) -> Optional[dict]:
     """Get the user's primary verified phone number."""
+    if _SUPABASE:
+        # In Supabase, fallback to first number (no is_primary flag yet)
+        all_numbers = get_phone_numbers(uid)
+        return all_numbers[0] if all_numbers else None
+
     user_ref = db.collection('users').document(uid)
     query = user_ref.collection(phone_numbers_collection).where('is_primary', '==', True).limit(1)
     docs = list(query.stream())
