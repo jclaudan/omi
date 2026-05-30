@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timezone, timedelta
 from typing import Optional, List
 from google.cloud import firestore
@@ -66,6 +67,11 @@ def create_action_item(uid: str, action_item_data: dict) -> str:
     Returns:
         The ID of the created action item
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_action_item_repo
+
+        return get_action_item_repo().create_action_item(uid, action_item_data)
+
     action_item_data = _prepare_action_item_for_write(action_item_data)
 
     user_ref = db.collection('users').document(uid)
@@ -143,6 +149,11 @@ def get_action_item(uid: str, action_item_id: str) -> Optional[dict]:
     Returns:
         Action item data or None if not found
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_action_item_repo
+
+        return get_action_item_repo().get_action_item(uid, action_item_id)
+
     user_ref = db.collection('users').document(uid)
     action_item_ref = user_ref.collection(action_items_collection).document(action_item_id)
     doc = action_item_ref.get()
@@ -187,6 +198,11 @@ def get_action_items(
         If both created_at and due_at filters are provided, only due_at filters will be applied
         (due to Firestore limitation requiring inequality filters on same field as orderBy).
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_action_item_repo
+
+        return get_action_item_repo().get_action_items(uid, completed=completed, limit=limit or 100, offset=offset)
+
     user_ref = db.collection('users').document(uid)
     query = user_ref.collection(action_items_collection)
 
@@ -316,6 +332,12 @@ def update_action_item(uid: str, action_item_id: str, update_data: dict) -> bool
     Returns:
         True if updated successfully, False otherwise
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_action_item_repo
+
+        get_action_item_repo().update_action_item(uid, action_item_id, update_data)
+        return True
+
     # Prepare data
     update_data = _prepare_action_item_for_write(update_data)
 
@@ -406,6 +428,12 @@ def delete_action_item(uid: str, action_item_id: str) -> bool:
     Returns:
         True if deleted successfully, False otherwise
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_action_item_repo
+
+        get_action_item_repo().delete_action_item(uid, action_item_id)
+        return True
+
     user_ref = db.collection('users').document(uid)
     action_item_ref = user_ref.collection(action_items_collection).document(action_item_id)
 
