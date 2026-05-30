@@ -1,4 +1,5 @@
 import copy
+import os
 from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 
@@ -72,6 +73,11 @@ def get_memories(
     start_date: Optional[datetime] = None,
     end_date: Optional[datetime] = None,
 ):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        return get_memory_repo().get_memories(uid, limit=limit, offset=offset)
+
     logger.info(f'get_memories db {uid} {limit} {offset} {categories} {start_date} {end_date}')
     memories_ref = db.collection(users_collection).document(uid).collection(memories_collection)
 
@@ -127,9 +133,18 @@ def get_non_filtered_memories(uid: str, limit: int = 100, offset: int = 0):
     return memories
 
 
+def create_memory(uid: str, data: dict):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        get_memory_repo().upsert_memory(uid, data)
+        return
+    _create_memory_firestore(uid, data)
+
+
 @set_data_protection_level(data_arg_name='data')
 @prepare_for_write(data_arg_name='data', prepare_func=_prepare_data_for_write)
-def create_memory(uid: str, data: dict):
+def _create_memory_firestore(uid: str, data: dict):
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
     memory_ref = memories_ref.document(data['id'])
@@ -160,8 +175,16 @@ def delete_memories(uid: str):
     batch.commit()
 
 
-@prepare_for_read(decrypt_func=_prepare_memory_for_read)
 def get_memory(uid: str, memory_id: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        return get_memory_repo().get_memory(uid, memory_id)
+    return _get_memory_firestore(uid, memory_id)
+
+
+@prepare_for_read(decrypt_func=_prepare_memory_for_read)
+def _get_memory_firestore(uid: str, memory_id: str):
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
     memory_ref = memories_ref.document(memory_id)
@@ -221,6 +244,12 @@ def update_memory_fields(uid: str, memory_id: str, data: dict):
     if not data:
         return
 
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        get_memory_repo().update_memory(uid, memory_id, data)
+        return
+
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
     memory_ref = memories_ref.document(memory_id)
@@ -248,6 +277,12 @@ def edit_memory(uid: str, memory_id: str, value: str):
 
 
 def delete_memory(uid: str, memory_id: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_memory_repo
+
+        get_memory_repo().delete_memory(uid, memory_id)
+        return
+
     user_ref = db.collection(users_collection).document(uid)
     memories_ref = user_ref.collection(memories_collection)
     memory_ref = memories_ref.document(memory_id)
