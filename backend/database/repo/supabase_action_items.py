@@ -98,6 +98,12 @@ class SupabaseActionItemRepo:
             params['completed'] = f'eq.{str(completed).lower()}'
         return _get(params)
 
+    def get_action_items_by_ids(self, uid: str, action_item_ids: list) -> list:
+        if not action_item_ids:
+            return []
+        id_list = ','.join(str(aid) for aid in action_item_ids)
+        return _get({'uid': f'eq.{uid}', 'id': f'in.({id_list})', 'deleted': 'eq.false'})
+
     def update_action_item(self, uid: str, action_item_id: str, updates: dict) -> None:
         _patch(uid, action_item_id, updates)
 

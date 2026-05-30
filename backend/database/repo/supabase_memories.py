@@ -179,3 +179,31 @@ class SupabaseMemoryRepo:
 
     def delete_all_memories(self, uid: str) -> None:
         _delete_by_uid(uid)
+
+    def unlock_all_memories(self, uid: str) -> None:
+        if not _is_configured():
+            return
+        try:
+            with httpx.Client(timeout=30.0) as client:
+                client.patch(
+                    f'{_SUPABASE_URL}/rest/v1/{_TABLE}',
+                    headers=_rest_headers(),
+                    params={'uid': f'eq.{uid}', 'is_locked': 'eq.true', 'deleted': 'eq.false'},
+                    json={'is_locked': False},
+                )
+        except Exception as exc:
+            logger.error('supabase memories unlock_all error: %s', exc)
+
+    def delete_memories_for_conversation(self, uid: str, conversation_id: str) -> None:
+        if not _is_configured():
+            return
+        try:
+            with httpx.Client(timeout=15.0) as client:
+                client.patch(
+                    f'{_SUPABASE_URL}/rest/v1/{_TABLE}',
+                    headers=_rest_headers(),
+                    params={'uid': f'eq.{uid}', 'conversation_id': f'eq.{conversation_id}'},
+                    json={'deleted': True, 'updated_at': datetime.now(timezone.utc).isoformat()},
+                )
+        except Exception as exc:
+            logger.error('supabase memories delete_for_conversation error: %s', exc)
