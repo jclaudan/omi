@@ -136,8 +136,16 @@ def _prepare_photo_for_read(photo_data: Optional[Dict[str, Any]], uid: str) -> O
     return data
 
 
-@prepare_for_read(decrypt_func=_prepare_photo_for_read)
 def get_conversation_photos(uid: str, conversation_id: str):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        return get_conversation_repo().get_photos(uid, conversation_id)
+    return _get_conversation_photos_firestore(uid, conversation_id)
+
+
+@prepare_for_read(decrypt_func=_prepare_photo_for_read)
+def _get_conversation_photos_firestore(uid: str, conversation_id: str):
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
     photos_ref = conversation_ref.collection('photos')
@@ -283,7 +291,6 @@ def get_conversations_count(uid: str, include_discarded: bool = False, statuses:
     return int(result[0][0].value)
 
 
-@prepare_for_read(decrypt_func=_prepare_conversation_for_read)
 def get_conversations_without_photos(
     uid: str,
     limit: int = 100,
@@ -300,6 +307,39 @@ def get_conversations_without_photos(
     Same as get_conversations but without loading photos.
     Much faster for list endpoints and bulk operations where full photo base64 isn't needed.
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        return get_conversation_repo().get_conversations(
+            uid, limit=limit, offset=offset, include_discarded=include_discarded
+        )
+    return _get_conversations_without_photos_firestore(
+        uid,
+        limit=limit,
+        offset=offset,
+        include_discarded=include_discarded,
+        statuses=statuses,
+        start_date=start_date,
+        end_date=end_date,
+        categories=categories,
+        folder_id=folder_id,
+        starred=starred,
+    )
+
+
+@prepare_for_read(decrypt_func=_prepare_conversation_for_read)
+def _get_conversations_without_photos_firestore(
+    uid: str,
+    limit: int = 100,
+    offset: int = 0,
+    include_discarded: bool = False,
+    statuses: List[str] = [],
+    start_date: Optional[datetime] = None,
+    end_date: Optional[datetime] = None,
+    categories: Optional[List[str]] = None,
+    folder_id: Optional[str] = None,
+    starred: Optional[bool] = None,
+):
     conversations_ref = db.collection('users').document(uid).collection(conversations_collection)
     if not include_discarded:
         conversations_ref = conversations_ref.where(filter=FieldFilter('discarded', '==', False))
@@ -372,6 +412,8 @@ def create_audio_files_from_chunks(
     uid: str,
     conversation_id: str,
 ) -> List[AudioFile]:
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        return []  # audio chunk sub-collections not supported in Supabase mode
     """
     Create audio file records by merging chunks from a conversation.
     Chunks are merged unless there's a gap > 30 seconds between segments.
@@ -1057,6 +1099,12 @@ def unlock_all_conversations(uid: str):
     """
     Finds all conversations for a user with is_locked: True and updates them to is_locked = False.
     """
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        get_conversation_repo().unlock_all_conversations(uid)
+        return
+
     conversations_ref = db.collection('users').document(uid).collection(conversations_collection)
     locked_conversations_query = conversations_ref.where(filter=FieldFilter('is_locked', '==', True))
 
@@ -1179,6 +1227,12 @@ def get_conversation_transcripts_by_model(uid: str, conversation_id: str):
 
 
 def store_conversation_photos(uid: str, conversation_id: str, photos: List[ConversationPhoto]):
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        get_conversation_repo().store_photos(uid, conversation_id, [p.dict() for p in photos])
+        return
+
     user_ref = db.collection('users').document(uid)
     conversation_ref = user_ref.collection(conversations_collection).document(conversation_id)
 
@@ -1204,9 +1258,19 @@ def store_conversation_photos(uid: str, conversation_id: str, photos: List[Conve
 # ********************************
 
 
+def get_closest_conversation_to_timestamps(uid: str, start_timestamp: int, end_timestamp: int) -> Optional[dict]:
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        return get_conversation_repo().get_closest_to_timestamps(uid, start_timestamp, end_timestamp)
+    return _get_closest_conversation_to_timestamps_firestore(uid, start_timestamp, end_timestamp)
+
+
 @prepare_for_read(decrypt_func=_prepare_conversation_for_read)
 @with_photos(get_conversation_photos)
-def get_closest_conversation_to_timestamps(uid: str, start_timestamp: int, end_timestamp: int) -> Optional[dict]:
+def _get_closest_conversation_to_timestamps_firestore(
+    uid: str, start_timestamp: int, end_timestamp: int
+) -> Optional[dict]:
     start_threshold = datetime.fromtimestamp(start_timestamp, tz=timezone.utc) - timedelta(minutes=2)
     end_threshold = datetime.fromtimestamp(end_timestamp, tz=timezone.utc) + timedelta(minutes=2)
 
@@ -1244,9 +1308,18 @@ def get_closest_conversation_to_timestamps(uid: str, start_timestamp: int, end_t
     return closest_conversation
 
 
+def get_last_completed_conversation(uid: str) -> Optional[dict]:
+    if os.environ.get('OMI_DB_BACKEND') == 'supabase':
+        from database.repo.factory import get_conversation_repo
+
+        rows = get_conversation_repo().get_by_status(uid, ConversationStatus.completed, limit=1)
+        return rows[0] if rows else None
+    return _get_last_completed_conversation_firestore(uid)
+
+
 @prepare_for_read(decrypt_func=_prepare_conversation_for_read)
 @with_photos(get_conversation_photos)
-def get_last_completed_conversation(uid: str) -> Optional[dict]:
+def _get_last_completed_conversation_firestore(uid: str) -> Optional[dict]:
     query = (
         db.collection('users')
         .document(uid)
