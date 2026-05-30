@@ -13,6 +13,8 @@ from utils.other.endpoints import timeit
 import logging
 
 _DG_TIMEOUT = httpx.Timeout(connect=10.0, read=120.0, write=30.0, pool=10.0)
+_FASTER_WHISPER_URL = os.getenv('FASTER_WHISPER_URL')
+_FW_TIMEOUT = httpx.Timeout(connect=10.0, read=180.0, write=30.0, pool=10.0)
 
 logger = logging.getLogger(__name__)
 
@@ -433,6 +435,90 @@ def fal_whisperx(
         if return_language:
             return [], 'en'
         return []
+
+
+@timeit
+def faster_whisper_prerecorded_from_bytes(
+    audio_bytes: bytes,
+    language: Optional[str] = None,
+    return_language: bool = False,
+) -> Union[List[dict], Tuple[List[dict], str]]:
+    """Transcribe audio bytes via the self-hosted Faster-Whisper batch service (POST /transcribe).
+
+    Returns words in the same format as deepgram_prerecorded_from_bytes so postprocess_words works unchanged.
+    No speaker diarization — all words are assigned to SPEAKER_00.
+    """
+    base = (_FASTER_WHISPER_URL or 'http://faster-whisper:8001').rstrip('/')
+    endpoint = f'{base}/transcribe'
+    lang = language if language and language != 'multi' else None
+
+    files = {'file': ('audio.wav', audio_bytes, 'audio/wav')}
+    form: dict = {}
+    if lang:
+        form['language'] = lang
+
+    logger.info(f'faster_whisper_prerecorded_from_bytes bytes={len(audio_bytes)} language={lang} endpoint={endpoint}')
+    with httpx.Client(timeout=_FW_TIMEOUT) as client:
+        resp = client.post(endpoint, files=files, data=form)
+        resp.raise_for_status()
+
+    result = resp.json()
+    detected_lang = result.get('language', 'en')
+
+    words = []
+    for seg in result.get('segments', []):
+        for w in seg.get('words', []):
+            words.append(
+                {
+                    'timestamp': [w['start'], w['end']],
+                    'speaker': 'SPEAKER_00',
+                    'text': w['word'],
+                }
+            )
+
+    if return_language:
+        return words, detected_lang
+    return words
+
+
+def _download_audio_bytes_from_url(url: str) -> bytes:
+    with httpx.Client(timeout=httpx.Timeout(connect=5.0, read=120.0, write=10.0)) as client:
+        resp = client.get(url)
+        resp.raise_for_status()
+        return resp.content
+
+
+@timeit
+def faster_whisper_prerecorded(
+    audio_url: str,
+    language: Optional[str] = None,
+    return_language: bool = False,
+    **_kwargs,
+) -> Union[List[dict], Tuple[List[dict], str]]:
+    """Download audio from URL and transcribe via self-hosted Faster-Whisper batch service."""
+    audio_bytes = _download_audio_bytes_from_url(audio_url)
+    return faster_whisper_prerecorded_from_bytes(audio_bytes, language=language, return_language=return_language)
+
+
+def get_prerecorded_transcript(
+    audio_url: str,
+    speakers_count: int = None,
+    return_language: bool = False,
+    language: Optional[str] = None,
+    model: str = 'nova-3',
+    keywords: Optional[Sequence[str]] = None,
+) -> Union[List[dict], Tuple[List[dict], str]]:
+    """Factory: route to Faster-Whisper when FASTER_WHISPER_URL is set and DEEPGRAM_API_KEY absent."""
+    if _FASTER_WHISPER_URL and not os.getenv('DEEPGRAM_API_KEY'):
+        return faster_whisper_prerecorded(audio_url, language=language, return_language=return_language)
+    return deepgram_prerecorded(
+        audio_url,
+        speakers_count=speakers_count,
+        return_language=return_language,
+        language=language,
+        model=model,
+        keywords=keywords,
+    )
 
 
 def _words_cleaning(words: List[dict]):
