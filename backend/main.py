@@ -10,6 +10,7 @@ load_dotenv()  # No-op if .env doesn't exist (production); loads local dev secre
 logging.basicConfig(level=logging.INFO)
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from routers import (
     chat,
@@ -94,6 +95,67 @@ from starlette.formparsers import MultiPartParser
 MultiPartParser.max_part_size = 200 * 1024 * 1024  # 200 MB
 
 app = FastAPI()
+
+# Configure CORS
+if _oss_mode:
+    # OSS+ mode: allow localhost, local IPs, and common ports
+    # Include custom Cloudflare Tunnel domain if provided via env var
+    allow_origins = [
+        "http://localhost",
+        "http://localhost:3000",
+        "http://localhost:8080",
+        "http://localhost:8081",
+        "http://localhost:5000",
+        "http://localhost:5173",  # Vite dev server
+        "http://127.0.0.1",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:8080",
+        "http://127.0.0.1:8081",
+        "http://127.0.0.1:5173",
+        "http://192.168.1.170",
+        "http://192.168.1.170:3000",
+        "http://192.168.1.170:8080",
+        "http://192.168.1.170:8081",
+        "http://192.168.1.170:5000",
+        "http://192.168.1.170:5173",
+        "https://192.168.1.170",
+        "https://192.168.1.170:3000",
+        "https://192.168.1.170:8080",
+        "https://192.168.1.170:8081",
+        "https://192.168.1.170:5173",
+    ]
+    # Add custom domains (e.g., Cloudflare Tunnel) from env var
+    custom_origin = os.environ.get('CORS_ORIGIN')
+    if custom_origin:
+        allow_origins.append(custom_origin)
+
+    # Allow http/https variants for custom origin
+    for origin in list(allow_origins):
+        if origin.startswith('http://'):
+            https_variant = origin.replace('http://', 'https://')
+            if https_variant not in allow_origins:
+                allow_origins.append(https_variant)
+        elif origin.startswith('https://'):
+            http_variant = origin.replace('https://', 'http://')
+            if http_variant not in allow_origins:
+                allow_origins.append(http_variant)
+else:
+    # Production mode: restrict to official domains
+    allow_origins = [
+        "https://omi.me",
+        "https://app.omi.me",
+        "https://www.omi.me",
+    ]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allow_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,
+)
 
 app.include_router(transcribe.router)
 app.include_router(conversations.router)
