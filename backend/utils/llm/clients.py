@@ -652,15 +652,166 @@ ANTHROPIC_AGENT_COMPLEX_MODEL = get_model('chat_agent')
 
 
 # ---------------------------------------------------------------------------
+# OSS+ Mode Detection
+# ---------------------------------------------------------------------------
+_OSS_PLUS_MODE = os.environ.get('OMI_STORAGE_BACKEND') == 'minio'
+_OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY', '')
+_OLLAMA_CONFIGURED = bool(os.environ.get('OLLAMA_BASE_URL', ''))
+
+
+def _get_user_oss_llm_config(uid: Optional[str]) -> Optional[dict]:
+    """Retrieve user's OSS+ LLM provider config from Supabase.
+
+    Returns: {'provider': 'openrouter'|'ollama', 'openrouter_api_key': '...'} or None
+    """
+    if not _OSS_PLUS_MODE or not uid:
+        return None
+
+    try:
+        from database.repo.supabase_users import get_user_profile
+        profile = get_user_profile(uid)
+        if profile and 'oss_llm_config' in profile:
+            return profile['oss_llm_config']
+    except Exception as exc:
+        logger.warning('Failed to get OSS LLM config for user %s: %s', uid, exc)
+
+    return None
+
+
+def _get_ollama_mini_client() -> ChatOpenAI:
+    """Get Ollama mini client for OSS+ mode."""
+    ollama_url = os.environ.get('OLLAMA_BASE_URL', '')
+    ollama_model = os.environ.get('OLLAMA_MODEL', 'llama2')
+    if not ollama_url:
+        raise ValueError('OLLAMA_BASE_URL not configured')
+    return ChatOpenAI(
+        model=ollama_model,
+        base_url=f'{ollama_url.rstrip("/")}/v1',
+        api_key='ollama',
+        callbacks=[_usage_callback],
+        request_timeout=120,
+        max_retries=1
+    )
+
+
+def _get_openrouter_mini_client(api_key: str) -> ChatOpenAI:
+    """Get OpenRouter mini client for OSS+ mode with user's API key."""
+    return ChatOpenAI(
+        model='openai/gpt-4-turbo',
+        api_key=api_key,
+        base_url='https://openrouter.io/api/v1',
+        callbacks=[_usage_callback],
+        request_timeout=120,
+        max_retries=1
+    )
+
+
+def _get_llm_mini_client_for_user(uid: Optional[str] = None) -> ChatOpenAI:
+    """Get LLM mini client based on user's OSS+ config or mode (OSS+ or Production)."""
+    if _OSS_PLUS_MODE:
+        # Try to get user's OSS+ config
+        if uid:
+            user_config = _get_user_oss_llm_config(uid)
+            if user_config:
+                provider = user_config.get('provider', 'ollama')
+                if provider == 'openrouter':
+                    api_key = user_config.get('openrouter_api_key')
+                    if api_key:
+                        logger.info('Using OpenRouter (user config) for uid %s', uid)
+                        return _get_openrouter_mini_client(api_key)
+                elif provider == 'ollama':
+                    if _OLLAMA_CONFIGURED:
+                        logger.info('Using Ollama (user config) for uid %s', uid)
+                        return _get_ollama_mini_client()
+
+        # Fallback to default OSS+ provider
+        if _OLLAMA_CONFIGURED:
+            logger.info('Using Ollama (default OSS+) for uid %s', uid or 'unknown')
+            return _get_ollama_mini_client()
+        elif _OPENROUTER_API_KEY:
+            logger.info('Using OpenRouter (default OSS+) for uid %s', uid or 'unknown')
+            return _get_openrouter_mini_client(_OPENROUTER_API_KEY)
+        else:
+            raise ValueError(
+                'OSS+ mode requires either OLLAMA_BASE_URL or OPENROUTER_API_KEY configured'
+            )
+    elif os.environ.get('OPENAI_API_KEY'):
+        # Production mode: use OpenAI
+        return ChatOpenAI(
+            model='gpt-4.1-mini',
+            callbacks=[_usage_callback],
+            request_timeout=120,
+            max_retries=1
+        )
+    else:
+        raise ValueError(
+            "Missing LLM configuration. Either:\n"
+            "  - Configure OLLAMA_BASE_URL and/or OPENROUTER_API_KEY for OSS+ mode\n"
+            "  - Set OPENAI_API_KEY for production mode"
+        )
+
+
+def _get_llm_mini_client() -> ChatOpenAI:
+    """Legacy: Get LLM mini client (uses default fallback without user context)."""
+    return _get_llm_mini_client_for_user(uid=None)
+
+
+def _get_embeddings_for_user(uid: Optional[str] = None) -> OpenAIEmbeddings:
+    """Get embeddings client based on user's OSS+ config or mode."""
+    if _OSS_PLUS_MODE:
+        # Try to get user's OSS+ config
+        if uid:
+            user_config = _get_user_oss_llm_config(uid)
+            if user_config:
+                provider = user_config.get('provider', 'ollama')
+                if provider == 'openrouter':
+                    api_key = user_config.get('openrouter_api_key')
+                    if api_key:
+                        logger.info('Using OpenRouter embeddings (user config) for uid %s', uid)
+                        return OpenAIEmbeddings(
+                            model='openai/text-embedding-3-large',
+                            api_key=api_key,
+                            base_url='https://openrouter.io/api/v1'
+                        )
+
+        # Fallback to default OSS+ provider
+        if _OPENROUTER_API_KEY:
+            logger.info('Using OpenRouter embeddings (default OSS+) for uid %s', uid or 'unknown')
+            return OpenAIEmbeddings(
+                model='openai/text-embedding-3-large',
+                api_key=_OPENROUTER_API_KEY,
+                base_url='https://openrouter.io/api/v1'
+            )
+        else:
+            raise ValueError(
+                'OSS+ mode requires OPENROUTER_API_KEY configured for embeddings'
+            )
+    elif os.environ.get('OPENAI_API_KEY'):
+        # Production mode: use OpenAI
+        return OpenAIEmbeddings(model="text-embedding-3-large")
+    else:
+        raise ValueError(
+            "Missing embeddings configuration. Either:\n"
+            "  - Set OPENROUTER_API_KEY for OSS+ mode (OMI_STORAGE_BACKEND=minio)\n"
+            "  - Set OPENAI_API_KEY for production mode"
+        )
+
+
+def _get_embeddings_default() -> OpenAIEmbeddings:
+    """Legacy: Get embeddings client (uses default fallback without user context)."""
+    return _get_embeddings_for_user(uid=None)
+
+
+# ---------------------------------------------------------------------------
 # Legacy module-level alias (kept for test compatibility).
 # Production code should use get_llm(feature) exclusively.
 # ---------------------------------------------------------------------------
-llm_mini = ChatOpenAI(model='gpt-4.1-mini', callbacks=[_usage_callback], request_timeout=120, max_retries=1)
+llm_mini = _get_llm_mini_client()
 
 # ---------------------------------------------------------------------------
 # Embeddings, parser, utilities
 # ---------------------------------------------------------------------------
-_embeddings_default = OpenAIEmbeddings(model="text-embedding-3-large")
+_embeddings_default = _get_embeddings_default()
 embeddings = _OpenAIEmbeddingsProxy(
     model="text-embedding-3-large",
     default=_embeddings_default,
@@ -668,16 +819,74 @@ embeddings = _OpenAIEmbeddingsProxy(
 )
 parser = PydanticOutputParser(pydantic_object=Structured)
 
-encoding = tiktoken.encoding_for_model('gpt-4')
+# Lazy-load tiktoken encoding to avoid network access at startup (important for Docker/offline environments)
+_encoding = None
+
+def get_encoding():
+    global _encoding
+    if _encoding is None:
+        try:
+            _encoding = tiktoken.encoding_for_model('gpt-4')
+        except Exception as e:
+            logger.warning(f"Failed to load tiktoken encoding: {e} — some features may not work")
+            _encoding = False  # Sentinel: don't retry
+    return _encoding if _encoding is not False else None
+
+
+def get_llm_mini_for_user(uid: Optional[str] = None) -> ChatOpenAI:
+    """Get LLM mini client for a specific user (OSS+ per-user routing).
+
+    In OSS+ mode, respects user's configured LLM provider preference.
+    In production mode, uses default OpenAI.
+
+    Args:
+        uid: User ID. If provided in OSS+ mode, reads user's LLM config from Supabase.
+             If not provided, uses default provider.
+
+    Returns:
+        ChatOpenAI client configured for the user or default.
+    """
+    return _get_llm_mini_client_for_user(uid)
+
+
+def get_embeddings_for_user(uid: Optional[str] = None) -> OpenAIEmbeddings:
+    """Get embeddings client for a specific user (OSS+ per-user routing).
+
+    In OSS+ mode, respects user's configured LLM provider preference.
+    In production mode, uses default OpenAI.
+
+    Args:
+        uid: User ID. If provided in OSS+ mode, reads user's LLM config from Supabase.
+             If not provided, uses default provider.
+
+    Returns:
+        OpenAIEmbeddings client configured for the user or default.
+    """
+    return _get_embeddings_for_user(uid)
 
 
 def num_tokens_from_string(string: str) -> int:
     """Returns the number of tokens in a text string."""
+    encoding = get_encoding()
+    if encoding is None:
+        return len(string) // 4  # Rough estimate: ~4 chars per token
     num_tokens = len(encoding.encode(string))
     return num_tokens
 
 
-def generate_embedding(content: str) -> List[float]:
+def generate_embedding(content: str, uid: Optional[str] = None) -> List[float]:
+    """Generate embedding for content.
+
+    Args:
+        content: Text to embed
+        uid: Optional user ID for OSS+ per-user routing
+
+    Returns:
+        Embedding vector
+    """
+    if _OSS_PLUS_MODE and uid:
+        emb_client = get_embeddings_for_user(uid)
+        return emb_client.embed_documents([content])[0]
     return embeddings.embed_documents([content])[0]
 
 
