@@ -73,11 +73,11 @@ if (-not (Test-Path $envFile)) {
 
 # Pull latest images
 Write-Host "`n[INFO] Pulling latest Docker images..." -ForegroundColor Yellow
-docker compose -f "$scriptPath/docker-compose.yml" pull 2>&1 | Tee-Object -Variable pullOutput | Out-Null
+docker compose -f "$scriptPath/docker-compose.yml" pull 2>&1 | Where-Object { $_ -notmatch "attribute.*obsolete" } | Out-Null
 
 # Start services
 Write-Host "`n[INFO] Starting services..." -ForegroundColor Yellow
-docker compose -f "$scriptPath/docker-compose.yml" up -d 2>&1 | Tee-Object -Variable upOutput | Out-Null
+docker compose -f "$scriptPath/docker-compose.yml" up -d 2>&1 | Where-Object { $_ -notmatch "attribute.*obsolete" } | Out-Null
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "[ERROR] Failed to start services" -ForegroundColor Red
