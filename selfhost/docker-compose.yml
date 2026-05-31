@@ -1,24 +1,40 @@
 services:
-  # PostgreSQL + Supabase
-  supabase:
-    image: supabase/supabase:latest
+  # PostgreSQL Database (Supabase Alternative)
+  postgres:
+    image: postgres:15-alpine
     container_name: omi-supabase
     ports:
       - "5432:5432"      # PostgreSQL
-      - "8000:8000"      # PostgREST API
-      - "3000:3000"      # Studio UI
     environment:
+      POSTGRES_DB: ${DB_NAME:-omi}
+      POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
-      POSTGRES_HOST: localhost
-      POSTGRES_PORT: 5432
-      JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-change-me}
-      ANON_KEY: ${ANON_KEY:-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4YW1wbGUiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNDIwOTIwMCwiZXhwIjoxNjQ1OzQ1MjAwfQ.UJTIOA1f9sErKgE6bpmArrEGghU-3vhVYWMuNxqHCCk}
-      SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY:-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4YW1wbGUiLCJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjE0MjA5MjAwLCJleHAiOjE2NDU3NDUyMDB9.DaYlNKVe0N-1UYx2l6kZjNSsGVLkLfKYYjvP4Hx3wkE}
     volumes:
       - supabase_data:/var/lib/postgresql/data
-      - ./selfhost/supabase/migrations:/docker-entrypoint-initdb.d
+      - ./supabase/migrations:/docker-entrypoint-initdb.d
     healthcheck:
       test: pg_isready -U postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - omi-network
+
+  # PostgREST API (REST API for PostgreSQL)
+  postgrest:
+    image: postgrest/postgrest:latest
+    container_name: omi-postgrest
+    ports:
+      - "8000:3000"      # PostgREST API
+    environment:
+      PGRST_DB_URI: postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@postgres:5432/${DB_NAME:-omi}
+      PGRST_DB_SCHEMAS: public
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_JWT_SECRET: ${JWT_SECRET:-super-secret-jwt-token-change-me}
+    depends_on:
+      - postgres
+    healthcheck:
+      test: curl -f http://localhost:3000/ || exit 1
       interval: 10s
       timeout: 5s
       retries: 5
