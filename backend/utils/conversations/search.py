@@ -15,7 +15,7 @@ client = typesense.Client(
                 'protocol': os.getenv('TYPESENSE_PROTOCOL', 'https'),
             }
         ],
-        'api_key': os.getenv('TYPESENSE_API_KEY'),
+        'api_key': os.getenv('TYPESENSE_API_KEY', 'typesense_api_key_default'),
         'connection_timeout_seconds': 2,
     }
 )
