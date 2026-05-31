@@ -141,6 +141,29 @@ services:
     networks:
       - omi-network
 
+  # Cloudflare Tunnel (OPTIONAL - for public URL access)
+  # To use:
+  # 1. Set CLOUDFLARE_TUNNEL_TOKEN in .env (get from https://dash.cloudflare.com/profile/api-tokens)
+  # 2. The tunnel URL will be displayed when the container starts
+  # If CLOUDFLARE_TUNNEL_TOKEN is not set, this service will not start
+  cloudflare-tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: omi-cloudflare-tunnel
+    command: tunnel run
+    environment:
+      CLOUDFLARE_API_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
+    depends_on:
+      - postgrest
+    networks:
+      - omi-network
+    profiles: ["tunnel"]  # Only start if profile is enabled
+    healthcheck:
+      test: cloudflared tunnel info || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
 volumes:
   supabase_data:
   qdrant_data:
