@@ -14,8 +14,12 @@ import logging
 from utils.executors import db_executor, run_blocking
 from datetime import datetime, timezone
 
-import google.auth
-import google.auth.transport.requests
+try:
+    import google.auth
+    import google.auth.transport.requests
+except Exception:
+    google = None
+
 import httpx
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from pydantic import BaseModel
@@ -38,6 +42,8 @@ GCE_PROJECT = "based-hardware"
 
 def _get_gce_access_token() -> str:
     """Get a GCE access token via Application Default Credentials."""
+    if google is None:
+        raise RuntimeError("Google Cloud authentication not available (OSS+ mode)")
     creds, _ = google.auth.default(scopes=['https://www.googleapis.com/auth/cloud-platform'])
     creds.refresh(google.auth.transport.requests.Request())
     return creds.token

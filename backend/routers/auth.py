@@ -13,7 +13,12 @@ from fastapi import APIRouter, Request, HTTPException, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 import pathlib
-import firebase_admin.auth
+
+try:
+    import firebase_admin.auth
+except Exception:
+    firebase_admin = None
+
 from database.redis_db import set_auth_session, get_auth_session, set_auth_code, get_auth_code, delete_auth_code
 from utils.http_client import get_auth_client
 from utils.log_sanitizer import sanitize
@@ -570,6 +575,9 @@ async def _generate_custom_token(provider: str, id_token: str, access_token: str
         logger.info(f"Firebase sign-in successful for {provider}, UID: {firebase_uid}")
 
         # Create custom token for this UID
+        if firebase_admin is None:
+            raise Exception("Firebase not initialized for custom token generation")
+
         custom_token = firebase_admin.auth.create_custom_token(firebase_uid)
 
         return custom_token.decode('utf-8') if isinstance(custom_token, bytes) else custom_token

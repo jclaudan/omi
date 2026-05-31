@@ -2,7 +2,13 @@ import os
 from datetime import datetime
 
 from fastapi import Request, Header, HTTPException, APIRouter, Depends, Query
-from google.api_core.exceptions import NotFound as FirestoreNotFound
+
+try:
+    from google.api_core.exceptions import NotFound as FirestoreNotFound
+except Exception:
+    class FirestoreNotFound(Exception):  # type: ignore[no-redef]
+        pass
+
 import stripe
 from pydantic import BaseModel
 from typing import List, Optional

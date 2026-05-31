@@ -26,7 +26,11 @@ from fastapi.websockets import WebSocket, WebSocketDisconnect
 from starlette.websockets import WebSocketState
 from websockets.exceptions import ConnectionClosed
 
-from firebase_admin.auth import InvalidIdTokenError
+try:
+    from firebase_admin.auth import InvalidIdTokenError
+except Exception:
+    class InvalidIdTokenError(Exception):  # type: ignore[no-redef]
+        pass
 
 from utils.speaker_assignment import (
     process_speaker_assigned_segments,

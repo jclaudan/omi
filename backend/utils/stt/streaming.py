@@ -6,19 +6,50 @@ from enum import Enum
 from typing import Callable, List, Optional
 
 import websockets
-from deepgram import DeepgramClient, DeepgramClientOptions, LiveTranscriptionEvents
-from deepgram.clients.live.v1 import LiveOptions
 
 from utils.byok import get_byok_key
 from utils.executors import sync_executor, run_blocking
-from utils.stt.safe_socket import KeepaliveConfig, SafeDeepgramSocket  # noqa: F401 — re-exported for backward compat
 from utils.stt.vad_gate import GatedDeepgramSocket
 import logging
 
 logger = logging.getLogger(__name__)
 
+_DEEPGRAM_INITIALIZED = False
+_DEEPGRAM_CLIENT = None
+_DEEPGRAM_CLIENT_OPTIONS = None
+_DEEPGRAM_LIVE_OPTIONS = None
+_SAFE_DEEPGRAM_SOCKET = None
 
-headers = {"Authorization": f"Token {os.getenv('DEEPGRAM_API_KEY')}", "Content-Type": "audio/*"}
+# For backward compatibility, we provide SafeDeepgramSocket as module-level (but lazy-load it)
+def get_SafeDeepgramSocket():
+    global _SAFE_DEEPGRAM_SOCKET
+    if _SAFE_DEEPGRAM_SOCKET is None:
+        try:
+            from utils.stt.safe_socket import SafeDeepgramSocket
+            _SAFE_DEEPGRAM_SOCKET = SafeDeepgramSocket
+        except ImportError:
+            pass
+    return _SAFE_DEEPGRAM_SOCKET
+
+def _init_deepgram():
+    global _DEEPGRAM_INITIALIZED, _DEEPGRAM_CLIENT, _DEEPGRAM_CLIENT_OPTIONS, _DEEPGRAM_LIVE_OPTIONS
+    if not _DEEPGRAM_INITIALIZED:
+        try:
+            from deepgram import DeepgramClient, DeepgramClientOptions, LiveTranscriptionEvents
+            from deepgram.clients.live.v1 import LiveOptions
+            _DEEPGRAM_CLIENT = DeepgramClient
+            _DEEPGRAM_CLIENT_OPTIONS = DeepgramClientOptions
+            _DEEPGRAM_LIVE_OPTIONS = LiveOptions
+            _DEEPGRAM_INITIALIZED = True
+        except (ImportError, Exception) as e:
+            logger.warning(f"Failed to initialize Deepgram: {e}")
+            _DEEPGRAM_INITIALIZED = True
+
+def get_deepgram_headers():
+    api_key = os.getenv('DEEPGRAM_API_KEY')
+    if not api_key:
+        return {"Content-Type": "audio/*"}
+    return {"Authorization": f"Token {api_key}", "Content-Type": "audio/*"}
 
 # Self-hosted Faster-Whisper WebSocket STT backend (replaces Deepgram when configured)
 from utils.stt.streaming_whisper_ws import process_audio_whisper_ws  # noqa: F401 — re-exported
@@ -172,26 +203,49 @@ def should_preserve_filler_words(language: str) -> bool:
     return not language.startswith('en')
 
 
-# Initialize Deepgram client based on environment configuration
-is_dg_self_hosted = os.getenv('DEEPGRAM_SELF_HOSTED_ENABLED', '').lower() == 'true'
-deepgram_options = DeepgramClientOptions(options={"termination_exception_connect": "true"})
+# Lazy-load Deepgram client initialization
+_deepgram_options = None
+_deepgram_cloud_options = None
+_deepgram_instance = None
+_deepgram_beta_instance = None
 
-deepgram_cloud_options = DeepgramClientOptions(options={"termination_exception_connect": "true"})
-deepgram_cloud_options.url = "https://api.deepgram.com"
+def _init_deepgram_clients():
+    global _deepgram_options, _deepgram_cloud_options, _deepgram_instance, _deepgram_beta_instance
+    if _deepgram_instance is not None:
+        return
 
-if is_dg_self_hosted:
-    dg_self_hosted_url = os.getenv('DEEPGRAM_SELF_HOSTED_URL')
-    if not dg_self_hosted_url:
-        raise ValueError("DEEPGRAM_SELF_HOSTED_URL must be set when DEEPGRAM_SELF_HOSTED_ENABLED is true")
-    # Override only the URL while keeping all other options
-    deepgram_options.url = dg_self_hosted_url
-    deepgram_cloud_options.url = dg_self_hosted_url
-    logger.info(f"Using Deepgram self-hosted at: {dg_self_hosted_url}")
+    _init_deepgram()
+    if _DEEPGRAM_CLIENT is None:
+        return
 
-deepgram = DeepgramClient(os.getenv('DEEPGRAM_API_KEY'), deepgram_options)
+    is_dg_self_hosted = os.getenv('DEEPGRAM_SELF_HOSTED_ENABLED', '').lower() == 'true'
+    _deepgram_options = _DEEPGRAM_CLIENT_OPTIONS(options={"termination_exception_connect": "true"})
 
-# unused fn
-deepgram_beta = DeepgramClient(os.getenv('DEEPGRAM_API_KEY'), deepgram_cloud_options)
+    _deepgram_cloud_options = _DEEPGRAM_CLIENT_OPTIONS(options={"termination_exception_connect": "true"})
+    _deepgram_cloud_options.url = "https://api.deepgram.com"
+
+    if is_dg_self_hosted:
+        dg_self_hosted_url = os.getenv('DEEPGRAM_SELF_HOSTED_URL')
+        if not dg_self_hosted_url:
+            raise ValueError("DEEPGRAM_SELF_HOSTED_URL must be set when DEEPGRAM_SELF_HOSTED_ENABLED is true")
+        _deepgram_options.url = dg_self_hosted_url
+        _deepgram_cloud_options.url = dg_self_hosted_url
+        logger.info(f"Using Deepgram self-hosted at: {dg_self_hosted_url}")
+
+    _deepgram_instance = _DEEPGRAM_CLIENT(os.getenv('DEEPGRAM_API_KEY'), _deepgram_options)
+    _deepgram_beta_instance = _DEEPGRAM_CLIENT(os.getenv('DEEPGRAM_API_KEY'), _deepgram_cloud_options)
+
+def get_deepgram_options():
+    _init_deepgram_clients()
+    return _deepgram_options
+
+def get_deepgram_cloud_options():
+    _init_deepgram_clients()
+    return _deepgram_cloud_options
+
+def get_deepgram_client():
+    _init_deepgram_clients()
+    return _deepgram_instance
 
 
 async def process_audio_dg(
@@ -269,6 +323,10 @@ async def process_audio_dg(
         return None
 
     # Always wrap with SafeDeepgramSocket for dead-connection detection (#5870)
+    _init_deepgram()
+    from deepgram import LiveTranscriptionEvents
+    from utils.stt.safe_socket import SafeDeepgramSocket
+
     safe_conn = SafeDeepgramSocket(dg_connection)
 
     # Register close-reason handlers that feed into SafeDeepgramSocket
@@ -353,26 +411,39 @@ def _dg_keywords_set(options: LiveOptions, keywords: List[str]):
     return options
 
 
-def _deepgram_client_for_request() -> DeepgramClient:
+def _deepgram_client_for_request():
     """Return a Deepgram client keyed to the current request's BYOK Deepgram key.
 
     BYOK users pay Deepgram directly — we don't want to rack up minutes on the
     Omi Deepgram account for them. Self-hosted Deepgram ignores BYOK since
     there's no per-user billing concept there.
     """
+    _init_deepgram_clients()
+    if _DEEPGRAM_CLIENT is None:
+        return None
+
+    is_dg_self_hosted = os.getenv('DEEPGRAM_SELF_HOSTED_ENABLED', '').lower() == 'true'
     if is_dg_self_hosted:
-        return deepgram
+        return _deepgram_instance
     byok = get_byok_key('deepgram')
     if byok:
-        return DeepgramClient(byok, deepgram_cloud_options)
-    return deepgram
+        return _DEEPGRAM_CLIENT(byok, get_deepgram_cloud_options())
+    return _deepgram_instance
 
 
 def connect_to_deepgram(
     on_message, on_error, language: str, sample_rate: int, channels: int, model: str, keywords: List[str] = []
 ):
     try:
-        dg_connection = _deepgram_client_for_request().listen.websocket.v("1")
+        _init_deepgram()
+        from deepgram.clients.live.v1 import LiveOptions
+        from deepgram import LiveTranscriptionEvents
+
+        dg_client = _deepgram_client_for_request()
+        if dg_client is None:
+            raise Exception('Deepgram client not available')
+
+        dg_connection = dg_client.listen.websocket.v("1")
         dg_connection.on(LiveTranscriptionEvents.Transcript, on_message)
         dg_connection.on(LiveTranscriptionEvents.Error, on_error)
 

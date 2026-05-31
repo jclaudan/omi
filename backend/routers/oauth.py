@@ -3,7 +3,12 @@ from typing import Optional
 from fastapi import APIRouter, Request, HTTPException, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-import firebase_admin.auth
+
+try:
+    import firebase_admin.auth
+except Exception:
+    firebase_admin = None
+
 import httpx
 
 from database.apps import get_app_by_id_db
@@ -114,6 +119,9 @@ def oauth_authorize(
 
 @router.post("/v1/oauth/token")
 async def oauth_token(firebase_id_token: str = Form(...), app_id: str = Form(...), state: Optional[str] = Form(None)):
+    if firebase_admin is None:
+        raise HTTPException(status_code=400, detail="Firebase not initialized")
+
     try:
         decoded_token = firebase_admin.auth.verify_id_token(firebase_id_token)
         uid = decoded_token['uid']
