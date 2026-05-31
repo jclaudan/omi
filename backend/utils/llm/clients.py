@@ -694,12 +694,17 @@ def _get_ollama_mini_client() -> ChatOpenAI:
     )
 
 
-def _get_openrouter_mini_client(api_key: str) -> ChatOpenAI:
-    """Get OpenRouter mini client for OSS+ mode with user's API key."""
+def _get_openrouter_mini_client(api_key: str, model: Optional[str] = None) -> ChatOpenAI:
+    """Get OpenRouter mini client for OSS+ mode with user's API key and selected model."""
+    # Default to gpt-4-turbo if no model specified, or wrap model with vendor prefix if needed
+    llm_model = model or 'openai/gpt-4-turbo'
+    if model and not model.startswith(('openai/', 'google/', 'anthropic/', 'mistral/', 'meta-llama/')):
+        llm_model = f'openai/{model}'
+
     return ChatOpenAI(
-        model='openai/gpt-4-turbo',
+        model=llm_model,
         api_key=api_key,
-        base_url='https://openrouter.io/api/v1',
+        base_url='https://openrouter.ai/api/v1',
         callbacks=[_usage_callback],
         request_timeout=120,
         max_retries=1
@@ -717,8 +722,9 @@ def _get_llm_mini_client_for_user(uid: Optional[str] = None) -> ChatOpenAI:
                 if provider == 'openrouter':
                     api_key = user_config.get('openrouter_api_key')
                     if api_key:
-                        logger.info('Using OpenRouter (user config) for uid %s', uid)
-                        return _get_openrouter_mini_client(api_key)
+                        model = user_config.get('openrouter_llm_model')
+                        logger.info('Using OpenRouter (user config) for uid %s, model=%s', uid, model or 'default')
+                        return _get_openrouter_mini_client(api_key, model)
                 elif provider == 'ollama':
                     if _OLLAMA_CONFIGURED:
                         logger.info('Using Ollama (user config) for uid %s', uid)
@@ -767,11 +773,15 @@ def _get_embeddings_for_user(uid: Optional[str] = None) -> OpenAIEmbeddings:
                 if provider == 'openrouter':
                     api_key = user_config.get('openrouter_api_key')
                     if api_key:
-                        logger.info('Using OpenRouter embeddings (user config) for uid %s', uid)
+                        # Use user's selected embedding model or default to text-embedding-3-large
+                        embedding_model = user_config.get('openrouter_embedding_model', 'openai/text-embedding-3-large')
+                        if embedding_model and not embedding_model.startswith(('openai/', 'google/', 'anthropic/')):
+                            embedding_model = f'openai/{embedding_model}'
+                        logger.info('Using OpenRouter embeddings (user config) for uid %s, model=%s', uid, embedding_model)
                         return OpenAIEmbeddings(
-                            model='openai/text-embedding-3-large',
+                            model=embedding_model,
                             api_key=api_key,
-                            base_url='https://openrouter.io/api/v1'
+                            base_url='https://openrouter.ai/api/v1'
                         )
 
         # Fallback to default OSS+ provider
@@ -780,7 +790,7 @@ def _get_embeddings_for_user(uid: Optional[str] = None) -> OpenAIEmbeddings:
             return OpenAIEmbeddings(
                 model='openai/text-embedding-3-large',
                 api_key=_OPENROUTER_API_KEY,
-                base_url='https://openrouter.io/api/v1'
+                base_url='https://openrouter.ai/api/v1'
             )
         else:
             raise ValueError(

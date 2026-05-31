@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:omi/backend/http/api/oss.dart';
 import 'package:omi/backend/http/api/oss_user.dart';
 import 'package:omi/backend/preferences.dart';
 import 'package:omi/pages/home/page.dart';
@@ -42,9 +43,23 @@ class _StepAuthState extends State<StepAuth> {
         await AuthService.instance.signInWithSupabase(email, _passwordCtrl.text);
       }
       await initOssUserProfile(email);
+
+      // Sync OSS+ LLM provider choice with backend
+      final prefs = SharedPreferencesUtil();
+      final provider = prefs.ossLlmProvider;
+      final apiKey = prefs.ossOpenrouterApiKey;
+      final llmModel = prefs.ossOpenrouterLlmModel;
+      final embeddingModel = prefs.ossOpenrouterEmbeddingModel;
+      await configureOssLlmProvider(
+        provider: provider,
+        openrouterApiKey: provider == 'openrouter' ? apiKey : null,
+        openrouterLlmModel: provider == 'openrouter' ? llmModel : null,
+        openrouterEmbeddingModel: provider == 'openrouter' ? embeddingModel : null,
+      );
+
       if (!mounted) return;
-      SharedPreferencesUtil().onboardingCompleted = true;
-      SharedPreferencesUtil().permissionsCompleted = true;
+      prefs.onboardingCompleted = true;
+      prefs.permissionsCompleted = true;
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const HomePageWrapper()),
         (_) => false,

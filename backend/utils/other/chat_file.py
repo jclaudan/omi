@@ -1,6 +1,7 @@
 import asyncio
 import base64
 import mimetypes
+import os
 import re
 from pathlib import Path
 from typing import List, Optional
@@ -15,7 +16,54 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-_async_openai = AsyncOpenAI()
+_get_async_openai_cache = None
+
+def _get_async_openai_for_user(uid: Optional[str] = None) -> Optional[AsyncOpenAI]:
+    """Get AsyncOpenAI client for user (OSS+ per-user routing or production).
+
+    In OSS+ mode with per-user config, creates client from user's OpenRouter API key.
+    Returns None if no credentials available.
+    """
+    # OSS+ mode with per-user routing
+    if os.environ.get('OMI_STORAGE_BACKEND') == 'minio' and uid:
+        try:
+            from database.repo.supabase_users import get_user_profile
+            profile = get_user_profile(uid)
+            if profile and 'oss_llm_config' in profile:
+                config = profile['oss_llm_config']
+                if config.get('provider') == 'openrouter' and config.get('openrouter_api_key'):
+                    return AsyncOpenAI(
+                        api_key=config['openrouter_api_key'],
+                        base_url='https://openrouter.io/api/v1'
+                    )
+        except Exception as e:
+            logger.warning('Failed to get OSS LLM config for user %s: %s', uid, e)
+
+    # Fallback to default OSS+ or production
+    if os.environ.get('OMI_STORAGE_BACKEND') == 'minio' and os.environ.get('OPENROUTER_API_KEY'):
+        return AsyncOpenAI(
+            api_key=os.environ.get('OPENROUTER_API_KEY'),
+            base_url='https://openrouter.io/api/v1'
+        )
+    elif os.environ.get('OPENAI_API_KEY'):
+        return AsyncOpenAI()
+    else:
+        logger.warning("No LLM credentials found. File chat features will be unavailable.")
+        return None
+
+def get_async_openai_for_user(uid: Optional[str] = None) -> Optional[AsyncOpenAI]:
+    """Get AsyncOpenAI client for a specific user.
+
+    In OSS+ mode, respects user's configured LLM provider preference.
+    In production mode, uses default OpenAI.
+
+    Args:
+        uid: Optional user ID. If provided in OSS+ mode, reads user's LLM config.
+
+    Returns:
+        AsyncOpenAI client or None if no credentials available.
+    """
+    return _get_async_openai_for_user(uid)
 
 
 class File:
@@ -60,6 +108,7 @@ class FileChatTool:
     def __init__(self, uid: str, chat_session_id: str) -> None:
         self.uid = uid
         self.chat_session_id = chat_session_id
+        self._client = None
 
         # Load chat session from database
         session_data = chat_db.get_chat_session_by_id(uid, chat_session_id)
@@ -71,6 +120,12 @@ class FileChatTool:
         # Get thread and assistant IDs from session (may be None)
         self.thread_id = self.chat_session.openai_thread_id
         self.assistant_id = self.chat_session.openai_assistant_id
+
+    def _get_client(self) -> Optional[AsyncOpenAI]:
+        """Get OpenAI client for this user (cached)."""
+        if self._client is None:
+            self._client = get_async_openai_for_user(self.uid)
+        return self._client
 
     @staticmethod
     def upload(file_path) -> dict:
@@ -127,11 +182,15 @@ class FileChatTool:
 
     async def _ask_vision_stream(self, question: str, files: list, callback=None):
         """Use Chat Completions API with vision for image-only chats (streaming)"""
+        client = self._get_client()
+        if client is None:
+            raise ValueError("File chat not available: No LLM API credentials configured for this user")
+
         output_list = []
         try:
             contents = [{"type": "text", "text": question}]
             for file in files:
-                file_content = await _async_openai.files.content(file.openai_file_id)
+                file_content = await client.files.content(file.openai_file_id)
                 b64 = base64.b64encode(file_content.read()).decode('utf-8')
                 mime = file.mime_type or 'image/png'
                 contents.append(
@@ -141,7 +200,7 @@ class FileChatTool:
                     }
                 )
 
-            stream = await _async_openai.chat.completions.create(
+            stream = await client.chat.completions.create(
                 model="gpt-4.1",
                 messages=[{"role": "user", "content": contents}],
                 stream=True,

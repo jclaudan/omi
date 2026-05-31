@@ -14,9 +14,15 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix='/v1/oss', tags=['oss_config'])
 
 
+class OpenRouterConfig(BaseModel):
+    api_key: str
+    llm_model: Optional[str] = None
+    embedding_model: Optional[str] = None
+
+
 class LlmConfig(BaseModel):
     provider: str
-    openrouter_api_key: Optional[str] = None
+    openrouter: Optional[OpenRouterConfig] = None
 
 
 @router.post('/configure-llm')
@@ -24,7 +30,7 @@ def configure_llm(
     config: LlmConfig,
     uid: str = Depends(get_current_user_uid),
 ):
-    """Store user's LLM provider preference and API keys in Supabase."""
+    """Store user's LLM provider preference, API keys, and model selections in Supabase."""
     if config.provider not in ['openrouter', 'ollama']:
         return {'error': 'provider must be "openrouter" or "ollama"'}
 
@@ -33,11 +39,18 @@ def configure_llm(
         return {'error': 'user profile not found'}
 
     oss_config = {'provider': config.provider}
-    if config.provider == 'openrouter' and config.openrouter_api_key:
-        oss_config['openrouter_api_key'] = config.openrouter_api_key
+
+    if config.provider == 'openrouter':
+        if not config.openrouter:
+            return {'error': 'openrouter config required when provider is openrouter'}
+        oss_config['openrouter_api_key'] = config.openrouter.api_key
+        if config.openrouter.llm_model:
+            oss_config['openrouter_llm_model'] = config.openrouter.llm_model
+        if config.openrouter.embedding_model:
+            oss_config['openrouter_embedding_model'] = config.openrouter.embedding_model
 
     set_user_oss_llm_config(uid, oss_config)
-    logger.info(f'[OSS] User {uid} configured LLM provider: {config.provider}')
+    logger.info(f'[OSS] User {uid} configured LLM: provider={config.provider}')
     return {'success': True, 'provider': config.provider}
 
 

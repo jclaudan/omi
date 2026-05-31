@@ -221,6 +221,11 @@ def set_user_speaker_embedding(uid: str, embedding: list) -> None:
     patch_user_field(uid, 'speaker_embedding', embedding)
 
 
+def set_user_oss_llm_config(uid: str, config: dict) -> None:
+    """Set the OSS+ LLM provider configuration for a user."""
+    patch_user_field(uid, 'oss_llm_config', config)
+
+
 # ---------------------------------------------------------------------------
 # People (already in `people` table from Etape 7, read via REST)
 # ---------------------------------------------------------------------------

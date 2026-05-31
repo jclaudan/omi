@@ -59,6 +59,7 @@ from routers import (
     scores,
     tts,
     oss_user,
+    oss_config,
 )
 
 from utils.other.timeout import TimeoutMiddleware
@@ -209,6 +210,7 @@ app.include_router(chat_sessions.router)
 app.include_router(scores.router)
 app.include_router(tts.router)
 app.include_router(oss_user.router)
+app.include_router(oss_config.router)
 
 
 methods_timeout = {

@@ -1,0 +1,55 @@
+● Vous avez raison! 🎯 Je dois privilégier les scripts que j'ai créés. Voici la bonne procédure :
+
+  ---
+  📋 PROCÉDURE DE DÉPLOIEMENT OSS+
+
+  1️⃣ Lancer l'instance avec le script
+
+  cd C:\Users\shinsekai\workspace\omi\selfhost
+  .\start-oss-plus.ps1
+
+  Ce que fait le script:
+  - ✅ Vérifie .env.selfhosted (crée depuis .env.example si absent)
+  - ✅ Lance docker compose up -d
+  - ✅ Affiche les URLs d'accès
+
+  2️⃣ Vérifier le démarrage
+
+  # Option 1: Via le script
+  docker compose ps
+
+  # Option 2: Vérifier les logs
+  docker compose logs -f omi-backend
+
+  3️⃣ Configurer la base (première fois seulement)
+
+  Les migrations Supabase s'exécutent automatiquement au démarrage :
+  - ✅ Migration 001-015 (tables + oss_llm_config)
+  - ✅ Buckets MinIO créés
+  - ✅ Redis initialisé
+
+  4️⃣ Configurer le LLM (choisir 1 option)
+
+  Option A: Ollama (Local, gratuit)
+  # Dans .env.selfhosted
+  OLLAMA_BASE_URL=http://ollama:11434
+  OLLAMA_MODEL=llama2
+
+  # Décommenter le service ollama dans docker-compose.yml
+
+  Option B: OpenRouter (Cloud, par user)
+  # Dans .env.selfhosted
+  OPENROUTER_API_KEY=sk_...  # Obtenir via https://openrouter.ai/keys
+
+  5️⃣ Redémarrer après config
+
+  .\start-oss-plus.ps1
+
+  6️⃣ APK est prête
+
+  L'APK de production est déjà compilée et prête à distribuer :
+  app/build/app/outputs/flutter-apk/app-prod-release.apk
+
+  ---
+Procédure simplifiée = utiliser le script! ✨
+/app/build/app/outputs/flutter-apk/
