@@ -23,20 +23,20 @@ if ($Help) {
 $ErrorActionPreference = "Stop"
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 
-Write-Host "🛑 Stopping Omi OSS+ Stack..." -ForegroundColor Cyan
+Write-Host "[STOP] Stopping Omi OSS+ Stack..." -ForegroundColor Cyan
 
 # Check if Docker is installed
 try {
     docker --version > $null 2>&1
 } catch {
-    Write-Host "✗ Docker not found" -ForegroundColor Red
+    Write-Host "[ERROR] Docker not found" -ForegroundColor Red
     exit 1
 }
 
 # Stop services
 if ($Remove) {
-    Write-Host "🗑️  Removing containers and volumes..." -ForegroundColor Yellow
-    Write-Host "⚠️  WARNING: This will delete all data!" -ForegroundColor Red
+    Write-Host "[INFO] Removing containers and volumes..." -ForegroundColor Yellow
+    Write-Host "[WARN] WARNING: This will delete all data!" -ForegroundColor Red
 
     $confirmation = Read-Host "Are you sure? Type 'yes' to confirm"
     if ($confirmation -ne "yes") {
@@ -45,14 +45,14 @@ if ($Remove) {
     }
 
     docker compose -f "$scriptPath/docker-compose.yml" down -v
-    Write-Host "✓ Containers and volumes removed" -ForegroundColor Green
+    Write-Host "[OK] Containers and volumes removed" -ForegroundColor Green
 } else {
-    Write-Host "⏹️  Stopping services..." -ForegroundColor Yellow
+    Write-Host "[INFO] Stopping services..." -ForegroundColor Yellow
     docker compose -f "$scriptPath/docker-compose.yml" down
-    Write-Host "✓ Services stopped" -ForegroundColor Green
+    Write-Host "[OK] Services stopped" -ForegroundColor Green
     Write-Host ""
     Write-Host "Tip: Use .\stop-ossp.ps1 -Remove to also delete volumes and data" -ForegroundColor Gray
 }
 
 Write-Host ""
-Write-Host "✓ OSS+ Stack stopped" -ForegroundColor Green
+Write-Host "[OK] OSS+ Stack stopped" -ForegroundColor Green

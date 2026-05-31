@@ -36,7 +36,7 @@ $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 try {
     docker --version > $null 2>&1
 } catch {
-    Write-Host "✗ Docker not found" -ForegroundColor Red
+    Write-Host "[ERROR] Docker not found" -ForegroundColor Red
     exit 1
 }
 
@@ -57,15 +57,15 @@ if ($Service) {
     # Validate service name
     $validService = $services | Where-Object { $_ -like "*$Service*" } | Select-Object -First 1
     if (-not $validService) {
-        Write-Host "❌ Unknown service: $Service" -ForegroundColor Red
+        Write-Host "[ERROR] Unknown service: $Service" -ForegroundColor Red
         Write-Host "Available services:" -ForegroundColor Yellow
         $services | ForEach-Object { Write-Host "  - $_" -ForegroundColor Gray }
         exit 1
     }
-    Write-Host "📺 Logs for $validService" -ForegroundColor Cyan
+    Write-Host "[INFO] Logs for $validService" -ForegroundColor Cyan
     $cmd += $validService
 } else {
-    Write-Host "📺 Logs for all services (press Ctrl+C to exit)" -ForegroundColor Cyan
+    Write-Host "[INFO] Logs for all services (press Ctrl+C to exit)" -ForegroundColor Cyan
 }
 
 # Add options
