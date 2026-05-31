@@ -65,21 +65,18 @@ services:
     networks:
       - omi-network
 
-  # Faster-Whisper STT Service
+  # Faster-Whisper STT Service (using OpenAI Whisper alternative)
   faster-whisper:
-    image: ghcr.io/fedirz/faster-whisper-server:latest
+    image: onerahmet/openai-whisper-asr-webservice:latest
     container_name: omi-faster-whisper
     ports:
-      - "8001:8000"      # HTTP API
-      - "8002:8001"      # WebSocket
+      - "8001:9000"      # HTTP API
     environment:
-      MODEL_NAME: ${WHISPER_MODEL:-base}
-      DEVICE: ${WHISPER_DEVICE:-cpu}
-      COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-default}
+      WORKERS: 1
     volumes:
-      - whisper_models:/root/.cache/huggingface
+      - whisper_models:/root/.cache/torch/whisper-multilingual
     healthcheck:
-      test: curl -f http://localhost:8000/health || exit 1
+      test: wget -q -O- http://localhost:9000/status || exit 1
       interval: 10s
       timeout: 5s
       retries: 5
