@@ -173,7 +173,6 @@ python-slugify==8.0.4
 python-ulid==3.0.0
 pytz==2024.1
 PyYAML==6.0.1
-qdrant-client==1.11.0
 rapidfuzz==3.9.7
 redis==5.0.8
 referencing==0.35.1
