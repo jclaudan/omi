@@ -5,7 +5,11 @@ import re
 from collections import Counter, OrderedDict
 from typing import List, Optional, Tuple
 
-from google.cloud import translate_v3
+try:
+    from google.cloud import translate_v3
+except Exception:
+    translate_v3 = None
+
 from langdetect import detect as langdetect_detect, detect_langs as langdetect_detect_langs, DetectorFactory
 from langdetect.lang_detect_exception import LangDetectException
 from enum import Enum
@@ -22,6 +26,22 @@ detection_cache = OrderedDict()
 MAX_DETECTION_CACHE_SIZE = 1000
 
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT")
+
+# Lazy-load Google Cloud Translate client
+_client = None
+_parent = None
+_mime_type = "text/plain"
+
+def _get_translation_client():
+    global _client, _parent
+    if _client is None and translate_v3 is not None:
+        try:
+            _client = translate_v3.TranslationServiceClient()
+            _parent = f"projects/{PROJECT_ID}/locations/global"
+        except Exception as e:
+            logger.warning(f"Failed to initialize Google Cloud Translate: {e}")
+            _client = False  # Sentinel: don't retry
+    return _client if _client is not False else None
 
 # A set of common English non-lexical utterances that can confuse language detectors.
 # This list helps prevent misclassification of short, ambiguous sounds.
@@ -118,11 +138,6 @@ _non_lexical_utterances = {
 _non_lexical_utterances_pattern = re.compile(
     r'\b(' + '|'.join(re.escape(word) for word in _non_lexical_utterances) + r')\b', re.IGNORECASE
 )
-
-# Initialize the translation client globally
-_client = translate_v3.TranslationServiceClient()
-_parent = f"projects/{PROJECT_ID}/locations/global"
-_mime_type = "text/plain"
 
 # Initialize langdetect for consistent results
 DetectorFactory.seed = 0
