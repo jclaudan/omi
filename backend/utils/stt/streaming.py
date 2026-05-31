@@ -402,7 +402,7 @@ async def connect_to_deepgram_with_backoff(
     raise Exception(f'Could not open socket: All retry attempts failed.')
 
 
-def _dg_keywords_set(options: LiveOptions, keywords: List[str]):
+def _dg_keywords_set(options, keywords: List[str]):  # options: LiveOptions (lazy-loaded)
     if options.model in ['nova-3']:
         options.keyterm = keywords
         return options
