@@ -22,7 +22,7 @@ class CapabilitiesCard extends StatelessWidget {
       case 'proactive_notification':
         return Icons.notifications;
       case 'push_to_talk':
-        return Icons.walkie_talkie;
+        return Icons.radio;
       default:
         return Icons.apps;
     }
