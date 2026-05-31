@@ -69,7 +69,8 @@ services:
       timeout: 5s
       retries: 5
 
-  # ==================== DATABASE (Supabase/PostgreSQL) ====================
+  # ==================== SUPABASE SELF-HOSTED (replaces Firebase) ====================
+  # Complete Supabase stack: PostgreSQL + PostgREST + GoTrue + Realtime + Storage
 
   postgres:
     image: postgres:15-alpine
@@ -88,6 +89,48 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  postgrest:
+    image: postgrest/postgrest
+    restart: unless-stopped
+    ports:
+      - "8000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PGRST_DB_URI: postgres://${DB_USER:-postgres}:${DB_PASSWORD:-postgres}@postgres:5432/${DB_NAME:-omi}
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_DB_POOL: 10
+      PGRST_MAX_ROWS: 1000
+      PGRST_JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-token-change-this}
+      PGRST_OPENAPI_SERVER_PROXY_URL: http://localhost:8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Optional: Auth service for user management (can be enabled later)
+  # gotrue:
+  #   image: supabase/gotrue:v2.139.0
+  #   restart: unless-stopped
+  #   ports:
+  #     - "9999:9999"
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+
+  # Optional: Realtime for WebSocket support (can be enabled later)
+  # realtime:
+  #   image: supabase/realtime:v2.27.4
+  #   restart: unless-stopped
+  #   ports:
+  #     - "4000:4000"
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
 
   # ==================== CACHE ====================
 
@@ -237,6 +280,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      postgrest:
+        condition: service_healthy
       redis:
         condition: service_started
       qdrant:
@@ -258,6 +303,9 @@ services:
       DB_USER: ${DB_USER:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-postgres}
       DB_NAME: ${DB_NAME:-omi}
+      SUPABASE_URL: http://postgrest:3000
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4YW1wbGUiLCJyb2xlIjoic2VydmljZV9yb2xlIiwiaWF0IjoxNjE0MjA5MjAwLCJleHAiOjE2NDU3NDUyMDB9.DaYlNKVe0N-1UYx2l6kZjNSsGVLkLfKYYjvP4Hx3wkE}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4YW1wbGUiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNDIwOTIwMCwiZXhwIjoxNjQ1ODQ1MjAwfQ.UJTIOA1f9sErKgE6bpmArrEGghU-3vhVYWMuNxqHCCk}
       REDIS_DB_HOST: redis
       REDIS_DB_PORT: "6379"
       QDRANT_URL: http://qdrant:6333
@@ -270,7 +318,6 @@ services:
       TYPESENSE_HOST: typesense
       TYPESENSE_HOST_PORT: "8108"
       TYPESENSE_PROTOCOL: http
-      SUPABASE_URL: http://localhost:8000
       OMI_DB_BACKEND: supabase
       OMI_AUTH_BACKEND: supabase
     healthcheck:
