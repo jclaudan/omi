@@ -727,7 +727,7 @@ class _ImportHistoryPageState extends State<ImportHistoryPage> {
               itemBuilder: (context) => [
                 PullDownMenuItem(
                   title: context.l10n.deleteImportedData,
-                  iconWidget: const Icon(Icons.deleteCan, size: 16, color: Colors.red),
+                  iconWidget: const Icon(Icons.delete, size: 16, color: Colors.red),
                   onTap: () {
                     _showDeleteLimitlessDialog();
                   },
@@ -743,7 +743,7 @@ class _ImportHistoryPageState extends State<ImportHistoryPage> {
                   height: 36,
                   decoration: BoxDecoration(color: Colors.grey.withValues(alpha: 0.3), shape: BoxShape.circle),
                   child: const Center(
-                    child: Icon(Icons.more_horizVertical, size: 16.0, color: Colors.white),
+                    child: Icon(Icons.more_vert, size: 16.0, color: Colors.white),
                   ),
                 ),
               ),

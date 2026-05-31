@@ -745,7 +745,7 @@ class _EnableAppsListItem extends StatelessWidget {
           leading: const CircleAvatar(
             backgroundColor: Colors.white,
             radius: 16,
-            child: Icon(Icons.folderOpen, color: Colors.black, size: 14),
+            child: Icon(Icons.folder, color: Colors.black, size: 14),
           ),
           title: Text(
             context.l10n.allTemplates,

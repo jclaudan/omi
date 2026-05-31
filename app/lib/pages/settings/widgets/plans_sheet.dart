@@ -891,7 +891,7 @@ class _PlansSheetState extends State<PlansSheet> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.crown, color: Colors.yellow, size: 20),
+                            const Icon(Icons.emoji_events, color: Colors.yellow, size: 20),
                             const SizedBox(width: 8),
                             Builder(
                               builder: (context) {

@@ -686,7 +686,7 @@ class _SyncPageState extends State<SyncPage> {
       child: Column(
         children: [
           _buildIcon(
-            isPending ? Icons.check_circle : Icons.scheduleRotateLeft,
+            isPending ? Icons.check_circle : Icons.history,
             size: 24,
             color: isPending ? Colors.green : Colors.grey,
           ),
@@ -736,7 +736,7 @@ class _SyncPageState extends State<SyncPage> {
       }
     }
 
-    if (phoneWals.isNotEmpty) addSection(context.l10n.phone, Icons.phone_androidScreen, Colors.grey, phoneWals);
+    if (phoneWals.isNotEmpty) addSection(context.l10n.phone, Icons.phone_android, Colors.grey, phoneWals);
     if (sdCardWals.isNotEmpty) {
       addSection(context.l10n.sdCard, Icons.storage, Colors.deepPurpleAccent, sdCardWals);
     }
@@ -844,7 +844,7 @@ class _SyncPageState extends State<SyncPage> {
                     margin: const EdgeInsets.only(right: 8),
                     decoration: BoxDecoration(color: Colors.grey.withValues(alpha: 0.3), shape: BoxShape.circle),
                     child: Center(
-                      child: _buildIcon(Icons.more_horizVertical, size: 16, color: Colors.white),
+                      child: _buildIcon(Icons.more_vert, size: 16, color: Colors.white),
                     ),
                   ),
                 ),
@@ -1063,7 +1063,7 @@ class _ManageStorageSheet extends StatelessWidget {
               const SizedBox(height: 12),
               // Pending row
               _StorageRow(
-                icon: Icons.scheduleRotateLeft,
+                icon: Icons.history,
                 iconColor: Colors.orange,
                 title: context.l10n.pending,
                 subtitle: context.l10n.notYetSynced,

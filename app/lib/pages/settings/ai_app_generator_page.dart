@@ -908,7 +908,7 @@ class _AiAppGeneratorPageState extends State<_AiAppGeneratorPageView> {
             // Memories feature
             if (hasMemories)
               _buildFeatureRow(
-                icon: Icons.descriptionLines,
+                icon: Icons.description,
                 description: context.l10n.tailoredConversationSummaries,
               ),
 

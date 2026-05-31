@@ -337,7 +337,7 @@ class SttProviderConfig {
       provider: SttProvider.customLive,
       displayName: 'Custom',
       description: 'Define your own real-time STT endpoint',
-      icon: Icons.codeBranch,
+      icon: Icons.branch,
       requestType: SttRequestType.streaming,
       supportedLanguages: SttLanguages.whisperSupported,
       defaultLanguage: 'en',

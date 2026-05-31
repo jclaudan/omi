@@ -583,7 +583,7 @@ class _DeveloperSettingsPageState extends State<_DeveloperSettingsPageView> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
-                              child: Icon(Icons.descriptionImport, color: Colors.grey.shade400, size: 16),
+                              child: Icon(Icons.download, color: Colors.grey.shade400, size: 16),
                             ),
                           ),
                           const SizedBox(width: 14),
@@ -767,7 +767,7 @@ class _DeveloperSettingsPageState extends State<_DeveloperSettingsPageView> {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Icon(Icons.descriptionArrowUp, color: Colors.grey.shade300, size: 16),
+                                        Icon(Icons.upload, color: Colors.grey.shade300, size: 16),
                                         const SizedBox(width: 8),
                                         Text(
                                           context.l10n.shareLogs,
@@ -875,7 +875,7 @@ class _DeveloperSettingsPageState extends State<_DeveloperSettingsPageView> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
-                              child: Icon(Icons.descriptionExport, color: Colors.grey.shade400, size: 16),
+                              child: Icon(Icons.upload, color: Colors.grey.shade400, size: 16),
                             ),
                           ),
                           const SizedBox(width: 14),
@@ -1519,7 +1519,7 @@ class _DeveloperSettingsPageState extends State<_DeveloperSettingsPageView> {
                         _buildExperimentalItem(
                           title: context.l10n.autoCreateSpeakers,
                           description: context.l10n.autoCreateWhenNameDetected,
-                          icon: Icons.person_outlinePlus,
+                          icon: Icons.person_add,
                           value: provider.autoCreateSpeakersEnabled,
                           onChanged: provider.onAutoCreateSpeakersChanged,
                         ),
@@ -1531,7 +1531,7 @@ class _DeveloperSettingsPageState extends State<_DeveloperSettingsPageView> {
                         _buildExperimentalItem(
                           title: 'VAD Gate',
                           description: 'Server-side voice gating to reduce STT costs',
-                          icon: Icons.micSlash,
+                          icon: Icons.mic_off,
                           value: provider.vadGateEnabled,
                           onChanged: provider.onVadGateChanged,
                         ),

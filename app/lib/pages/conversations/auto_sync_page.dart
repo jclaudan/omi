@@ -841,7 +841,7 @@ class _ManageStorageSheet extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _StorageRow(
-                icon: Icons.scheduleRotateLeft,
+                icon: Icons.history,
                 iconColor: Colors.orange,
                 title: context.l10n.pending,
                 subtitle: context.l10n.notYetSynced,

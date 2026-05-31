@@ -808,7 +808,7 @@ class ChatPageState extends State<ChatPage> with AutomaticKeepAliveClientMixin {
                                             ),
                                             PullDownMenuItem(
                                               title: context.l10n.photoLibrary,
-                                              iconWidget: const Icon(Icons.images, size: 16),
+                                              iconWidget: const Icon(Icons.image, size: 16),
                                               onTap: () {
                                                 HapticFeedback.selectionClick();
                                                 if (mounted) {

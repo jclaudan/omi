@@ -943,7 +943,7 @@ class _ConversationDetailPageState extends State<ConversationDetailPage> with Ti
                                 ),
                               PullDownMenuItem(
                                 title: context.l10n.deleteConversation,
-                                iconWidget: Icon(Icons.deleteCan, size: 16, color: Colors.red),
+                                iconWidget: Icon(Icons.delete, size: 16, color: Colors.red),
                                 onTap: () => _handleMenuSelection(context, 'delete', provider),
                               ),
                             ],
@@ -960,7 +960,7 @@ class _ConversationDetailPageState extends State<ConversationDetailPage> with Ti
                                 height: 36,
                                 decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3), shape: BoxShape.circle),
                                 child: const Center(
-                                  child: Icon(Icons.more_horizVertical, size: 16.0, color: Colors.white),
+                                  child: Icon(Icons.more_vert, size: 16.0, color: Colors.white),
                                 ),
                               ),
                             ),

@@ -549,7 +549,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.crown, color: Colors.amber, size: 10),
+                                  const Icon(Icons.emoji_events, color: Colors.amber, size: 10),
                                   const SizedBox(width: 4),
                                   Text(
                                     context.l10n.pro.toUpperCase(),

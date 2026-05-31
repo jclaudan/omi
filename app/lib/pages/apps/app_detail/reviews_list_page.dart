@@ -421,7 +421,7 @@ class _ReviewsListPageState extends State<ReviewsListPage> {
               child: TextButton.icon(
                 onPressed: () => _showReplyDialog(review),
                 icon: Icon(
-                  review.response.isNotEmpty ? Icons.editcil : Icons.reply,
+                  review.response.isNotEmpty ? Icons.edit : Icons.reply,
                   size: 12,
                   color: Colors.deepPurple,
                 ),
