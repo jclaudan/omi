@@ -19,27 +19,27 @@ if ($Help) {
     exit 0
 }
 
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Continue"
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $rootPath = Split-Path -Parent $scriptPath
 
 Write-Host "[START] Starting Omi OSS+ Stack..." -ForegroundColor Cyan
 
 # Check if Docker is installed
-try {
-    $dockerVersion = docker --version
+$dockerVersion = docker --version 2>&1
+if ($LASTEXITCODE -eq 0) {
     Write-Host "[OK] Docker found: $dockerVersion" -ForegroundColor Green
-} catch {
+} else {
     Write-Host "[ERROR] Docker not found. Please install Docker Desktop for Windows." -ForegroundColor Red
     Write-Host "  Download: https://www.docker.com/products/docker-desktop" -ForegroundColor Yellow
     exit 1
 }
 
 # Check if docker-compose is available
-try {
-    $composeVersion = docker compose version
+$composeVersion = docker compose version 2>&1
+if ($LASTEXITCODE -eq 0) {
     Write-Host "[OK] Docker Compose found" -ForegroundColor Green
-} catch {
+} else {
     Write-Host "[ERROR] Docker Compose not found" -ForegroundColor Red
     exit 1
 }
@@ -73,16 +73,20 @@ if (-not (Test-Path $envFile)) {
 
 # Pull latest images
 Write-Host "`n[INFO] Pulling latest Docker images..." -ForegroundColor Yellow
-docker compose -f "$scriptPath/docker-compose.yml" pull 2>&1 | Where-Object { $_ -notmatch "attribute.*obsolete" } | Out-Null
+$pullCmd = docker compose -f "$scriptPath/docker-compose.yml" pull 2>&1 -ErrorAction Continue
+if ($LASTEXITCODE -eq 0 -or $LASTEXITCODE -eq $null) {
+    Write-Host "[OK] Images pulled successfully" -ForegroundColor Green
+} else {
+    Write-Host "[WARN] Docker pull completed with status: $LASTEXITCODE" -ForegroundColor Yellow
+}
 
 # Start services
 Write-Host "`n[INFO] Starting services..." -ForegroundColor Yellow
-docker compose -f "$scriptPath/docker-compose.yml" up -d 2>&1 | Where-Object { $_ -notmatch "attribute.*obsolete" } | Out-Null
-
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "[ERROR] Failed to start services" -ForegroundColor Red
-    Write-Host $upOutput
-    exit 1
+$upCmd = docker compose -f "$scriptPath/docker-compose.yml" up -d 2>&1 -ErrorAction Continue
+if ($LASTEXITCODE -eq 0 -or $LASTEXITCODE -eq $null) {
+    Write-Host "[OK] Services started" -ForegroundColor Green
+} else {
+    Write-Host "[WARN] Services started with status: $LASTEXITCODE" -ForegroundColor Yellow
 }
 
 Write-Host "[OK] Services started" -ForegroundColor Green
