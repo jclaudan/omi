@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:omi/pages/onboarding/mode_selector.dart';
 import 'step_auth.dart';
+import 'step_llm_provider.dart';
 import 'step_minio.dart';
 import 'step_ollama.dart';
 import 'step_qdrant.dart';
 import 'step_stt.dart';
-import 'step_supabase.dart';
 import 'step_test.dart';
 import 'step_welcome.dart';
 
@@ -19,7 +19,7 @@ class OssPlusOnboardingWrapper extends StatefulWidget {
 class _OssPlusOnboardingWrapperState extends State<OssPlusOnboardingWrapper> {
   final PageController _controller = PageController();
   int _currentStep = 0;
-  static const int _totalSteps = 8;
+  static const int _totalSteps = 8; // Removed step_supabase (auto-initialized)
 
   void _next() {
     if (_currentStep < _totalSteps - 1) {
@@ -60,10 +60,10 @@ class _OssPlusOnboardingWrapperState extends State<OssPlusOnboardingWrapper> {
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   StepWelcome(onNext: _next),
-                  StepSupabase(onNext: _next, onBack: _back),
                   StepStt(onNext: _next, onBack: _back),
                   StepQdrant(onNext: _next, onBack: _back),
                   StepMinio(onNext: _next, onBack: _back),
+                  StepLlmProvider(onNext: _next, onBack: _back),
                   StepOllama(onNext: _next, onBack: _back),
                   StepTest(onNext: _next, onBack: _back),
                   StepAuth(onBack: _back),

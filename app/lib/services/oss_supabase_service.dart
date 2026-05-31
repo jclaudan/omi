@@ -12,15 +12,24 @@ class OssSupabaseService {
 
   Future<void> initialize() async {
     if (_initialized) return;
-    final url = SharedPreferencesUtil().ossSupabaseUrl;
-    final anonKey = SharedPreferencesUtil().ossSupabaseAnonKey;
-    if (url.isEmpty || anonKey.isEmpty) {
-      Logger.debug('OssSupabaseService: missing URL or anon key, skipping init');
-      return;
+
+    // Auto-initialize with default OSS+ values if not explicitly configured
+    var url = SharedPreferencesUtil().ossSupabaseUrl;
+    var anonKey = SharedPreferencesUtil().ossSupabaseAnonKey;
+
+    if (url.isEmpty) {
+      url = 'http://localhost:8000'; // Default OSS+ PostgREST endpoint
+      SharedPreferencesUtil().ossSupabaseUrl = url;
     }
+
+    if (anonKey.isEmpty) {
+      anonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV4YW1wbGUiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNDIwOTIwMCwiZXhwIjoxNjQ1ODQ1MjAwfQ.UJTIOA1f9sErKgE6bpmArrEGghU-3vhVYWMuNxqHCCk'; // Default anon key from .env.selfhosted
+      SharedPreferencesUtil().ossSupabaseAnonKey = anonKey;
+    }
+
     await Supabase.initialize(url: url, anonKey: anonKey);
     _initialized = true;
-    Logger.debug('OssSupabaseService: initialized with $url');
+    Logger.debug('OssSupabaseService: initialized with $url (OSS+ mode)');
   }
 
   bool get isInitialized => _initialized;
