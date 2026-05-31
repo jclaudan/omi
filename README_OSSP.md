@@ -498,6 +498,144 @@ A: Use PostgreSQL native backups: `pg_dump` for logical backups or WAL archiving
 
 ---
 
+## 📱 Building and Installing the Android APK
+
+### Prerequisites
+
+- Flutter 3.35.3 (compatible with font_awesome_flutter)
+- Android SDK with API level 35+
+- JDK 17 or higher
+- Android Debug Bridge (adb) for device installation
+
+### Build the APK
+
+**1. Set up Flutter 3.35.3**
+
+```bash
+# If not already installed
+flutter version 3.35.3
+
+# Or set PATH to the correct Flutter installation
+export PATH="/path/to/flutter-3.35.3/bin:$PATH"
+```
+
+**2. Navigate to app directory**
+
+```bash
+cd app
+```
+
+**3. Get dependencies**
+
+```bash
+flutter pub get
+```
+
+**4. Build the APK**
+
+```bash
+flutter build apk --flavor dev
+```
+
+The APK will be generated at:
+```
+app/build/app/outputs/flutter-apk/app-dev-release.apk
+```
+
+### Install on Android Device
+
+**Option A: Using ADB (Android Debug Bridge)**
+
+1. **Connect your Android device** via USB or Wi-Fi
+2. **Enable USB Debugging** on your device (Settings → Developer Options → USB Debugging)
+3. **Verify connection**:
+   ```bash
+   adb devices
+   ```
+4. **Install the APK**:
+   ```bash
+   adb install app/build/app/outputs/flutter-apk/app-dev-release.apk
+   ```
+
+**Option B: Manual Installation (via USB)**
+
+1. Connect your Android device via USB
+2. Copy the APK to your device:
+   ```bash
+   adb push app/build/app/outputs/flutter-apk/app-dev-release.apk /sdcard/Download/
+   ```
+3. On your device:
+   - Open Files → Downloads
+   - Tap the APK file
+   - Follow the installation prompts
+
+**Option C: Via File Transfer**
+
+1. Copy the APK file to your computer
+2. Transfer it to your Android device via:
+   - USB file transfer
+   - Email
+   - Cloud storage (Google Drive, OneDrive)
+   - AirDrop (if applicable)
+3. On your device, open the file with your app installer
+
+### Configure OSS+ Mode in the App
+
+After installation, launch the app:
+
+1. **Mode Selection Screen** - Choose "OSS+ Self-Hosted"
+2. **Server Configuration**:
+   - Enter your server IP or hostname
+   - For local testing: use your computer's IP on the same network
+   - Example: `192.168.1.100:8080` (replace with your actual IP)
+3. **Complete Onboarding**:
+   - Create account with Supabase
+   - Configure encryption settings
+   - Set up speech profile
+
+### Finding Your Server IP Address
+
+**Windows (for testing from same machine)**:
+```powershell
+ipconfig
+# Look for "IPv4 Address" under your active network adapter
+```
+
+**From another machine on same network**:
+```bash
+# Linux/macOS
+hostname -I
+
+# Windows
+ipconfig /all
+# Look for IPv4 Address
+```
+
+**For production/remote access**:
+- Use your public IP or domain name
+- Ensure backend is accessible (firewall rules, port forwarding)
+- Use HTTPS in production
+
+### Troubleshooting
+
+**APK won't install**:
+- Ensure API level 21+ (Android 5.0+)
+- Check available storage (150+ MB free)
+- Clear app cache: `adb shell pm clear com.friend.ios.dev`
+
+**Can't connect to backend**:
+- Verify network connectivity
+- Check firewall rules
+- Test with: `curl http://<your-ip>:8080`
+- Ensure backend container is running: `docker compose ps`
+
+**App crashes on startup**:
+- Check logs: `adb logcat | grep omi`
+- Ensure Supabase is accessible
+- Verify `.env` configuration in backend
+
+---
+
 ## 📊 Status
 
 **Core Implementation**: ✅ 100% Complete  

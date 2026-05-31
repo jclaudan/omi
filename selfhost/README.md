@@ -296,6 +296,24 @@ docker volume prune         # Clean unused volumes
 ./start-ossp.sh              # Fresh start with new .env
 ```
 
+## 📱 Building the Android App
+
+For building and installing the Omi APK:
+
+```bash
+# Set Flutter 3.35.3 path
+export PATH="/path/to/flutter-3.35.3/bin:$PATH"
+
+# Build APK
+cd ../app
+flutter build apk --flavor dev
+
+# Install on Android device
+adb install build/app/outputs/flutter-apk/app-dev-release.apk
+```
+
+See [QUICKSTART.md](./QUICKSTART.md#building-and-installing-the-android-app) for detailed instructions.
+
 ## 🚢 Deployment
 
 For production deployment:

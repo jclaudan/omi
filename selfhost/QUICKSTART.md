@@ -354,12 +354,116 @@ docker run --rm -v supabase_data:/data -v $(pwd):/backup alpine tar czf /backup/
 docker run --rm -v supabase_data:/data -v $(pwd):/backup alpine tar xzf /backup/supabase-backup.tar.gz -C /
 ```
 
+## Building and Installing the Android App
+
+### 1. Set Up Flutter 3.35.3
+
+The Android build requires Flutter 3.35.3 for compatibility with font_awesome_flutter.
+
+**Windows (PowerShell)**:
+```powershell
+$env:Path = "C:\Users\shinsekai\development\flutter\bin;" + $env:Path
+```
+
+**Linux/macOS**:
+```bash
+export PATH="/path/to/flutter-3.35.3/bin:$PATH"
+```
+
+### 2. Build the APK
+
+```bash
+cd app
+flutter clean
+flutter pub get
+flutter build apk --flavor dev
+```
+
+Output: `app/build/app/outputs/flutter-apk/app-dev-release.apk`
+
+### 3. Install on Android Device
+
+**Using ADB**:
+```bash
+# Connect device via USB and enable USB debugging
+adb devices                 # Verify connection
+adb install app/build/app/outputs/flutter-apk/app-dev-release.apk
+```
+
+**Or copy to device manually**:
+- Transfer APK via USB, email, or cloud storage
+- Open file on device to install
+
+### 4. Configure OSS+ Mode
+
+Launch the app and follow the onboarding:
+
+1. Select "OSS+ Self-Hosted" mode
+2. Enter server address: `<your-ip>:8080`
+3. Complete setup wizard
+
+**Finding your server IP**:
+```powershell
+# Windows
+ipconfig
+
+# Linux/macOS
+hostname -I
+```
+
+### Complete OSS+ Setup Workflow
+
+```bash
+# 1. Start infrastructure
+./start-ossp.sh              # Linux/macOS
+# or
+.\start-ossp.ps1            # Windows
+
+# 2. Wait for services to be healthy (~30 seconds)
+
+# 3. Build Android APK
+export PATH="/path/to/flutter-3.35.3/bin:$PATH"  # Set Flutter path
+cd ../app
+flutter build apk --flavor dev
+
+# 4. Install on device
+adb install build/app/outputs/flutter-apk/app-dev-release.apk
+
+# 5. Launch app and configure OSS+ mode
+# Enter your server IP when prompted in the app
+
+# 6. Check logs if needed
+cd ../selfhost
+.\logs-ossp.ps1             # Windows
+./logs-ossp.sh              # Linux/macOS
+```
+
+## Troubleshooting
+
+**Flutter build fails with "IconData" error**:
+- Ensure Flutter 3.35.3 is in PATH
+- Run: `flutter --version` (should show 3.35.3)
+
+**APK installation fails**:
+- Check Android version (5.0+ required)
+- Verify USB debugging is enabled
+- Try: `adb uninstall com.friend.ios.dev` then reinstall
+
+**App can't connect to backend**:
+- Verify services are running: `docker compose ps`
+- Test connectivity: `curl http://<your-ip>:8000`
+- Check device is on same network or has access to server
+
+**App crashes on startup**:
+- View logs: `adb logcat | grep -i omi`
+- Ensure Supabase is healthy: `.\logs-ossp.ps1 -Service postgres`
+
 ## Next Steps
 
 1. ✅ Start OSS+ stack: `start-ossp.sh` / `start-ossp.ps1`
 2. ✅ Run database migrations
-3. ✅ Configure the Omi app to use local OSS+
-4. ✅ Build and test the Android APK
+3. ✅ Build and install Android APK
+4. ✅ Configure the Omi app to use local OSS+
 5. ✅ Check [README_OSSP.md](../README_OSSP.md) for features and configuration
 
 ## Support
