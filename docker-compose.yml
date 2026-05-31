@@ -60,10 +60,31 @@ services:
       - "6334:6334"   # gRPC
     volumes:
       - qdrant-data:/qdrant/storage
-    environment:
-      QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY:-}
+    # Disable API key for local development — enable by setting QDRANT__SERVICE__API_KEY in production
+    # environment:
+    #   QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY:-}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==================== DATABASE (Supabase/PostgreSQL) ====================
+
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-omi}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./selfhost/supabase/migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -135,7 +156,7 @@ services:
       dockerfile: ${WHISPER_DOCKERFILE:-docker/services/faster-whisper/Dockerfile}
     restart: unless-stopped
     ports:
-      - "8001:8001"
+      - "8001:9000"
     volumes:
       - whisper-models:/models
     environment:
@@ -150,12 +171,6 @@ services:
     #         - driver: nvidia
     #           count: 1
     #           capabilities: [gpu]
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 90s
 
   # Streaming STT — used for live audio (replaces Deepgram WebSocket API)
   # GPU: same instructions as faster-whisper above (they share the same env vars and GPU setup).
@@ -165,7 +180,7 @@ services:
       dockerfile: ${WHISPER_WS_DOCKERFILE:-docker/services/faster-whisper-ws/Dockerfile}
     restart: unless-stopped
     ports:
-      - "8002:8002"
+      - "8002:8000"
     volumes:
       - whisper-models:/models
     environment:
@@ -174,6 +189,11 @@ services:
       COMPUTE_TYPE: ${WHISPER_COMPUTE_TYPE:-int8}
       FLUSH_SECS: "1.5"
       SILENCE_SECS: "0.3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     # Uncomment to pass your NVIDIA GPU to the container (requires nvidia-container-toolkit):
     # deploy:
     #   resources:
@@ -182,32 +202,28 @@ services:
     #         - driver: nvidia
     #           count: 1
     #           capabilities: [gpu]
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 90s
 
   # ==================== SPEAKER DIARIZATION ====================
+  # Temporarily disabled due to GCR authentication issues (gcr.io/based-hardware-dev/python:3.11-slim-forky)
+  # Uncomment once GCR access is available
 
-  diarizer:
-    build:
-      context: .
-      dockerfile: backend/diarizer/Dockerfile
-    restart: unless-stopped
-    ports:
-      - "8004:8080"
-    volumes:
-      - diarizer-models:/root/.cache/huggingface
-    environment:
-      HUGGINGFACE_TOKEN: ${HUGGINGFACE_TOKEN:-}
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 120s
+  # diarizer:
+  #   build:
+  #     context: .
+  #     dockerfile: backend/diarizer/Dockerfile
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8004:8080"
+  #   volumes:
+  #     - diarizer-models:/root/.cache/huggingface
+  #   environment:
+  #     HUGGINGFACE_TOKEN: ${HUGGINGFACE_TOKEN:-}
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 5
+  #     start_period: 120s
 
   # ==================== MAIN BACKEND ====================
 
@@ -219,22 +235,29 @@ services:
     ports:
       - "8080:8080"
     depends_on:
+      postgres:
+        condition: service_healthy
       redis:
-        condition: service_healthy
+        condition: service_started
       qdrant:
-        condition: service_healthy
+        condition: service_started
       minio:
-        condition: service_healthy
+        condition: service_started
       minio-init:
         condition: service_completed_successfully
       typesense:
-        condition: service_healthy
+        condition: service_started
       faster-whisper-ws:
-        condition: service_healthy
+        condition: service_started
     env_file:
       - .env.selfhosted
     environment:
       # Override cloud endpoints with self-hosted services
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      DB_NAME: ${DB_NAME:-omi}
       REDIS_DB_HOST: redis
       REDIS_DB_PORT: "6379"
       QDRANT_URL: http://qdrant:6333
@@ -247,6 +270,9 @@ services:
       TYPESENSE_HOST: typesense
       TYPESENSE_HOST_PORT: "8108"
       TYPESENSE_PROTOCOL: http
+      SUPABASE_URL: http://localhost:8000
+      OMI_DB_BACKEND: supabase
+      OMI_AUTH_BACKEND: supabase
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
@@ -256,36 +282,38 @@ services:
 
   # ==================== PUSHER (real-time hub) ====================
 
-  omi-pusher:
-    build:
-      context: .
-      dockerfile: backend/pusher/Dockerfile
-    restart: unless-stopped
-    ports:
-      - "8081:8080"
-    depends_on:
-      redis:
-        condition: service_healthy
-      minio:
-        condition: service_healthy
-      minio-init:
-        condition: service_completed_successfully
-    env_file:
-      - .env.selfhosted
-    environment:
-      REDIS_DB_HOST: redis
-      REDIS_DB_PORT: "6379"
-      MINIO_ENDPOINT: http://minio:9000
-      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
-      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
-      FASTER_WHISPER_URL: http://faster-whisper:8001
-      FASTER_WHISPER_WS_URL: ws://faster-whisper-ws:8002
-      DIARIZER_URL: http://diarizer:8080
-      HOSTED_PUSHER_API_URL: http://omi-backend:8080
+  # omi-pusher:
+  #   build:
+  #     context: .
+  #     dockerfile: backend/pusher/Dockerfile
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8081:8080"
+  #   depends_on:
+  #     redis:
+  #       condition: service_healthy
+  #     minio:
+  #       condition: service_healthy
+  #     minio-init:
+  #       condition: service_completed_successfully
+  #   env_file:
+  #     - .env.selfhosted
+  #   environment:
+  #     REDIS_DB_HOST: redis
+  #     REDIS_DB_PORT: "6379"
+  #     MINIO_ENDPOINT: http://minio:9000
+  #     MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
+  #     MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
+  #     FASTER_WHISPER_URL: http://faster-whisper:8001
+  #     FASTER_WHISPER_WS_URL: ws://faster-whisper-ws:8002
+  #     DIARIZER_URL: http://diarizer:8080
+  #     HOSTED_PUSHER_API_URL: http://omi-backend:8080
 
 # ==================== VOLUMES ====================
 
 volumes:
+  postgres-data:
+    driver: local
   minio-data:
     driver: local
   qdrant-data:
