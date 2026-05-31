@@ -9,7 +9,6 @@ import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 import 'package:upgrader/upgrader.dart';
@@ -755,7 +754,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver, Ticker
                 height: 42,
                 margin: const EdgeInsets.only(right: 6),
                 decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                child: const Icon(FontAwesomeIcons.microphone, size: 15, color: Colors.black),
+                child: const Icon(Icons.mic, size: 15, color: Colors.black),
               ),
             ),
           ],
@@ -864,7 +863,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver, Ticker
                           ),
                           child: IconButton(
                             padding: EdgeInsets.zero,
-                            icon: const Icon(FontAwesomeIcons.calendarDay, size: 16, color: Colors.white),
+                            icon: const Icon(Icons.calendar_today, size: 16, color: Colors.white),
                             onPressed: () async {
                               HapticFeedback.mediumImpact();
                               // Open date picker to change date, cancel clears filter
@@ -982,7 +981,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver, Ticker
                         decoration: const BoxDecoration(color: Color(0xFF1F1F25), shape: BoxShape.circle),
                         child: IconButton(
                           padding: EdgeInsets.zero,
-                          icon: const Icon(FontAwesomeIcons.arrowUpFromBracket, size: 16, color: Colors.white70),
+                          icon: const Icon(Icons.share, size: 16, color: Colors.white70),
                           onPressed: () {
                             HapticFeedback.mediumImpact();
                             PlatformManager.instance.analytics.exportTasksBannerClicked();
@@ -1004,7 +1003,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver, Ticker
                         child: IconButton(
                           padding: EdgeInsets.zero,
                           icon: Icon(
-                            FontAwesomeIcons.solidCircleCheck,
+                            Icons.check_circle,
                             size: 16,
                             color: showCompleted ? Colors.white : Colors.white70,
                           ),
@@ -1069,7 +1068,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver, Ticker
                 decoration: const BoxDecoration(color: Color(0xFF1F1F25), shape: BoxShape.circle),
                 child: IconButton(
                   padding: EdgeInsets.zero,
-                  icon: const Icon(FontAwesomeIcons.gear, size: 16, color: Colors.white70),
+                  icon: const Icon(Icons.settings, size: 16, color: Colors.white70),
                   onPressed: () {
                     HapticFeedback.mediumImpact();
                     PlatformManager.instance.analytics.pageOpened('Settings');

@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/preferences.dart';
@@ -378,7 +377,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
                                 if (widget.conversation.starred)
                                   const Padding(
                                     padding: EdgeInsets.only(right: 4.0),
-                                    child: FaIcon(FontAwesomeIcons.solidStar, size: 12, color: Colors.amber),
+                                    child: Icon(Icons.star, size: 12, color: Colors.amber),
                                   ),
                               ],
                             )
@@ -405,7 +404,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
                                 if (widget.conversation.starred)
                                   const Padding(
                                     padding: EdgeInsets.only(right: 4.0),
-                                    child: FaIcon(FontAwesomeIcons.solidStar, size: 12, color: Colors.amber),
+                                    child: Icon(Icons.star, size: 12, color: Colors.amber),
                                   ),
                               ],
                             ),
@@ -573,7 +572,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
                       if (widget.conversation.starred)
                         const Padding(
                           padding: EdgeInsets.only(left: 8.0),
-                          child: FaIcon(FontAwesomeIcons.solidStar, size: 12, color: Colors.amber),
+                          child: Icon(Icons.star, size: 12, color: Colors.amber),
                         ),
                     ],
                   ),

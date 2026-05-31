@@ -2,7 +2,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -73,15 +72,15 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
 
   IconData _getBatteryIcon(int batteryLevel) {
     if (batteryLevel > 75) {
-      return FontAwesomeIcons.batteryFull;
+      return Icons.battery_full;
     } else if (batteryLevel > 50) {
-      return FontAwesomeIcons.batteryThreeQuarters;
+      return Icons.battery_6_bar;
     } else if (batteryLevel > 25) {
-      return FontAwesomeIcons.batteryHalf;
+      return Icons.battery_3_bar;
     } else if (batteryLevel > 10) {
-      return FontAwesomeIcons.batteryQuarter;
+      return Icons.battery_2_bar;
     } else {
-      return FontAwesomeIcons.batteryEmpty;
+      return Icons.battery_0_bar;
     }
   }
 
@@ -121,7 +120,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
             height: 24,
             child: Padding(
               padding: const EdgeInsets.only(left: 2, top: 1),
-              child: FaIcon(icon, color: iconColor ?? const Color(0xFF8E8E93), size: 20),
+              child: Icon(icon, color: iconColor ?? const Color(0xFF8E8E93), size: 20),
             ),
           ),
           const SizedBox(width: 16),
@@ -174,8 +173,8 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 2, top: 1),
                 child: charging
-                    ? const FaIcon(FontAwesomeIcons.chargingStation, color: Color.fromARGB(255, 0, 255, 8), size: 20)
-                    : FaIcon(
+                    ? const Icon(Icons.ev_station, color: Color.fromARGB(255, 0, 255, 8), size: 20)
+                    : Icon(
                         _getBatteryIcon(provider.batteryLevel),
                         color: _getBatteryColor(provider.batteryLevel),
                         size: 20,
@@ -213,7 +212,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
         children: [
           // Firmware Update
           _buildProfileStyleItem(
-            icon: FontAwesomeIcons.download,
+            icon: Icons.download,
             title: context.l10n.productUpdate,
             chipValue: provider.connectedDevice == null
                 ? context.l10n.offline
@@ -258,7 +257,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
               provider.pairedDevice?.firmwareRevision != provider.latestStableFirmwareVersion) ...[
             const Divider(height: 1, color: Color(0xFF3C3C43)),
             _buildProfileStyleItem(
-              icon: FontAwesomeIcons.rotateLeft,
+              icon: Icons.rotate_left,
               title: context.l10n.rollbackToStableFirmware,
               onTap: () {
                 showDialog(
@@ -286,7 +285,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
           if (provider.isDeviceStorageSupport) ...[
             const Divider(height: 1, color: Color(0xFF3C3C43)),
             _buildProfileStyleItem(
-              icon: FontAwesomeIcons.sdCard,
+              icon: Icons.storage,
               title: context.l10n.sdCardSync,
               chipValue: pendingSeconds > 0 ? secondsToCompactDuration(pendingSeconds, context) : null,
               chipColor: pendingSeconds > 0 ? const Color(0xFF3D3520) : null,
@@ -329,7 +328,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
                     height: 24,
                     child: Padding(
                       padding: EdgeInsets.only(left: 2, top: 1),
-                      child: FaIcon(FontAwesomeIcons.circleQuestion, color: Color(0xFF8E8E93), size: 20),
+                      child: Icon(Icons.help_outline, color: Color(0xFF8E8E93), size: 20),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -383,7 +382,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
                     height: 24,
                     child: Padding(
                       padding: EdgeInsets.only(left: 2, top: 1),
-                      child: FaIcon(FontAwesomeIcons.linkSlash, color: Colors.redAccent, size: 20),
+                      child: Icon(Icons.link_off, color: Colors.redAccent, size: 20),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -442,7 +441,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
                       height: 24,
                       child: Padding(
                         padding: EdgeInsets.only(left: 2, top: 1),
-                        child: FaIcon(FontAwesomeIcons.ban, color: Colors.orange, size: 20),
+                        child: Icon(Icons.cancel, color: Colors.orange, size: 20),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -485,7 +484,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
       child: Column(
         children: [
           _buildProfileStyleItem(
-            icon: FontAwesomeIcons.microchip,
+            icon: Icons.memory,
             title: context.l10n.productName,
             chipValue: deviceName,
             copyValue: deviceName,
@@ -493,7 +492,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
           ),
           const Divider(height: 1, color: Color(0xFF3C3C43)),
           _buildProfileStyleItem(
-            icon: FontAwesomeIcons.hashtag,
+            icon: Icons.tag,
             title: context.l10n.modelNumber,
             chipValue: modelNumber,
             copyValue: modelNumber,
@@ -501,7 +500,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
           ),
           const Divider(height: 1, color: Color(0xFF3C3C43)),
           _buildProfileStyleItem(
-            icon: FontAwesomeIcons.industry,
+            icon: Icons.factory,
             title: context.l10n.manufacturer,
             chipValue: manufacturer,
             copyValue: manufacturer,
@@ -509,7 +508,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
           ),
           const Divider(height: 1, color: Color(0xFF3C3C43)),
           _buildProfileStyleItem(
-            icon: FontAwesomeIcons.code,
+            icon: Icons.code,
             title: context.l10n.firmware,
             chipValue: firmware,
             copyValue: firmware,
@@ -517,7 +516,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
           ),
           const Divider(height: 1, color: Color(0xFF3C3C43)),
           _buildProfileStyleItem(
-            icon: FontAwesomeIcons.fingerprint,
+            icon: Icons.fingerprint,
             title: context.l10n.deviceId,
             chipValue: truncateValue(deviceId),
             copyValue: deviceId,
@@ -526,7 +525,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
           if (showSerialNumber) ...[
             const Divider(height: 1, color: Color(0xFF3C3C43)),
             _buildProfileStyleItem(
-              icon: FontAwesomeIcons.barcode,
+              icon: Icons.barcode_reader,
               title: context.l10n.serialNumber,
               chipValue: truncateValue(serialNumber),
               copyValue: serialNumber,
@@ -548,7 +547,7 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
             backgroundColor: const Color(0xFF0D0D0D),
             elevation: 0,
             leading: IconButton(
-              icon: const FaIcon(FontAwesomeIcons.chevronLeft, size: 18),
+              icon: const Icon(Icons.chevron_left, size: 18),
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
@@ -629,14 +628,14 @@ class _ConnectedDeviceState extends State<ConnectedDevice> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const FaIcon(FontAwesomeIcons.bluetooth, color: Colors.grey, size: 14),
+                      const Icon(Icons.bluetooth, color: Colors.grey, size: 14),
                       const SizedBox(width: 6),
                       Text(
                         '${captureProvider.bleReceiveRateKbps.toStringAsFixed(1)} kbps',
                         style: const TextStyle(color: Colors.grey, fontSize: 14),
                       ),
                       const SizedBox(width: 24),
-                      const FaIcon(FontAwesomeIcons.signal, color: Colors.grey, size: 14),
+                      const Icon(Icons.signal_cellular_alt, color: Colors.grey, size: 14),
                       const SizedBox(width: 6),
                       Text(
                         '${captureProvider.wsSendRateKbps.toStringAsFixed(1)} kbps',

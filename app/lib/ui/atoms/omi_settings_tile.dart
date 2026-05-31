@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:omi/ui/adaptive_widget.dart';
 import 'package:omi/utils/responsive/responsive_helper.dart';
@@ -97,7 +96,7 @@ class OmiSettingsTile extends AdaptiveWidget {
                   trailing!,
                 ] else if (showArrow) ...[
                   if (value != null) const SizedBox(width: 16),
-                  const Icon(FontAwesomeIcons.chevronRight, size: 12, color: ResponsiveHelper.textTertiary),
+                  const Icon(Icons.chevron_right, size: 12, color: ResponsiveHelper.textTertiary),
                 ],
               ],
             ),

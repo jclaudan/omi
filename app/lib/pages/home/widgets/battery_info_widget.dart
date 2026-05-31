@@ -2,7 +2,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/preferences.dart';
@@ -281,7 +280,7 @@ class _BatteryInfoWidgetState extends State<BatteryInfoWidget> {
                                             child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                                           )
                                         else
-                                          const Icon(FontAwesomeIcons.microphone, size: 12, color: Colors.white),
+                                          const Icon(Icons.mic, size: 12, color: Colors.white),
                                         const SizedBox(width: 6),
                                         Text(
                                           isRecording
@@ -392,7 +391,7 @@ class _RecordOptionsSheet extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           _RecordOption(
-            icon: FontAwesomeIcons.microphone,
+            icon: Icons.mic,
             title: context.l10n.recordWithPhoneMic,
             subtitle: context.l10n.recordWithPhoneMicSubtitle,
             onTap: onPickPhoneMic,

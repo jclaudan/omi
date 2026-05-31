@@ -4,7 +4,6 @@ import 'dart:ui' as ui;
 import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -362,8 +361,8 @@ class _CreateTemplateBottomSheetState extends State<CreateTemplateBottomSheet> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Center(
-                                child: FaIcon(
-                                  _isPublic ? FontAwesomeIcons.globe : FontAwesomeIcons.lock,
+                                child: Icon(
+                                  _isPublic ? Icons.public : Icons.lock,
                                   color: Colors.grey.shade400,
                                   size: 16,
                                 ),

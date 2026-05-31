@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:omi/widgets/shimmer_with_timeout.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -83,7 +82,7 @@ class _AddAppPageState extends State<AddAppPage> {
                               style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 12),
                             ),
                             const SizedBox(width: 4),
-                            const FaIcon(FontAwesomeIcons.arrowUpRightFromSquare, color: Colors.black, size: 10),
+                            const Icon(Icons.open_in_new, color: Colors.black, size: 10),
                           ],
                         ),
                       ),
@@ -188,7 +187,7 @@ class _AddAppPageState extends State<AddAppPage> {
                                                         color: Colors.white,
                                                       ),
                                                     )
-                                                  : const FaIcon(FontAwesomeIcons.image, size: 16, color: Colors.white),
+                                                  : const Icon(Icons.image, size: 16, color: Colors.white),
                                             ),
                                           ),
                                         ),
@@ -227,8 +226,8 @@ class _AddAppPageState extends State<AddAppPage> {
                                                           ),
                                                         )
                                                       : const Center(
-                                                          child: FaIcon(
-                                                            FontAwesomeIcons.image,
+                                                          child: Icon(
+                                                            Icons.image,
                                                             size: 28,
                                                             color: Colors.white,
                                                           ),
@@ -282,7 +281,7 @@ class _AddAppPageState extends State<AddAppPage> {
                                                         color: Colors.grey[900],
                                                         borderRadius: BorderRadius.circular(8),
                                                       ),
-                                                      child: const FaIcon(FontAwesomeIcons.triangleExclamation),
+                                                      child: const Icon(Icons.warning),
                                                     ),
                                                   ),
                                                 ),
@@ -298,7 +297,7 @@ class _AddAppPageState extends State<AddAppPage> {
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: const Icon(
-                                                        FontAwesomeIcons.xmark,
+                                                        Icons.close,
                                                         size: 10,
                                                         color: Colors.black,
                                                       ),
@@ -345,8 +344,8 @@ class _AddAppPageState extends State<AddAppPage> {
                                           onTap: () {
                                             launchUrl(Uri.parse('https://docs.omi.me/doc/developer/apps/Introduction'));
                                           },
-                                          child: FaIcon(
-                                            FontAwesomeIcons.solidCircleQuestion,
+                                          child: Icon(
+                                            Icons.help_outline,
                                             color: Colors.grey.shade500,
                                             size: 18,
                                           ),
@@ -529,8 +528,8 @@ class _AddAppPageState extends State<AddAppPage> {
                                           borderRadius: BorderRadius.circular(10),
                                         ),
                                         child: Center(
-                                          child: FaIcon(
-                                            provider.makeAppPublic ? FontAwesomeIcons.globe : FontAwesomeIcons.lock,
+                                          child: Icon(
+                                            provider.makeAppPublic ? Icons.public : Icons.lock,
                                             color: Colors.grey.shade400,
                                             size: 16,
                                           ),
@@ -586,8 +585,8 @@ class _AddAppPageState extends State<AddAppPage> {
                                             borderRadius: BorderRadius.circular(10),
                                           ),
                                           child: Center(
-                                            child: FaIcon(
-                                              FontAwesomeIcons.dollarSign,
+                                            child: Icon(
+                                              Icons.attach_money,
                                               color: Colors.grey.shade400,
                                               size: 16,
                                             ),

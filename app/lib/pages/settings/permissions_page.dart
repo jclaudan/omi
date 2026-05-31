@@ -4,7 +4,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:omi/utils/l10n_extensions.dart';
@@ -161,7 +160,7 @@ class _PermissionsPageState extends State<PermissionsPage> with WidgetsBindingOb
                     child: Column(
                       children: [
                         _buildPermissionRow(
-                          icon: FontAwesomeIcons.solidBell,
+                          icon: Icons.notifications,
                           title: context.l10n.notifications,
                           isGranted: _notificationsGranted,
                           onTap: () =>
@@ -169,21 +168,21 @@ class _PermissionsPageState extends State<PermissionsPage> with WidgetsBindingOb
                         ),
                         const Divider(height: 1, color: Color(0xFF3C3C43)),
                         _buildPermissionRow(
-                          icon: FontAwesomeIcons.locationArrow,
+                          icon: Icons.location_on,
                           title: context.l10n.location,
                           isGranted: _locationGranted,
                           onTap: _handleLocationTap,
                         ),
                         const Divider(height: 1, color: Color(0xFF3C3C43)),
                         _buildPermissionRow(
-                          icon: FontAwesomeIcons.bluetooth,
+                          icon: Icons.bluetooth,
                           title: context.l10n.bluetooth,
                           isGranted: _bluetoothGranted,
                           onTap: _handleBluetoothTap,
                         ),
                         const Divider(height: 1, color: Color(0xFF3C3C43)),
                         _buildPermissionRow(
-                          icon: FontAwesomeIcons.microphone,
+                          icon: Icons.mic,
                           title: context.l10n.microphone,
                           isGranted: _microphoneGranted,
                           onTap: () => _handlePermissionTap(Permission.microphone, _microphoneGranted, 'microphone'),
@@ -191,7 +190,7 @@ class _PermissionsPageState extends State<PermissionsPage> with WidgetsBindingOb
                         if (Platform.isAndroid) ...[
                           const Divider(height: 1, color: Color(0xFF3C3C43)),
                           _buildPermissionRow(
-                            icon: FontAwesomeIcons.batteryFull,
+                            icon: Icons.battery_full,
                             title: context.l10n.backgroundActivity,
                             isGranted: _backgroundGranted,
                             onTap: _handleBackgroundTap,
@@ -227,7 +226,7 @@ class _PermissionsPageState extends State<PermissionsPage> with WidgetsBindingOb
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
         child: Row(
           children: [
-            SizedBox(width: 24, height: 24, child: FaIcon(icon, color: const Color(0xFF8E8E93), size: 20)),
+            SizedBox(width: 24, height: 24, child: Icon(icon, color: const Color(0xFF8E8E93), size: 20)),
             const SizedBox(width: 16),
             Expanded(
               child: Text(

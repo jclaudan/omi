@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'package:omi/backend/http/api/action_items.dart' as action_items_api;
@@ -323,7 +322,7 @@ class _ActionItemFormSheetState extends State<ActionItemFormSheet> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        icon: FaIcon(FontAwesomeIcons.share, color: Colors.grey.shade400, size: 16),
+                        icon: Icon(Icons.share, color: Colors.grey.shade400, size: 16),
                         onPressed: _shareActionItem,
                       ),
                       IconButton(

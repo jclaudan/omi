@@ -4,7 +4,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:omi/utils/l10n_extensions.dart';
@@ -124,8 +123,8 @@ class _UserReviewPageState extends State<UserReviewPage> {
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              FaIcon(
-                                Platform.isIOS ? FontAwesomeIcons.appStoreIos : FontAwesomeIcons.googlePlay,
+                              Icon(
+                                Platform.isIOS ? Icons.apple : Icons.android,
                                 size: 20,
                               ),
                               const SizedBox(width: 12),

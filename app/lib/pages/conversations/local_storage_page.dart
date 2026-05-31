@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/preferences.dart';
@@ -83,10 +82,10 @@ class _LocalStoragePageState extends State<LocalStoragePage> {
     );
   }
 
-  Widget _buildFaIcon(IconData icon, {double size = 18, Color color = const Color(0xFF8E8E93)}) {
+  Widget _buildIcon(IconData icon, {double size = 18, Color color = const Color(0xFF8E8E93)}) {
     return Padding(
       padding: const EdgeInsets.only(left: 2, top: 1),
-      child: FaIcon(icon, size: size, color: color),
+      child: Icon(icon, size: size, color: color),
     );
   }
 
@@ -100,7 +99,7 @@ class _LocalStoragePageState extends State<LocalStoragePage> {
         backgroundColor: const Color(0xFF0D0D0D),
         elevation: 0,
         leading: IconButton(
-          icon: _buildFaIcon(FontAwesomeIcons.chevronLeft, size: 18, color: Colors.white),
+          icon: _buildIcon(Icons.chevron_left, size: 18, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
@@ -122,7 +121,7 @@ class _LocalStoragePageState extends State<LocalStoragePage> {
                 children: [
                   Row(
                     children: [
-                      _buildFaIcon(FontAwesomeIcons.mobile, size: 20, color: Colors.deepPurpleAccent),
+                      _buildIcon(Icons.phone_android, size: 20, color: Colors.deepPurpleAccent),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(

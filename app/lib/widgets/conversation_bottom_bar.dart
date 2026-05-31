@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 
@@ -338,7 +337,7 @@ class _ConversationBottomBarState extends State<ConversationBottomBar> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildCircularButton(
-              icon: FontAwesomeIcons.solidComments,
+              icon: Icons.forum,
               isSelected: widget.selectedTab == ConversationTab.transcript,
               onTap: () => widget.onTabSelected(ConversationTab.transcript),
             ),
@@ -377,7 +376,7 @@ class _ConversationBottomBarState extends State<ConversationBottomBar> {
             child: (isTranscriptSelected && hasAudio)
                 ? _buildTranscriptPillContent()
                 : _buildCircularButtonContent(
-                    icon: FontAwesomeIcons.solidComments,
+                    icon: Icons.forum,
                     isSelected: isTranscriptSelected,
                     onTap: () => widget.onTabSelected(ConversationTab.transcript),
                   ),
@@ -399,7 +398,7 @@ class _ConversationBottomBarState extends State<ConversationBottomBar> {
             child: isSummarySelected
                 ? _buildSummaryPillContent(context)
                 : _buildCircularButtonContent(
-                    icon: FontAwesomeIcons.solidFileLines,
+                    icon: Icons.description,
                     isSelected: false,
                     onTap: () => widget.onTabSelected(ConversationTab.summary),
                   ),
@@ -409,7 +408,7 @@ class _ConversationBottomBarState extends State<ConversationBottomBar> {
         if (widget.hasActionItems) ...[
           const SizedBox(width: 8),
           _buildCircularButton(
-            icon: FontAwesomeIcons.listCheck,
+            icon: Icons.checklist,
             isSelected: widget.selectedTab == ConversationTab.actionItems,
             onTap: () => widget.onTabSelected(ConversationTab.actionItems),
           ),
@@ -463,7 +462,7 @@ class _ConversationBottomBarState extends State<ConversationBottomBar> {
             HapticFeedback.mediumImpact();
             onTap();
           },
-          child: Center(child: FaIcon(icon, color: isSelected ? Colors.white : Colors.grey.shade400, size: 22)),
+          child: Center(child: Icon(icon, color: isSelected ? Colors.white : Colors.grey.shade400, size: 22)),
         ),
       ),
     );
@@ -765,7 +764,7 @@ class _ConversationBottomBarState extends State<ConversationBottomBar> {
               HapticFeedback.mediumImpact();
               onTap();
             },
-            child: Center(child: FaIcon(icon, color: isSelected ? Colors.white : Colors.grey.shade400, size: 22)),
+            child: Center(child: Icon(icon, color: isSelected ? Colors.white : Colors.grey.shade400, size: 22)),
           ),
         ),
       ),

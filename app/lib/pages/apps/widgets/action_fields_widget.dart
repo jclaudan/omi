@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -35,7 +34,7 @@ class ActionFieldsWidget extends StatelessWidget {
                         onTap: () {
                           launchUrl(Uri.parse('https://docs.omi.me/doc/developer/apps/Integrations'));
                         },
-                        child: FaIcon(FontAwesomeIcons.solidCircleQuestion, color: Colors.grey.shade500, size: 18),
+                        child: Icon(Icons.help_outline, color: Colors.grey.shade500, size: 18),
                       ),
                     ],
                   ),
@@ -63,7 +62,7 @@ class ActionFieldsWidget extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Center(
-                                    child: FaIcon(
+                                    child: Icon(
                                       _getIconForAction(actionType.id),
                                       color: Colors.grey.shade400,
                                       size: 16,
@@ -112,17 +111,17 @@ class ActionFieldsWidget extends StatelessWidget {
   IconData _getIconForAction(String actionId) {
     switch (actionId) {
       case 'create_conversation':
-        return FontAwesomeIcons.solidComment;
+        return Icons.comment;
       case 'create_facts':
-        return FontAwesomeIcons.solidLightbulb;
+        return Icons.lightbulb;
       case 'read_conversations':
-        return FontAwesomeIcons.solidComments;
+        return Icons.forum;
       case 'read_memories':
-        return FontAwesomeIcons.brain;
+        return Icons.psychology;
       case 'read_tasks':
-        return FontAwesomeIcons.listCheck;
+        return Icons.checklist;
       default:
-        return FontAwesomeIcons.puzzlePiece;
+        return Icons.extension;
     }
   }
 }

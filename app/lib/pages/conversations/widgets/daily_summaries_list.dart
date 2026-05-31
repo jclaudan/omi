@@ -1,7 +1,6 @@
 import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:omi/widgets/shimmer_with_timeout.dart';
 
 import 'package:omi/backend/http/api/users.dart';
@@ -317,7 +316,7 @@ class _DailySummariesListState extends State<DailySummariesList> {
                             ),
                             if (summary.stats.totalConversations > 0) ...[
                               const Text(' • ', style: TextStyle(color: Color(0xFF9A9BA1), fontSize: 14)),
-                              const FaIcon(FontAwesomeIcons.solidComments, size: 10, color: Color(0xFF9A9BA1)),
+                              const Icon(Icons.forum, size: 10, color: Color(0xFF9A9BA1)),
                               const SizedBox(width: 4),
                               Text(
                                 '${summary.stats.totalConversations}',
@@ -327,7 +326,7 @@ class _DailySummariesListState extends State<DailySummariesList> {
                             ],
                             if (summary.stats.actionItemsCount > 0) ...[
                               const Text(' • ', style: TextStyle(color: Color(0xFF9A9BA1), fontSize: 14)),
-                              const FaIcon(FontAwesomeIcons.listCheck, size: 11, color: Color(0xFF9A9BA1)),
+                              const Icon(Icons.checklist, size: 11, color: Color(0xFF9A9BA1)),
                               const SizedBox(width: 4),
                               Text(
                                 '${summary.stats.actionItemsCount}',

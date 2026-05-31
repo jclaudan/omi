@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/providers/auth_provider.dart';
@@ -87,7 +86,7 @@ class _AuthComponentState extends State<AuthComponent> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(FontAwesomeIcons.apple, size: 24),
+                              const Icon(Icons.apple, size: 24),
                               const SizedBox(width: 8),
                               Text(
                                 context.l10n.signInWithApple,
@@ -121,7 +120,7 @@ class _AuthComponentState extends State<AuthComponent> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(FontAwesomeIcons.google, size: 20),
+                            const Icon(Icons.g_mobiledata, size: 20),
                             const SizedBox(width: 8),
                             Text(
                               context.l10n.signInWithGoogle,

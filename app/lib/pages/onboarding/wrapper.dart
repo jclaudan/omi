@@ -4,7 +4,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/http/api/knowledge_graph_api.dart';
@@ -476,7 +475,7 @@ class _OnboardingWrapperState extends State<OnboardingWrapper> with TickerProvid
                                     _controller!.animateTo(_controller!.index - 1);
                                   }
                                 },
-                                icon: const FaIcon(FontAwesomeIcons.arrowLeft, size: 16.0, color: Colors.white),
+                                icon: const Icon(Icons.arrow_back, size: 16.0, color: Colors.white),
                               ),
                             ),
                           ),
@@ -555,7 +554,7 @@ class _OnboardingWrapperState extends State<OnboardingWrapper> with TickerProvid
                                       _controller!.animateTo(_controller!.index - 1);
                                     }
                                   },
-                                  icon: const FaIcon(FontAwesomeIcons.arrowLeft, size: 16.0, color: Colors.white),
+                                  icon: const Icon(Icons.arrow_back, size: 16.0, color: Colors.white),
                                 ),
                               ),
                             ),

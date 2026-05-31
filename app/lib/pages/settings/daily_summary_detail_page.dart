@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -410,11 +409,11 @@ class _DailySummaryDetailPageState extends State<DailySummaryDetailPage> with Si
   Widget _buildStatsRow(DailySummary summary) {
     return Row(
       children: [
-        _buildStatItem(FontAwesomeIcons.message, '${summary.stats.totalConversations}'),
+        _buildStatItem(Icons.mail, '${summary.stats.totalConversations}'),
         const SizedBox(width: 8),
-        _buildStatItem(FontAwesomeIcons.clock, summary.stats.formattedDuration),
+        _buildStatItem(Icons.schedule, summary.stats.formattedDuration),
         const SizedBox(width: 8),
-        _buildStatItem(FontAwesomeIcons.circleCheck, '${summary.stats.actionItemsCount}'),
+        _buildStatItem(Icons.check_circle, '${summary.stats.actionItemsCount}'),
       ],
     );
   }
@@ -427,7 +426,7 @@ class _DailySummaryDetailPageState extends State<DailySummaryDetailPage> with Si
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FaIcon(icon, color: Colors.grey.shade400, size: 14),
+            Icon(icon, color: Colors.grey.shade400, size: 14),
             const SizedBox(width: 8),
             Text(
               value,
@@ -543,7 +542,7 @@ class _DailySummaryDetailPageState extends State<DailySummaryDetailPage> with Si
         point: LatLng(loc.latitude, loc.longitude),
         width: 32,
         height: 32,
-        child: const FaIcon(FontAwesomeIcons.locationDot, color: Colors.deepPurple, size: 28),
+        child: const Icon(Icons.location_on, color: Colors.deepPurple, size: 28),
       );
     }).toList();
 
@@ -889,7 +888,7 @@ class _DailySummaryDetailPageState extends State<DailySummaryDetailPage> with Si
                             const SizedBox(height: 4),
                             Row(
                               children: [
-                                FaIcon(FontAwesomeIcons.clock, color: Colors.grey.shade500, size: 12),
+                                Icon(Icons.schedule, color: Colors.grey.shade500, size: 12),
                                 const SizedBox(width: 4),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 2),

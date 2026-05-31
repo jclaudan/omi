@@ -1,7 +1,6 @@
 import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/pages/home/page.dart';
@@ -55,7 +54,7 @@ class _ConnectDevicePageState extends State<ConnectDevicePage> {
               width: 36,
               height: 36,
               decoration: const BoxDecoration(color: Color(0xFF1F1F25), shape: BoxShape.circle),
-              child: const Icon(FontAwesomeIcons.chevronLeft, size: 16, color: Colors.white70),
+              child: const Icon(Icons.chevron_left, size: 16, color: Colors.white70),
             ),
           ),
         ),
@@ -73,7 +72,7 @@ class _ConnectDevicePageState extends State<ConnectDevicePage> {
               decoration: const BoxDecoration(color: Color(0xFF1F1F25), shape: BoxShape.circle),
               child: IconButton(
                 padding: EdgeInsets.zero,
-                icon: const Icon(FontAwesomeIcons.gear, size: 16, color: Colors.white70),
+                icon: const Icon(Icons.settings, size: 16, color: Colors.white70),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DeviceSettings()));
                 },

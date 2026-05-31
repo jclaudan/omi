@@ -2,7 +2,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/providers/home_provider.dart';
@@ -32,10 +31,10 @@ class BottomNavBar extends StatelessWidget {
             ),
             child: Row(
               children: [
-                _buildTab(context, home, 0, FontAwesomeIcons.house, 'Home'),
-                _buildTab(context, home, 1, FontAwesomeIcons.comments, 'Conversations'),
-                _buildTab(context, home, 2, FontAwesomeIcons.listCheck, 'Tasks'),
-                _buildTab(context, home, 3, FontAwesomeIcons.puzzlePiece, 'Apps'),
+                _buildTab(context, home, 0, Icons.home, 'Home'),
+                _buildTab(context, home, 1, Icons.chat, 'Conversations'),
+                _buildTab(context, home, 2, Icons.checklist, 'Tasks'),
+                _buildTab(context, home, 3, Icons.extension, 'Apps'),
               ],
             ),
           ),

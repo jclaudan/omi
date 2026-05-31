@@ -1,40 +1,38 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-/// Maps folder icon strings (emojis) to FontAwesome IconData.
+/// Maps folder icon strings (emojis) to Material Design IconData.
 /// Falls back to a folder icon for unknown values.
 IconData folderIconToFa(String? iconString) {
-  return _emojiToFaMap[iconString] ?? FontAwesomeIcons.folder;
+  return _emojiToFaMap[iconString] ?? Icons.folder;
 }
 
-/// Mapping from emoji strings to FontAwesome icons.
+/// Mapping from emoji strings to Material Design icons.
 const Map<String, IconData> _emojiToFaMap = {
-  '📁': FontAwesomeIcons.solidFolder,
-  '💼': FontAwesomeIcons.briefcase,
-  '🏠': FontAwesomeIcons.solidHouse,
-  '📚': FontAwesomeIcons.book,
-  '👨‍👩‍👧‍👦': FontAwesomeIcons.users,
-  '👤': FontAwesomeIcons.solidHeart,
-  '👥': FontAwesomeIcons.users,
-  '❤️': FontAwesomeIcons.solidHeart,
-  '🎮': FontAwesomeIcons.gamepad,
-  '✈️': FontAwesomeIcons.plane,
-  '🏥': FontAwesomeIcons.solidHospital,
-  '🛒': FontAwesomeIcons.cartShopping,
-  '💰': FontAwesomeIcons.moneyBill,
-  '🎵': FontAwesomeIcons.music,
-  '🎨': FontAwesomeIcons.palette,
-  '📝': FontAwesomeIcons.pen,
-  '💬': FontAwesomeIcons.solidComments,
-  '🌎': FontAwesomeIcons.globe,
-  '🛠️': FontAwesomeIcons.screwdriverWrench,
-  '🍔': FontAwesomeIcons.burger,
-  '🏆': FontAwesomeIcons.trophy,
-  '🔒': FontAwesomeIcons.lock,
-  '⭐': FontAwesomeIcons.solidStar,
-  '🕐': FontAwesomeIcons.solidClock,
-  '📊': FontAwesomeIcons.chartSimple,
+  '📁': Icons.folder,
+  '💼': Icons.work,
+  '🏠': Icons.home,
+  '📚': Icons.menu_book,
+  '👨‍👩‍👧‍👦': Icons.people,
+  '👤': Icons.favorite,
+  '👥': Icons.people,
+  '❤️': Icons.favorite,
+  '🎮': Icons.sports_esports,
+  '✈️': Icons.flight,
+  '🏥': Icons.local_hospital,
+  '🛒': Icons.shopping_cart,
+  '💰': Icons.money,
+  '🎵': Icons.music_note,
+  '🎨': Icons.palette,
+  '📝': Icons.edit,
+  '💬': Icons.forum,
+  '🌎': Icons.public,
+  '🛠️': Icons.construction,
+  '🍔': Icons.restaurant,
+  '🏆': Icons.emoji_events,
+  '🔒': Icons.lock,
+  '⭐': Icons.star,
+  '🕐': Icons.schedule,
+  '📊': Icons.bar_chart,
 };
 
 /// List of all available folder icon strings (for use in icon picker UI).

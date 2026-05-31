@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -186,7 +185,7 @@ class _ReviewsListPageState extends State<ReviewsListPage> {
           child: IconButton(
             padding: EdgeInsets.zero,
             onPressed: () => Navigator.pop(context),
-            icon: const FaIcon(FontAwesomeIcons.arrowLeft, size: 16.0, color: Colors.white),
+            icon: const Icon(Icons.arrow_back, size: 16.0, color: Colors.white),
           ),
         ),
         title: Text(
@@ -244,7 +243,7 @@ class _ReviewsListPageState extends State<ReviewsListPage> {
                       padding: const EdgeInsets.only(top: 60.0),
                       child: Column(
                         children: [
-                          Icon(FontAwesomeIcons.star, size: 48, color: Colors.grey.shade600),
+                          Icon(Icons.star_border, size: 48, color: Colors.grey.shade600),
                           const SizedBox(height: 16),
                           Text(
                             context.l10n.noReviewsFound,
@@ -364,7 +363,7 @@ class _ReviewsListPageState extends State<ReviewsListPage> {
                         return Padding(
                           padding: const EdgeInsets.only(right: 4),
                           child: Icon(
-                            FontAwesomeIcons.solidStar,
+                            Icons.star,
                             size: 14,
                             color: index < review.score.round() ? Colors.deepPurple : Colors.grey.shade700,
                           ),
@@ -422,7 +421,7 @@ class _ReviewsListPageState extends State<ReviewsListPage> {
               child: TextButton.icon(
                 onPressed: () => _showReplyDialog(review),
                 icon: Icon(
-                  review.response.isNotEmpty ? FontAwesomeIcons.pencil : FontAwesomeIcons.reply,
+                  review.response.isNotEmpty ? Icons.editcil : Icons.reply,
                   size: 12,
                   color: Colors.deepPurple,
                 ),

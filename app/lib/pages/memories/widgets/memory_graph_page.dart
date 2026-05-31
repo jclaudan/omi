@@ -4,7 +4,6 @@ import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:omi/utils/platform/platform_manager.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -586,7 +585,7 @@ class _MemoryGraphPageState extends State<MemoryGraphPage> with SingleTickerProv
               elevation: 0,
               leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => Navigator.of(context).pop()),
               actions: widget.showShareButton
-                  ? [IconButton(icon: const FaIcon(FontAwesomeIcons.share, size: 20), onPressed: _shareGraph)]
+                  ? [IconButton(icon: const Icon(Icons.share, size: 20), onPressed: _shareGraph)]
                   : null,
             )
           : null,

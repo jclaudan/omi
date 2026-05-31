@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:omi/widgets/shimmer_with_timeout.dart';
 
@@ -592,7 +591,7 @@ class _AppListItemState extends State<_AppListItem> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 1, 0, 0),
-                  child: Icon(FontAwesomeIcons.solidStar, size: 7, color: Colors.amber.shade300),
+                  child: Icon(Icons.star, size: 7, color: Colors.amber.shade300),
                 ),
                 const SizedBox(width: 4),
                 Text(
@@ -621,7 +620,7 @@ class _AppListItemState extends State<_AppListItem> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 1, 0, 0),
-                  child: Icon(FontAwesomeIcons.clock, size: 7, color: Colors.grey.shade400),
+                  child: Icon(Icons.schedule, size: 7, color: Colors.grey.shade400),
                 ),
                 const SizedBox(width: 4),
                 Text(
@@ -709,7 +708,7 @@ class _CreateTemplateListItem extends StatelessWidget {
           leading: const CircleAvatar(
             backgroundColor: Colors.white,
             radius: 16,
-            child: Icon(FontAwesomeIcons.plus, color: Colors.black, size: 18),
+            child: Icon(Icons.add, color: Colors.black, size: 18),
           ),
           title: Text(
             context.l10n.createCustomTemplate,
@@ -746,7 +745,7 @@ class _EnableAppsListItem extends StatelessWidget {
           leading: const CircleAvatar(
             backgroundColor: Colors.white,
             radius: 16,
-            child: FaIcon(FontAwesomeIcons.solidFolderOpen, color: Colors.black, size: 14),
+            child: Icon(Icons.folderOpen, color: Colors.black, size: 14),
           ),
           title: Text(
             context.l10n.allTemplates,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:omi/ui/atoms/omi_badge.dart';
 import 'package:omi/ui/atoms/omi_icon_button.dart';
@@ -11,7 +10,7 @@ import 'package:omi/utils/responsive/responsive_helper.dart';
 /// Layout:  [neutral icon-bubble]  [title]  (optional badge)  .............  (optional close button)
 /// – Re-uses atom components so visual language is consistent with [OmiSectionHeader].
 class OmiPanelHeader extends StatelessWidget {
-  /// Leading icon for the panel (e.g. `FontAwesomeIcons.fileLines`).
+  /// Leading icon for the panel (e.g. `Icons.descriptionLines`).
   final IconData icon;
 
   /// Panel title.
@@ -82,7 +81,7 @@ class OmiPanelHeader extends StatelessWidget {
           if (action != null) ...[action!, SizedBox(width: spacing)],
           if (onClose != null)
             OmiIconButton(
-              icon: FontAwesomeIcons.xmark,
+              icon: Icons.close,
               style: OmiIconButtonStyle.outline,
               borderOpacity: 0.1,
               size: 28,

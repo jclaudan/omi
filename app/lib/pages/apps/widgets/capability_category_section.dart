@@ -4,7 +4,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/schema/app.dart';
@@ -193,7 +192,7 @@ class CapabilitySectionAppItemCard extends StatelessWidget {
                         const SizedBox(height: 2),
                         Row(
                           children: [
-                            const FaIcon(FontAwesomeIcons.solidStar, color: Color(0xFF8B5CF6), size: 9),
+                            const Icon(Icons.star, color: Color(0xFF8B5CF6), size: 9),
                             const SizedBox(width: 4),
                             Text(
                               app.getRatingAvg()!,

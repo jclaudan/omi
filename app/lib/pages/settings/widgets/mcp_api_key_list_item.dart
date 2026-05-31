@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/schema/mcp_api_key.dart';
@@ -21,7 +20,7 @@ class McpApiKeyListItem extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(color: const Color(0xFF2C2C2E), borderRadius: BorderRadius.circular(10)),
-            child: const FaIcon(FontAwesomeIcons.key, color: Color(0xFF8E8E93), size: 16),
+            child: const Icon(Icons.key, color: Color(0xFF8E8E93), size: 16),
           ),
           const SizedBox(width: 14),
           Expanded(

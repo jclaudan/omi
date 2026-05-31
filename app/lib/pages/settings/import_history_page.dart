@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 import 'package:omi/widgets/shimmer_with_timeout.dart';
 
@@ -369,7 +368,7 @@ class _ImportHistoryPageState extends State<ImportHistoryPage> {
                         color: Colors.deepPurple.withValues(alpha: 0.8),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Icon(FontAwesomeIcons.plus, color: Colors.white, size: 16),
+                      child: const Icon(Icons.add, color: Colors.white, size: 16),
                     )
             else
               Icon(Icons.lock_outline, color: Colors.grey.shade700, size: 20),
@@ -716,7 +715,7 @@ class _ImportHistoryPageState extends State<ImportHistoryPage> {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(color: Colors.grey.withValues(alpha: 0.3), shape: BoxShape.circle),
-                child: const Center(child: FaIcon(FontAwesomeIcons.arrowsRotate, size: 16.0, color: Colors.white)),
+                child: const Center(child: Icon(Icons.sync, size: 16.0, color: Colors.white)),
               ),
             ),
           ),
@@ -728,7 +727,7 @@ class _ImportHistoryPageState extends State<ImportHistoryPage> {
               itemBuilder: (context) => [
                 PullDownMenuItem(
                   title: context.l10n.deleteImportedData,
-                  iconWidget: const FaIcon(FontAwesomeIcons.trashCan, size: 16, color: Colors.red),
+                  iconWidget: const Icon(Icons.deleteCan, size: 16, color: Colors.red),
                   onTap: () {
                     _showDeleteLimitlessDialog();
                   },
@@ -744,7 +743,7 @@ class _ImportHistoryPageState extends State<ImportHistoryPage> {
                   height: 36,
                   decoration: BoxDecoration(color: Colors.grey.withValues(alpha: 0.3), shape: BoxShape.circle),
                   child: const Center(
-                    child: FaIcon(FontAwesomeIcons.ellipsisVertical, size: 16.0, color: Colors.white),
+                    child: Icon(Icons.more_horizVertical, size: 16.0, color: Colors.white),
                   ),
                 ),
               ),

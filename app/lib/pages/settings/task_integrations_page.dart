@@ -1,7 +1,6 @@
 import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:omi/widgets/shimmer_with_timeout.dart';
 
@@ -549,7 +548,7 @@ class _TaskIntegrationsPageState extends State<TaskIntegrationsPage> with Widget
             else
             // Radio button for connected services
             if (isSelected)
-              const FaIcon(FontAwesomeIcons.solidCircleCheck, color: Colors.green, size: 24)
+              const Icon(Icons.check_circle, color: Colors.green, size: 24)
             else
               Container(
                 width: 24,
@@ -627,7 +626,7 @@ class _TaskIntegrationsPageState extends State<TaskIntegrationsPage> with Widget
                 ),
                 child: Row(
                   children: [
-                    FaIcon(FontAwesomeIcons.solidLightbulb, color: Colors.yellow.withValues(alpha: 0.5), size: 20),
+                    Icon(Icons.lightbulb, color: Colors.yellow.withValues(alpha: 0.5), size: 20),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(

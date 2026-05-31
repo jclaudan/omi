@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/providers/capture_provider.dart';
@@ -48,7 +47,7 @@ class _CustomVocabularyPageState extends State<CustomVocabularyPage> {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(color: const Color(0xFF2A2A2E), borderRadius: BorderRadius.circular(10)),
-                child: Center(child: FaIcon(FontAwesomeIcons.book, color: Colors.grey.shade400, size: 16)),
+                child: Center(child: Icon(Icons.menu_book, color: Colors.grey.shade400, size: 16)),
               ),
               const SizedBox(width: 14),
               Expanded(
@@ -131,7 +130,7 @@ class _CustomVocabularyPageState extends State<CustomVocabularyPage> {
                             valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF6B6B6B)),
                           ),
                         )
-                      : const FaIcon(FontAwesomeIcons.plus, color: Colors.white, size: 16),
+                      : const Icon(Icons.add, color: Colors.white, size: 16),
                 ),
               ),
             ],
@@ -270,7 +269,7 @@ class _CustomVocabularyPageState extends State<CustomVocabularyPage> {
           backgroundColor: const Color(0xFF0D0D0D),
           elevation: 0,
           leading: IconButton(
-            icon: const FaIcon(FontAwesomeIcons.chevronLeft, size: 18),
+            icon: const Icon(Icons.chevron_left, size: 18),
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: Text(

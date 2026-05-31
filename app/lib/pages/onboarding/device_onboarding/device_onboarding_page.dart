@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 
 class DeviceOnboardingPage extends StatefulWidget {
@@ -239,7 +238,7 @@ class _DeviceOnboardingPageState extends State<DeviceOnboardingPage> with Single
                   child: IconButton(
                     padding: EdgeInsets.zero,
                     onPressed: widget.onBack,
-                    icon: const FaIcon(FontAwesomeIcons.arrowLeft, size: 16.0, color: Colors.white),
+                    icon: const Icon(Icons.arrow_back, size: 16.0, color: Colors.white),
                   ),
                 ),
               ),

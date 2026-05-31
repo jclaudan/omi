@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:omi/backend/schema/app.dart';
 import 'package:omi/utils/app_localizations_helper.dart';
@@ -13,19 +12,19 @@ class CapabilitiesCard extends StatelessWidget {
   IconData _getCapabilityIcon(String id) {
     switch (id) {
       case 'chat':
-        return FontAwesomeIcons.solidComment;
+        return Icons.comment;
       case 'memories':
-        return FontAwesomeIcons.solidFileLines;
+        return Icons.description;
       case 'external_integration':
-        return FontAwesomeIcons.puzzlePiece;
+        return Icons.extension;
       case 'persona':
-        return FontAwesomeIcons.userAstronaut;
+        return Icons.public;
       case 'proactive_notification':
-        return FontAwesomeIcons.solidBell;
+        return Icons.notifications;
       case 'push_to_talk':
-        return FontAwesomeIcons.walkieTalkie;
+        return Icons.walkie_talkie;
       default:
-        return FontAwesomeIcons.cubes;
+        return Icons.apps;
     }
   }
 
@@ -71,7 +70,7 @@ class CapabilitiesCard extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    FaIcon(_getCapabilityIcon(capability.id), size: 14, color: color),
+                    Icon(_getCapabilityIcon(capability.id), size: 14, color: color),
                     const SizedBox(width: 8),
                     Text(
                       capability.getLocalizedTitle(context),

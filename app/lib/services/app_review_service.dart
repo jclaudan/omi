@@ -4,7 +4,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -173,7 +172,7 @@ class AppReviewService {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          FaIcon(Platform.isIOS ? FontAwesomeIcons.appStoreIos : FontAwesomeIcons.googlePlay, size: 20),
+                          Icon(Platform.isIOS ? Icons.apple : Icons.android, size: 20),
                           const SizedBox(width: 12),
                           Text(
                             'Rate on ${Platform.isIOS ? 'App Store' : 'Google Play'}',

@@ -4,7 +4,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/preferences.dart';
@@ -341,7 +340,7 @@ class _ConversationCapturingPageState extends State<ConversationCapturingPage> w
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const FaIcon(FontAwesomeIcons.stop, color: Colors.black, size: 16.0),
+                              const Icon(Icons.stop_circle, color: Colors.black, size: 16.0),
                               const SizedBox(width: 10),
                               Text(
                                 context.l10n.processNow,

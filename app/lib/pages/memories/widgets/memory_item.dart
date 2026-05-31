@@ -4,7 +4,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/http/api/conversations.dart';
@@ -152,7 +151,7 @@ class MemoryItem extends StatelessWidget {
           color: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(AppStyles.radiusMedium),
         ),
-        child: const Center(child: FaIcon(FontAwesomeIcons.message, size: 16, color: Colors.white70)),
+        child: const Center(child: Icon(Icons.mail, size: 16, color: Colors.white70)),
       ),
     );
   }

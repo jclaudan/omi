@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:omi/utils/l10n_extensions.dart';
 
@@ -25,7 +24,7 @@ class _EmptyConversationsWidgetState extends State<EmptyConversationsWidget> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(color: Colors.amber.withValues(alpha: 0.1), shape: BoxShape.circle),
-              child: const FaIcon(FontAwesomeIcons.star, color: Colors.amber, size: 32),
+              child: const Icon(Icons.star_border, color: Colors.amber, size: 32),
             ),
             const SizedBox(height: 16),
             Text(

@@ -2,7 +2,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:omi/widgets/shimmer_with_timeout.dart';
 
@@ -181,7 +180,7 @@ class MemoriesPageState extends State<MemoriesPage> with AutomaticKeepAliveClien
                                           leading: const Padding(
                                             padding: EdgeInsets.only(left: 6.0),
                                             child: Icon(
-                                              FontAwesomeIcons.magnifyingGlass,
+                                              Icons.search,
                                               color: Colors.white70,
                                               size: 14,
                                             ),
@@ -237,7 +236,7 @@ class MemoriesPageState extends State<MemoriesPage> with AutomaticKeepAliveClien
                                               leading: const Padding(
                                                 padding: EdgeInsets.only(left: 6.0),
                                                 child: Icon(
-                                                  FontAwesomeIcons.magnifyingGlass,
+                                                  Icons.search,
                                                   color: Colors.white70,
                                                   size: 14,
                                                 ),
@@ -306,7 +305,7 @@ class MemoriesPageState extends State<MemoriesPage> with AutomaticKeepAliveClien
                                           padding: EdgeInsets.zero,
                                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                         ),
-                                        child: const Icon(FontAwesomeIcons.brain, size: 16),
+                                        child: const Icon(Icons.psychology, size: 16),
                                       ),
                                     ),
                                     const SizedBox(width: 8),
@@ -323,7 +322,7 @@ class MemoriesPageState extends State<MemoriesPage> with AutomaticKeepAliveClien
                                           padding: EdgeInsets.zero,
                                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                                         ),
-                                        child: const Icon(FontAwesomeIcons.sliders, size: 16),
+                                        child: const Icon(Icons.tune, size: 16),
                                       ),
                                     ),
                                   ],

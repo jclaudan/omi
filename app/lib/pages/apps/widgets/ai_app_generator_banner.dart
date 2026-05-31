@@ -2,7 +2,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:omi/pages/settings/ai_app_generator_page.dart';
 
@@ -42,7 +41,7 @@ class AiAppGeneratorBanner extends StatelessWidget {
                 gradient: const LinearGradient(colors: [Color(0xFF6366F1), Color(0xFF8B5CF6)]),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Center(child: FaIcon(FontAwesomeIcons.wandMagicSparkles, color: Colors.white, size: 16)),
+              child: const Center(child: Icon(Icons.auto_awesome, color: Colors.white, size: 16)),
             ),
 
             const SizedBox(width: 12),

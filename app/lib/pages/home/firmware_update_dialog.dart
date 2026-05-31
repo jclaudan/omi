@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:omi/utils/l10n_extensions.dart';
 
@@ -53,17 +52,17 @@ class _FirmwareUpdateSheetState extends State<FirmwareUpdateSheet> {
       'no_usb': FirmwareUpdateStep(
         title: context.l10n.firmwareDisconnectUsb,
         description: context.l10n.firmwareUsbWarning,
-        icon: FontAwesomeIcons.plug,
+        icon: Icons.power,
       ),
       'battery': FirmwareUpdateStep(
         title: context.l10n.firmwareBatteryAbove15,
         description: context.l10n.firmwareEnsureBattery,
-        icon: FontAwesomeIcons.batteryHalf,
+        icon: Icons.battery_50,
       ),
       'internet': FirmwareUpdateStep(
         title: context.l10n.firmwareStableConnection,
         description: context.l10n.firmwareConnectWifi,
-        icon: FontAwesomeIcons.wifi,
+        icon: Icons.wifi,
       ),
     };
   }
@@ -105,7 +104,7 @@ class _FirmwareUpdateSheetState extends State<FirmwareUpdateSheet> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const FaIcon(FontAwesomeIcons.circleExclamation, color: Color(0xFFFFB800), size: 20),
+                  const Icon(Icons.error, color: Color(0xFFFFB800), size: 20),
                   const SizedBox(width: 10),
                   Text(
                     context.l10n.beforeUpdateMakeSure,
@@ -146,7 +145,7 @@ class _FirmwareUpdateSheetState extends State<FirmwareUpdateSheet> {
               width: 44,
               height: 44,
               decoration: BoxDecoration(color: const Color(0xFF1C1C1E), borderRadius: BorderRadius.circular(12)),
-              child: Center(child: FaIcon(step.icon, size: 18, color: Colors.white)),
+              child: Center(child: Icon(step.icon, size: 18, color: Colors.white)),
             ),
             const SizedBox(width: 14),
             Expanded(
@@ -331,7 +330,7 @@ class _SwipeToConfirmState extends State<SwipeToConfirm> with SingleTickerProvid
                         ],
                       ),
                       child: const Center(
-                        child: FaIcon(FontAwesomeIcons.chevronRight, color: Color(0xFF2A2A2E), size: 18),
+                        child: Icon(Icons.chevron_right, color: Color(0xFF2A2A2E), size: 18),
                       ),
                     ),
                   ),

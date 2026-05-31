@@ -4,7 +4,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/http/api/action_items.dart';
@@ -152,7 +151,7 @@ class _ActionItemTileWidgetState extends State<ActionItemTileWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          FaIcon(FontAwesomeIcons.solidCalendar, size: 11, color: textColor),
+          Icon(Icons.calendar_today, size: 11, color: textColor),
           const SizedBox(width: 6),
           Padding(
             padding: const EdgeInsets.only(top: 1),

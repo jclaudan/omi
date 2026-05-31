@@ -1,7 +1,6 @@
 import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:omi/backend/http/api/users.dart';
 import 'package:omi/backend/preferences.dart';
@@ -29,18 +28,18 @@ class _FoundOmiWidgetState extends State<FoundOmiWidget> {
 
   List<_SourceOption> _getSources(BuildContext context) {
     return [
-      _SourceOption(context.l10n.tiktok, FontAwesomeIcons.tiktok),
-      _SourceOption(context.l10n.youtube, FontAwesomeIcons.youtube),
-      _SourceOption(context.l10n.instagram, FontAwesomeIcons.instagram),
-      _SourceOption(context.l10n.xTwitter, FontAwesomeIcons.xTwitter),
-      _SourceOption(context.l10n.reddit, FontAwesomeIcons.reddit),
-      _SourceOption(context.l10n.linkedIn, FontAwesomeIcons.linkedin),
-      _SourceOption(context.l10n.friendWordOfMouth, FontAwesomeIcons.userGroup),
-      _SourceOption(context.l10n.coworker, FontAwesomeIcons.briefcase),
-      _SourceOption(context.l10n.event, FontAwesomeIcons.calendarDay),
-      _SourceOption(context.l10n.appStore, FontAwesomeIcons.appStore),
-      _SourceOption(context.l10n.googleSearch, FontAwesomeIcons.google),
-      _SourceOption(context.l10n.otherSource, FontAwesomeIcons.ellipsis),
+      _SourceOption(context.l10n.tiktok, Icons.video_library),
+      _SourceOption(context.l10n.youtube, Icons.video_library),
+      _SourceOption(context.l10n.instagram, Icons.camera),
+      _SourceOption(context.l10n.xTwitter, Icons.public),
+      _SourceOption(context.l10n.reddit, Icons.public),
+      _SourceOption(context.l10n.linkedIn, Icons.business),
+      _SourceOption(context.l10n.friendWordOfMouth, Icons.group),
+      _SourceOption(context.l10n.coworker, Icons.work),
+      _SourceOption(context.l10n.event, Icons.calendar_today),
+      _SourceOption(context.l10n.appStore, Icons.apple),
+      _SourceOption(context.l10n.googleSearch, Icons.g_mobiledata),
+      _SourceOption(context.l10n.otherSource, Icons.more_horiz),
     ];
   }
 
@@ -121,7 +120,7 @@ class _FoundOmiWidgetState extends State<FoundOmiWidget> {
                           ),
                           child: Row(
                             children: [
-                              FaIcon(source.icon, size: 18, color: isSelected ? Colors.black : Colors.white),
+                              Icon(source.icon, size: 18, color: isSelected ? Colors.black : Colors.white),
                               const SizedBox(width: 14),
                               Text(
                                 source.label,

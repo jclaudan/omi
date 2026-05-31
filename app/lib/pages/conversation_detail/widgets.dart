@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
@@ -271,7 +270,7 @@ class GetSummaryWidgets extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 2),
-              child: FaIcon(
+              child: Icon(
                 folderIconToFa(folder?.icon),
                 size: 12,
                 color: folder != null ? folder.colorValue : Colors.grey.shade300,

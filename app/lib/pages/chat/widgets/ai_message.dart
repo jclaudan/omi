@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:omi/widgets/shimmer_with_timeout.dart';
@@ -123,21 +122,21 @@ String? _getIntegrationLogoPath(String thinkingText) {
 IconData _getThinkingIcon(String thinkingText) {
   final text = thinkingText.toLowerCase();
   if (text.contains('thinking')) {
-    return FontAwesomeIcons.brain;
+    return Icons.psychology;
   } else if (text.contains('searching the web') || text.contains('searching web')) {
-    return FontAwesomeIcons.magnifyingGlass;
+    return Icons.search;
   } else if (text.contains('conversations')) {
-    return FontAwesomeIcons.comments;
+    return Icons.chat;
   } else if (text.contains('memories')) {
-    return FontAwesomeIcons.lightbulb;
+    return Icons.lightbulb_outline;
   } else if (text.contains('action item')) {
-    return FontAwesomeIcons.listCheck;
+    return Icons.checklist;
   } else if (text.contains('product info')) {
-    return FontAwesomeIcons.circleInfo;
+    return Icons.info;
   } else if (text.contains('search')) {
-    return FontAwesomeIcons.magnifyingGlass;
+    return Icons.search;
   }
-  return FontAwesomeIcons.brain; // Default brain icon
+  return Icons.psychology; // Default brain icon
 }
 
 /// Build the thinking icon widget - either an integration logo or a fallback icon
@@ -151,11 +150,11 @@ Widget _buildThinkingIconWidget(String thinkingText, {double size = 15, Color co
         width: size,
         height: size,
         fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => FaIcon(_getThinkingIcon(thinkingText), size: size, color: color),
+        errorBuilder: (context, error, stackTrace) => Icon(_getThinkingIcon(thinkingText), size: size, color: color),
       ),
     );
   }
-  return FaIcon(_getThinkingIcon(thinkingText), size: size, color: color);
+  return Icon(_getThinkingIcon(thinkingText), size: size, color: color);
 }
 
 class AIMessage extends StatefulWidget {
@@ -869,7 +868,7 @@ class _MemoriesMessageWidgetState extends State<MemoriesMessageWidget> {
                               strokeWidth: 2,
                             ),
                           )
-                        : const FaIcon(FontAwesomeIcons.chevronRight, size: 16, color: Colors.white54),
+                        : const Icon(Icons.chevron_right, size: 16, color: Colors.white54),
                   ],
                 ),
               ),
@@ -1146,7 +1145,7 @@ class _MessageActionBarState extends State<MessageActionBar> {
         children: [
           // Copy button
           _buildActionButton(
-            icon: FontAwesomeIcons.copy,
+            icon: Icons.content_copy,
             onTap: () async {
               HapticFeedback.lightImpact();
               await Clipboard.setData(ClipboardData(text: widget.messageText));
@@ -1176,7 +1175,7 @@ class _MessageActionBarState extends State<MessageActionBar> {
           const SizedBox(width: 20),
           // Thumbs up button
           _buildActionButton(
-            icon: _selectedNps == 1 ? FontAwesomeIcons.solidThumbsUp : FontAwesomeIcons.thumbsUp,
+            icon: _selectedNps == 1 ? Icons.thumb_up : Icons.thumb_up,
             isSelected: _selectedNps == 1,
             onTap: () {
               HapticFeedback.lightImpact();
@@ -1189,7 +1188,7 @@ class _MessageActionBarState extends State<MessageActionBar> {
           const SizedBox(width: 20),
           // Thumbs down button
           _buildActionButton(
-            icon: _selectedNps == -1 ? FontAwesomeIcons.solidThumbsDown : FontAwesomeIcons.thumbsDown,
+            icon: _selectedNps == -1 ? Icons.thumb_down : Icons.thumb_down,
             isSelected: _selectedNps == -1,
             onTap: () {
               HapticFeedback.lightImpact();
@@ -1208,7 +1207,7 @@ class _MessageActionBarState extends State<MessageActionBar> {
           const SizedBox(width: 20),
           // Share button
           _buildActionButton(
-            icon: FontAwesomeIcons.share,
+            icon: Icons.share,
             onTap: () async {
               HapticFeedback.lightImpact();
               await Share.share(widget.messageText);
@@ -1235,7 +1234,7 @@ class _MessageActionBarState extends State<MessageActionBar> {
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: onTap,
-      child: FaIcon(icon, color: isSelected ? Colors.white : Colors.grey.shade600, size: 14),
+      child: Icon(icon, color: isSelected ? Colors.white : Colors.grey.shade600, size: 14),
     );
   }
 }

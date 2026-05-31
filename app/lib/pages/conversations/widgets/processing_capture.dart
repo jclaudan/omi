@@ -2,7 +2,6 @@ import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/backend/preferences.dart';
@@ -351,7 +350,7 @@ class _ConversationCaptureWidgetState extends State<ConversationCaptureWidget> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const FaIcon(FontAwesomeIcons.solidStar, size: 12, color: Colors.amber),
+                  const Icon(Icons.star, size: 12, color: Colors.amber),
                   const SizedBox(width: 4),
                   Text(
                     context.l10n.starred,
@@ -370,7 +369,7 @@ class _ConversationCaptureWidgetState extends State<ConversationCaptureWidget> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const FaIcon(FontAwesomeIcons.camera, size: 12, color: Color(0xFFC9CBCF)),
+                  const Icon(Icons.camera_alt, size: 12, color: Color(0xFFC9CBCF)),
                   const SizedBox(width: 6),
                   Text(
                     '${provider.photos.length}',
@@ -430,14 +429,14 @@ class _ConversationCaptureWidgetState extends State<ConversationCaptureWidget> {
                   shape: BoxShape.circle,
                 ),
                 child: Center(
-                  child: FaIcon(
+                  child: Icon(
                     isPaused
                         ? isDeviceRecording
-                            ? FontAwesomeIcons.microphoneSlash
-                            : FontAwesomeIcons.play
+                            ? Icons.mic_off
+                            : Icons.play_arrow
                         : isDeviceRecording
-                            ? FontAwesomeIcons.microphone
-                            : FontAwesomeIcons.pause,
+                            ? Icons.mic
+                            : Icons.pause,
                     color: Colors.white,
                     size: 12,
                   ),

@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:omi/widgets/shimmer_with_timeout.dart';
@@ -576,7 +575,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                   HapticFeedback.mediumImpact();
                   Navigator.pop(context);
                 },
-                icon: const FaIcon(FontAwesomeIcons.arrowLeft, size: 16.0, color: Colors.white),
+                icon: const Icon(Icons.arrow_back, size: 16.0, color: Colors.white),
               ),
             ),
             actions: [
@@ -641,7 +640,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
-                        : const FaIcon(FontAwesomeIcons.solidComments, size: 16.0, color: Colors.white),
+                        : const Icon(Icons.forum, size: 16.0, color: Colors.white),
                   ),
                 ),
               ],
@@ -653,7 +652,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                   decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3), shape: BoxShape.circle),
                   child: IconButton(
                     padding: EdgeInsets.zero,
-                    icon: const FaIcon(FontAwesomeIcons.gear, size: 16.0, color: Colors.white),
+                    icon: const Icon(Icons.settings, size: 16.0, color: Colors.white),
                     onPressed: () {
                       HapticFeedback.mediumImpact();
                       Navigator.push(context, MaterialPageRoute(builder: (context) => AppHomeWebPage(app: app)));
@@ -672,7 +671,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                           decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3), shape: BoxShape.circle),
                           child: IconButton(
                             padding: EdgeInsets.zero,
-                            icon: const FaIcon(FontAwesomeIcons.arrowUpFromBracket, size: 16.0, color: Colors.white),
+                            icon: const Icon(Icons.share, size: 16.0, color: Colors.white),
                             onPressed: () async {
                               HapticFeedback.mediumImpact();
                               PlatformManager.instance.analytics.track('App Shared', properties: {'appId': app.id});
@@ -705,7 +704,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                           decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3), shape: BoxShape.circle),
                           child: IconButton(
                             padding: EdgeInsets.zero,
-                            icon: const FaIcon(FontAwesomeIcons.edit, size: 16.0, color: Colors.white),
+                            icon: const Icon(Icons.edit, size: 16.0, color: Colors.white),
                             onPressed: () async {
                               HapticFeedback.mediumImpact();
                               await showModalBottomSheet(
@@ -752,7 +751,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                           ),
                         ),
                         placeholder: (context, url) => const CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => const Icon(FontAwesomeIcons.circleExclamation),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
                       ),
                       const SizedBox(width: 20),
                       Expanded(
@@ -787,8 +786,8 @@ class _AppDetailPageState extends State<AppDetailPage> {
                                       ),
                                       if (app.official) ...[
                                         const SizedBox(width: 4),
-                                        const FaIcon(
-                                          FontAwesomeIcons.solidCircleCheck,
+                                        const Icon(
+                                          Icons.check_circle,
                                           size: 14,
                                           color: Colors.deepPurpleAccent,
                                         ),
@@ -810,7 +809,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                                     child: Row(
                                       children: [
                                         if (app.ratingCount > 0) ...[
-                                          const Icon(FontAwesomeIcons.solidStar, size: 11, color: Color(0xFF8B5CF6)),
+                                          const Icon(Icons.star, size: 11, color: Color(0xFF8B5CF6)),
                                           const SizedBox(width: 4),
                                           Text(
                                             '${app.getRatingAvg()} (${app.ratingCount})',
@@ -982,7 +981,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(FontAwesomeIcons.circleInfo, color: Colors.grey, size: 18),
+                                const Icon(Icons.info, color: Colors.grey, size: 18),
                                 const SizedBox(width: 10),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.78,
@@ -1003,7 +1002,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(FontAwesomeIcons.circleInfo, color: Colors.grey, size: 18),
+                                const Icon(Icons.info, color: Colors.grey, size: 18),
                                 const SizedBox(width: 10),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.78,
@@ -1024,7 +1023,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(FontAwesomeIcons.circleExclamation, color: Colors.grey, size: 18),
+                                const Icon(Icons.error, color: Colors.grey, size: 18),
                                 const SizedBox(width: 10),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.78,
@@ -1086,7 +1085,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                                         ),
                                         child: Center(
                                           child: setupCompleted
-                                              ? const FaIcon(FontAwesomeIcons.check, size: 14, color: Colors.green)
+                                              ? const Icon(Icons.check, size: 14, color: Colors.green)
                                               : Text(
                                                   '${i + 1}',
                                                   style: TextStyle(
@@ -1120,8 +1119,8 @@ class _AppDetailPageState extends State<AppDetailPage> {
                                           ],
                                         ),
                                       ),
-                                      FaIcon(
-                                        FontAwesomeIcons.arrowUpRightFromSquare,
+                                      Icon(
+                                        Icons.open_in_new,
                                         size: 16,
                                         color: Colors.grey.shade500,
                                       ),
@@ -1171,7 +1170,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                           },
                           trailing: const Padding(
                             padding: EdgeInsets.only(right: 12.0),
-                            child: Icon(FontAwesomeIcons.chevronRight, size: 20, color: Colors.grey),
+                            child: Icon(Icons.chevron_right, size: 20, color: Colors.grey),
                           ),
                           title: const Text(
                             'Integration Instructions',
@@ -1242,7 +1241,7 @@ class _AppDetailPageState extends State<AppDetailPage> {
                                           color: Colors.grey[900],
                                           borderRadius: BorderRadius.circular(12),
                                         ),
-                                        child: const Icon(FontAwesomeIcons.circleExclamation),
+                                        child: const Icon(Icons.error),
                                       ),
                                     ),
                                   ),
@@ -1600,7 +1599,7 @@ class RatingDistributionWidget extends StatelessWidget {
                 return Padding(
                   padding: EdgeInsets.only(right: index < 4 ? 4 : 0),
                   child: Icon(
-                    FontAwesomeIcons.solidStar,
+                    Icons.star,
                     size: 14,
                     color: index < ratingAvg.round() ? Colors.deepPurple : Colors.grey.shade700,
                   ),
@@ -1837,7 +1836,7 @@ class _RecentReviewsSectionState extends State<RecentReviewsSection> {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: Icon(
-                    FontAwesomeIcons.solidStar,
+                    Icons.star,
                     size: 24,
                     color: index < editRating ? Colors.deepPurple : Colors.grey.shade600,
                   ),
@@ -1975,7 +1974,7 @@ class _RecentReviewsSectionState extends State<RecentReviewsSection> {
                         return Padding(
                           padding: const EdgeInsets.only(right: 4),
                           child: Icon(
-                            FontAwesomeIcons.solidStar,
+                            Icons.star,
                             size: 14,
                             color: index < review.score.round() ? Colors.deepPurple : Colors.grey.shade700,
                           ),

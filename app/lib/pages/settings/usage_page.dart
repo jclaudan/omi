@@ -7,7 +7,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:fl_chart/fl_chart.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -293,7 +292,7 @@ class _UsagePageState extends State<UsagePage> with TickerProviderStateMixin {
         centerTitle: true,
         elevation: 0,
         leading: IconButton(icon: const Icon(Icons.arrow_back_ios_new), onPressed: () => Navigator.of(context).pop()),
-        actions: [IconButton(icon: const FaIcon(FontAwesomeIcons.solidShareFromSquare), onPressed: _shareUsage)],
+        actions: [IconButton(icon: const Icon(Icons.share), onPressed: _shareUsage)],
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.deepPurple,
@@ -640,7 +639,7 @@ class _UsagePageState extends State<UsagePage> with TickerProviderStateMixin {
               if (history != null && history.isNotEmpty) ...[_buildChart(history, period), const SizedBox(height: 24)],
               _buildUsageCard(
                 context,
-                icon: FontAwesomeIcons.microphone,
+                icon: Icons.mic,
                 title: context.l10n.listening,
                 value: transcriptionValue,
                 subtitle: context.l10n.listeningSubtitle,
@@ -650,7 +649,7 @@ class _UsagePageState extends State<UsagePage> with TickerProviderStateMixin {
               const SizedBox(height: 16),
               _buildUsageCard(
                 context,
-                icon: FontAwesomeIcons.comments,
+                icon: Icons.chat,
                 title: context.l10n.understanding,
                 value:
                     '${numberFormatter.format(stats.wordsTranscribed)} ${context.l10n.understandingWords}', // Use correct key
@@ -661,7 +660,7 @@ class _UsagePageState extends State<UsagePage> with TickerProviderStateMixin {
               const SizedBox(height: 16),
               _buildUsageCard(
                 context,
-                icon: FontAwesomeIcons.wandMagicSparkles,
+                icon: Icons.auto_awesome,
                 title: context.l10n.providing,
                 value: '${numberFormatter.format(stats.insightsGained)} ${context.l10n.insights}',
                 subtitle: context.l10n.providingSubtitle,
@@ -671,7 +670,7 @@ class _UsagePageState extends State<UsagePage> with TickerProviderStateMixin {
               const SizedBox(height: 16),
               _buildUsageCard(
                 context,
-                icon: FontAwesomeIcons.brain,
+                icon: Icons.psychology,
                 title: context.l10n.remembering,
                 value: '${numberFormatter.format(stats.memoriesCreated)} ${context.l10n.memories}',
                 subtitle: context.l10n.rememberingSubtitle,
@@ -1062,7 +1061,7 @@ class _UsagePageState extends State<UsagePage> with TickerProviderStateMixin {
             const SizedBox(height: 12),
             Row(
               children: [
-                FaIcon(FontAwesomeIcons.solidMessage, color: color, size: 16),
+                Icon(Icons.mail, color: color, size: 16),
                 const SizedBox(width: 8),
                 Text(context.l10n.chatTitle, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
               ],
@@ -1125,14 +1124,14 @@ class _UsagePageState extends State<UsagePage> with TickerProviderStateMixin {
             const SizedBox(height: 12),
             Row(
               children: [
-                FaIcon(icon, color: color, size: 16),
+                Icon(icon, color: color, size: 16),
                 const SizedBox(width: 8),
                 Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
               ],
             ),
             const SizedBox(height: 8),
             Text(subtitle, style: TextStyle(fontSize: 14, color: Colors.grey.shade400, height: 1.4)),
-            if (icon == FontAwesomeIcons.microphone &&
+            if (icon == Icons.mic &&
                 subscription != null &&
                 subscription.subscription.plan == PlanType.basic &&
                 subscription.transcriptionSecondsLimit > 0) ...[
@@ -1228,7 +1227,7 @@ class _UsagePageState extends State<UsagePage> with TickerProviderStateMixin {
                 },
               ),
             ],
-            if (icon == FontAwesomeIcons.comments &&
+            if (icon == Icons.chat &&
                 subscription != null &&
                 subscription.subscription.plan == PlanType.basic &&
                 subscription.wordsTranscribedLimit > 0) ...[
@@ -1258,7 +1257,7 @@ class _UsagePageState extends State<UsagePage> with TickerProviderStateMixin {
                 },
               ),
             ],
-            if (icon == FontAwesomeIcons.wandMagicSparkles &&
+            if (icon == Icons.auto_awesome &&
                 subscription != null &&
                 subscription.subscription.plan == PlanType.basic &&
                 subscription.insightsGainedLimit > 0) ...[

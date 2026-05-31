@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -107,7 +106,7 @@ class AppMetadataWidget extends StatelessWidget {
                                     child: Container(
                                       padding: const EdgeInsets.all(6.0),
                                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
-                                      child: FaIcon(FontAwesomeIcons.copy, color: Colors.white, size: 16),
+                                      child: Icon(Icons.content_copy, color: Colors.white, size: 16),
                                     ),
                                   ),
                                 ],
@@ -147,7 +146,7 @@ class AppMetadataWidget extends StatelessWidget {
                                   : Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        const FaIcon(FontAwesomeIcons.camera, color: Colors.grey, size: 24),
+                                        const Icon(Icons.camera_alt, color: Colors.grey, size: 24),
                                         const SizedBox(height: 6),
                                         Text(
                                           '${context.l10n.appIconLabel}*',
@@ -166,7 +165,7 @@ class AppMetadataWidget extends StatelessWidget {
                                 child: Container(
                                   padding: const EdgeInsets.all(6.0),
                                   decoration: const BoxDecoration(color: Color(0xFF35343B), shape: BoxShape.circle),
-                                  child: const FaIcon(FontAwesomeIcons.pen, color: Colors.white, size: 12),
+                                  child: const Icon(Icons.edit, color: Colors.white, size: 12),
                                 ),
                               ),
                             ),
@@ -308,7 +307,7 @@ class AppMetadataWidget extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    FaIcon(FontAwesomeIcons.chevronRight, color: Colors.grey.shade400, size: 14),
+                                    Icon(Icons.chevron_right, color: Colors.grey.shade400, size: 14),
                                   ],
                                 ),
                               ),
@@ -487,7 +486,7 @@ class AppMetadataWidget extends StatelessWidget {
                                   ),
                                 ),
                                 const Spacer(),
-                                FaIcon(FontAwesomeIcons.chevronRight, color: Colors.grey.shade400, size: 14),
+                                Icon(Icons.chevron_right, color: Colors.grey.shade400, size: 14),
                                 const SizedBox(width: 12),
                               ],
                             ),

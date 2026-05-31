@@ -1,7 +1,6 @@
 import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -35,13 +34,13 @@ class _CancelSubscriptionFlowState extends State<CancelSubscriptionFlow> {
   }
 
   static const _reasons = [
-    _Reason('too_expensive', FontAwesomeIcons.wallet),
-    _Reason('not_using_enough', FontAwesomeIcons.clock),
-    _Reason('missing_features', FontAwesomeIcons.puzzlePiece),
-    _Reason('audio_quality', FontAwesomeIcons.microphone),
-    _Reason('battery_drain', FontAwesomeIcons.batteryQuarter),
-    _Reason('found_alternative', FontAwesomeIcons.arrowRightArrowLeft),
-    _Reason('other', FontAwesomeIcons.ellipsis),
+    _Reason('too_expensive', Icons.wallet_giftcard),
+    _Reason('not_using_enough', Icons.schedule),
+    _Reason('missing_features', Icons.extension),
+    _Reason('audio_quality', Icons.mic),
+    _Reason('battery_drain', Icons.battery_2_bar),
+    _Reason('found_alternative', Icons.compare_arrows),
+    _Reason('other', Icons.more_horiz),
   ];
 
   String _label(String key) => switch (key) {
@@ -238,7 +237,7 @@ class _CancelSubscriptionFlowState extends State<CancelSubscriptionFlow> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Center(
-                child: FaIcon(reason.icon, size: 14, color: selected ? Colors.white : Colors.grey.shade600),
+                child: Icon(reason.icon, size: 14, color: selected ? Colors.white : Colors.grey.shade600),
               ),
             ),
             const SizedBox(width: 14),
@@ -414,7 +413,7 @@ class _CancelSubscriptionFlowState extends State<CancelSubscriptionFlow> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 2),
-                  child: FaIcon(FontAwesomeIcons.circleInfo, size: 14, color: Colors.orange.shade400),
+                  child: Icon(Icons.info, size: 14, color: Colors.orange.shade400),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -432,12 +431,12 @@ class _CancelSubscriptionFlowState extends State<CancelSubscriptionFlow> {
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             children: [
-              _featureRow(FontAwesomeIcons.infinity, context.l10n.cancelConsequenceNoAccess),
-              _featureRow(FontAwesomeIcons.bolt, context.l10n.cancelConsequenceBattery),
-              _featureRow(FontAwesomeIcons.solidComments, context.l10n.cancelConsequenceQuality),
-              _featureRow(FontAwesomeIcons.gaugeHigh, context.l10n.cancelConsequenceDelay),
-              _featureRow(FontAwesomeIcons.userGroup, context.l10n.cancelConsequenceSpeakers),
-              _featureRow(FontAwesomeIcons.phone, context.l10n.cancelConsequencePhoneCalls),
+              _featureRow(Icons.all_inclusive, context.l10n.cancelConsequenceNoAccess),
+              _featureRow(Icons.flash_on, context.l10n.cancelConsequenceBattery),
+              _featureRow(Icons.forum, context.l10n.cancelConsequenceQuality),
+              _featureRow(Icons.dashboard, context.l10n.cancelConsequenceDelay),
+              _featureRow(Icons.group, context.l10n.cancelConsequenceSpeakers),
+              _featureRow(Icons.phone, context.l10n.cancelConsequencePhoneCalls),
             ],
           ),
         ),
@@ -518,7 +517,7 @@ class _CancelSubscriptionFlowState extends State<CancelSubscriptionFlow> {
                 color: Colors.grey.shade800.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Center(child: FaIcon(icon, size: 14, color: Colors.grey.shade500)),
+              child: Center(child: Icon(icon, size: 14, color: Colors.grey.shade500)),
             ),
             const SizedBox(width: 14),
             Expanded(

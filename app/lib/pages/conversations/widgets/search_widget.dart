@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:omi/providers/conversation_provider.dart';
@@ -229,7 +228,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 child: IconButton(
                   padding: EdgeInsets.zero,
                   icon: Icon(
-                    convoProvider.selectedDate != null ? FontAwesomeIcons.calendarDay : FontAwesomeIcons.calendarDays,
+                    convoProvider.selectedDate != null ? Icons.calendar_today : Icons.calendar_month,
                     size: 18,
                     color: convoProvider.selectedDate != null ? Colors.white : Colors.white70,
                   ),

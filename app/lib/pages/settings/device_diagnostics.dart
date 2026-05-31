@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -221,7 +220,7 @@ class _DeviceDiagnosticsState extends State<DeviceDiagnostics> {
           children: [
             Expanded(
               child: _statusCard(
-                icon: FontAwesomeIcons.clock,
+                icon: Icons.schedule,
                 label: context.l10n.connectionUptime,
                 value: _formatUptime(connectedAt),
               ),
@@ -229,7 +228,7 @@ class _DeviceDiagnosticsState extends State<DeviceDiagnostics> {
             const SizedBox(width: 12),
             Expanded(
               child: _statusCard(
-                icon: FontAwesomeIcons.arrowsRotate,
+                icon: Icons.sync,
                 label: context.l10n.reconnections,
                 value: '$reconnections',
                 valueColor: reconnections > 5 ? const Color(0xFFF44336) : null,
@@ -244,7 +243,7 @@ class _DeviceDiagnosticsState extends State<DeviceDiagnostics> {
             children: [
               Expanded(
                 child: _statusCard(
-                  icon: FontAwesomeIcons.batteryThreeQuarters,
+                  icon: Icons.battery_6_bar,
                   label: context.l10n.battery,
                   value: battery >= 0 ? '$battery%' : '--',
                 ),
@@ -252,7 +251,7 @@ class _DeviceDiagnosticsState extends State<DeviceDiagnostics> {
               const SizedBox(width: 12),
               Expanded(
                 child: _statusCard(
-                  icon: FontAwesomeIcons.signal,
+                  icon: Icons.signal_cellular_alt,
                   label: context.l10n.signal,
                   value: latestRssi != null ? '$latestRssi dBm' : '--',
                   valueColor: latestRssi != null ? _rssiColor(latestRssi) : null,
@@ -281,7 +280,7 @@ class _DeviceDiagnosticsState extends State<DeviceDiagnostics> {
         children: [
           Row(
             children: [
-              FaIcon(icon, color: const Color(0xFF8E8E93), size: 14),
+              Icon(icon, color: const Color(0xFF8E8E93), size: 14),
               const SizedBox(width: 8),
               Text(label, style: TextStyle(color: Colors.grey.shade400, fontSize: 13)),
             ],
@@ -605,7 +604,7 @@ class _DeviceDiagnosticsState extends State<DeviceDiagnostics> {
             child: Center(
               child: Column(
                 children: [
-                  FaIcon(FontAwesomeIcons.circleCheck, color: Colors.grey.shade600, size: 32),
+                  Icon(Icons.check_circle, color: Colors.grey.shade600, size: 32),
                   const SizedBox(height: 12),
                   Text(context.l10n.noDisconnectsRecorded, style: TextStyle(color: Colors.grey.shade500, fontSize: 14)),
                 ],

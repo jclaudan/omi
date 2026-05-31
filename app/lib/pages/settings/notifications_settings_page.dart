@@ -1,7 +1,6 @@
 import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:omi/backend/http/api/users.dart';
 import 'package:omi/backend/preferences.dart';
 import 'package:omi/utils/l10n_extensions.dart';
@@ -338,7 +337,7 @@ class _NotificationsSettingsPageState extends State<NotificationsSettingsPage> {
         children: [
           // Enable toggle row
           _buildSettingRow(
-            icon: FontAwesomeIcons.bell,
+            icon: Icons.notifications_none,
             title: context.l10n.enable,
             trailing: Switch(
               value: _dailySummaryEnabled,
@@ -360,7 +359,7 @@ class _NotificationsSettingsPageState extends State<NotificationsSettingsPage> {
               onTap: _showHourPicker,
               behavior: HitTestBehavior.opaque,
               child: _buildSettingRow(
-                icon: FontAwesomeIcons.clock,
+                icon: Icons.schedule,
                 title: context.l10n.deliveryTime,
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -388,7 +387,7 @@ class _NotificationsSettingsPageState extends State<NotificationsSettingsPage> {
           width: 40,
           height: 40,
           decoration: BoxDecoration(color: const Color(0xFF2A2A2E), borderRadius: BorderRadius.circular(10)),
-          child: Center(child: FaIcon(icon, color: Colors.grey.shade400, size: 16)),
+          child: Center(child: Icon(icon, color: Colors.grey.shade400, size: 16)),
         ),
         const SizedBox(width: 14),
         Expanded(

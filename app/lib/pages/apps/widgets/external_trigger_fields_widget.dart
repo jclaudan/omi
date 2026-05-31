@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -84,8 +83,8 @@ class ExternalTriggerFieldsWidget extends StatelessWidget {
                               onTap: () {
                                 launchUrl(Uri.parse('https://docs.omi.me/doc/developer/apps/Integrations'));
                               },
-                              child: FaIcon(
-                                FontAwesomeIcons.solidCircleQuestion,
+                              child: Icon(
+                                Icons.help_outline,
                                 color: Colors.grey.shade500,
                                 size: 18,
                               ),
@@ -221,7 +220,7 @@ class ExternalTriggerFieldsWidget extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              FaIcon(FontAwesomeIcons.chevronRight, color: Colors.grey.shade400, size: 14),
+                              Icon(Icons.chevron_right, color: Colors.grey.shade400, size: 14),
                             ],
                           ),
                         ),

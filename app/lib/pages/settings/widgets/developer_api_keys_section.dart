@@ -1,7 +1,6 @@
 import 'package:omi/utils/platform/platform_manager.dart';
 import 'package:flutter/material.dart';
 
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -46,7 +45,7 @@ class DeveloperApiKeysSection extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const FaIcon(FontAwesomeIcons.plus, color: Colors.white, size: 10),
+            const Icon(Icons.add, color: Colors.white, size: 10),
             const SizedBox(width: 6),
             Text(
               context.l10n.createKey,
@@ -111,7 +110,7 @@ class DeveloperApiKeysSection extends StatelessWidget {
                     decoration: BoxDecoration(color: const Color(0xFF1C1C1E), borderRadius: BorderRadius.circular(12)),
                     child: Column(
                       children: [
-                        FaIcon(FontAwesomeIcons.key, color: Colors.grey.shade600, size: 28),
+                        Icon(Icons.key, color: Colors.grey.shade600, size: 28),
                         const SizedBox(height: 12),
                         Text(context.l10n.noApiKeys, style: TextStyle(color: Colors.grey.shade400, fontSize: 15)),
                         const SizedBox(height: 4),

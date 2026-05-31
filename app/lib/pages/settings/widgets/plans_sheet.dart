@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:collection/collection.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:omi/widgets/shimmer_with_timeout.dart';
@@ -892,7 +891,7 @@ class _PlansSheetState extends State<PlansSheet> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const FaIcon(FontAwesomeIcons.crown, color: Colors.yellow, size: 20),
+                            const Icon(Icons.crown, color: Colors.yellow, size: 20),
                             const SizedBox(width: 8),
                             Builder(
                               builder: (context) {
@@ -987,17 +986,17 @@ class _PlansSheetState extends State<PlansSheet> {
                         ...[
                           Column(
                             children: [
-                              _buildFeatureItem(faIcon: FontAwesomeIcons.infinity, text: 'Unlimited conversations'),
+                              _buildFeatureItem(faIcon: Icons.all_inclusive, text: 'Unlimited conversations'),
                               const SizedBox(height: 16),
                               _buildFeatureItem(
-                                faIcon: FontAwesomeIcons.solidComments,
+                                faIcon: Icons.forum,
                                 text: 'Ask Omi anything about your life',
                               ),
                               const SizedBox(height: 16),
-                              _buildFeatureItem(faIcon: FontAwesomeIcons.brain, text: 'Unlock Omi\'s infinite memory'),
+                              _buildFeatureItem(faIcon: Icons.psychology, text: 'Unlock Omi\'s infinite memory'),
                               const SizedBox(height: 16),
                               _buildFeatureItem(
-                                faIcon: FontAwesomeIcons.globe,
+                                faIcon: Icons.public,
                                 text: 'Available on Mac, mobile, and web',
                               ),
                             ],
@@ -1629,7 +1628,7 @@ class _PlansSheetState extends State<PlansSheet> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.white, width: 1),
           ),
-          child: Center(child: FaIcon(faIcon, color: Colors.white, size: 16)),
+          child: Center(child: Icon(faIcon, color: Colors.white, size: 16)),
         ),
         const SizedBox(width: 12),
         Expanded(
