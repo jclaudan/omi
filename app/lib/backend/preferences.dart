@@ -677,6 +677,12 @@ class SharedPreferencesUtil {
   String get ossOpenrouterEmbeddingModel => getString('ossOpenrouterEmbeddingModel', defaultValue: '');
   set ossOpenrouterEmbeddingModel(String v) => saveString('ossOpenrouterEmbeddingModel', v);
 
+  String get ossCustomProviderUrl => getString('ossCustomProviderUrl', defaultValue: '');
+  set ossCustomProviderUrl(String v) => saveString('ossCustomProviderUrl', v);
+
+  String get ossCustomProviderModel => getString('ossCustomProviderModel', defaultValue: '');
+  set ossCustomProviderModel(String v) => saveString('ossCustomProviderModel', v);
+
   //--------------------------- Setters & Getters -----------------------------//
 
   String getString(String key, {String defaultValue = ''}) => _preferences?.getString(key) ?? defaultValue;

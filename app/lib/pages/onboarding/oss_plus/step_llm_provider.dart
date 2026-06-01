@@ -18,6 +18,8 @@ class StepLlmProvider extends StatefulWidget {
 class _StepLlmProviderState extends State<StepLlmProvider> {
   String _selectedProvider = '';
   final _apiKeyController = TextEditingController();
+  final _customUrlController = TextEditingController();
+  final _customModelController = TextEditingController();
   bool _keyVerified = false;
   bool _isLoading = false;
   List<OpenRouterModel> _llmModels = [];
@@ -30,10 +32,13 @@ class _StepLlmProviderState extends State<StepLlmProvider> {
   @override
   void initState() {
     super.initState();
-    _selectedProvider = SharedPreferencesUtil().ossLlmProvider;
-    _apiKeyController.text = SharedPreferencesUtil().ossOpenrouterApiKey;
-    _selectedLlmModel = SharedPreferencesUtil().ossOpenrouterLlmModel;
-    _selectedEmbeddingModel = SharedPreferencesUtil().ossOpenrouterEmbeddingModel;
+    final prefs = SharedPreferencesUtil();
+    _selectedProvider = prefs.ossLlmProvider;
+    _apiKeyController.text = prefs.ossOpenrouterApiKey;
+    _selectedLlmModel = prefs.ossOpenrouterLlmModel;
+    _selectedEmbeddingModel = prefs.ossOpenrouterEmbeddingModel;
+    _customUrlController.text = prefs.ossCustomProviderUrl;
+    _customModelController.text = prefs.ossCustomProviderModel;
 
     if (_apiKeyController.text.isNotEmpty && _selectedProvider == 'openrouter') {
       _verifyKey();
@@ -43,6 +48,8 @@ class _StepLlmProviderState extends State<StepLlmProvider> {
   @override
   void dispose() {
     _apiKeyController.dispose();
+    _customUrlController.dispose();
+    _customModelController.dispose();
     super.dispose();
   }
 
@@ -95,15 +102,20 @@ class _StepLlmProviderState extends State<StepLlmProvider> {
   }
 
   void _save() {
-    SharedPreferencesUtil().ossLlmProvider = _selectedProvider;
+    final prefs = SharedPreferencesUtil();
+    prefs.ossLlmProvider = _selectedProvider;
+
     if (_selectedProvider == 'openrouter') {
-      SharedPreferencesUtil().ossOpenrouterApiKey = _apiKeyController.text.trim();
+      prefs.ossOpenrouterApiKey = _apiKeyController.text.trim();
       if (_selectedLlmModel != null) {
-        SharedPreferencesUtil().ossOpenrouterLlmModel = _selectedLlmModel!;
+        prefs.ossOpenrouterLlmModel = _selectedLlmModel!;
       }
       if (_selectedEmbeddingModel != null) {
-        SharedPreferencesUtil().ossOpenrouterEmbeddingModel = _selectedEmbeddingModel!;
+        prefs.ossOpenrouterEmbeddingModel = _selectedEmbeddingModel!;
       }
+    } else if (_selectedProvider == 'custom') {
+      prefs.ossCustomProviderUrl = _customUrlController.text.trim();
+      prefs.ossCustomProviderModel = _customModelController.text.trim();
     }
   }
 
@@ -272,12 +284,46 @@ class _StepLlmProviderState extends State<StepLlmProvider> {
             isSelected: _selectedProvider == 'ollama',
             onSelect: () => setState(() => _selectedProvider = 'ollama'),
           ),
+          const SizedBox(height: 16),
+
+          // Custom Provider Option (LM Studio, etc)
+          _ProviderCard(
+            title: 'Custom Provider',
+            description: 'LM Studio, LocalAI, or other OpenAI-compatible servers',
+            icon: Icons.settings,
+            isSelected: _selectedProvider == 'custom',
+            onSelect: () => setState(() => _selectedProvider = 'custom'),
+          ),
+          const SizedBox(height: 16),
+
+          // Custom Provider Configuration
+          if (_selectedProvider == 'custom') ...[
+            OssTextField(
+              controller: _customUrlController,
+              label: 'API Base URL',
+              hint: 'http://localhost:1234',
+              optionalLabel: 'e.g., LM Studio default',
+              onChanged: (_) => setState(() {}),
+            ),
+            const SizedBox(height: 12),
+            OssTextField(
+              controller: _customModelController,
+              label: 'Model Name',
+              hint: 'mistral-7b or your model ID',
+              onChanged: (_) => setState(() {}),
+            ),
+            const SizedBox(height: 24),
+          ],
+
           const SizedBox(height: 32),
 
           // Continue Button
           OssNextButton(
             enabled: _selectedProvider.isNotEmpty &&
                 (_selectedProvider == 'ollama' ||
+                    (_selectedProvider == 'custom' &&
+                        _customUrlController.text.trim().isNotEmpty &&
+                        _customModelController.text.trim().isNotEmpty) ||
                     (_keyVerified && _selectedLlmModel != null && _selectedEmbeddingModel != null)),
             label: context.l10n.continueButton,
             onPressed: () {

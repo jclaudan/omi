@@ -5,12 +5,14 @@ import 'package:omi/env/env.dart';
 
 /// Configure OSS+ LLM provider preference.
 ///
-/// Saves the user's choice of LLM provider (openrouter or ollama) and API keys to the backend.
+/// Saves the user's choice of LLM provider (openrouter, ollama, or custom) and configuration.
 Future<bool> configureOssLlmProvider({
   required String provider,
   String? openrouterApiKey,
   String? openrouterLlmModel,
   String? openrouterEmbeddingModel,
+  String? customProviderUrl,
+  String? customProviderModel,
 }) async {
   final url = '${Env.apiBaseUrl}v1/oss/configure-llm';
 
@@ -24,6 +26,13 @@ Future<bool> configureOssLlmProvider({
         'api_key': openrouterApiKey,
         if (openrouterLlmModel != null) 'llm_model': openrouterLlmModel,
         if (openrouterEmbeddingModel != null) 'embedding_model': openrouterEmbeddingModel,
+      };
+    }
+  } else if (provider == 'custom') {
+    if (customProviderUrl != null && customProviderModel != null) {
+      bodyMap['custom'] = {
+        'base_url': customProviderUrl,
+        'model': customProviderModel,
       };
     }
   }

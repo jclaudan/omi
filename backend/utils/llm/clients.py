@@ -711,6 +711,23 @@ def _get_openrouter_mini_client(api_key: str, model: Optional[str] = None) -> Ch
     )
 
 
+def _get_custom_provider_client(base_url: str, model: str) -> ChatOpenAI:
+    """Get OpenAI-compatible client for custom providers (LM Studio, LocalAI, etc)."""
+    # Ensure base_url ends with /v1 if not already there
+    normalized_url = base_url.rstrip('/')
+    if not normalized_url.endswith('/v1'):
+        normalized_url = f'{normalized_url}/v1'
+
+    return ChatOpenAI(
+        model=model,
+        base_url=normalized_url,
+        api_key='not-needed',  # Custom providers often don't require auth
+        callbacks=[_usage_callback],
+        request_timeout=120,
+        max_retries=1
+    )
+
+
 def _get_llm_mini_client_for_user(uid: Optional[str] = None) -> ChatOpenAI:
     """Get LLM mini client based on user's OSS+ config or mode (OSS+ or Production)."""
     if _OSS_PLUS_MODE:
@@ -725,6 +742,12 @@ def _get_llm_mini_client_for_user(uid: Optional[str] = None) -> ChatOpenAI:
                         model = user_config.get('openrouter_llm_model')
                         logger.info('Using OpenRouter (user config) for uid %s, model=%s', uid, model or 'default')
                         return _get_openrouter_mini_client(api_key, model)
+                elif provider == 'custom':
+                    base_url = user_config.get('custom_base_url')
+                    model = user_config.get('custom_model')
+                    if base_url and model:
+                        logger.info('Using custom provider (user config) for uid %s, url=%s, model=%s', uid, base_url, model)
+                        return _get_custom_provider_client(base_url, model)
                 elif provider == 'ollama':
                     if _OLLAMA_CONFIGURED:
                         logger.info('Using Ollama (user config) for uid %s', uid)

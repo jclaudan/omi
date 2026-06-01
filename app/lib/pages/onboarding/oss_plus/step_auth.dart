@@ -50,11 +50,16 @@ class _StepAuthState extends State<StepAuth> {
       final apiKey = prefs.ossOpenrouterApiKey;
       final llmModel = prefs.ossOpenrouterLlmModel;
       final embeddingModel = prefs.ossOpenrouterEmbeddingModel;
+      final customUrl = prefs.ossCustomProviderUrl;
+      final customModel = prefs.ossCustomProviderModel;
+
       await configureOssLlmProvider(
         provider: provider,
         openrouterApiKey: provider == 'openrouter' ? apiKey : null,
         openrouterLlmModel: provider == 'openrouter' ? llmModel : null,
         openrouterEmbeddingModel: provider == 'openrouter' ? embeddingModel : null,
+        customProviderUrl: provider == 'custom' ? customUrl : null,
+        customProviderModel: provider == 'custom' ? customModel : null,
       );
 
       if (!mounted) return;
